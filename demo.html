@@ -11,12 +11,11 @@ try { if (localStorage.getItem('gallery_theme') === 'dark') document.documentEle
 <style>
 :root { --bg-body: #ffffff; --bg-surface: #ffffff; --bg-photo: #faf9f6; --bg-cream: #fbf9f5; --bg-subtle-cream: #f7f4ef; --bg-subtle: #fcfbf9; --lightbox-bg: rgba(10, 16, 26, 0.96); --text-main: #1a2b4a; --text-secondary: #4a5a73; --text-muted: #7e8b9e; --text-light: #abb5c2; --text-topbar: #334460; --text-note: #243550; --gold-primary: #b0945c; --gold-hover: #967d4a; --gold-light: #d4c092; --gold-subtle: #f7f3eb; --gold-badge: #eee5d3; --price-color: #b0945c; --price-lightbox: #e5d3a9; --border-light: #f0ede6; --border-subtle: #e5dfd5; --border-gold: #b0945c; --border-gold-light: #d4c092; --border-card-hover: #d4c092; --status-error: #a83232; --status-warning: #c28e2b; --status-success: #3b7352;--border-cream:var(--border-subtle);--font-serif:"Didot","Bodoni MT","Cinzel","Baskerville","Baskerville Old Face","Hoefler Text","Garamond","Times New Roman",serif;--font-sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--text-white:white;--bg-header:rgba(255,255,255,.98);--bg-backdrop:rgba(10,16,26,.45);--lb-border:rgba(255,255,255,.2);--lb-button:rgba(0,0,0,.45);--image-shadow:rgba(0,0,0,0.65);--lb-hover:rgba(255,255,255,0.25);--lb-border-hover:rgba(255,255,255,0.4);--card-shadow:rgba(0,0,0,.09);--toast-shadow:rgba(26,43,74,.28);--desktop-shadow:rgba(26,43,74,.14);--transparent:transparent;--toast-text:#ffffff}
 *{box-sizing:border-box}body{margin:0;background:var(--bg-body);color:var(--text-main);font:14px/1.5 var(--font-sans)}[hidden]{display:none!important}button,input{font:inherit}button{cursor:pointer;background:var(--bg-surface);color:var(--text-main);border:1px solid var(--border-subtle);border-radius:9999px;padding:10px 18px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}button:hover{background:var(--bg-cream)}button:disabled{opacity:.5;cursor:wait}button.primary{background:var(--gold-primary);border-color:var(--gold-primary);color:var(--text-white)}button.primary:hover{background:var(--gold-hover)}:focus-visible{outline:2px solid var(--gold-primary);outline-offset:4px}input[type=search],input[type=text]{width:100%;padding:12px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--bg-surface);color:var(--text-main)}input::placeholder{color:var(--text-light)}input:focus{border-color:var(--gold-primary)}
-.announcement{padding:8px 16px;background:var(--bg-cream);border-bottom:1px solid var(--border-cream);text-align:center;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-topbar)}header{position:sticky;top:0;z-index:10;height:74px;background:var(--bg-header);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px}.logo{display:inline-flex;align-items:center;gap:12px;border:0;padding:0;text-align:left;background:none!important}.brand-icon{width:40px;height:40px;flex:none;display:block}.brand-text{display:flex;flex-direction:column;min-width:0}.logo strong{display:block;font:600 21px/1.15 var(--font-serif);letter-spacing:.18em;text-transform:uppercase;color:var(--text-main)}.logo small{display:block;margin-top:6px;font-size:10px;letter-spacing:.22em;color:var(--gold-primary);text-transform:uppercase}.actions{display:flex;gap:8px}.container{max-width:1680px;margin:auto;padding:0 16px 64px}.intro{margin:36px 0 30px}.intro h1,.login h1{font:600 28px/1.25 var(--font-serif);letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px}.muted{color:var(--text-muted);font-size:12px}.login{max-width:500px;margin:100px auto;padding:32px 20px;text-align:center}.login p{color:var(--text-secondary);margin:20px 0 28px}.login .muted{margin-top:24px}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:36px}.filters{align-self:start;position:sticky;top:100px;max-height:calc(100dvh - 125px);overflow:auto;padding-right:12px}.filter-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.filter-header strong,.group h2{font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;font-variant:small-caps}.group{border-top:1px solid var(--border-light);padding:24px 0 12px}.group h2{margin:0 0 18px}.group input[type=search]{margin-bottom:14px;font-size:13px}.options{display:flex;flex-direction:column;gap:12px}.brands{max-height:260px;overflow:auto;scrollbar-width:thin}.text-button{border:0;padding:4px 0;background:none!important;text-decoration:underline;color:var(--text-muted);font-size:12px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px;min-height:35px}.progress{display:flex;gap:10px;align-items:center;margin-bottom:22px;color:var(--text-muted);font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 12px}.card{min-width:0;padding:10px;border:1px solid var(--border-light);border-radius:4px;text-align:center;content-visibility:auto;contain-intrinsic-size:auto 280px}.photo{display:flex;align-items:center;justify-content:center;aspect-ratio:1;background:var(--bg-photo);overflow:hidden;border-radius:2px;color:var(--text-muted);font-size:11px}.photo img{width:100%;height:100%;object-fit:contain}.filename{display:block;margin-top:10px;font-size:11.5px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.price{display:block;margin-top:4px;font-size:13.5px;font-weight:600;color:var(--price-color)}.empty{text-align:center;padding:60px 16px;color:var(--text-muted)}.mobile-only{display:none}.modal{border:1px solid var(--border-subtle);border-radius:4px;padding:28px;max-width:480px;width:calc(100% - 32px);color:var(--text-main)}dialog::backdrop{background:var(--bg-backdrop)}.modal h2{font:600 24px var(--font-serif);margin:0 0 24px}.modal label{display:block;margin-bottom:10px}.modal .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.lightbox{border:0;margin:0;padding:20px;background:var(--lightbox-bg);color:var(--text-white);width:100vw;max-width:none;height:100dvh;max-height:none}.lightbox[open]{display:flex;flex-direction:column;justify-content:space-between}.lightbox::backdrop{background:var(--lightbox-bg)}.lb-top{display:flex;align-items:center;justify-content:space-between;color:var(--text-light);font-size:13px}.lightbox button{color:var(--text-white);border:1px solid var(--lb-border);border-radius:50%;background:var(--lb-button);width:44px;height:44px;padding:0;font-size:24px}.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;touch-action:pan-y}.stage img{max-width:92vw;max-height:74dvh;object-fit:contain;border-radius:2px;box-shadow:0 12px 48px var(--image-shadow)}.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:1}.prev{left:0}.next{right:0}.lb-bottom{text-align:center;overflow-wrap:anywhere;padding:12px 36px}.lb-bottom .price{color:var(--price-lightbox);font-size:16px}.lb-status{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);text-align:center;font-size:13px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;background:var(--text-main);color:var(--toast-text);padding:14px 20px;border-radius:4px;max-width:calc(100% - 32px);width:max-content;font-size:13px}
+.announcement{padding:8px 16px;background:var(--bg-cream);border-bottom:1px solid var(--border-cream);text-align:center;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-topbar)}header{position:sticky;top:0;z-index:10;height:74px;background:var(--bg-header);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px}.logo{display:inline-flex;align-items:center;gap:12px;border:0;padding:0;text-align:left;background:none!important}.brand-icon{width:40px;height:40px;flex:none;display:block}.brand-text{display:flex;flex-direction:column;min-width:0}.logo strong{display:block;font:600 21px/1.15 var(--font-serif);letter-spacing:.18em;text-transform:uppercase;color:var(--text-main)}.logo small{display:block;margin-top:6px;font-size:10px;letter-spacing:.22em;color:var(--gold-primary);text-transform:uppercase}.actions{display:flex;gap:8px}.container{max-width:1680px;margin:auto;padding:0 16px 64px}.intro{margin:36px 0 30px}.intro h1,.login h1{font:600 28px/1.25 var(--font-serif);letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px}.muted{color:var(--text-muted);font-size:12px}.login{max-width:500px;margin:100px auto;padding:32px 20px;text-align:center}.login p{color:var(--text-secondary);margin:20px 0 28px}.login .muted{margin-top:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:36px}.filter-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.filter-header strong,.group h2{font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;font-variant:small-caps}.group{border-top:1px solid var(--border-light);padding:24px 0 12px}.group h2{margin:0 0 18px}.group input[type=search]{margin-bottom:14px;font-size:13px}.options{display:flex;flex-direction:column;gap:12px}.brands{max-height:260px;overflow:auto;scrollbar-width:thin}.text-button{border:0;padding:4px 0;background:none!important;text-decoration:underline;color:var(--text-muted);font-size:12px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px;min-height:35px}.progress{display:flex;gap:10px;align-items:center;margin-bottom:22px;color:var(--text-muted);font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 12px}.card{min-width:0;padding:10px;border:1px solid var(--border-light);border-radius:4px;text-align:center;content-visibility:auto;contain-intrinsic-size:auto 280px}.photo{display:flex;align-items:center;justify-content:center;aspect-ratio:1;background:var(--bg-photo);overflow:hidden;border-radius:2px;color:var(--text-muted);font-size:11px}.photo img{width:100%;height:100%;object-fit:contain}.filename{display:block;margin-top:10px;font-size:11.5px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.price{display:block;margin-top:4px;font-size:13.5px;font-weight:600;color:var(--price-color)}.empty{text-align:center;padding:60px 16px;color:var(--text-muted)}.mobile-only{display:none}.modal{border:1px solid var(--border-subtle);border-radius:4px;padding:28px;max-width:480px;width:calc(100% - 32px);color:var(--text-main)}dialog::backdrop{background:var(--bg-backdrop)}.modal h2{font:600 24px var(--font-serif);margin:0 0 24px}.modal label{display:block;margin-bottom:10px}.modal .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.lightbox{border:0;margin:0;padding:20px;background:var(--lightbox-bg);color:var(--text-white);width:100vw;max-width:none;height:100dvh;max-height:none}.lightbox[open]{display:flex;flex-direction:column;justify-content:space-between}.lightbox::backdrop{background:var(--lightbox-bg)}.lb-top{display:flex;align-items:center;justify-content:space-between;color:var(--text-light);font-size:13px}.lightbox button{color:var(--text-white);border:1px solid var(--lb-border);border-radius:50%;background:var(--lb-button);width:44px;height:44px;padding:0;font-size:24px}.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;touch-action:pan-y}.stage img{max-width:92vw;max-height:74dvh;object-fit:contain;border-radius:2px;box-shadow:0 12px 48px var(--image-shadow)}.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:1}.prev{left:0}.next{right:0}.lb-bottom{text-align:center;overflow-wrap:anywhere;padding:12px 36px}.lb-bottom .price{color:var(--price-lightbox);font-size:16px}.lb-status{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);text-align:center;font-size:13px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;background:var(--text-main);color:var(--toast-text);padding:14px 20px;border-radius:4px;max-width:calc(100% - 32px);width:max-content;font-size:13px}
 @media(min-width:768px){header{padding:0 28px}.container{padding-left:28px;padding-right:28px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 18px}}
-@media(max-width:1023px){.layout{display:block}.mobile-only{display:inline-block}.filters{display:block;position:fixed;inset:0;top:0;max-height:none;padding:0;z-index:30;overflow:auto;visibility:hidden;pointer-events:none;}.filter-body{margin-left:auto;background:var(--bg-surface);width:min(90%,380px);min-height:100%;padding:24px}.filter-header{margin-bottom:20px}.brands{max-height:220px}.apply{position:sticky;bottom:0;width:100%;margin-top:28px}.intro{margin:28px 0}.intro h1{font-size:25px}.toolbar{flex-wrap:wrap}.logo strong{font-size:17px;letter-spacing:.1em}.logo small{font-size:8px}.actions button{font-size:11px;padding:9px}.card{padding:6px}.stage img{max-width:100%;max-height:72dvh}.lightbox{padding:14px}}
+@media(max-width:1023px){.layout{display:block}.mobile-only{display:inline-block}.filter-header{margin-bottom:20px}.brands{max-height:220px}.apply{position:sticky;bottom:0;width:100%;margin-top:28px}.intro{margin:28px 0}.intro h1{font-size:25px}.toolbar{flex-wrap:wrap}.logo strong{font-size:17px;letter-spacing:.1em}.logo small{font-size:8px}.actions button{font-size:11px;padding:9px}.card{padding:6px}.stage img{max-width:100%;max-height:72dvh}.lightbox{padding:14px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .lightbox button:hover{background:var(--lb-hover);border-color:var(--lb-border-hover)}
-#close-filters{border:0;background:none;padding:4px 8px;font-size:18px;color:var(--text-secondary)}
 .filter-body{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;align-items:start}
 .filter-header{grid-column:1;grid-row:1;min-height:26px}
 #clear-filters{grid-column:2;grid-row:1;text-decoration:none;white-space:nowrap}
@@ -43,7 +42,7 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 @media(max-width:767px){.logo{gap:8px}.brand-icon{width:36px;height:36px}.logo strong{font-size:18px}.logo small{letter-spacing:.14em;margin-top:3px}.actions{gap:6px}.actions button{padding:9px 10px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
-/* Desktop collection: permanent sidebar and airy four/five-column gallery. */
+/* Desktop collection: full-width four/five-column gallery. */
 @media(min-width:1024px){
   header{padding-inline:max(32px,calc((100vw - 1400px)/2 + 32px));height:88px}
   .logo strong{font-size:26px;letter-spacing:.18em}
@@ -52,7 +51,7 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
   .intro{margin:56px 0 44px}
   .intro h1{font-size:clamp(36px,3.1vw,44px);line-height:1.2;letter-spacing:.09em;margin-bottom:16px}
   .intro>.muted{font-size:14px;letter-spacing:.03em}
-  .layout{grid-template-columns:208px minmax(0,1fr);gap:32px;align-items:start}
+  .layout{grid-template-columns:minmax(0,1fr);gap:32px;align-items:start}
   .layout>section{min-width:0}
   .filters{position:sticky;top:112px;max-height:calc(100dvh - 136px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--gold-light) var(--transparent);padding:0 16px 16px 0;border-right:1px solid var(--border-light);scroll-padding-block:12px}
   .filter-body{display:flex;flex-direction:column;align-items:stretch;gap:0}
@@ -79,7 +78,7 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 }
 @media(min-width:1400px){
   .container{padding-inline:40px}
-  .layout{grid-template-columns:216px minmax(0,1fr);gap:40px}
+  .layout{grid-template-columns:minmax(0,1fr);gap:40px}
   .grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:32px 24px}
 }
 @media(min-width:1024px) and (hover:hover){
@@ -95,6 +94,18 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 .modal{background:var(--bg-surface)}
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Shared navigation and filter panel; the handle stays outside the scroll area. */
+#nav-fab{position:fixed;left:0;right:auto;z-index:61;transition:left .32s cubic-bezier(.25,1,.5,1),background-color .4s ease}
+body:has(#nav-sidebar.open) #nav-fab{left:min(280px,86vw)}
+#nav-sidebar>*{flex-shrink:0}
+#nav-sidebar .filters{--text-main:#e8e4d8;--text-secondary:#c4cbd6;--text-muted:#a9b4c5;--bg-surface:transparent;--bg-cream:rgba(176,148,92,.12);--border-light:rgba(176,148,92,.2);--border-subtle:rgba(176,148,92,.35);align-self:stretch;position:static;inset:auto;max-height:none;overflow:visible;visibility:visible;pointer-events:auto;padding:24px 20px;border:0;border-top:1px solid rgba(176,148,92,.25)}
+#nav-sidebar .filter-body{display:flex;flex-direction:column;align-items:stretch;width:100%;min-height:0;margin:0;padding:0;background:transparent}
+#nav-sidebar .filter-header{margin:0 0 8px}
+#nav-sidebar .filter-header strong{font-size:13px;letter-spacing:.2em;color:var(--gold-light)}
+#nav-sidebar #clear-filters{align-self:flex-start;margin:0 0 16px;font-size:10px;white-space:normal;text-align:left}
+#nav-sidebar .brands{max-height:none;overflow:visible}
+@media(max-width:480px){body:has(#nav-sidebar.open) #nav-fab{left:min(260px,86vw)}}
 
 </style>
 <style>
@@ -121,9 +132,9 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 #stage-ok:hover{background:#b0945c;color:#0a0f1a}
 
 /* ===== 3. FILTER: drawer truot, tabs mega-menu, stagger, checkbox ve dan, hieu ung kinh ===== */
-@media(max-width:1023px){.filters::before{content:"";position:fixed;inset:0;background:var(--bg-backdrop);opacity:0;transition:opacity .3s ease-out}.filters.open{visibility:visible;pointer-events:auto;transition-delay:0s}.filters.open::before{opacity:1}.filters .filter-body{position:relative;transform:translateX(100%);transition:transform .35s cubic-bezier(.16,1,.3,1)}.filters.open .filter-body{transform:translateX(0)}.filters .filter-body>.group{opacity:0;transform:translateY(14px);transition:transform .34s cubic-bezier(.34,1.56,.64,1),opacity .24s ease-out}.filters.open .filter-body>.group{opacity:1;transform:translateY(0);transition-delay:80ms}.filters.open .filter-body>.group:nth-of-type(2){transition-delay:140ms}.filters.open .filter-body>.group:nth-of-type(3){transition-delay:200ms}}
+@media(max-width:1023px){.filters .filter-body>.group{opacity:0;transform:translateY(14px);transition:transform .34s cubic-bezier(.34,1.56,.64,1),opacity .24s ease-out}#nav-sidebar.open .filters .filter-body>.group{opacity:1;transform:translateY(0);transition-delay:80ms}#nav-sidebar.open .filters .filter-body>.group:nth-of-type(2){transition-delay:140ms}#nav-sidebar.open .filters .filter-body>.group:nth-of-type(3){transition-delay:200ms}}
 .filter-tab-state,.filter-tabs{display:none}
-@media(max-width:1023px){.filter-tab-state{display:block;position:absolute;width:1px;height:1px;opacity:0;clip-path:inset(50%)}.filter-tabs{grid-column:1/-1;position:relative;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border-light);margin-bottom:8px}.filter-tabs label{padding:14px 2px;text-align:center;font-size:12px;color:var(--text-muted);cursor:pointer;transition:color .2s}.filter-tabs::after{content:"";position:absolute;bottom:-1px;left:0;width:calc(100% / 3);height:2px;border-radius:2px;background:var(--gold-primary);transform:translateX(0);transition:transform .32s cubic-bezier(.34,1.2,.64,1);pointer-events:none}#filter-category:checked~.filter-tabs::after{transform:translateX(100%)}#filter-price:checked~.filter-tabs::after{transform:translateX(200%)}#filter-brand:checked~.filter-tabs [for=filter-brand],#filter-category:checked~.filter-tabs [for=filter-category],#filter-price:checked~.filter-tabs [for=filter-price]{color:var(--text-main);font-weight:600}#filter-brand:focus-visible~.filter-tabs [for=filter-brand],#filter-category:focus-visible~.filter-tabs [for=filter-category],#filter-price:focus-visible~.filter-tabs [for=filter-price]{outline:2px solid var(--gold-primary);outline-offset:-3px;border-radius:4px}.filters .filter-body>.group{display:none;border-top:0}#filter-brand:checked~.filter-brands,#filter-category:checked~.filter-categories,#filter-price:checked~.filter-prices{display:block}.filters.open .filter-body>.group{transition-delay:60ms}.filters.open .group .option{opacity:1;transform:translateY(0);transition:opacity .24s ease-out,transform .34s cubic-bezier(.34,1.56,.64,1);transition-delay:90ms}.filters.open .group .option:nth-child(2){transition-delay:120ms}.filters.open .group .option:nth-child(3){transition-delay:150ms}.filters.open .group .option:nth-child(n+4){transition-delay:180ms}@starting-style{.filters.open .filter-body>.group,.filters.open .group .option{opacity:0;transform:translateY(14px)}}}
+@media(max-width:1023px){.filter-tab-state{display:block;position:absolute;width:1px;height:1px;opacity:0;clip-path:inset(50%)}.filter-tabs{grid-column:1/-1;position:relative;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border-light);margin-bottom:8px}.filter-tabs label{padding:14px 2px;text-align:center;font-size:12px;color:var(--text-muted);cursor:pointer;transition:color .2s}.filter-tabs::after{content:"";position:absolute;bottom:-1px;left:0;width:calc(100% / 3);height:2px;border-radius:2px;background:var(--gold-primary);transform:translateX(0);transition:transform .32s cubic-bezier(.34,1.2,.64,1);pointer-events:none}#filter-category:checked~.filter-tabs::after{transform:translateX(100%)}#filter-price:checked~.filter-tabs::after{transform:translateX(200%)}#filter-brand:checked~.filter-tabs [for=filter-brand],#filter-category:checked~.filter-tabs [for=filter-category],#filter-price:checked~.filter-tabs [for=filter-price]{color:var(--text-main);font-weight:600}#filter-brand:focus-visible~.filter-tabs [for=filter-brand],#filter-category:focus-visible~.filter-tabs [for=filter-category],#filter-price:focus-visible~.filter-tabs [for=filter-price]{outline:2px solid var(--gold-primary);outline-offset:-3px;border-radius:4px}.filters .filter-body>.group{display:none;border-top:0}#filter-brand:checked~.filter-brands,#filter-category:checked~.filter-categories,#filter-price:checked~.filter-prices{display:block}#nav-sidebar.open .filters .filter-body>.group{transition-delay:60ms}#nav-sidebar.open .filters .group .option{opacity:1;transform:translateY(0);transition:opacity .24s ease-out,transform .34s cubic-bezier(.34,1.56,.64,1);transition-delay:90ms}#nav-sidebar.open .filters .group .option:nth-child(2){transition-delay:120ms}#nav-sidebar.open .filters .group .option:nth-child(3){transition-delay:150ms}#nav-sidebar.open .filters .group .option:nth-child(n+4){transition-delay:180ms}@starting-style{#nav-sidebar.open .filters .filter-body>.group,#nav-sidebar.open .filters .group .option{opacity:0;transform:translateY(14px)}}}
 @media(prefers-reduced-motion:reduce){.filter-tabs::after,.filters .group,.filters .group .option{transition:none!important}}
 .option{position:relative;display:flex;gap:10px;align-items:center;padding:6px 10px;border:1px solid transparent;border-radius:9999px;font-size:13px;color:var(--text-secondary);cursor:pointer}
 .option span{overflow-wrap:anywhere}
@@ -161,13 +172,13 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 @keyframes backdrop-enter{from{opacity:0}to{opacity:1}}
 
 /* ===== 6. MENU TRUOT: tay nam (tab handle) + sidebar + backdrop ===== */
-#nav-fab{position:absolute;right:-34px;top:55%;transform:translateY(-50%);z-index:1;width:34px;height:38px;border:1px solid rgba(176,148,92,.55);border-radius:0 4px 4px 0;background:#0e1c33;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;cursor:pointer}
+#nav-fab{position:absolute;right:-36px;top:50%;transform:translateY(-50%);z-index:1;width:36px;height:42px;border:1px solid rgba(176,148,92,.55);border-left:none;border-radius:0 6px 6px 0;background:#0e1c33;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;cursor:pointer}
 #nav-fab span{display:block;width:18px;height:2px;border-radius:2px;background:#e8e4d8;transition:transform .3s ease,opacity .3s ease}
 #nav-fab:hover{background:#152a4d}
-#nav-backdrop{position:fixed;inset:0;z-index:50;background:rgba(10,16,26,.4);opacity:0;transition:opacity .3s ease}
-#nav-backdrop.show{opacity:1}
-#nav-sidebar{position:fixed;top:0;left:0;z-index:60;width:280px;max-width:86vw;height:100dvh;background:#1a2b4a;color:#e8e4d8;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .3s cubic-bezier(0.25,1,0.5,1),box-shadow .3s ease;box-shadow:none}
-#nav-sidebar.open{transform:translateX(0);box-shadow:8px 0 32px rgba(0,0,0,.3)}
+#nav-backdrop{position:fixed;inset:0;z-index:50;background:rgba(10,16,26,.4);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
+#nav-backdrop.show{opacity:1;visibility:visible}
+#nav-sidebar{position:fixed;top:0;left:0;z-index:60;width:280px;max-width:86vw;height:100dvh;overflow-y:auto;overscroll-behavior:contain;background:#1a2b4a;color:#e8e4d8;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform 0.32s cubic-bezier(0.25,1,0.5,1);box-shadow:2px 0 12px rgba(0,0,0,.3)}
+#nav-sidebar.open{transform:translateX(0)}
 [data-theme="dark"] #nav-sidebar{background:#0c1626}
 [data-theme="dark"] #nav-fab{background:#060d18}
 .nav-head{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;border-bottom:1px solid rgba(176,148,92,.25)}
@@ -210,16 +221,35 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 .toast{border:1px solid var(--gold-primary);border-radius:9999px;box-shadow:0 10px 32px var(--toast-shadow)}
 .toast::before{content:"";display:inline-block;width:6px;height:6px;margin-right:10px;border-radius:50%;background:var(--gold-light)}
 
+/* Shared navigation and filter panel; the handle stays outside the scroll area. */
+#nav-fab{position:fixed;left:0;right:auto;z-index:61;transition:left .32s cubic-bezier(.25,1,.5,1),background-color .4s ease}
+body:has(#nav-sidebar.open) #nav-fab{left:min(280px,86vw)}
+#nav-sidebar>*{flex-shrink:0}
+#nav-sidebar .filters{--text-main:#e8e4d8;--text-secondary:#c4cbd6;--text-muted:#a9b4c5;--bg-surface:transparent;--bg-cream:rgba(176,148,92,.12);--border-light:rgba(176,148,92,.2);--border-subtle:rgba(176,148,92,.35);align-self:stretch;position:static;inset:auto;max-height:none;overflow:visible;visibility:visible;pointer-events:auto;padding:24px 20px;border:0;border-top:1px solid rgba(176,148,92,.25)}
+#nav-sidebar .filter-body{display:flex;flex-direction:column;align-items:stretch;width:100%;min-height:0;margin:0;padding:0;background:transparent}
+#nav-sidebar .filter-header{margin:0 0 8px}
+#nav-sidebar .filter-header strong{font-size:13px;letter-spacing:.2em;color:var(--gold-light)}
+#nav-sidebar #clear-filters{align-self:flex-start;margin:0 0 16px;font-size:10px;white-space:normal;text-align:left}
+#nav-sidebar .brands{max-height:none;overflow:visible}
+@media(max-width:480px){body:has(#nav-sidebar.open) #nav-fab{left:min(260px,86vw)}}
+
 </style>
 </head>
 <body>
-<div id="nav-backdrop" hidden></div>
-<nav id="nav-sidebar" aria-label="Điều hướng">
+<div id="nav-backdrop"></div>
 <button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button>
+<nav id="nav-sidebar" aria-label="Điều hướng">
 <div class="nav-head"><span class="nav-logo">Kho ảnh</span><button id="nav-close" aria-label="Đóng menu" type="button">×</button></div>
 <a class="nav-item active" href="#" id="nav-home"><span class="nav-bar"></span>Trang chủ</a>
 <a class="nav-item" href="https://huhuhu003.github.io/hop-thu-gui-nhanh/" target="_blank" rel="noopener"><span class="nav-bar"></span>Kho up ảnh</a>
 <button class="nav-item" id="nav-theme" type="button"><span class="nav-bar"></span><span id="nav-theme-label">Chế độ tối</span></button>
+<aside class="filters" id="filters" aria-label="Bộ lọc sản phẩm"><div class="filter-body"><div class="filter-header"><strong>BỘ LỌC</strong></div><button class="text-button" id="clear-filters">Xóa tất cả bộ lọc</button>
+<input class="filter-tab-state" type="radio" name="filter-tab" id="filter-brand" aria-label="Hãng" aria-controls="filter-brands" checked><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-category" aria-label="Danh mục" aria-controls="filter-categories"><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-price" aria-label="Giá" aria-controls="filter-prices">
+<div class="filter-tabs" role="group" aria-label="Chọn nhóm bộ lọc"><label for="filter-brand">Hãng</label><label for="filter-category">Danh mục</label><label for="filter-price">Giá</label></div>
+<section class="group filter-brands" id="filter-brands"><h2>Hãng</h2><input type="search" id="brand-search" placeholder="Tìm tên hãng" aria-label="Tìm tên hãng"><div class="options brands" id="brand-options"></div><p class="muted" id="brand-empty" hidden>Không có hãng phù hợp.</p></section>
+<section class="group filter-categories" id="filter-categories"><h2>Danh mục</h2><div class="options" id="category-options"></div></section>
+<section class="group filter-prices" id="filter-prices"><h2>Khoảng giá</h2><div class="options" id="price-options"></div></section>
+</div></aside>
 <div class="nav-foot">© 2026 Kho ảnh</div>
 </nav>
 <div id="greeting-stage" role="dialog" aria-modal="true" aria-label="Chào mừng">
@@ -247,14 +277,8 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 <main class="container" id="gallery">
 <div class="intro"><h1>Tất cả sản phẩm</h1><div class="muted">Một kho ảnh, nhiều cách khám phá.</div></div>
 <div class="layout">
-<aside class="filters" id="filters" aria-label="Bộ lọc sản phẩm"><div class="filter-body"><div class="filter-header"><strong>Bộ lọc</strong><button class="mobile-only" id="close-filters" aria-label="Đóng bộ lọc">✕</button></div><button class="text-button" id="clear-filters">Xóa tất cả bộ lọc</button>
-<input class="filter-tab-state" type="radio" name="filter-tab" id="filter-brand" aria-label="Hãng" aria-controls="filter-brands" checked><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-category" aria-label="Danh mục" aria-controls="filter-categories"><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-price" aria-label="Giá" aria-controls="filter-prices">
-<div class="filter-tabs" role="group" aria-label="Chọn nhóm bộ lọc"><label for="filter-brand">Hãng</label><label for="filter-category">Danh mục</label><label for="filter-price">Giá</label></div>
-<section class="group filter-brands" id="filter-brands"><h2>Hãng</h2><input type="search" id="brand-search" placeholder="Tìm tên hãng" aria-label="Tìm tên hãng"><div class="options brands" id="brand-options"></div><p class="muted" id="brand-empty" hidden>Không có hãng phù hợp.</p></section>
-<section class="group filter-categories" id="filter-categories"><h2>Danh mục</h2><div class="options" id="category-options"></div></section>
-<section class="group filter-prices" id="filter-prices"><h2>Khoảng giá</h2><div class="options" id="price-options"></div></section>
-<button class="primary mobile-only apply" id="apply-filters">Xem kết quả</button></div></aside>
-<section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div><button class="mobile-only" id="open-filters">Lọc</button> <button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
+
+<section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
 </div></main>
 <dialog class="modal" id="settings"><h2>Cài đặt kho ảnh</h2><form id="settings-form"><label for="root-input">ID thư mục gốc Google Drive</label><input id="root-input" type="text" required pattern="[A-Za-z0-9_-]+" autocomplete="off"><p class="muted">Lưu thư mục sẽ quét lại kho ảnh từ đầu.</p><label for="sheet-input">ID Google Sheet giờ làm việc</label><input id="sheet-input" type="text" pattern="[A-Za-z0-9_-]+" autocomplete="off" placeholder="Để trống nếu chưa có"><p class="muted">Đại ca tạo sheet "Giờ làm việc" trên mail mình, share quyền Editor cho mail chị, rồi dán ID sheet vào đây để app tự ghi giờ chấm công.</p><div class="buttons"><button class="primary" type="submit">Lưu thư mục</button><button type="button" id="reset-root">Khôi phục mặc định</button><button type="button" id="close-settings">Đóng</button></div></form></dialog>
 <dialog class="lightbox" id="lightbox" aria-label="Xem ảnh gốc"><div class="lb-top"><span id="lb-count"></span><button id="lb-close" aria-label="Đóng ảnh">×</button></div><div class="stage" id="stage"><img id="original" alt="" hidden><div class="lb-status" id="lb-status" role="status"></div><button class="nav prev" id="lb-prev" aria-label="Ảnh trước">‹</button><button class="nav next" id="lb-next" aria-label="Ảnh sau">›</button></div><div class="lb-bottom"><div id="lb-name"></div><div class="price" id="lb-price"></div></div></dialog>
@@ -378,8 +402,8 @@ $('theme-toggle').addEventListener('click',() => {
     if (l) l.textContent = dark ? 'Chế độ sáng' : 'Chế độ tối';
   }
   function openNav(){
-    backdrop.hidden = false;
-    requestAnimationFrame(()=>{ backdrop.classList.add('show'); sidebar.classList.add('open'); });
+    backdrop.classList.add('show');
+    sidebar.classList.add('open');
     fab.setAttribute('aria-expanded','true');
     syncNavThemeLabel();
   }
@@ -387,7 +411,6 @@ $('theme-toggle').addEventListener('click',() => {
     backdrop.classList.remove('show');
     sidebar.classList.remove('open');
     fab.setAttribute('aria-expanded','false');
-    setTimeout(()=>{ backdrop.hidden = true; },320);
   }
   fab.addEventListener('click', () => { sidebar.classList.contains('open') ? closeNav() : openNav(); });
   const hoverOK = window.matchMedia('(hover:hover)');
@@ -554,8 +577,7 @@ function metadata(note) {
 }
 function priceText(price) { return price === null ? '' : new Intl.NumberFormat('vi-VN').format(price) + ' đ'; }
 function toast(message) { $('toast').textContent = message; $('toast').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { $('toast').hidden = true; },6500); }
-function scrollLock() { document.body.style.overflow = $('lightbox').open || $('settings').open || $('filters').classList.contains('open') ? 'hidden' : ''; }
-function closeFilters() { $('filters').classList.remove('open'); $('filters').removeAttribute('role'); $('filters').removeAttribute('aria-modal'); scrollLock(); }
+function scrollLock() { document.body.style.overflow = $('lightbox').open || $('settings').open ? 'hidden' : ''; }
 function active(run) { if (run !== generation) throw new DOMException('Đã dừng','AbortError'); }
 function thumbnail(link) { return link || ''; }
 function makeOption(group,value,labelText) {
@@ -574,9 +596,6 @@ function matches(photo) { return (!selected.brand.size || selected.brand.has(pho
 function updateResults() {
   const shown = photos.reduce((total,photo) => total + (matches(photo) ? 1 : 0),0);
   $('result-count').textContent = shown.toLocaleString('vi-VN') + ' / ' + photos.length.toLocaleString('vi-VN') + ' ảnh · ' + brands.length + ' hãng';
-  const filtersCount = Object.values(selected).reduce((sum,values) => sum + values.size,0);
-  $('open-filters').textContent = filtersCount ? 'Lọc (' + filtersCount + ')' : 'Lọc';
-  $('apply-filters').textContent = 'Xem ' + shown.toLocaleString('vi-VN') + ' ảnh';
   $('empty').hidden = shown > 0;
   $('empty').textContent = scanning ? 'Đang quét kho ảnh. Các ảnh phù hợp sẽ xuất hiện tại đây…' : scanErrors ? 'Chưa có ảnh phù hợp trong dữ liệu đã đọc. Một phần kho chưa tải được; bạn có thể quét lại.' : photos.length ? 'Chưa có ảnh phù hợp. Thử bỏ bớt bộ lọc nhé.' : 'Kho này chưa có ảnh. Bạn có thể chọn thư mục khác trong Cài đặt.';
 }
@@ -699,20 +718,7 @@ $('stage').addEventListener('touchend',event => { if (!touch) return; const poin
 $('stage').addEventListener('touchcancel',() => { touch = null; },{passive:true});
 document.addEventListener('keydown',event => {
   if ($('lightbox').open) { if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); moveImage(event.key === 'ArrowLeft' ? -1 : 1); } }
-  else if ($('filters').classList.contains('open')) {
-    if (event.key === 'Escape') { closeFilters(); $('open-filters').focus(); }
-    if (event.key === 'Tab') {
-      const nodes = [...$('filters').querySelectorAll('button,input')].filter(node => !node.closest('[hidden]') && node.getClientRects().length);
-      const first = nodes[0], last = nodes[nodes.length-1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    }
-  }
 });
-$('open-filters').addEventListener('click',() => { $('filters').classList.add('open'); $('filters').setAttribute('role','dialog'); $('filters').setAttribute('aria-modal','true'); scrollLock(); $('close-filters').focus(); });
-for (const id of ['close-filters','apply-filters']) $(id).addEventListener('click',() => { closeFilters(); $('open-filters').focus(); });
-$('filters').addEventListener('click',event => { if (event.target === $('filters')) closeFilters(); });
-matchMedia('(min-width:1024px)').addEventListener('change',event => { if (event.matches) closeFilters(); });
 $('brand-search').addEventListener('input',searchBrands); $('clear-filters').addEventListener('click',clearFilters); $('home').addEventListener('click',clearFilters); $('retry').addEventListener('click',scan);
 function closeSettings() { $('settings').close(); scrollLock(); }
 $('settings-button').addEventListener('click',() => { $('root-input').value = root; try { $('sheet-input').value = localStorage.getItem('chamcong_sheet_id') || ''; } catch (_) {} $('settings').showModal(); scrollLock(); });
