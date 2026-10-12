@@ -100,7 +100,8 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 <style>
 /* ===== ANIMATIONS - gom theo khu, sua nhanh theo dau muc ===== */
 /* ===== 1. HEADER: bounce logo + tieu de luc mo trang ===== */
-.logo{transform-origin:center;animation:header-bounce .9s cubic-bezier(.2,.7,.3,1) 1}
+.logo{transform-origin:center}
+.logo.bounce-now{animation:header-bounce .9s cubic-bezier(.2,.7,.3,1) 1}
 @keyframes header-bounce{0%{opacity:0;transform:translateY(-46px) scale(.94)}55%{opacity:1;transform:translateY(7px) scale(1.015)}72%{transform:translateY(-4px) scale(.998)}86%{transform:translateY(2px) scale(1.002)}100%{opacity:1;transform:translateY(0) scale(1)}}
 
 /* ===== 2. MAN CHAO SAN KHAU: overlay + spotlight + chu Magic + nut OK ===== */
@@ -409,6 +410,8 @@ $('theme-toggle').addEventListener('click',() => {
   function closeStage(){
     if (!st || st.classList.contains('hide')) return;
     st.classList.add('hide');
+    const logo = document.querySelector('.logo');
+    if (logo) { logo.classList.remove('bounce-now'); void logo.offsetWidth; logo.classList.add('bounce-now'); }
     document.body.style.overflow = '';
     setTimeout(() => { st.hidden = true; }, 700);
   }
