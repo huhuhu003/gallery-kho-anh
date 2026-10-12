@@ -127,12 +127,12 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 
 .stage-inner{position:relative;z-index:1;text-align:center;padding:0 24px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .stage-arc{width:min(400px,80vw);height:auto;overflow:visible}
-.arc-text{font:600 clamp(20px,4vw,32px)/1 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;fill:#e5d3a9;letter-spacing:.06em;animation:arc-in .5s ease-out both}
+.arc-text{font:600 clamp(26px,5.2vw,42px)/1 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;fill:#e5d3a9;letter-spacing:.06em;animation:arc-in .5s ease-out both}
 @keyframes arc-in{from{opacity:0;filter:blur(6px)}to{opacity:1;filter:blur(0)}}
 .stage-glass{position:relative;display:inline-block;padding:1.5rem 2.5rem;border-radius:24px;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.18);box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.2);overflow:hidden;opacity:0;animation:bounceIn .8s cubic-bezier(.215,.61,.355,1) .3s both}
 .stage-glass::after{content:"";position:absolute;top:0;bottom:0;width:45%;left:0;pointer-events:none;background:linear-gradient(105deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-160%) skewX(-12deg);animation:glass-sheen 1.2s ease-out 1.2s 1}
 @keyframes glass-sheen{to{transform:translateX(320%) skewX(-12deg)}}
-#stage-text{font:700 clamp(32px,7vw,56px)/1.2 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;color:#fff;text-shadow:0 2px 12px rgba(212,192,146,.45);letter-spacing:.02em}
+#stage-text{font:700 clamp(26px,5.6vw,45px)/1.2 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;color:#fff;text-shadow:0 2px 12px rgba(212,192,146,.45);letter-spacing:.02em}
 @keyframes bounceIn{from,20%,40%,60%,80%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:scale3d(.3,.3,.3)}20%{transform:scale3d(1.1,1.1,1.1)}40%{transform:scale3d(.9,.9,.9)}60%{opacity:1;transform:scale3d(1.03,1.03,1.03)}80%{transform:scale3d(.97,.97,.97)}to{opacity:1;transform:scale3d(1,1,1)}}
 @keyframes bounceOut{20%{transform:scale3d(.9,.9,.9)}50%,55%{opacity:1;transform:scale3d(1.1,1.1,1.1)}to{opacity:0;transform:scale3d(.3,.3,.3)}}
 #greeting-stage.hide .stage-inner{animation:bounceOut .8s ease-in both}
@@ -288,8 +288,8 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 <div class="spot s2"></div>
 <div class="stage-inner">
   <svg class="stage-arc" viewBox="0 0 400 80" aria-hidden="true">
-    <defs><path id="arcPath" d="M 30,65 Q 200,10 370,65" fill="none"/></defs>
-    <text class="arc-text"><textPath href="#arcPath" startOffset="50%" text-anchor="middle">Chào buổi tối,</textPath></text>
+    <defs><path id="arcPath" d="M 30,65 Q 200,-20 370,65" fill="none"/></defs>
+    <text class="arc-text"><textPath href="#arcPath" startOffset="50%" text-anchor="middle">Chào buổi tối</textPath></text>
   </svg>
   <div class="stage-glass">
     <div id="stage-text">Phương Anh</div>
@@ -381,7 +381,7 @@ document.addEventListener('keydown',e => {
 const mobileHeader = matchMedia('(max-width:767px)');
 function placeHeaderControls(){for(const id of ['chamcong','settings-button','logout']){const el=$(id);if(mobileHeader.matches)$('nav-controls').append(el);else if(id==='chamcong')document.querySelector('header').insertBefore(el,document.querySelector('.actions'));else document.querySelector('.actions').append(el);}}
 placeHeaderControls();mobileHeader.addEventListener('change',placeHeaderControls);
-(function(){const h=new Date().getHours();document.querySelector('#greeting-stage textPath').textContent='Chào '+(h>=5&&h<11?'buổi sáng':h<14&&h>=11?'buổi trưa':h<18&&h>=14?'buổi chiều':'buổi tối')+',';$('stage-text').textContent='Phương Anh';const st=$('greeting-stage');document.body.style.overflow='hidden';function dismiss(){if(st.classList.contains('hide'))return;st.classList.add('hide');document.querySelector('.logo').classList.add('bounce-now');scrollLock();setTimeout(()=>st.hidden=true,800);}st.addEventListener('click',dismiss);document.addEventListener('keydown',e=>{if(e.key==='Escape')dismiss();});setTimeout(dismiss,4000);})();
+(function(){const h=new Date().getHours();document.querySelector('#greeting-stage textPath').textContent='Chào '+(h>=5&&h<11?'buổi sáng':h<14&&h>=11?'buổi trưa':h<18&&h>=14?'buổi chiều':'buổi tối');$('stage-text').textContent='Phương Anh';const st=$('greeting-stage');document.body.style.overflow='hidden';function dismiss(){if(st.classList.contains('hide'))return;st.classList.add('hide');document.querySelector('.logo').classList.add('bounce-now');scrollLock();setTimeout(()=>st.hidden=true,800);}st.addEventListener('click',dismiss);document.addEventListener('keydown',e=>{if(e.key==='Escape')dismiss();});setTimeout(dismiss,4000);})();
 (function(){
   const DAYS = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
   const CC_KEY = 'chamcong_log';
