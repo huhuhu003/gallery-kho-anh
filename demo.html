@@ -386,6 +386,12 @@ $('theme-toggle').addEventListener('click',() => {
     setTimeout(()=>{ backdrop.hidden = true; },320);
   }
   fab.addEventListener('click', openNav);
+  if (window.matchMedia('(hover:hover)').matches) {
+    let navTimer = null;
+    fab.addEventListener('mouseenter', () => { clearTimeout(navTimer); openNav(); });
+    sidebar.addEventListener('mouseenter', () => clearTimeout(navTimer));
+    sidebar.addEventListener('mouseleave', () => { navTimer = setTimeout(closeNav, 300); });
+  }
   $('nav-close').addEventListener('click', closeNav);
   backdrop.addEventListener('click', closeNav);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && sidebar.classList.contains('open')) closeNav(); });
