@@ -127,16 +127,18 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 
 .stage-inner{position:relative;z-index:1;text-align:center;padding:0 24px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .stage-arc{width:min(400px,80vw);height:auto;overflow:visible}
-.arc-text{font:600 clamp(26px,5.2vw,42px)/1 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;fill:#e5d3a9;letter-spacing:.06em;animation:arc-in .5s ease-out both}
+.arc-text{font:600 clamp(30px,6vw,48px)/1 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;fill:#e5d3a9;letter-spacing:.06em;animation:arc-in .5s ease-out both}
 @keyframes arc-in{from{opacity:0;filter:blur(6px)}to{opacity:1;filter:blur(0)}}
-.stage-glass{position:relative;display:inline-block;padding:1.5rem 2.5rem;border-radius:24px;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.18);box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.2);overflow:hidden;opacity:0;animation:bounceIn .8s cubic-bezier(.215,.61,.355,1) .3s both}
+.stage-glass{position:relative;display:inline-block;padding:1.5rem 2.5rem;border-radius:24px;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.18);box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.2);overflow:hidden;opacity:0;animation:glass-bloom .8s cubic-bezier(.22,1,.36,1) .2s both}
+@keyframes glass-bloom{0%{opacity:0;transform:scale(.6)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
 .stage-glass::after{content:"";position:absolute;top:0;bottom:0;width:45%;left:0;pointer-events:none;background:linear-gradient(105deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-160%) skewX(-12deg);animation:glass-sheen 1.2s ease-out 1.2s 1}
 @keyframes glass-sheen{to{transform:translateX(320%) skewX(-12deg)}}
-#stage-text{font:700 clamp(26px,5.6vw,45px)/1.2 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;color:#fff;text-shadow:0 2px 12px rgba(212,192,146,.45);letter-spacing:.02em}
+#stage-text{font:700 clamp(26px,5.6vw,45px)/1.2 'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;color:#fff;text-shadow:0 2px 12px rgba(212,192,146,.45);letter-spacing:.02em;animation:bounceIn .8s cubic-bezier(.215,.61,.355,1) .3s both}
 @keyframes bounceIn{from,20%,40%,60%,80%,to{animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;transform:scale3d(.3,.3,.3)}20%{transform:scale3d(1.1,1.1,1.1)}40%{transform:scale3d(.9,.9,.9)}60%{opacity:1;transform:scale3d(1.03,1.03,1.03)}80%{transform:scale3d(.97,.97,.97)}to{opacity:1;transform:scale3d(1,1,1)}}
 @keyframes bounceOut{20%{transform:scale3d(.9,.9,.9)}50%,55%{opacity:1;transform:scale3d(1.1,1.1,1.1)}to{opacity:0;transform:scale3d(.3,.3,.3)}}
-#greeting-stage.hide .stage-inner{animation:bounceOut .8s ease-in both}
-@media(prefers-reduced-motion:reduce){.arc-text,.stage-glass{animation:none;opacity:1}#greeting-stage.hide .stage-inner{animation:none}.stage-glass::after{animation:none}}
+#greeting-stage.hide .stage-glass{animation:glass-bloom .6s cubic-bezier(.55,.06,.68,.19) reverse both}
+#greeting-stage.hide #stage-text{animation:bounceOut .8s ease-in both}
+@media(prefers-reduced-motion:reduce){.arc-text,.stage-glass,#stage-text{animation:none;opacity:1}#greeting-stage.hide .stage-glass,#greeting-stage.hide #stage-text{animation:none}.stage-glass::after{animation:none}}
 
 
 /* ===== 3. FILTER: drawer truot, tabs mega-menu, stagger, checkbox ve dan, hieu ung kinh ===== */
