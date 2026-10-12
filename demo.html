@@ -158,14 +158,16 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 .lightbox[open]::backdrop{animation:backdrop-enter .3s ease-out}
 @keyframes backdrop-enter{from{opacity:0}to{opacity:1}}
 
-/* ===== 6. MENU TRUOT: hamburger + sidebar + backdrop ===== */
-#nav-fab{position:fixed;left:10px;top:50%;transform:translateY(-50%);z-index:40;width:44px;height:44px;border-radius:50%;border:1px solid var(--border-gold);background:#1a2b4a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-#nav-fab span{display:block;width:18px;height:2px;border-radius:2px;background:#b0945c;transition:transform .3s ease,opacity .3s ease}
+/* ===== 6. MENU TRUOT: tay nam (tab handle) + sidebar + backdrop ===== */
+#nav-fab{position:absolute;right:-34px;top:55%;transform:translateY(-50%);z-index:1;width:34px;height:38px;border:1px solid rgba(176,148,92,.55);border-radius:0 4px 4px 0;background:#0e1c33;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;cursor:pointer}
+#nav-fab span{display:block;width:18px;height:2px;border-radius:2px;background:#e8e4d8;transition:transform .3s ease,opacity .3s ease}
+#nav-fab:hover{background:#152a4d}
 #nav-backdrop{position:fixed;inset:0;z-index:50;background:rgba(10,16,26,.4);opacity:0;transition:opacity .3s ease}
 #nav-backdrop.show{opacity:1}
-#nav-sidebar{position:fixed;top:0;left:0;z-index:60;width:280px;max-width:86vw;height:100dvh;background:#1a2b4a;color:#e8e4d8;display:flex;flex-direction:column;transform:translateX(-105%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:8px 0 32px rgba(0,0,0,.3)}
-#nav-sidebar.open{transform:translateX(0)}
+#nav-sidebar{position:fixed;top:0;left:0;z-index:60;width:280px;max-width:86vw;height:100dvh;background:#1a2b4a;color:#e8e4d8;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .3s cubic-bezier(0.25,1,0.5,1),box-shadow .3s ease;box-shadow:none}
+#nav-sidebar.open{transform:translateX(0);box-shadow:8px 0 32px rgba(0,0,0,.3)}
 [data-theme="dark"] #nav-sidebar{background:#0c1626}
+[data-theme="dark"] #nav-fab{background:#060d18}
 .nav-head{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;border-bottom:1px solid rgba(176,148,92,.25)}
 .nav-logo{font:600 20px/1.2 var(--font-serif);letter-spacing:.18em;text-transform:uppercase;color:#b0945c}
 #nav-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(176,148,92,.4);background:transparent;color:#b0945c;font-size:20px;line-height:1;padding:0;flex:none}
@@ -174,7 +176,7 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 .nav-item:hover{background:rgba(176,148,92,.12);color:#b0945c}
 .nav-item.active .nav-bar{transform:scaleY(1)}
 .nav-foot{margin-top:auto;padding:18px 20px;font-size:11px;letter-spacing:.1em;color:#96a4b8}
-@media(max-width:480px){#nav-sidebar{width:260px}#nav-fab{left:8px;width:40px;height:40px}}
+@media(max-width:480px){#nav-sidebar{width:260px}}
 
 /* ===== 7. DARK MODE: switch truot + chuyen mau muot ===== */
 body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolbar,.card,.photo,.modal,button,input,.option,.option small,.filename,.price,.muted,.toast,.brand-icon rect{transition:background-color .4s ease,color .4s ease,border-color .4s ease,fill .4s ease}
@@ -199,6 +201,7 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 @keyframes cc-pulse{0%,100%{box-shadow:0 0 0 0 rgba(176,148,92,.45)}50%{box-shadow:0 0 0 7px rgba(176,148,92,0)}}
 @media(max-width:640px){.chamcong{gap:6px;padding:5px 8px;font-size:11px;margin-right:4px}#cc-total{display:none}}
 @media(prefers-reduced-motion:reduce){#cc-toggle[aria-pressed="true"]{animation:none}}
+@media(prefers-reduced-motion:reduce){#nav-sidebar,#nav-fab,#nav-fab span{transition:none}}
 /* ===== 8. KHAC: spinner, toast ===== */
 .spinner{width:16px;height:16px;border:2px solid var(--gold-badge);border-top-color:var(--gold-primary);border-radius:50%;animation:spin .8s linear infinite;flex:none}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -208,9 +211,9 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 </style>
 </head>
 <body>
-<button id="nav-fab" aria-label="Mở menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button>
 <div id="nav-backdrop" hidden></div>
-<nav id="nav-sidebar" aria-label="Điều hướng" aria-hidden="true">
+<nav id="nav-sidebar" aria-label="Điều hướng">
+<button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button>
 <div class="nav-head"><span class="nav-logo">Kho ảnh</span><button id="nav-close" aria-label="Đóng menu" type="button">×</button></div>
 <a class="nav-item active" href="#" id="nav-home"><span class="nav-bar"></span>Trang chủ</a>
 <a class="nav-item" href="https://huhuhu003.github.io/hop-thu-gui-nhanh/" target="_blank" rel="noopener"><span class="nav-bar"></span>Kho up ảnh</a>
@@ -375,24 +378,25 @@ $('theme-toggle').addEventListener('click',() => {
   function openNav(){
     backdrop.hidden = false;
     requestAnimationFrame(()=>{ backdrop.classList.add('show'); sidebar.classList.add('open'); });
-    sidebar.setAttribute('aria-hidden','false');
     fab.setAttribute('aria-expanded','true');
     syncNavThemeLabel();
   }
   function closeNav(){
     backdrop.classList.remove('show');
     sidebar.classList.remove('open');
-    sidebar.setAttribute('aria-hidden','true');
     fab.setAttribute('aria-expanded','false');
     setTimeout(()=>{ backdrop.hidden = true; },320);
   }
-  fab.addEventListener('click', openNav);
-  if (window.matchMedia('(hover:hover)').matches) {
-    let navTimer = null;
-    fab.addEventListener('mouseenter', () => { clearTimeout(navTimer); openNav(); });
-    sidebar.addEventListener('mouseenter', () => clearTimeout(navTimer));
-    sidebar.addEventListener('mouseleave', () => { navTimer = setTimeout(closeNav, 300); });
-  }
+  fab.addEventListener('click', () => { sidebar.classList.contains('open') ? closeNav() : openNav(); });
+  const hoverOK = window.matchMedia('(hover:hover)');
+  let navCloseTimer = null;
+  fab.addEventListener('mouseenter', () => { if (hoverOK.matches && !sidebar.classList.contains('open')) openNav(); });
+  sidebar.addEventListener('mouseenter', () => { if (navCloseTimer) { clearTimeout(navCloseTimer); navCloseTimer = null; } });
+  sidebar.addEventListener('mouseleave', () => {
+    if (!hoverOK.matches) return;
+    if (navCloseTimer) clearTimeout(navCloseTimer);
+    navCloseTimer = setTimeout(() => { navCloseTimer = null; if (sidebar.classList.contains('open')) closeNav(); }, 300);
+  });
   $('nav-close').addEventListener('click', closeNav);
   backdrop.addEventListener('click', closeNav);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && sidebar.classList.contains('open')) closeNav(); });
