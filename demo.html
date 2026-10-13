@@ -108,8 +108,8 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 /* Tool chèn logo: preview dùng cùng tọa độ ảnh với bản xuất. */
 #logo-tool{max-width:1100px;margin:auto}
 #logo-tool button,.logo-drag-label{min-height:48px}
-.logo-preview{width:100%;background:var(--bg-photo);border:1px solid var(--border-subtle);border-radius:4px;overflow:hidden;margin:16px 0}
-#logo-canvas{display:block;width:100%;height:auto}
+.logo-preview{width:100%;max-height:60vh;background:var(--bg-photo);border:1px solid var(--border-subtle);border-radius:4px;overflow:hidden;margin:16px 0}
+#logo-canvas{display:block;width:auto;max-width:100%;height:auto;max-height:60vh;margin:0 auto;object-fit:contain}
 #logo-canvas.free-drag{touch-action:none;cursor:grab}
 #logo-canvas.free-drag:active{cursor:grabbing}
 .logo-controls{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
