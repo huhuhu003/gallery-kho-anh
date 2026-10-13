@@ -796,7 +796,8 @@ const logoImage = new Image();
 let logoReady = false, logoFailed = false, logoItems = [], logoIndex = 0, logoBusy = false, logoDrag = null;
 const logoCanvas = $('logo-canvas'), logoContext = logoCanvas.getContext('2d');
 function logoSize(item) {
-  return {x:.15, y:.15 * item.img.naturalWidth / item.img.naturalHeight * logoImage.naturalHeight / logoImage.naturalWidth};
+  const w = Math.min(.15, 1.5 * logoImage.naturalWidth / item.img.naturalWidth);
+  return {x:w, y:w * item.img.naturalWidth / item.img.naturalHeight * logoImage.naturalHeight / logoImage.naturalWidth};
 }
 function logoSnap(item, position) {
   const size = logoSize(item), right = Math.max(0, 1 - .03 - size.x), bottom = Math.max(0, 1 - .03 - size.y);
@@ -804,6 +805,7 @@ function logoSnap(item, position) {
     y:position.startsWith('top') ? Math.min(.03, Math.max(0,1-size.y)) : bottom};
 }
 function paintLogo(ctx, item, width, height) {
+  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
   ctx.globalAlpha = 1; ctx.drawImage(item.img, 0, 0, width, height);
   const size = logoSize(item);
   ctx.drawImage(logoImage, item.pos.x * width, item.pos.y * height, size.x * width, size.y * height);
