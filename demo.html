@@ -299,9 +299,10 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 <section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
 </div></div>
 <section id="logo-tool" aria-labelledby="logo-title" hidden>
-<div class="intro"><h1 id="logo-title">Chèn logo hàng loạt</h1><p class="muted">Chọn ảnh, đặt logo và tải ảnh giữ nguyên kích thước gốc.</p></div>
+<div class="intro"><h1 id="logo-title">Chèn logo hàng loạt</h1><p class="muted">Chọn ảnh, đặt logo và tải ảnh giữ nguyên kích thước gốc. Hoặc nhấn Ctrl+V / Cmd+V để dán ảnh.</p></div>
 <input id="logo-files" type="file" accept="image/*" multiple hidden>
 <button id="logo-select" class="primary" type="button">Chọn ảnh</button>
+<button id="logo-paste" type="button">Dán ảnh</button>
 <p id="logo-status" class="muted" role="status">Chưa chọn ảnh.</p>
 <div class="logo-preview"><canvas id="logo-canvas" width="960" height="600" aria-label="Ảnh xem trước với logo">Ảnh xem trước với logo</canvas></div>
 <div id="logo-positions" class="logo-controls" role="group" aria-label="Vị trí logo">
@@ -815,6 +816,7 @@ function renderLogoPreview() {
   $('logo-apply').disabled = logoBusy || !item || !logoReady;
   $('logo-clear').disabled = logoBusy || !item;
   $('logo-select').disabled = logoBusy || !logoReady;
+  $('logo-paste').disabled = logoBusy || !logoReady;
   $('logo-positions').querySelectorAll('button').forEach(button => {
     button.disabled = logoBusy || !item || !logoReady;
     const snap = item && logoReady ? logoSnap(item, button.dataset.position) : null;
@@ -832,14 +834,18 @@ logoImage.onerror = () => { logoFailed = true; renderLogoPreview(); toast('Khôn
 logoImage.src = 'logo-trong-suot.png';
 $('logo-select').addEventListener('click', () => $('logo-files').click());
 $('logo-files').addEventListener('change', async event => {
-  const files = Array.from(event.target.files); event.target.value = '';
+  const adding = addLogoFiles(Array.from(event.target.files)); event.target.value = '';
+  await adding;
+});
+async function addLogoFiles(files) {
   if (logoBusy || !logoReady || !files.length) return;
   logoBusy = true; renderLogoPreview(); let added = 0;
   for (const file of files) {
+    const fileName = file.name || 'anh-dan-' + (logoItems.length + 1) + '.png';
     const url = URL.createObjectURL(file), img = new Image();
     try {
       await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; img.src = url; });
-      const item = {file, img, pos:null, name:file.name, url}; item.pos = logoSnap(item, 'bottom-right');
+      const item = {file, img, pos:null, name:fileName, url}; item.pos = logoSnap(item, 'bottom-right');
       const i = logoItems.length; logoItems.push(item); added++;
       const button = document.createElement('button'); button.type = 'button'; button.title = item.name;
       button.setAttribute('aria-label', 'Sửa ảnh ' + item.name);
@@ -847,9 +853,31 @@ $('logo-files').addEventListener('change', async event => {
       const name = document.createElement('span'); name.textContent = item.name; button.append(thumb, name);
       button.addEventListener('click', () => { if (!logoBusy) { logoIndex = i; logoDrag = null; renderLogoPreview(); } });
       $('logo-thumbnails').append(button);
-    } catch (_) { URL.revokeObjectURL(url); toast('Không đọc được ảnh: ' + file.name); }
+    } catch (_) { URL.revokeObjectURL(url); toast('Không đọc được ảnh: ' + fileName); }
   }
   logoBusy = false; renderLogoPreview(); if (added) toast('Đã thêm ' + added + ' ảnh');
+}
+document.addEventListener('paste', event => {
+  const target = event.target;
+  if (target && (['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) || target.isContentEditable)) return;
+  const files = Array.from(event.clipboardData?.items || [])
+    .filter(item => item.type.startsWith('image/'))
+    .map(item => item.getAsFile()).filter(Boolean);
+  if (!files.length) return;
+  event.preventDefault();
+  addLogoFiles(files);
+});
+$('logo-paste').addEventListener('click', async () => {
+  try {
+    if (!navigator.clipboard?.read) throw new Error('Clipboard read unavailable');
+    const items = await navigator.clipboard.read();
+    const files = [];
+    for (const item of items) {
+      const type = item.types.find(type => type.startsWith('image/'));
+      if (type) files.push(await item.getType(type));
+    }
+    if (files.length) await addLogoFiles(files);
+  } catch (_) { toast('Trình duyệt không cho đọc clipboard, hãy dùng Ctrl+V'); }
 });
 $('logo-positions').addEventListener('click', event => {
   const button = event.target.closest('button[data-position]'), item = logoItems[logoIndex];
