@@ -105,6 +105,23 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 #nav-sidebar .brands{max-height:none;overflow:visible}
 
 
+/* Tool chèn logo: preview dùng cùng tọa độ ảnh với bản xuất. */
+#logo-tool{max-width:1100px;margin:auto}
+#logo-tool button,.logo-drag-label{min-height:48px}
+.logo-preview{width:100%;background:var(--bg-photo);border:1px solid var(--border-subtle);border-radius:4px;overflow:hidden;margin:16px 0}
+#logo-canvas{display:block;width:100%;height:auto}
+#logo-canvas.free-drag{touch-action:none;cursor:grab}
+#logo-canvas.free-drag:active{cursor:grabbing}
+.logo-controls{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+#logo-positions button[aria-pressed="true"]{border-color:var(--gold-primary);background:var(--gold-subtle)}
+.logo-drag-label{display:flex;align-items:center;gap:10px;margin:12px 0}
+#logo-free-drag{width:22px;height:22px;accent-color:var(--gold-primary)}
+#logo-thumbnails{display:flex;gap:12px;overflow-x:auto;padding:16px 4px;margin:16px 0}
+#logo-thumbnails button{flex:0 0 100px;padding:6px;border-radius:4px;letter-spacing:0;text-transform:none}
+#logo-thumbnails button[aria-pressed="true"]{border:2px solid var(--gold-primary)}
+#logo-thumbnails img{width:84px;height:84px;object-fit:contain;border-radius:2px;background:var(--bg-photo)}
+#logo-thumbnails span{display:block;width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+@media(max-width:480px){#logo-positions button{flex:1 1 40%;padding:10px}#logo-apply{width:100%}}
 </style>
 <style>
 /* ===== ANIMATIONS - gom theo khu, sua nhanh theo dau muc ===== */
@@ -241,6 +258,7 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 <div class="nav-head"><span class="nav-logo">Kho ảnh</span><button id="nav-close" aria-label="Đóng menu" type="button">×</button></div>
 <a class="nav-item active" href="#" id="nav-home"><span class="nav-bar"></span>Trang chủ</a>
 <a class="nav-item" href="https://huhuhu003.github.io/hop-thu-gui-nhanh/" target="_blank" rel="noopener"><span class="nav-bar"></span>Kho up ảnh</a>
+<button class="nav-item" id="nav-logo" type="button"><span class="nav-bar"></span>Chèn logo</button>
 <button class="nav-item" id="nav-theme" type="button"><span class="nav-bar"></span><span id="nav-theme-label">Chế độ tối</span></button>
 <aside class="filters" id="filters" aria-label="Bộ lọc sản phẩm"><div class="filter-body"><div class="filter-header"><strong>BỘ LỌC</strong></div><button class="text-button" id="clear-filters">Xóa tất cả bộ lọc</button>
 <input class="filter-tab-state" type="radio" name="filter-tab" id="filter-brand" aria-label="Hãng" aria-controls="filter-brands" checked><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-category" aria-label="Danh mục" aria-controls="filter-categories"><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-price" aria-label="Giá" aria-controls="filter-prices">
@@ -273,12 +291,32 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 <button id="cc-toggle" type="button" aria-pressed="false">ON</button>
 </div><div class="actions"><button id="theme-toggle" type="button" aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="sw-knob"><svg class="theme-icon theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-icon theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.3A9 9 0 0 1 10.7 3.5a9 9 0 1 0 9.8 9.8Z"/></svg></span></button><button id="settings-button">Cài đặt</button><button id="logout" hidden>Đăng xuất</button></div></header>
 <section class="login" id="login" hidden><h1>Kho ảnh của bạn</h1><p>Khám phá toàn bộ ảnh sản phẩm. Chọn hãng, danh mục và khoảng giá để tìm đúng món bạn cần.</p><button class="primary" id="login-button" disabled>Đang chuẩn bị đăng nhập…</button><p class="muted" id="login-message">Ứng dụng chỉ đọc Google Drive. Phiên đăng nhập chỉ được giữ trong bộ nhớ.</p></section>
-<main class="container" id="gallery">
+<main class="container">
+<div id="gallery">
 <div class="intro"><h1>Tất cả sản phẩm</h1><div class="muted">Một kho ảnh, nhiều cách khám phá.</div></div>
 <div class="layout">
 
 <section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
-</div></main>
+</div></div>
+<section id="logo-tool" aria-labelledby="logo-title" hidden>
+<div class="intro"><h1 id="logo-title">Chèn logo hàng loạt</h1><p class="muted">Chọn ảnh, đặt logo và tải ảnh giữ nguyên kích thước gốc.</p></div>
+<input id="logo-files" type="file" accept="image/*" multiple hidden>
+<button id="logo-select" class="primary" type="button">Chọn ảnh</button>
+<p id="logo-status" class="muted" role="status">Chưa chọn ảnh.</p>
+<div class="logo-preview"><canvas id="logo-canvas" width="960" height="600" aria-label="Ảnh xem trước với logo">Ảnh xem trước với logo</canvas></div>
+<div id="logo-positions" class="logo-controls" role="group" aria-label="Vị trí logo">
+<button type="button" data-position="top-left">Trên-trái</button>
+<button type="button" data-position="top-right">Trên-phải</button>
+<button type="button" data-position="bottom-left">Dưới-trái</button>
+<button type="button" data-position="bottom-right">Dưới-phải</button>
+<button type="button" data-position="bottom-center">Giữa-dưới</button>
+</div>
+<label class="logo-drag-label"><input id="logo-free-drag" type="checkbox"> Kéo thả tự do</label>
+<button id="logo-apply" type="button" disabled>Áp vị trí này cho ảnh còn lại</button>
+<div id="logo-thumbnails" aria-label="Các ảnh đã chọn"></div>
+<div class="logo-controls"><button id="logo-download" class="primary" type="button" disabled>Tải tất cả</button><button id="logo-clear" type="button" disabled>Xóa hết</button></div>
+</section>
+</main>
 <dialog class="modal" id="settings"><h2>Cài đặt kho ảnh</h2><form id="settings-form"><label for="root-input">ID thư mục gốc Google Drive</label><input id="root-input" type="text" required pattern="[A-Za-z0-9_-]+" autocomplete="off"><p class="muted">Lưu thư mục sẽ quét lại kho ảnh từ đầu.</p><label for="sheet-input">ID Google Sheet giờ làm việc</label><input id="sheet-input" type="text" pattern="[A-Za-z0-9_-]+" autocomplete="off" placeholder="Để trống nếu chưa có"><p class="muted">Đại ca tạo sheet "Giờ làm việc" trên mail mình, share quyền Editor cho mail chị, rồi dán ID sheet vào đây để app tự ghi giờ chấm công.</p><div class="buttons"><button class="primary" type="submit">Lưu thư mục</button><button type="button" id="reset-root">Khôi phục mặc định</button><button type="button" id="close-settings">Đóng</button></div></form></dialog>
 <dialog class="lightbox" id="lightbox" aria-label="Xem ảnh gốc"><div class="lb-top"><span id="lb-count"></span><button id="lb-close" aria-label="Đóng ảnh">×</button></div><div class="stage" id="stage"><img id="original" alt="" hidden><div class="lb-status" id="lb-status" role="status"></div><button class="nav prev" id="lb-prev" aria-label="Ảnh trước">‹</button><button class="nav next" id="lb-next" aria-label="Ảnh sau">›</button></div><div class="lb-bottom"><div id="lb-name"></div><div class="price" id="lb-price"></div></div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -424,7 +462,8 @@ $('theme-toggle').addEventListener('click',() => {
   $('nav-close').addEventListener('click', closeNav);
   backdrop.addEventListener('click', closeNav);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && sidebar.classList.contains('open')) closeNav(); });
-  $('nav-home').addEventListener('click', e => { e.preventDefault(); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
+  $('nav-home').addEventListener('click', e => { e.preventDefault(); showLogoTool(false); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
+  $('nav-logo').addEventListener('click', () => { showLogoTool(true); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
   $('nav-theme').addEventListener('click', () => { $('theme-toggle').click(); syncNavThemeLabel(); });
   syncNavThemeLabel();
 })();
@@ -656,7 +695,7 @@ async function scan() {
   $('grid').replaceChildren(); $('brand-options').replaceChildren(); options.brand.clear();
   Object.values(counts).forEach(map => map.clear()); clearFilters();
   Object.values(options).forEach(map => map.forEach(option => { option.count.textContent = '0'; }));
-  $('gallery').hidden = false; $('login').hidden = true; $('logout').hidden = true;
+  $('gallery').hidden = !$('logo-tool').hidden; $('login').hidden = true; $('logout').hidden = true;
   $('scan-spinner').hidden = false; $('retry').hidden = true; $('scan-status').textContent = 'Đang đọc danh sách hãng…';
   try {
     brands = demoBrands();
@@ -746,6 +785,135 @@ if (demoMode) scan();
 }
 $('settings-form').addEventListener('submit',event => { event.preventDefault(); const sv = $('sheet-input').value.trim(); if (sv && !/^[\w-]+$/.test(sv)) { toast('ID Google Sheet không hợp lệ.'); return; } try { localStorage.setItem('chamcong_sheet_id', sv); } catch (_) {} saveRoot($('root-input').value.trim()); });
 $('reset-root').addEventListener('click',() => saveRoot(DEFAULT_ROOT,true));
+// pos là góc trên-trái của logo, theo tỉ lệ kích thước ảnh gốc.
+function showLogoTool(open) {
+  $('gallery').hidden = open; $('logo-tool').hidden = !open;
+  $('nav-home').classList.toggle('active', !open); $('nav-logo').classList.toggle('active', open);
+  if (open) renderLogoPreview();
+}
+const logoImage = new Image();
+let logoReady = false, logoFailed = false, logoItems = [], logoIndex = 0, logoBusy = false, logoDrag = null;
+const logoCanvas = $('logo-canvas'), logoContext = logoCanvas.getContext('2d');
+function logoSize(item) {
+  return {x:.15, y:.15 * item.img.naturalWidth / item.img.naturalHeight * logoImage.naturalHeight / logoImage.naturalWidth};
+}
+function logoSnap(item, position) {
+  const size = logoSize(item), right = Math.max(0, 1 - .03 - size.x), bottom = Math.max(0, 1 - .03 - size.y);
+  return {x:position.endsWith('left') ? .03 : position.endsWith('center') ? (1-size.x)/2 : right,
+    y:position.startsWith('top') ? Math.min(.03, Math.max(0,1-size.y)) : bottom};
+}
+function paintLogo(ctx, item, width, height) {
+  ctx.globalAlpha = 1; ctx.drawImage(item.img, 0, 0, width, height);
+  const size = logoSize(item);
+  ctx.drawImage(logoImage, item.pos.x * width, item.pos.y * height, size.x * width, size.y * height);
+}
+function renderLogoPreview() {
+  const item = logoItems[logoIndex];
+  logoCanvas.hidden = !item;
+  $('logo-status').textContent = logoFailed ? 'Không tải được logo-trong-suot.png. Hãy tải lại trang.' : !logoReady ? 'Đang tải logo…' : item ? `${logoIndex + 1} / ${logoItems.length} · ${item.name}` : 'Chưa chọn ảnh.';
+  $('logo-download').disabled = logoBusy || !item || !logoReady;
+  $('logo-apply').disabled = logoBusy || !item || !logoReady;
+  $('logo-clear').disabled = logoBusy || !item;
+  $('logo-select').disabled = logoBusy || !logoReady;
+  $('logo-positions').querySelectorAll('button').forEach(button => {
+    button.disabled = logoBusy || !item || !logoReady;
+    const snap = item && logoReady ? logoSnap(item, button.dataset.position) : null;
+    button.setAttribute('aria-pressed', String(!!snap && Math.abs(snap.x-item.pos.x)<.0001 && Math.abs(snap.y-item.pos.y)<.0001));
+  });
+  $('logo-thumbnails').querySelectorAll('button').forEach((button, i) => { button.disabled = logoBusy; button.setAttribute('aria-pressed', String(i === logoIndex)); });
+  if (!item || !logoReady) return;
+  const scale = Math.min(1, 1200/item.img.naturalWidth, 750/item.img.naturalHeight);
+  logoCanvas.width = Math.max(1, Math.round(item.img.naturalWidth*scale));
+  logoCanvas.height = Math.max(1, Math.round(item.img.naturalHeight*scale));
+  paintLogo(logoContext, item, logoCanvas.width, logoCanvas.height);
+}
+logoImage.onload = () => { logoReady = true; renderLogoPreview(); };
+logoImage.onerror = () => { logoFailed = true; renderLogoPreview(); toast('Không tải được logo-trong-suot.png'); };
+logoImage.src = 'logo-trong-suot.png';
+$('logo-select').addEventListener('click', () => $('logo-files').click());
+$('logo-files').addEventListener('change', async event => {
+  const files = Array.from(event.target.files); event.target.value = '';
+  if (logoBusy || !logoReady || !files.length) return;
+  logoBusy = true; renderLogoPreview(); let added = 0;
+  for (const file of files) {
+    const url = URL.createObjectURL(file), img = new Image();
+    try {
+      await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; img.src = url; });
+      const item = {file, img, pos:null, name:file.name, url}; item.pos = logoSnap(item, 'bottom-right');
+      const i = logoItems.length; logoItems.push(item); added++;
+      const button = document.createElement('button'); button.type = 'button'; button.title = item.name;
+      button.setAttribute('aria-label', 'Sửa ảnh ' + item.name);
+      const thumb = document.createElement('img'); thumb.src = url; thumb.alt = ''; thumb.loading = 'lazy';
+      const name = document.createElement('span'); name.textContent = item.name; button.append(thumb, name);
+      button.addEventListener('click', () => { if (!logoBusy) { logoIndex = i; logoDrag = null; renderLogoPreview(); } });
+      $('logo-thumbnails').append(button);
+    } catch (_) { URL.revokeObjectURL(url); toast('Không đọc được ảnh: ' + file.name); }
+  }
+  logoBusy = false; renderLogoPreview(); if (added) toast('Đã thêm ' + added + ' ảnh');
+});
+$('logo-positions').addEventListener('click', event => {
+  const button = event.target.closest('button[data-position]'), item = logoItems[logoIndex];
+  if (!button || !item || !logoReady || logoBusy) return;
+  item.pos = logoSnap(item, button.dataset.position); renderLogoPreview();
+});
+$('logo-free-drag').addEventListener('change', event => { logoDrag = null; logoCanvas.classList.toggle('free-drag', event.target.checked); });
+function logoPointer(event) {
+  const rect = logoCanvas.getBoundingClientRect();
+  return {x:(event.clientX-rect.left)/rect.width, y:(event.clientY-rect.top)/rect.height};
+}
+logoCanvas.addEventListener('pointerdown', event => {
+  const item = logoItems[logoIndex];
+  if (!$('logo-free-drag').checked || !item || !logoReady || logoBusy || event.button !== 0 || !event.isPrimary) return;
+  const point = logoPointer(event), size = logoSize(item);
+  if (point.x < item.pos.x || point.x > item.pos.x+size.x || point.y < item.pos.y || point.y > item.pos.y+size.y) return;
+  event.preventDefault(); logoDrag = {id:event.pointerId, x:point.x-item.pos.x, y:point.y-item.pos.y};
+  logoCanvas.setPointerCapture(event.pointerId);
+});
+logoCanvas.addEventListener('pointermove', event => {
+  if (!logoDrag || logoDrag.id !== event.pointerId) return;
+  const item = logoItems[logoIndex], point = logoPointer(event), size = logoSize(item);
+  item.pos = {x:Math.max(0,Math.min(1-size.x,point.x-logoDrag.x)), y:Math.max(0,Math.min(1-size.y,point.y-logoDrag.y))};
+  renderLogoPreview();
+});
+['pointerup','pointercancel','lostpointercapture'].forEach(type => logoCanvas.addEventListener(type, event => {
+  if (logoDrag?.id !== event.pointerId) return;
+  logoDrag = null; if (logoCanvas.hasPointerCapture(event.pointerId)) logoCanvas.releasePointerCapture(event.pointerId);
+}));
+$('logo-apply').addEventListener('click', () => {
+  const item = logoItems[logoIndex]; if (!item || logoBusy) return;
+  logoItems.forEach(other => { if (other !== item) other.pos = {...item.pos}; });
+  toast('Đã áp cho ' + (logoItems.length-1) + ' ảnh'); renderLogoPreview();
+});
+$('logo-clear').addEventListener('click', () => {
+  if (logoBusy) return;
+  logoItems.forEach(item => URL.revokeObjectURL(item.url)); logoItems = []; logoIndex = 0; logoDrag = null;
+  $('logo-thumbnails').replaceChildren(); renderLogoPreview();
+});
+$('logo-download').addEventListener('click', async () => {
+  if (logoBusy || !logoReady || !logoItems.length) return;
+  logoBusy = true; logoDrag = null; renderLogoPreview(); let downloaded = 0;
+  for (const item of logoItems) {
+    const output = document.createElement('canvas'); output.width = item.img.naturalWidth; output.height = item.img.naturalHeight;
+    try {
+      paintLogo(output.getContext('2d'), item, output.width, output.height);
+      const match = item.name.match(/^(.*)\.([^.]+)$/), stem = match ? match[1] : item.name;
+      const originalExt = match ? match[2].toLowerCase() : 'png';
+      const mime = /^(jpg|jpeg)$/.test(originalExt) ? 'image/jpeg' : originalExt === 'webp' ? 'image/webp' : 'image/png';
+      const blob = await new Promise(resolve => output.toBlob(resolve, mime, .95));
+      if (!blob) throw new Error('Trình duyệt không tạo được ảnh');
+      const ext = blob.type === 'image/jpeg' ? (/^(jpg|jpeg)$/.test(originalExt) ? match[2] : 'jpg') : blob.type === 'image/webp' ? 'webp' : 'png';
+      const url = URL.createObjectURL(blob), link = document.createElement('a');
+      link.href = url; link.download = stem + '-logo.' + ext; document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000); downloaded++;
+      toast('Đang tải ' + downloaded + '/' + logoItems.length + ' ảnh');
+      await new Promise(resolve => setTimeout(resolve, 350));
+    } catch (error) { toast('Không xuất được ' + item.name + ': ' + error.message); }
+    finally { output.width = output.height = 0; }
+  }
+  logoBusy = false; renderLogoPreview(); toast('Đã gửi tải ' + downloaded + '/' + logoItems.length + ' ảnh');
+});
+renderLogoPreview();
+
 if (demoMode) scan();
 })();
 </script>
