@@ -277,7 +277,30 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 /* ===== Lấy ảnh: dialog hướng dẫn bookmarklet ===== */
 #getimg-guide .getimg-steps ol{margin:16px 0;padding-left:22px;display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.6}
 .bmlink{display:inline-block;padding:14px 28px;font-size:17px;font-weight:700;color:#0e1c33;background:linear-gradient(180deg,#e8c96a,#c9a227);border:2px dashed #7a6234;border-radius:10px;text-decoration:none;cursor:grab}
-.bmlink:active{cursor:grabbing}</style>
+.bmlink:active{cursor:grabbing}#logo-tool{max-width:1100px;margin:auto}
+#logo-tool button,.logo-drag-label{min-height:48px}
+.logo-panels{display:flex;gap:12px;align-items:flex-start;margin:16px 0}
+.logo-panel{flex:1;min-width:0;background:var(--bg-photo);border:1px solid var(--border-subtle);border-radius:4px;overflow:hidden}
+.logo-panel-canvas{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain}
+.logo-panel-canvas.free-drag{touch-action:none;cursor:grab}
+.logo-panel-canvas.free-drag:active{cursor:grabbing}
+.logo-panel-name{padding:8px;font-size:12px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo-panel-colors-label{padding:8px 8px 0;font-size:12px;color:var(--text-muted)}
+.logo-panel-colors{display:flex;gap:6px;padding:8px 8px 0}
+.logo-panel-colors button{flex:1;min-height:40px;font-size:12px;padding:8px 4px}
+.logo-panel-colors button[aria-pressed="true"]{border-color:var(--gold-primary);background:var(--gold-subtle)}
+.logo-panel .logo-drag-label{padding:0 8px}
+.logo-panel .logo-size-row{padding:0 8px 12px;margin:8px 0 0}
+.logo-pager{justify-content:center;align-items:center}
+@media(max-width:767px){.logo-panels{flex-direction:column}}
+.logo-controls{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.logo-size-row{align-items:center}
+.logo-size-row label{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.logo-panel-size{flex:1;min-width:120px;accent-color:var(--gold-primary);min-height:48px}
+.logo-panel-size-value{font-weight:600;color:var(--gold-primary);min-width:3ch}
+.logo-drag-label{display:flex;align-items:center;gap:10px;margin:12px 0}
+.logo-panel-drag{width:22px;height:22px;accent-color:var(--gold-primary)}
+</style>
 </head>
 <body>
 <div id="nav-backdrop"></div>
@@ -287,6 +310,7 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 <a class="nav-item active" href="#" id="nav-home"><span class="nav-bar"></span>Trang chủ</a>
 <a class="nav-item" href="https://huhuhu003.github.io/hop-thu-gui-nhanh/" target="_blank" rel="noopener"><span class="nav-bar"></span>Kho up ảnh</a>
 <button class="nav-item" id="nav-getimg" type="button"><span class="nav-bar"></span>📸 Lấy ảnh</button>
+<button class="nav-item" id="nav-logo" type="button"><span class="nav-bar"></span>Chèn logo</button>
 <button class="nav-item" id="nav-theme" type="button"><span class="nav-bar"></span><span id="nav-theme-label">Chế độ tối</span></button>
 <div id="nav-controls"></div><aside class="filters" id="filters" aria-label="Bộ lọc sản phẩm"><div class="filter-body"><div class="filter-header"><strong>BỘ LỌC</strong></div><button class="text-button" id="clear-filters">Xóa tất cả bộ lọc</button>
 <input class="filter-tab-state" type="radio" name="filter-tab" id="filter-brand" aria-label="Hãng" aria-controls="filter-brands" checked><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-category" aria-label="Danh mục" aria-controls="filter-categories"><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-price" aria-label="Giá" aria-controls="filter-prices">
@@ -331,6 +355,16 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 
 <section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div> <button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
 </div></main>
+<section id="logo-tool" aria-labelledby="logo-title" hidden>
+<div class="intro"><h1 id="logo-title">Chèn logo hàng loạt</h1><p class="muted">Chọn ảnh, đặt logo và tải ảnh giữ nguyên kích thước gốc. Hoặc nhấn Ctrl+V / Cmd+V để dán ảnh.</p></div>
+<input id="logo-files" type="file" accept="image/*" multiple hidden>
+<button id="logo-select" class="primary" type="button">Chọn ảnh</button>
+<button id="logo-paste" type="button">Dán ảnh</button>
+<p id="logo-status" class="muted" role="status">Chưa chọn ảnh.</p>
+<div id="logo-panels" class="logo-panels" aria-label="3 ảnh đang chỉnh"><div class="logo-panel" data-panel="0"><canvas class="logo-panel-canvas" width="640" height="480" aria-label="Ảnh 1"></canvas><p class="logo-panel-name"></p><p class="logo-panel-colors-label">Đổi màu chữ</p><div class="logo-panel-colors" role="group" aria-label="Màu logo ảnh 1"><button type="button" data-color="white">Trắng</button><button type="button" data-color="gray">Xám</button></div><label class="logo-drag-label"><input class="logo-panel-drag" type="checkbox"> Kéo thả tự do</label><div class="logo-controls logo-size-row"><label>Cỡ logo <output class="logo-panel-size-value">15%</output></label><input class="logo-panel-size" type="range" min="10" max="30" step="1" value="15" aria-label="Cỡ logo ảnh 1"></div></div><div class="logo-panel" data-panel="1"><canvas class="logo-panel-canvas" width="640" height="480" aria-label="Ảnh 2"></canvas><p class="logo-panel-name"></p><p class="logo-panel-colors-label">Đổi màu chữ</p><div class="logo-panel-colors" role="group" aria-label="Màu logo ảnh 2"><button type="button" data-color="white">Trắng</button><button type="button" data-color="gray">Xám</button></div><label class="logo-drag-label"><input class="logo-panel-drag" type="checkbox"> Kéo thả tự do</label><div class="logo-controls logo-size-row"><label>Cỡ logo <output class="logo-panel-size-value">15%</output></label><input class="logo-panel-size" type="range" min="10" max="30" step="1" value="15" aria-label="Cỡ logo ảnh 2"></div></div><div class="logo-panel" data-panel="2"><canvas class="logo-panel-canvas" width="640" height="480" aria-label="Ảnh 3"></canvas><p class="logo-panel-name"></p><p class="logo-panel-colors-label">Đổi màu chữ</p><div class="logo-panel-colors" role="group" aria-label="Màu logo ảnh 3"><button type="button" data-color="white">Trắng</button><button type="button" data-color="gray">Xám</button></div><label class="logo-drag-label"><input class="logo-panel-drag" type="checkbox"> Kéo thả tự do</label><div class="logo-controls logo-size-row"><label>Cỡ logo <output class="logo-panel-size-value">15%</output></label><input class="logo-panel-size" type="range" min="10" max="30" step="1" value="15" aria-label="Cỡ logo ảnh 3"></div></div></div>
+<div id="logo-pager" class="logo-controls logo-pager" hidden><button id="logo-prev-page" type="button">← Trang trước</button><span id="logo-page-info" class="muted" role="status">Trang 1/1</span><button id="logo-next-page" type="button">Trang tiếp →</button></div>
+<div class="logo-controls"><button id="logo-download" class="primary" type="button" disabled>Tải tất cả</button><button id="logo-clear" type="button" disabled>Xóa hết</button></div>
+</section>
 <dialog class="modal" id="settings"><h2>Cài đặt kho ảnh</h2><form id="settings-form"><label for="root-input">ID thư mục gốc Google Drive</label><input id="root-input" type="text" required pattern="[A-Za-z0-9_-]+" autocomplete="off"><p class="muted">Lưu thư mục sẽ quét lại kho ảnh từ đầu.</p><div class="buttons"><button class="primary" type="submit">Lưu thư mục</button><button type="button" id="reset-root">Khôi phục mặc định</button><button type="button" id="close-settings">Đóng</button></div></form></dialog>
 <dialog class="modal" id="getimg-guide" aria-label="Hướng dẫn lấy ảnh"><h2>📸 Lấy ảnh từ Xiaohongshu / Instagram</h2>
 <div class="getimg-steps">
@@ -380,9 +414,10 @@ function openNav(){ $('nav-sidebar').inert = false; $('nav-sidebar').classList.a
 $('nav-fab').addEventListener('click',openNav);
 $('nav-close').addEventListener('click',() => {closeNav(); $('nav-fab').focus();});
 $('nav-backdrop').addEventListener('click',closeNav);
-$('nav-home').addEventListener('click',e => {e.preventDefault();clearFilters();closeNav();});
+$('nav-home').addEventListener('click',e => {e.preventDefault();showLogoTool(false);clearFilters();closeNav();});
 $('nav-theme').addEventListener('click',() => {$('theme-toggle').click();});
 $('nav-getimg').addEventListener('click',() => {closeNav();$('getimg-guide').showModal();scrollLock();});
+$('nav-logo').addEventListener('click', () => { showLogoTool(true); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
 $('close-getimg').addEventListener('click',() => {$('getimg-guide').close();scrollLock();});
 $('getimg-guide').addEventListener('close',scrollLock);
 $('copy-bm').addEventListener('click',async () => {const code=$('bmlink').getAttribute('href');try{await navigator.clipboard.writeText(code);$('copy-msg').textContent='Đã copy! Tạo bookmark mới và dán mã vào ô địa chỉ (URL).';}catch(e){$('copy-msg').textContent='Không copy tự động được — chuột phải vào nút vàng, chọn Copy link address.';}});
@@ -479,6 +514,7 @@ function stopSession(message) {
   generation++; controller?.abort(); clearTimeout(tokenTimer); accessToken = ''; scanning = false;
   closeLightbox(); closeFilters(); photos = []; brands = []; $('grid').replaceChildren(); $('brand-options').replaceChildren();
   $('gallery').hidden = true; $('login').hidden = false; $('logout').hidden = true;
+  $('logo-tool').hidden = true; $('nav-home').classList.add('active'); $('nav-logo').classList.remove('active');
   if (message) { $('login-message').textContent = message; toast(message); }
 }
 function active(run) { if (run !== generation || !accessToken) throw new DOMException('Đã dừng','AbortError'); }
@@ -607,7 +643,7 @@ async function scan() {
   $('grid').replaceChildren(); $('brand-options').replaceChildren(); options.brand.clear();
   Object.values(counts).forEach(map => map.clear()); clearFilters();
   Object.values(options).forEach(map => map.forEach(option => { option.count.textContent = '0'; }));
-  $('gallery').hidden = false; $('login').hidden = true; $('logout').hidden = false;
+  $('gallery').hidden = !$('logo-tool').hidden; $('login').hidden = true; $('logout').hidden = false;
   $('scan-spinner').hidden = false; $('retry').hidden = true; $('scan-status').textContent = 'Đang đọc danh sách hãng…';
   try {
     brands = await list(root,"mimeType='" + FOLDER + "'",'id,name',run);
@@ -712,6 +748,234 @@ function saveRoot(value,reset=false) {
 }
 $('settings-form').addEventListener('submit',event => { event.preventDefault(); saveRoot($('root-input').value.trim()); });
 $('reset-root').addEventListener('click',() => saveRoot(DEFAULT_ROOT,true));
+// pos là góc trên-trái của logo, theo tỉ lệ kích thước ảnh gốc.
+// Bản chính: gallery là <main id=gallery>, có thêm section login + trạng thái đăng nhập.
+function showLogoTool(open) {
+  $('gallery').hidden = open || !accessToken;
+  $('logo-tool').hidden = !open;
+  $('login').hidden = open || !!accessToken;
+  $('nav-home').classList.toggle('active', !open); $('nav-logo').classList.toggle('active', open);
+  if (open) renderLogoPanels();
+}
+const logoImage = new Image();
+let logoGrayImage = null;
+let logoReady = false, logoFailed = false, logoItems = [], logoPage = 0, logoBusy = false, logoDrag = null;
+const logoPanelEls = Array.from(document.querySelectorAll('.logo-panel'));
+function logoPageCount() { return Math.max(1, Math.ceil(logoItems.length / 3)); }
+function logoPanelItem(slot) { return logoItems[logoPage * 3 + slot]; }
+function logoSize(item) {
+  const base = item.logoScale ?? .15;
+  const w = Math.min(base, 1.5 * logoImage.naturalWidth / item.img.naturalWidth);
+  return {x:w, y:w * item.img.naturalWidth / item.img.naturalHeight * logoImage.naturalHeight / logoImage.naturalWidth};
+}
+function logoSnap(item, position) {
+  const size = logoSize(item), right = Math.max(0, 1 - .03 - size.x), bottom = Math.max(0, 1 - .03 - size.y);
+  return {x:position.endsWith('left') ? .03 : position.endsWith('center') ? (1-size.x)/2 : right,
+    y:position.startsWith('top') ? Math.min(.03, Math.max(0,1-size.y)) : bottom};
+}
+function paintLogo(ctx, item, width, height) {
+  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+  ctx.globalAlpha = 1; ctx.drawImage(item.img, 0, 0, width, height);
+  const size = logoSize(item);
+  const logo = (item.logoColor === 'gray' && logoGrayImage) ? logoGrayImage : logoImage;
+  ctx.drawImage(logo, item.pos.x * width, item.pos.y * height, size.x * width, size.y * height);
+}
+function renderLogoPanels() {
+  const totalPages = logoPageCount();
+  if (logoPage > totalPages - 1) logoPage = totalPages - 1;
+  if (logoPage < 0) logoPage = 0;
+  const hasItems = logoItems.length > 0;
+  $('logo-panels').hidden = !hasItems;
+  $('logo-pager').hidden = !hasItems;
+  $('logo-status').textContent = logoFailed ? 'Không tải được logo-trong-suot.png. Hãy tải lại trang.' : !logoReady ? 'Đang tải logo…' : hasItems ? `Trang ${logoPage + 1}/${totalPages} · ${logoItems.length} ảnh` : 'Chưa chọn ảnh.';
+  $('logo-page-info').textContent = `Trang ${logoPage + 1}/${totalPages}`;
+  $('logo-prev-page').disabled = logoBusy || logoPage <= 0;
+  $('logo-next-page').disabled = logoBusy || logoPage >= totalPages - 1;
+  $('logo-download').disabled = logoBusy || !hasItems || !logoReady;
+  $('logo-clear').disabled = logoBusy || !hasItems;
+  $('logo-select').disabled = logoBusy || !logoReady;
+  $('logo-paste').disabled = logoBusy || !logoReady;
+  logoPanelEls.forEach((panel, slot) => {
+    const item = logoItems[logoPage * 3 + slot];
+    const canvas = panel.querySelector('canvas');
+    const nameEl = panel.querySelector('.logo-panel-name');
+    panel.hidden = !item;
+    panel.querySelectorAll('.logo-panel-colors button').forEach(button => {
+      button.disabled = logoBusy || !item || !logoReady;
+      button.setAttribute('aria-pressed', String(!!item && (item.logoColor || 'white') === button.dataset.color));
+    });
+    const dragBox = panel.querySelector('.logo-panel-drag');
+    if (dragBox) dragBox.disabled = logoBusy || !item || !logoReady;
+    const sizeInput = panel.querySelector('.logo-panel-size');
+    if (sizeInput) {
+      sizeInput.disabled = logoBusy || !item || !logoReady;
+      const pct = Math.round(((item && item.logoScale) ?? .15) * 100);
+      if (String(pct) !== sizeInput.value) sizeInput.value = String(pct);
+      const valueEl = panel.querySelector('.logo-panel-size-value');
+      if (valueEl) valueEl.textContent = pct + '%';
+    }
+    if (!item || !logoReady) { if (nameEl) nameEl.textContent = ''; return; }
+    if (nameEl) nameEl.textContent = item.name;
+    const scale = Math.min(1, 1200/item.img.naturalWidth, 750/item.img.naturalHeight);
+    const pw = Math.max(1, Math.round(item.img.naturalWidth*scale));
+    const ph = Math.max(1, Math.round(item.img.naturalHeight*scale));
+    if (canvas.width !== pw || canvas.height !== ph) { canvas.width = pw; canvas.height = ph; }
+    paintLogo(canvas.getContext('2d'), item, canvas.width, canvas.height);
+  });
+}
+logoImage.onload = () => { logoReady = true;
+  try {
+    const off = document.createElement('canvas');
+    off.width = logoImage.naturalWidth; off.height = logoImage.naturalHeight;
+    const octx = off.getContext('2d');
+    octx.drawImage(logoImage, 0, 0);
+    octx.globalCompositeOperation = 'source-in';
+    octx.fillStyle = '#888888'; octx.fillRect(0, 0, off.width, off.height);
+    logoGrayImage = new Image(); logoGrayImage.src = off.toDataURL();
+  } catch (_) { logoGrayImage = null; }
+  renderLogoPanels(); };
+logoImage.onerror = () => { logoFailed = true; renderLogoPanels(); toast('Không tải được logo-trong-suot.png'); };
+logoImage.src = 'logo-trong-suot.png';
+$('logo-select').addEventListener('click', () => $('logo-files').click());
+$('logo-files').addEventListener('change', async event => {
+  const adding = addLogoFiles(Array.from(event.target.files)); event.target.value = '';
+  await adding;
+});
+async function addLogoFiles(files) {
+  if (logoBusy || !logoReady || !files.length) return;
+  if (logoItems.length >= 9) { toast('Đã đủ 9 ảnh — xóa ảnh cũ đi'); return; }
+  logoBusy = true; renderLogoPanels(); let added = 0;
+  for (const file of files) {
+    if (logoItems.length >= 9) { toast('Đã đủ 9 ảnh — xóa ảnh cũ đi'); break; }
+    const fileName = file.name || 'anh-dan-' + (logoItems.length + 1) + '.png';
+    const url = URL.createObjectURL(file), img = new Image();
+    try {
+      await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; img.src = url; });
+      const item = {file, img, pos:null, name:fileName, url, logoScale:.15, logoColor:'white'}; item.pos = logoSnap(item, 'bottom-right');
+      logoItems.push(item); added++;
+    } catch (_) { URL.revokeObjectURL(url); toast('Không đọc được ảnh: ' + fileName); }
+  }
+  logoBusy = false; renderLogoPanels(); if (added) toast('Đã thêm ' + added + ' ảnh');
+}
+document.addEventListener('paste', event => {
+  const target = event.target;
+  if (target && (['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) || target.isContentEditable)) return;
+  const files = Array.from(event.clipboardData?.items || [])
+    .filter(item => item.type.startsWith('image/'))
+    .map(item => item.getAsFile()).filter(Boolean);
+  if (!files.length) return;
+  event.preventDefault();
+  addLogoFiles(files);
+});
+$('logo-paste').addEventListener('click', async () => {
+  try {
+    if (!navigator.clipboard?.read) throw new Error('Clipboard read unavailable');
+    const items = await navigator.clipboard.read();
+    const files = [];
+    for (const item of items) {
+      const type = item.types.find(type => type.startsWith('image/'));
+      if (type) files.push(await item.getType(type));
+    }
+    if (files.length) await addLogoFiles(files);
+  } catch (_) { toast('Trình duyệt không cho đọc clipboard, hãy dùng Ctrl+V'); }
+});
+$('logo-panels').addEventListener('click', event => {
+  const button = event.target.closest('button[data-color]');
+  if (!button || !logoReady || logoBusy) return;
+  const panel = button.closest('.logo-panel');
+  const item = panel ? logoPanelItem(Number(panel.dataset.panel)) : null;
+  if (!item) return;
+  item.logoColor = button.dataset.color;
+  renderLogoPanels();
+});
+$('logo-panels').addEventListener('change', event => {
+  const dragBox = event.target.closest('.logo-panel-drag');
+  if (!dragBox) return;
+  const panel = dragBox.closest('.logo-panel');
+  const canvas = panel ? panel.querySelector('canvas') : null;
+  if (canvas) canvas.classList.toggle('free-drag', dragBox.checked);
+});
+$('logo-panels').addEventListener('input', event => {
+  const sizeInput = event.target.closest('.logo-panel-size');
+  if (!sizeInput || !logoReady || logoBusy) return;
+  const panel = sizeInput.closest('.logo-panel');
+  const item = panel ? logoPanelItem(Number(panel.dataset.panel)) : null;
+  if (!item) return;
+  item.logoScale = Number(sizeInput.value)/100;
+  const valueEl = panel.querySelector('.logo-panel-size-value');
+  if (valueEl) valueEl.textContent = sizeInput.value + '%';
+  renderLogoPanels();
+});
+function logoPointer(event, canvas) {
+  const rect = canvas.getBoundingClientRect();
+  // Canvas dùng object-fit:contain nên ảnh thật có thể letterbox trong khung CSS
+  // (vd 1 ảnh: panel rộng, cao bị cap 60vh) — phải map về vùng nội dung thật.
+  if (!rect.width || !rect.height || !canvas.width || !canvas.height) return {x:0, y:0};
+  const scale = Math.min(rect.width / canvas.width, rect.height / canvas.height);
+  const contentW = canvas.width * scale, contentH = canvas.height * scale;
+  const offsetX = (rect.width - contentW) / 2, offsetY = (rect.height - contentH) / 2;
+  return {x:(event.clientX - rect.left - offsetX) / contentW, y:(event.clientY - rect.top - offsetY) / contentH};
+}
+logoPanelEls.forEach(panel => {
+  const canvas = panel.querySelector('canvas');
+  const slot = Number(panel.dataset.panel);
+  canvas.addEventListener('pointerdown', event => {
+    const item = logoPanelItem(slot);
+    const dragBox = panel.querySelector('.logo-panel-drag');
+    if (!dragBox?.checked || !item || !logoReady || logoBusy || event.button !== 0 || !event.isPrimary) return;
+    const point = logoPointer(event, canvas), size = logoSize(item);
+    if (point.x < item.pos.x || point.x > item.pos.x+size.x || point.y < item.pos.y || point.y > item.pos.y+size.y) return;
+    event.preventDefault(); logoDrag = {id:event.pointerId, canvas, slot, x:point.x-item.pos.x, y:point.y-item.pos.y};
+    canvas.setPointerCapture(event.pointerId);
+  });
+  canvas.addEventListener('pointermove', event => {
+    if (!logoDrag || logoDrag.id !== event.pointerId || logoDrag.canvas !== canvas) return;
+    const item = logoPanelItem(logoDrag.slot), point = logoPointer(event, canvas), size = logoSize(item);
+    item.pos = {x:Math.max(0,Math.min(1-size.x,point.x-logoDrag.x)), y:Math.max(0,Math.min(1-size.y,point.y-logoDrag.y))};
+    renderLogoPanels();
+  });
+  ['pointerup','pointercancel','lostpointercapture'].forEach(type => canvas.addEventListener(type, event => {
+    if (logoDrag?.id !== event.pointerId || logoDrag.canvas !== canvas) return;
+    logoDrag = null; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    renderLogoPanels();
+  }));
+});
+$('logo-prev-page').addEventListener('click', () => { if (logoPage > 0) { logoPage--; logoDrag = null; renderLogoPanels(); } });
+$('logo-next-page').addEventListener('click', () => { if (logoPage < logoPageCount() - 1) { logoPage++; logoDrag = null; renderLogoPanels(); } });
+$('logo-clear').addEventListener('click', () => {
+  if (logoBusy) return;
+  logoItems.forEach(item => URL.revokeObjectURL(item.url)); logoItems = []; logoPage = 0; logoDrag = null;
+  renderLogoPanels();
+});
+$('logo-download').addEventListener('click', async () => {
+  if (logoBusy || !logoReady || !logoItems.length) return;
+  logoBusy = true; logoDrag = null; renderLogoPanels(); let downloaded = 0;
+  for (const item of logoItems) {
+    const output = document.createElement('canvas'); output.width = item.img.naturalWidth; output.height = item.img.naturalHeight;
+    try {
+      paintLogo(output.getContext('2d'), item, output.width, output.height);
+      const match = item.name.match(/^(.*)\.([^.]+)$/), stem = match ? match[1] : item.name;
+      const originalExt = match ? match[2].toLowerCase() : 'png';
+      const mime = /^(jpg|jpeg)$/.test(originalExt) ? 'image/jpeg' : originalExt === 'webp' ? 'image/webp' : 'image/png';
+      const blob = await new Promise(resolve => output.toBlob(resolve, mime, .95));
+      if (!blob) throw new Error('Trình duyệt không tạo được ảnh');
+      const ext = blob.type === 'image/jpeg' ? (/^(jpg|jpeg)$/.test(originalExt) ? match[2] : 'jpg') : blob.type === 'image/webp' ? 'webp' : 'png';
+      const url = URL.createObjectURL(blob), link = document.createElement('a');
+      link.href = url; link.download = stem + '-logo.' + ext; document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000); downloaded++;
+      toast('Đang tải ' + downloaded + '/' + logoItems.length + ' ảnh');
+      // Chrome chặn tải nhiều file tự động nếu bắn liên tiếp — giãn 1s/lần
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    } catch (error) { toast('Không xuất được ' + item.name + ': ' + error.message); }
+    finally { output.width = output.height = 0; }
+  }
+  logoBusy = false; renderLogoPanels(); toast('Đã gửi tải ' + downloaded + '/' + logoItems.length + ' ảnh');
+  // Chrome có thể chặn tải nhiều file mà JS không phát hiện được — dặn trước khi thiếu file
+  if (logoItems.length > 1) toast('Nếu thiếu file: vào chrome://settings/content/popups cho phép trang này tải nhiều file');
+});
+
+renderLogoPanels();
+
 // The only external executable resource is Google Identity Services.
 const identityScript = document.createElement('script'); identityScript.src = 'https://accounts.google.com/gsi/client'; identityScript.async = true; identityScript.onload = initIdentity; identityScript.onerror = identityError; document.head.append(identityScript);
 })();
