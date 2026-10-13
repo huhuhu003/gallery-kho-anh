@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <title>Gallery kho ảnh</title>
+<link rel="icon" type="image/png" href="pa-gallery-logo-web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet">
@@ -306,6 +307,9 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 .header-tool{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border:1px solid var(--gold-primary);border-radius:9999px;background:var(--bg-surface);color:var(--text-main);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .header-tool:hover{background:var(--gold-subtle);color:var(--gold-primary);border-color:var(--gold-primary)}
 @media(max-width:767px){.header-tools{gap:6px;margin-left:0}.header-tool{padding:8px 10px;font-size:16px}.header-tool span{display:none}}
+/* ===== Header: logo P.A Gallery ===== */
+.brand-img{display:block;height:56px;width:auto;flex:none;object-fit:contain}
+@media(max-width:767px){.brand-img{height:46px}}
 </style>
 </head>
 <body>
@@ -342,13 +346,7 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 </div>
 
 <div class="announcement">Kho ảnh sản phẩm · Cảm hứng thời trang · Google Drive chỉ đọc</div>
-<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><svg class="brand-icon" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Gallery Kho Ảnh">
-  <rect x="8" y="7" width="22" height="28" rx="1.5" transform="rotate(-8 19 21)" stroke="var(--gold-light)" stroke-width="1.1" stroke-opacity="0.75" stroke-linejoin="round"/>
-  <rect x="12.5" y="6" width="22" height="28" rx="1.5" transform="rotate(5 23.5 20)" fill="var(--bg-surface)" stroke="var(--gold-light)" stroke-width="1.25" stroke-linejoin="round"/>
-  <rect x="14.5" y="9.5" width="23" height="29" rx="1.5" fill="var(--bg-surface)" stroke="var(--gold-primary)" stroke-width="1.4" stroke-linejoin="round"/>
-  <circle cx="29.5" cy="17" r="2.3" stroke="var(--gold-primary)" stroke-width="1.1" fill="var(--gold-light)" fill-opacity="0.35"/>
-  <path d="M17 32.5L23 26.5L27 30L30.5 26L34.5 29.5" stroke="var(--gold-primary)" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/>
-</svg><span class="brand-text"><strong>Kho ảnh</strong><small>Bộ sưu tập của bạn</small></span></button><div class="header-tools" aria-label="Tool nhanh"><button id="hdr-logo" type="button" class="header-tool" title="Chèn logo" aria-label="Chèn logo">🏷️<span>Chèn logo</span></button><button id="hdr-getimg" type="button" class="header-tool" title="Lấy ảnh" aria-label="Lấy ảnh">📸<span>Lấy ảnh</span></button></div><div class="chamcong" id="chamcong">
+<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><img class="brand-img" src="pa-gallery-logo-web.png" alt="P.A Gallery"></button><div class="header-tools" aria-label="Tool nhanh"><button id="hdr-logo" type="button" class="header-tool" title="Chèn logo" aria-label="Chèn logo">🏷️<span>Chèn logo</span></button><button id="hdr-getimg" type="button" class="header-tool" title="Lấy ảnh" aria-label="Lấy ảnh">📸<span>Lấy ảnh</span></button></div><div class="chamcong" id="chamcong">
 <span id="cc-date"></span>
 <span id="cc-timer" hidden>00:00:00</span>
 <span id="cc-total"></span>
