@@ -304,7 +304,7 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 @media(max-width:767px){.header-tools{gap:6px;margin-left:0}.header-tool{padding:8px 10px;font-size:16px}.header-tool span{display:none}}
 /* ===== Header: logo Phuong Anh GALLERY — dung demo da chot + kinh long CHI trong chu Phuong Anh ===== */
 .logo{min-width:0;flex:1}
-.logo-mini{display:flex;align-items:center;gap:10px;text-align:left;min-width:0;flex:1;perspective:800px;--float-amp:1.5px}
+.logo-mini{display:flex;align-items:center;gap:10px;text-align:left;min-width:0;flex:1;perspective:800px;--float-amp:1.5px;text-transform:none}
 .logo-mini .flower-entrance{width:40px;height:40px;margin:0;flex:none;transform-origin:50% 90%;opacity:0}
 .logo-mini .flower-sway{width:100%;height:100%;transform-origin:50% 85%}
 .logo-mini .flower-svg{width:100%;height:100%;display:block;overflow:visible}
@@ -350,7 +350,7 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 @keyframes lineGrow{from{width:0;opacity:0}to{width:180px;opacity:1}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 header .chamcong{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.25);color:#fdf6e3}
-@media(max-width:767px){.logo-mini{gap:7px}.logo-mini .flower-entrance{width:28px;height:28px}.logo-mini .name-line{font-size:20px}.logo-mini .gallery-line{font-size:8px;letter-spacing:.34em}.logo-mini .tagline{font-size:6.5px;letter-spacing:.24em;text-indent:.24em}.pa-name-glass{padding:2px 10px}header{flex-wrap:wrap;padding:8px 12px}.header-tools{width:100%;margin-left:0;justify-content:flex-end}#nav-fab{width:34px;height:34px}}
+@media(max-width:767px){#nav-fab{order:0}.logo{order:1}header .actions{order:2}.logo-mini{gap:7px}.logo-mini .flower-entrance{width:28px;height:28px}.logo-mini .name-line{font-size:20px}.logo-mini .gallery-line{font-size:8px;letter-spacing:.34em}.logo-mini .tagline{font-size:6.5px;letter-spacing:.24em;text-indent:.24em}.pa-name-glass{padding:2px 10px}header{flex-wrap:wrap;padding:8px 12px}.header-tools{order:3;width:100%;margin-left:0;justify-content:flex-end}#nav-fab{width:34px;height:34px}}
 @media (prefers-reduced-motion:reduce){.play .flower-entrance,.play .word,.play .name-line .ltr,.play .gallery-line span,.play .tagline{animation:none!important;opacity:1!important}.play .divider{width:180px;opacity:1}.flower-sway{animation:none!important}}
 </style>
 </head>
