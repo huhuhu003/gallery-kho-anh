@@ -17,7 +17,7 @@ try { if (localStorage.getItem('gallery_theme') === 'dark') document.documentEle
 </script>
 <style>
 :root { --bg-body: #ffffff; --bg-surface: #ffffff; --bg-photo: #faf9f6; --bg-cream: #fbf9f5; --bg-subtle-cream: #f7f4ef; --bg-subtle: #fcfbf9; --lightbox-bg: rgba(10, 16, 26, 0.96); --text-main: #1a2b4a; --text-secondary: #4a5a73; --text-muted: #7e8b9e; --text-light: #abb5c2; --text-topbar: #334460; --text-note: #243550; --gold-primary: #b0945c; --gold-hover: #967d4a; --gold-light: #d4c092; --gold-subtle: #f7f3eb; --gold-badge: #eee5d3; --price-color: #b0945c; --price-lightbox: #e5d3a9; --border-light: #f0ede6; --border-subtle: #e5dfd5; --border-gold: #b0945c; --border-gold-light: #d4c092; --border-card-hover: #d4c092; --status-error: #a83232; --status-warning: #c28e2b; --status-success: #3b7352;--border-cream:var(--border-subtle);--font-serif:"Didot","Bodoni MT","Cinzel","Baskerville","Baskerville Old Face","Hoefler Text","Garamond","Times New Roman",serif;--font-sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--text-white:white;--bg-header:rgba(255,255,255,.98);--bg-backdrop:rgba(10,16,26,.45);--lb-border:rgba(255,255,255,.2);--lb-button:rgba(0,0,0,.45);--image-shadow:rgba(0,0,0,0.65);--lb-hover:rgba(255,255,255,0.25);--lb-border-hover:rgba(255,255,255,0.4);--card-shadow:rgba(146,116,62,.13);--toast-shadow:rgba(26,43,74,.28);--desktop-shadow:rgba(26,43,74,.14);--transparent:transparent;--toast-text:#ffffff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg-body);color:var(--text-main);font:14px/1.5 var(--font-sans)}[hidden]{display:none!important}button,input{font:inherit}button{cursor:pointer;background:var(--bg-surface);color:var(--text-main);border:1px solid var(--border-subtle);border-radius:9999px;padding:10px 18px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}button:hover{background:var(--bg-cream)}button:disabled{opacity:.5;cursor:wait}button.primary{background:var(--gold-primary);border-color:var(--gold-primary);color:var(--text-white)}button.primary:hover{background:var(--gold-hover)}:focus-visible{outline:2px solid var(--gold-primary);outline-offset:4px}input[type=search],input[type=text]{width:100%;padding:12px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--bg-surface);color:var(--text-main)}input::placeholder{color:var(--text-light)}input:focus{border-color:var(--gold-primary)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg-body);color:var(--text-main);font:14px/1.5 var(--font-sans)}[hidden]{display:none!important}button,input,select{font:inherit}button{cursor:pointer;background:var(--bg-surface);color:var(--text-main);border:1px solid var(--border-subtle);border-radius:9999px;padding:10px 18px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}button:hover{background:var(--bg-cream)}button:disabled{opacity:.5;cursor:wait}button.primary{background:var(--gold-primary);border-color:var(--gold-primary);color:var(--text-white)}button.primary:hover{background:var(--gold-hover)}:focus-visible{outline:2px solid var(--gold-primary);outline-offset:4px}input[type=search],input[type=text],select{width:100%;padding:12px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--bg-surface);color:var(--text-main)}input::placeholder{color:var(--text-light)}input:focus,select:focus{border-color:var(--gold-primary)}
 .announcement{padding:8px 16px;background:var(--bg-cream);border-bottom:1px solid var(--border-cream);text-align:center;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-topbar)}header{position:sticky;top:0;z-index:10;min-height:74px;background:#19213d;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 10px 26px rgba(25,33,61,.28);display:flex;align-items:center;justify-content:space-between;padding:8px 16px;gap:12px}.logo{display:inline-flex;align-items:center;gap:12px;border:0;padding:0;text-align:left;background:none}.brand-icon{width:40px;height:40px;flex:none;display:block}.brand-text{display:flex;flex-direction:column;min-width:0}.logo strong{display:block;font:600 21px/1.15 var(--font-serif);letter-spacing:.18em;text-transform:uppercase;color:var(--text-main)}.logo small{display:block;margin-top:6px;font-size:10px;letter-spacing:.22em;color:var(--gold-primary);text-transform:uppercase}.actions{display:flex;gap:8px}.container{max-width:1680px;margin:auto;padding:0 16px 64px}.intro{margin:36px 0 30px}.intro h1,.login h1{font:600 28px/1.25 var(--font-serif);letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px}.muted{color:var(--text-muted);font-size:12px}.login{max-width:500px;margin:100px auto;padding:32px 20px;text-align:center}.login p{color:var(--text-secondary);margin:20px 0 28px}.login .muted{margin-top:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:36px}.filter-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.filter-header strong,.group h2{font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;font-variant:small-caps}.group{border-top:1px solid var(--border-light);padding:24px 0 12px}.group h2{margin:0 0 18px}.group input[type=search]{margin-bottom:14px;font-size:13px}.options{display:flex;flex-direction:column;gap:12px}.brands{max-height:260px;overflow:auto;scrollbar-width:thin}.text-button{border:0;padding:4px 0;background:none;text-decoration:underline;color:var(--text-muted);font-size:12px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px;min-height:35px}.progress{display:flex;gap:10px;align-items:center;margin-bottom:22px;color:var(--text-muted);font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 12px}.card{min-width:0;padding:10px;border:1px solid var(--border-light);border-radius:4px;text-align:center;content-visibility:auto;contain-intrinsic-size:auto 280px}.photo{display:flex;align-items:center;justify-content:center;aspect-ratio:1;background:var(--bg-photo);overflow:hidden;border-radius:2px;color:var(--text-muted);font-size:11px}.photo img{width:100%;height:100%;object-fit:contain}.filename{display:block;margin-top:10px;font-size:11.5px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.price{display:block;margin-top:4px;font-size:13.5px;font-weight:600;color:var(--price-color)}.empty{text-align:center;padding:60px 16px;color:var(--text-muted)}.modal{border:1px solid var(--border-subtle);border-radius:4px;padding:28px;max-width:480px;width:calc(100% - 32px);color:var(--text-main)}dialog::backdrop{background:var(--bg-backdrop)}.modal h2{font:600 24px var(--font-serif);margin:0 0 24px}.modal label{display:block;margin-bottom:10px}.modal .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.lightbox{border:0;margin:0;padding:20px;background:var(--lightbox-bg);color:var(--text-white);width:100vw;max-width:none;height:100dvh;max-height:none}.lightbox[open]{display:flex;flex-direction:column;justify-content:space-between}.lightbox::backdrop{background:var(--lightbox-bg)}.lb-top{display:flex;align-items:center;justify-content:space-between;color:var(--text-light);font-size:13px}.lightbox button{color:var(--text-white);border:1px solid var(--lb-border);border-radius:50%;background:var(--lb-button);width:44px;height:44px;padding:0;font-size:24px}.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;touch-action:pan-y}.stage img{max-width:92vw;max-height:74dvh;object-fit:contain;border-radius:2px;box-shadow:0 12px 48px var(--image-shadow)}.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:1}.prev{left:0}.next{right:0}.lb-bottom{text-align:center;overflow-wrap:anywhere;padding:12px 36px}.lb-bottom .price{color:var(--price-lightbox);font-size:16px}.lb-status{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);text-align:center;font-size:13px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;background:var(--text-main);color:var(--toast-text);padding:14px 20px;border-radius:4px;max-width:calc(100% - 32px);width:max-content;font-size:13px}
 @media(min-width:768px){header{padding:8px 28px}.container{padding-left:28px;padding-right:28px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 18px}}
 @media(max-width:1023px){.layout{display:block}.filter-header{margin-bottom:20px}.brands{max-height:220px}.intro{margin:28px 0}.intro h1{font-size:25px}.toolbar{flex-wrap:wrap}.logo strong{font-size:17px;letter-spacing:.1em}.logo small{font-size:8px}.actions button{font-size:11px;padding:9px}.card{padding:6px}.stage img{max-width:100%;max-height:72dvh}.lightbox{padding:14px}}
@@ -32,24 +32,15 @@ try { if (localStorage.getItem('gallery_theme') === 'dark') document.documentEle
 .option:hover span{color:var(--text-main)}
 .card:hover .filename{color:var(--text-main)}
 
-/* Motion uses only transform and opacity. */
-
 .lightbox{background:var(--transparent)}
-
 .stage{overflow:hidden}
-
-
-/* Editorial details and one-shot title entrance; no external assets. */
 .card{text-transform:none;font-weight:400;letter-spacing:normal}
 button:hover{border-color:var(--gold-light);color:var(--gold-primary)}
 button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
-
 .option:hover{background:var(--bg-cream)}
 
 @media(max-width:767px){.logo{gap:8px}.brand-icon{width:36px;height:36px}.logo strong{font-size:18px}.logo small{letter-spacing:.14em;margin-top:3px}.actions{gap:6px}.actions button{padding:9px 10px}}
 
-
-/* Desktop collection: full-width four/five-column gallery. */
 @media(min-width:1024px){
   header{padding-inline:max(32px,calc((100vw - 1400px)/2 + 32px));min-height:88px}
   .logo strong{font-size:26px;letter-spacing:.18em}
@@ -69,16 +60,10 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
   .group input[type=search]{padding:10px;font-size:12px;border-radius:2px}
   .options{gap:8px}
   .brands{max-height:none;overflow:visible}
-  
-  
-  
   .toolbar{min-height:40px;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border-light)}
   .toolbar .muted{font-size:13px;letter-spacing:.02em}
   .progress{margin-bottom:28px;line-height:1.6}
   .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}
-  
-  
-  
   .filename{margin-top:14px;font-size:12px;line-height:1.6}
   .price{font-size:14px;margin-top:6px;margin-bottom:4px}
 }
@@ -93,15 +78,9 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
   .card:hover img{transform:scale(1.06)}
 }
 
-
-/* Theme colors preserve the original light palette. */
 [data-theme="dark"]{color-scheme:dark;--bg-body:#0f1b2d;--bg-surface:#16243a;--bg-photo:#1a2940;--bg-cream:#142238;--bg-subtle-cream:#19283d;--bg-subtle:#142238;--bg-header:rgba(15,27,45,.98);--text-main:#e8e4d8;--text-secondary:#c5c9d2;--text-muted:#a8b2c2;--text-light:#96a4b8;--text-topbar:#c5c9d2;--text-note:#e8e4d8;--gold-hover:#d4c092;--gold-subtle:#2a2b30;--gold-badge:#39382f;--price-color:#d4c092;--border-light:#29364a;--border-subtle:#354258;--status-error:#ef9494;--status-warning:#d4c092;--status-success:#95c6a5;--toast-text:#0f1b2d}
 
 .modal{background:var(--bg-surface)}
-
-
-
-/* Shared navigation and filter panel; the handle stays outside the scroll area. */
 
 #nav-sidebar>*{flex-shrink:0}
 #nav-sidebar .filters{padding:24px 20px;border-top:1px solid var(--border-subtle)}
@@ -111,15 +90,8 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 #nav-sidebar #clear-filters{align-self:flex-start;margin:0 0 16px;font-size:10px;white-space:normal;text-align:left}
 #nav-sidebar .brands{max-height:none;overflow:visible}
 
-
-
-
-/* ===== ANIMATIONS - gom theo khu, sua nhanh theo dau muc ===== */
-/* ===== 1. HEADER: bounce logo + tieu de luc mo trang ===== */
 .logo{transform-origin:center}
 
-
-/* ===== 2. MAN CHAO SAN KHAU: overlay + spotlight + chu Magic + nut OK ===== */
 #greeting-stage{position:fixed;inset:0;z-index:200;background:#0a0f1a;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #greeting-stage.hide{pointer-events:none;animation:stage-fadeout .8s ease both}
 @keyframes stage-fadeout{to{opacity:0}}
@@ -127,7 +99,6 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 .spot{position:absolute;top:-12%;width:36vmax;height:120%;transform-origin:50% 0;pointer-events:none;filter:blur(5px);background:conic-gradient(at 50% 0%,transparent 158deg,rgba(212,192,146,.30) 180deg,transparent 202deg)}
 .spot.s1{left:10%;animation:none}
 .spot.s2{right:10%;animation:none}
-
 
 .stage-inner{position:relative;z-index:2;text-align:center;padding:0 24px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .stage-arc{width:min(400px,80vw);height:auto;overflow:visible}
@@ -137,7 +108,6 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 @keyframes glass-bloom{0%{opacity:0;transform:scale(.6)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
 .stage-glass::after{content:"";position:absolute;top:0;bottom:0;width:45%;left:0;pointer-events:none;background:linear-gradient(105deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-160%) skewX(-12deg);animation:glass-sheen 1.2s ease-out 1.2s 1}
 @keyframes glass-sheen{to{transform:translateX(320%) skewX(-12deg)}}
-/* Hat vang: entrance burst + exit shatter */
 .g-particles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
 .g-particle{position:absolute;left:50%;top:50%;border-radius:50%;background:#e5d3a9;box-shadow:0 0 4px 1px #e5d3a9}
 .g-particle.burst{animation:particle-burst 1s cubic-bezier(.17,.67,.35,1) both}
@@ -153,8 +123,6 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 @keyframes content-vanish{to{opacity:0;transform:scale(.85)}}
 @media(prefers-reduced-motion:reduce){.arc-text,.stage-glass,#stage-text{animation:none;opacity:1}#greeting-stage.hide{animation:none}#greeting-stage.hide .stage-glass,#greeting-stage.hide #stage-text{animation:none}.stage-glass::after{animation:none}.g-particles{display:none}}
 
-
-/* ===== 3. FILTER: drawer truot, tabs mega-menu, stagger, checkbox ve dan, hieu ung kinh ===== */
 @media(max-width:1023px){.filters .filter-body>.group{opacity:0;transform:translateY(14px);transition:transform .34s cubic-bezier(.34,1.56,.64,1),opacity .24s ease-out}#nav-sidebar.open .filters .filter-body>.group{opacity:1;transform:translateY(0);transition-delay:80ms}#nav-sidebar.open .filters .filter-body>.group:nth-of-type(2){transition-delay:140ms}#nav-sidebar.open .filters .filter-body>.group:nth-of-type(3){transition-delay:200ms}}
 .filter-tab-state,.filter-tabs{display:none}
 @media(max-width:1023px){.filter-tab-state{display:block;position:absolute;width:1px;height:1px;opacity:0;clip-path:inset(50%)}.filter-tabs{grid-column:1/-1;position:relative;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border-light);margin-bottom:8px}.filter-tabs label{padding:14px 2px;text-align:center;font-size:12px;color:var(--text-muted);cursor:pointer;transition:color .2s}.filter-tabs::after{content:"";position:absolute;bottom:-1px;left:0;width:calc(100% / 3);height:2px;border-radius:2px;background:var(--gold-primary);transform:translateX(0);transition:transform .32s cubic-bezier(.34,1.2,.64,1);pointer-events:none}#filter-category:checked~.filter-tabs::after{transform:translateX(100%)}#filter-price:checked~.filter-tabs::after{transform:translateX(200%)}#filter-brand:checked~.filter-tabs [for=filter-brand],#filter-category:checked~.filter-tabs [for=filter-category],#filter-price:checked~.filter-tabs [for=filter-price]{color:var(--text-main);font-weight:600}#filter-brand:focus-visible~.filter-tabs [for=filter-brand],#filter-category:focus-visible~.filter-tabs [for=filter-category],#filter-price:focus-visible~.filter-tabs [for=filter-price]{outline:2px solid var(--gold-primary);outline-offset:-3px;border-radius:4px}.filters .filter-body>.group{display:none;border-top:0}#filter-brand:checked~.filter-brands,#filter-category:checked~.filter-categories,#filter-price:checked~.filter-prices{display:block}#nav-sidebar.open .filters .filter-body>.group{transition-delay:60ms}#nav-sidebar.open .filters .group .option{opacity:1;transform:translateY(0);transition:opacity .24s ease-out,transform .34s cubic-bezier(.34,1.56,.64,1);transition-delay:90ms}#nav-sidebar.open .filters .group .option:nth-child(2){transition-delay:120ms}#nav-sidebar.open .filters .group .option:nth-child(3){transition-delay:150ms}#nav-sidebar.open .filters .group .option:nth-child(n+4){transition-delay:180ms}@starting-style{#nav-sidebar.open .filters .filter-body>.group,#nav-sidebar.open .filters .group .option{opacity:0;transform:translateY(14px)}}}
@@ -180,7 +148,6 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 @keyframes glass-shine{from{transform:translateX(-170%) skewX(-20deg)}to{transform:translateX(340%) skewX(-20deg)}}
 @media(min-width:1024px){.option{gap:9px;padding:8px 6px;border-radius:3px;font-size:12px;line-height:1.5}.option .box{width:15px;height:15px}.option small{font-size:10px;padding:1px 5px}}
 
-/* ===== 4. THE ANH (GRID): hover nang + stagger vao ===== */
 .card{transition:transform .3s}
 .photo img{transition:transform .4s cubic-bezier(.16,1,.3,1)}
 .card{position:relative;isolation:isolate}.card::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 8px 24px var(--card-shadow);opacity:0;pointer-events:none;transition:opacity .3s;z-index:-1}
@@ -189,15 +156,10 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 @media(min-width:1024px){.card{padding:8px;background:var(--bg-surface);transition:transform .3s ease;contain-intrinsic-size:auto 250px}.card::after{box-shadow:0 14px 32px var(--desktop-shadow);transition:opacity .3s ease}.photo img{transition:transform .3s ease}}
 .card{transition:transform .3s ease,background-color .4s ease,color .4s ease,border-color .4s ease}
 
-/* ===== 5. LIGHTBOX: mo kieu dialog ===== */
 .lightbox[open]{animation:backdrop-enter .3s ease-out}
 .lightbox[open]::backdrop{animation:backdrop-enter .3s ease-out}
 @keyframes backdrop-enter{from{opacity:0}to{opacity:1}}
 
-/* ===== 6. MENU TRUOT: tay nam (tab handle) + sidebar + backdrop ===== */
-
-body:has(#nav-sidebar.open) 
-@media(max-width:480px){body:has(#nav-sidebar.open) }
 #nav-fab span{display:block;width:18px;height:2px;border-radius:2px;background:#e8e4d8;transition:transform .3s ease,opacity .3s ease}
 #nav-fab:hover{background:rgba(255,255,255,.18)}
 #nav-backdrop{position:fixed;inset:0;z-index:50;background:rgba(10,16,26,.4);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
@@ -205,7 +167,6 @@ body:has(#nav-sidebar.open)
 #nav-sidebar{position:fixed;top:0;left:0;z-index:60;width:280px;max-width:86vw;height:100dvh;overflow-y:auto;overscroll-behavior:contain;background:#1a2b4a;color:#e8e4d8;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .3s cubic-bezier(.37,0,.63,1);box-shadow:2px 0 12px rgba(0,0,0,.3)}
 #nav-sidebar.open{transform:translateX(0)}
 [data-theme="dark"] #nav-sidebar{background:#0c1626}
-[data-theme="dark"] 
 .nav-head{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;border-bottom:1px solid rgba(176,148,92,.25)}
 .nav-logo{font:600 20px/1.2 var(--font-serif);letter-spacing:.18em;text-transform:uppercase;color:#b0945c}
 #nav-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(176,148,92,.4);background:transparent;color:#b0945c;font-size:20px;line-height:1;padding:0;flex:none}
@@ -216,8 +177,7 @@ body:has(#nav-sidebar.open)
 .nav-foot{margin-top:auto;padding:18px 20px;font-size:11px;letter-spacing:.1em;color:#96a4b8}
 @media(max-width:480px){#nav-sidebar{width:260px}}
 
-/* ===== 7. DARK MODE: switch truot + chuyen mau muot ===== */
-body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolbar,.card,.photo,.modal,button,input,.option,.option small,.filename,.price,.muted,.toast,.brand-icon rect{transition:background-color .4s ease,color .4s ease,border-color .4s ease,fill .4s ease}
+body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolbar,.card,.photo,.modal,button,input,select,.option,.option small,.filename,.price,.muted,.toast,.brand-icon rect{transition:background-color .4s ease,color .4s ease,border-color .4s ease,fill .4s ease}
 #theme-toggle{position:relative;width:62px;height:32px;flex:none;padding:0;border-radius:9999px;border:1px solid #c9a86a;background:linear-gradient(180deg,#f0e6cd,#e2d3ac);overflow:hidden;transition:background .4s ease,border-color .4s ease}
 #theme-toggle .sw-knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--gold-light),var(--gold-primary));box-shadow:0 2px 6px rgba(0,0,0,.28);display:grid;place-items:center;transition:transform .45s cubic-bezier(.34,1.4,.44,1),background .4s ease}
 #theme-toggle .theme-icon{position:absolute;width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s ease,transform .45s ease}
@@ -228,7 +188,6 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 [data-theme="dark"] #theme-toggle .theme-sun{opacity:0;transform:rotate(-90deg) scale(.5)}
 [data-theme="dark"] #theme-toggle .theme-moon{opacity:1;transform:rotate(0) scale(1)}
 
-/* ===== 9. CHAM CONG: ngay + nut ON/OFF + dem gio ===== */
 .chamcong{display:flex;align-items:center;gap:10px;margin-left:auto;margin-right:8px;padding:6px 12px;border:1px solid var(--border-subtle);border-radius:9999px;background:var(--bg-surface);font-size:12px;color:var(--text-secondary);transition:border-color .3s ease,box-shadow .3s ease}
 #cc-date{letter-spacing:.04em;white-space:nowrap}
 #cc-timer{font-variant-numeric:tabular-nums;font-weight:600;color:var(--gold-primary);letter-spacing:.06em}
@@ -239,8 +198,6 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 
 @media(max-width:640px){.chamcong{gap:6px;padding:5px 8px;font-size:11px;margin-right:4px}#cc-total{display:none}}
 
-
-/* ===== 8. KHAC: spinner, toast ===== */
 .spinner{width:16px;height:16px;border:2px solid var(--gold-badge);border-top-color:var(--gold-primary);border-radius:50%;animation:spin .8s linear infinite;flex:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 .toast{border:1px solid var(--gold-primary);border-radius:9999px;box-shadow:0 10px 32px var(--toast-shadow)}
@@ -248,8 +205,6 @@ body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolba
 
 #nav-sidebar #clear-filters{align-self:flex-start;margin:0 0 16px;font-size:10px;white-space:normal;text-align:left}
 #nav-sidebar .brands{max-height:none;overflow:visible}
-
-
 
 :root{--gold-primary:#7a6234;--gold-hover:#6f5930;--price-color:#7a6234;--text-muted:#58667a;--text-light:#627087}
 [data-theme="dark"]{--gold-primary:#d4c092;--gold-hover:#e5d3a9;--price-color:#d4c092}
@@ -273,7 +228,6 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 @media(max-width:767px){header{padding-inline:12px;gap:8px}header .logo{min-width:0;gap:6px}header .logo strong{font-size:18px}header .logo small{font-size:10px;letter-spacing:.16em}.actions{gap:6px}#theme-toggle{width:38px;height:38px}#theme-toggle .sw-knob{left:6px;top:6px}[data-theme="dark"] #theme-toggle .sw-knob{transform:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.option input:checked + .box path{stroke-dashoffset:0}}
 
-/* ===== Lấy ảnh: dialog hướng dẫn bookmarklet ===== */
 #getimg-guide .getimg-steps ol{margin:16px 0;padding-left:22px;display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.6}
 .bmlink{display:inline-block;padding:14px 28px;font-size:17px;font-weight:700;color:#0e1c33;background:linear-gradient(180deg,#e8c96a,#c9a227);border:2px dashed #7a6234;border-radius:10px;text-decoration:none;cursor:grab}
 .bmlink:active{cursor:grabbing}#logo-tool{max-width:1100px;margin:auto}
@@ -300,12 +254,29 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 .logo-drag-label{display:flex;align-items:center;gap:10px;margin:12px 0}
 .logo-panel-drag{width:22px;height:22px;accent-color:var(--gold-primary)}
 
-/* ===== Header: 2 nút tool nhanh (Chèn logo / Lấy ảnh) ===== */
+/* ===== Header: 3 nút tool nhanh (Tìm bằng ảnh / Chèn logo / Lấy ảnh) ===== */
 .header-tools{display:flex;gap:8px;margin-left:8px;flex:none}
 .header-tool{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border:1px solid #b9975b;border-radius:999px;background:#e9d9b3;color:#19213d;font-family:"Jost",sans-serif;font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;box-shadow:0 4px 10px rgba(0,0,0,.20)}
 .header-tool:hover{background:#f7efdb;color:#19213d;border-color:#b9975b}
+.header-tool.highlight{background:linear-gradient(135deg,#f6b8c6,#e9d9b3);border-color:#f6b8c6}
 @media(max-width:767px){.header-tools{gap:6px;margin-left:0}.header-tool{padding:8px 10px;font-size:16px}.header-tool span{display:none}}
-/* ===== Header: logo Phuong Anh GALLERY — dung demo da chot + kinh long CHI trong chu Phuong Anh ===== */
+
+/* ===== GIAO DIỆN TÌM KIẾM BẰNG ẢNH (AI VISUAL SEARCH) ===== */
+#search-tool{max-width:1200px;margin:auto;padding:0 16px 64px}
+.ai-search-box{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:start;margin-top:20px}
+@media(max-width:900px){.ai-search-box{grid-template-columns:1fr}}
+.ai-panel{background:var(--bg-cream);border:1px solid var(--border-subtle);border-radius:12px;padding:20px}
+.ai-step{margin-bottom:18px}
+.ai-step label{display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-primary);margin-bottom:8px}
+.ai-dropzone{border:2px dashed var(--border-gold);border-radius:10px;padding:20px;text-align:center;background:var(--bg-surface);cursor:pointer;transition:background .25s,border-color .25s;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.ai-dropzone:hover,.ai-dropzone.dragover{background:var(--gold-subtle);border-color:var(--gold-hover)}
+.ai-dropzone img{max-width:100%;max-height:210px;object-fit:contain;border-radius:6px}
+.ai-match-badge{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:999px;background:var(--gold-primary);color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em}
+[data-theme="dark"] .ai-match-badge{color:#0f1b2d}
+.ai-progress-wrap{margin:12px 0;padding:12px 14px;border-radius:8px;background:var(--bg-surface);border:1px solid var(--border-light);display:flex;align-items:center;gap:10px;font-size:12.5px}
+.ai-bar-bg{width:100%;height:7px;background:var(--border-light);border-radius:999px;overflow:hidden;margin-top:6px}
+.ai-bar-fill{height:100%;background:var(--gold-primary);width:0%;transition:width .2s ease}
+
 .logo{min-width:0;flex:1}
 .logo-mini{display:flex;align-items:center;gap:10px;text-align:left;min-width:0;flex:1;perspective:800px;--float-amp:1.5px;text-transform:none}
 .logo-mini .flower-entrance{width:40px;height:40px;margin:0;flex:none;transform-origin:50% 90%;opacity:0}
@@ -319,7 +290,6 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 .word-anh{color:#f6b8c6}
 .ltr{display:inline-block}
 .logo-mini .name-line{flex-wrap:nowrap;font-size:clamp(23px,4.4vw,33px);padding:0;min-height:0}
-/* Kinh long CHI boc chu Phuong Anh — hoa / GALLERY / tagline / nut: khong kinh */
 .pa-name-glass{display:inline-block;padding:3px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.08));box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4)}
 .logo-mini .gallery-wrap{display:block;position:relative;margin-top:2px}
 .logo-mini .gallery-line{position:relative;z-index:1;display:flex;justify-content:center;gap:.08em;font-family:"Jost",sans-serif;font-weight:600;font-size:clamp(8px,1.6vw,11px);letter-spacing:.42em;color:#e9d9b3;text-transform:uppercase}
@@ -327,7 +297,6 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 .gallery-line span:last-child{letter-spacing:0}
 .logo-mini .divider{display:block;width:0;height:1px;margin:5px auto 0;background:linear-gradient(90deg,#b9975b,rgba(185,151,91,.2))}
 .logo-mini .tagline{display:block;margin-top:4px;font-size:7px;letter-spacing:.3em;text-indent:.3em;text-align:center;white-space:nowrap;text-transform:uppercase;color:#e6ddc0;opacity:0}
-/* Chuoi animation dung demo: hoa -> Phuong Anh -> GALLERY -> ke vang -> tagline, xong ~2.5s */
 .play .flower-entrance{animation:flowerGrow .6s cubic-bezier(.34,1.56,.64,1) .1s both}
 .play .flower-sway{animation:flowerSway 3.2s ease-in-out .75s infinite alternate}
 .play .name-line .word{animation:jellySoft .6s cubic-bezier(.34,1.4,.64,1) both}
@@ -363,6 +332,7 @@ header .chamcong{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,
 <nav inert id="nav-sidebar" aria-label="Điều hướng">
 <div class="nav-head"><span class="nav-logo">Kho ảnh</span><button id="nav-close" aria-label="Đóng menu" type="button">×</button></div>
 <a class="nav-item active" href="#" id="nav-home"><span class="nav-bar"></span>Trang chủ</a>
+<button class="nav-item" id="nav-search" type="button"><span class="nav-bar"></span>🔍 Tìm bằng ảnh (AI)</button>
 <a class="nav-item" href="https://huhuhu003.github.io/hop-thu-gui-nhanh/" target="_blank" rel="noopener"><span class="nav-bar"></span>Kho up ảnh</a>
 <button class="nav-item" id="nav-getimg" type="button"><span class="nav-bar"></span>📸 Lấy ảnh</button>
 <button class="nav-item" id="nav-logo" type="button"><span class="nav-bar"></span>Chèn logo</button>
@@ -391,7 +361,7 @@ header .chamcong{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,
 </div>
 
 <div class="announcement">Kho ảnh sản phẩm · Cảm hứng thời trang · Google Drive chỉ đọc</div>
-<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="GALLERY"><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; GALLERY</span></span></span></button><div class="header-tools" aria-label="Tool nhanh"><button id="hdr-logo" type="button" class="header-tool" title="Chèn logo" aria-label="Chèn logo">🏷️<span>Chèn logo</span></button><button id="hdr-getimg" type="button" class="header-tool" title="Lấy ảnh" aria-label="Lấy ảnh">📸<span>Lấy ảnh</span></button></div><div class="chamcong" id="chamcong">
+<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="GALLERY"><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; GALLERY</span></span></span></button><div class="header-tools" aria-label="Tool nhanh"><button id="hdr-search" type="button" class="header-tool highlight" title="Tìm ảnh thật bằng ảnh mẫu" aria-label="Tìm bằng ảnh">🔍<span>Tìm bằng ảnh</span></button><button id="hdr-logo" type="button" class="header-tool" title="Chèn logo" aria-label="Chèn logo">🏷️<span>Chèn logo</span></button><button id="hdr-getimg" type="button" class="header-tool" title="Lấy ảnh" aria-label="Lấy ảnh">📸<span>Lấy ảnh</span></button></div><div class="chamcong" id="chamcong">
 <span id="cc-date"></span>
 <span id="cc-timer" hidden>00:00:00</span>
 <span id="cc-total"></span>
@@ -404,6 +374,59 @@ header .chamcong{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,
 
 <section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div> <button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
 </div></main>
+
+<!-- ===== SECTION: TÌM KIẾM BẰNG ẢNH MẪU (AI CLIP) ===== -->
+<section id="search-tool" aria-labelledby="search-title" hidden>
+  <div class="intro">
+    <h1 id="search-title">🔍 Tìm ảnh thật bằng ảnh mẫu (AI)</h1>
+    <p class="muted">Chọn đúng Hãng & Danh mục, sau đó dán (Ctrl+V) hoặc chọn ảnh web/lookbook để AI lọc ra những ảnh chụp thật giống nhất trong kho.</p>
+  </div>
+  <div class="ai-search-box">
+    <div class="ai-panel">
+      <div class="ai-step">
+        <label for="ai-brand-select">1. Chọn Hãng cần tìm</label>
+        <select id="ai-brand-select"><option value="">-- Chọn hãng --</option></select>
+      </div>
+      <div class="ai-step">
+        <label for="ai-cat-select">2. Chọn Danh mục (Áo, Quần, Giày...)</label>
+        <select id="ai-cat-select"><option value="ALL">-- Tất cả danh mục của hãng --</option></select>
+      </div>
+      <div class="ai-step">
+        <label>3. Ảnh mẫu cần tìm (Web / Khách gửi)</label>
+        <input id="ai-file-input" type="file" accept="image/*" hidden>
+        <div id="ai-dropzone" class="ai-dropzone" tabindex="0" role="button" aria-label="Chọn hoặc dán ảnh mẫu">
+          <img id="ai-query-preview" alt="Ảnh mẫu" hidden>
+          <div id="ai-drop-hint">
+            <div style="font-size:28px;margin-bottom:6px">📥</div>
+            <strong>Bấm để chọn ảnh</strong>
+            <div class="muted" style="margin-top:4px">Hoặc bấm <b>Ctrl + V</b> để dán thẳng ảnh từ Zalo</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button id="ai-paste-btn" type="button" style="flex:1">📋 Dán ảnh</button>
+          <button id="ai-clear-btn" type="button" hidden>✕ Xóa</button>
+        </div>
+      </div>
+      <button id="ai-run-btn" class="primary" type="button" style="width:100%;padding:14px;font-size:13px" disabled>✨ Bắt đầu tìm ảnh tương đồng</button>
+      <p id="ai-scope-info" class="muted" style="margin:12px 0 0;text-align:center"></p>
+    </div>
+
+    <div>
+      <div id="ai-status-box" class="ai-progress-wrap" hidden>
+        <span class="spinner" id="ai-spinner"></span>
+        <div style="flex:1">
+          <div id="ai-status-text">Đang khởi tạo bộ não AI...</div>
+          <div class="ai-bar-bg"><div id="ai-bar-fill" class="ai-bar-fill"></div></div>
+        </div>
+      </div>
+      <div class="toolbar" style="margin-bottom:16px">
+        <span class="muted" id="ai-result-label">Kết quả ảnh thật tương đồng sẽ xuất hiện tại đây.</span>
+      </div>
+      <div class="grid" id="ai-results-grid"></div>
+    </div>
+  </div>
+</section>
+
 <section id="logo-tool" aria-labelledby="logo-title" hidden>
 <div class="intro"><h1 id="logo-title">Chèn logo hàng loạt</h1><p class="muted">Chọn ảnh, đặt logo và tải ảnh giữ nguyên kích thước gốc. Hoặc nhấn Ctrl+V / Cmd+V để dán ảnh.</p></div>
 <input id="logo-files" type="file" accept="image/*" multiple hidden>
@@ -463,11 +486,13 @@ function openNav(){ $('nav-sidebar').inert = false; $('nav-sidebar').classList.a
 $('nav-fab').addEventListener('click',openNav);
 $('nav-close').addEventListener('click',() => {closeNav(); $('nav-fab').focus();});
 $('nav-backdrop').addEventListener('click',closeNav);
-$('nav-home').addEventListener('click',e => {e.preventDefault();showLogoTool(false);clearFilters();closeNav();});
+$('nav-home').addEventListener('click',e => {e.preventDefault();switchMainView('gallery');clearFilters();closeNav();});
 $('nav-theme').addEventListener('click',() => {$('theme-toggle').click();});
 $('nav-getimg').addEventListener('click',() => {closeNav();$('getimg-guide').showModal();scrollLock();});
-$('nav-logo').addEventListener('click', () => { showLogoTool(true); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
-$('hdr-logo').addEventListener('click', () => { showLogoTool(true); window.scrollTo({top:0,behavior:'smooth'}); });
+$('nav-logo').addEventListener('click', () => { switchMainView('logo'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
+$('nav-search').addEventListener('click', () => { switchMainView('search'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
+$('hdr-logo').addEventListener('click', () => { switchMainView('logo'); window.scrollTo({top:0,behavior:'smooth'}); });
+$('hdr-search').addEventListener('click', () => { switchMainView('search'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('hdr-getimg').addEventListener('click', () => { $('getimg-guide').showModal(); scrollLock(); });
 (function(){var lg=$('logo-mini');if(!lg)return;var started=false;function start(){if(started)return;started=true;lg.classList.add('play');}var st=$('greeting-stage');if(!st||st.hidden){start();return;}new MutationObserver(function(){if(st.hidden||st.classList.contains('hide'))setTimeout(start,800);}).observe(st,{attributes:true,attributeFilter:['hidden','class']});setTimeout(start,6000);})();
 $('close-getimg').addEventListener('click',() => {$('getimg-guide').close();scrollLock();});
@@ -535,7 +560,6 @@ placeHeaderControls();mobileHeader.addEventListener('change',placeHeaderControls
     const entry = { date: dayKey(new Date(startTs)), start: new Date(startTs).toISOString(), end: new Date(endTs).toISOString(), seconds: seconds, note: '', synced: false };
     const log = load(); log.push(entry); save(log);
     renderTotal();
-
   }
   $btn.addEventListener('click', () => { timerId ? endShift() : startShift(); });
   renderTotal();
@@ -543,16 +567,32 @@ placeHeaderControls();mobileHeader.addEventListener('change',placeHeaderControls
 let accessToken = '', tokenClient, generation = 0, controller, tokenTimer, toastTimer;
 let root = DEFAULT_ROOT, photos = [], brands = [], scanning = false, scanErrors = 0, completed = 0;
 let lightboxItems = [], lightboxIndex = 0, imageGeneration = 0, originalController, objectUrl = '', returnFocus;
+let activeView = 'gallery'; // 'gallery' | 'logo' | 'search'
 const selected = {brand:new Set(), category:new Set(), price:new Set()};
 const counts = {brand:new Map(), category:new Map(), price:new Map()};
 const options = {brand:new Map(), category:new Map(), price:new Map()};
 try { const saved = localStorage.getItem(STORAGE_KEY); if (saved && /^[\w-]+$/.test(saved)) root = saved; } catch (_) {}
-function normalize(text) { return text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().trim(); }
+function normalize(text) { return (text || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().trim(); }
 function priceBucket(price) { return price === null ? PRICES[4] : price < 500000 ? PRICES[0] : price < 1000000 ? PRICES[1] : price < 2000000 ? PRICES[2] : PRICES[3]; }
-function metadata(note) {
+
+// Bổ sung nhận diện danh mục trực tiếp từ tên thư mục AI đã phân loại (Áo, Quần, Váy, Đầm, Giày, Túi, Set, Phụ kiện)
+const FOLDER_CAT_ALIASES = new Map([
+  ['ao', 'Áo'], ['quan', 'Quần'], ['vay', 'Váy'], ['chan vay', 'Váy'],
+  ['dam', 'Đầm'], ['giay', 'Giày'], ['dep', 'Giày'], ['tui', 'Túi'],
+  ['balo', 'Túi'], ['set', 'Set'], ['bo', 'Set'], ['phu kien', 'Phụ kiện'],
+  ['khac', 'Chưa phân loại'], ['khong ro', 'Chưa phân loại']
+]);
+function matchCategoryByFolderName(folderName) {
+  const norm = normalize(folderName);
+  if (FOLDER_CAT_ALIASES.has(norm)) return FOLDER_CAT_ALIASES.get(norm);
+  return CATEGORIES.find(c => normalize(c) === norm) || null;
+}
+
+function metadata(note, folderName = '') {
   const categoryLine = note.match(/^\s*Danh mục\s*:\s*([^\r\n]*)/im);
   const priceLine = note.match(/^\s*Giá\s*:\s*([^\r\n]*)/im);
-  const category = categoryLine && CATEGORIES.find(value => normalize(value) === normalize(categoryLine[1])) || CATEGORIES[8];
+  const fromFolder = matchCategoryByFolderName(folderName);
+  const category = (categoryLine && CATEGORIES.find(value => normalize(value) === normalize(categoryLine[1]))) || fromFolder || CATEGORIES[8];
   const digits = priceLine ? priceLine[1].replace(/\D/g,'') : '';
   const number = digits ? Number(digits) : NaN;
   const price = Number.isSafeInteger(number) && number >= 0 ? number : null;
@@ -566,7 +606,8 @@ function stopSession(message) {
   generation++; controller?.abort(); clearTimeout(tokenTimer); accessToken = ''; scanning = false;
   closeLightbox(); closeFilters(); photos = []; brands = []; $('grid').replaceChildren(); $('brand-options').replaceChildren();
   $('gallery').hidden = true; $('login').hidden = false; $('logout').hidden = true;
-  $('logo-tool').hidden = true; $('nav-home').classList.add('active'); $('nav-logo').classList.remove('active');
+  $('logo-tool').hidden = true; $('search-tool').hidden = true;
+  $('nav-home').classList.add('active'); $('nav-logo').classList.remove('active'); $('nav-search').classList.remove('active');
   if (message) { $('login-message').textContent = message; toast(message); }
 }
 function active(run) { if (run !== generation || !accessToken) throw new DOMException('Đã dừng','AbortError'); }
@@ -622,6 +663,7 @@ function updateResults() {
   $('nav-fab').setAttribute('aria-label',filtersCount ? 'Mở menu, ' + filtersCount + ' bộ lọc đang chọn' : 'Mở menu điều hướng');
   $('empty').hidden = shown > 0;
   $('empty').textContent = scanning ? 'Đang quét kho ảnh. Các ảnh phù hợp sẽ xuất hiện tại đây…' : scanErrors ? 'Chưa có ảnh phù hợp trong dữ liệu đã đọc. Một phần kho chưa tải được; bạn có thể quét lại.' : photos.length ? 'Chưa có ảnh phù hợp. Thử bỏ bớt bộ lọc nhé.' : 'Kho này chưa có ảnh. Bạn có thể chọn thư mục khác trong Cài đặt.';
+  updateAISearchDropdowns();
 }
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 function filterPhotos() {
@@ -649,7 +691,6 @@ function updateCounts(photo) {
   }
 }
 async function appendPhotos(items,brand,batch,meta,run) {
-  // Small chunks keep input responsive even when a page contains 1,000 photos.
   for (let offset = 0; offset < items.length; offset += 60) {
     active(run); const fragment = document.createDocumentFragment();
     for (const file of items.slice(offset,offset + 60)) {
@@ -672,21 +713,30 @@ async function appendPhotos(items,brand,batch,meta,run) {
   }
 }
 async function scanBatch(brand,batch,run) {
-  // Exactly two list requests at most: note lookup and first image page.
   const firstUrl = new URL(API);
   firstUrl.search = new URLSearchParams({q:"'" + batch.id + "' in parents and mimeType contains 'image/' and trashed=false",fields:'nextPageToken,files(id,name,thumbnailLink,webContentLink)',pageSize:'1000',orderBy:'name',supportsAllDrives:'true',includeItemsFromAllDrives:'true'});
   const results = await Promise.allSettled([
-    list(batch.id,"name='GHI-CHU.md'",'id,name',run,'createdTime desc'), request(firstUrl,run)
+    list(batch.id,"name='GHI-CHU.md'",'id,name',run,'createdTime desc'), request(firstUrl,run),
+    list(batch.id,"mimeType='" + FOLDER + "'",'id,name',run,'name')
   ]);
   active(run);
-  for (const result of results) if (result.status === 'rejected') throw result.reason;
+  if (results[0].status === 'rejected') throw results[0].reason;
+  if (results[1].status === 'rejected') throw results[1].reason;
   const notes = results[0].value; let page = results[1].value;
+  const subFolders = results[2].status === 'fulfilled' ? results[2].value : [];
   const note = notes.length ? await request(API + '/' + encodeURIComponent(notes[0].id) + '?alt=media',run,'text') : '';
-  const meta = metadata(note);
+  const meta = metadata(note, batch.name);
   while (true) {
     await appendPhotos(page.files || [],brand,batch,meta,run);
     if (!page.nextPageToken) break;
     firstUrl.searchParams.set('pageToken',page.nextPageToken); page = await request(firstUrl,run);
+  }
+  // Hỗ trợ quét thêm 1 cấp thư mục con nếu trong đợt hàng có chia mục Áo, Quần, Váy...
+  for (const sub of subFolders) {
+    active(run);
+    if (matchCategoryByFolderName(sub.name)) {
+      await scanBatch(brand, sub, run);
+    }
   }
 }
 async function scan() {
@@ -695,7 +745,7 @@ async function scan() {
   $('grid').replaceChildren(); $('brand-options').replaceChildren(); options.brand.clear();
   Object.values(counts).forEach(map => map.clear()); clearFilters();
   Object.values(options).forEach(map => map.forEach(option => { option.count.textContent = '0'; }));
-  $('gallery').hidden = !$('logo-tool').hidden; $('login').hidden = true; $('logout').hidden = false;
+  switchMainView(activeView); $('login').hidden = true; $('logout').hidden = false;
   $('scan-spinner').hidden = false; $('retry').hidden = true; $('scan-status').textContent = 'Đang đọc danh sách hãng…';
   try {
     brands = await list(root,"mimeType='" + FOLDER + "'",'id,name',run);
@@ -705,12 +755,12 @@ async function scan() {
       active(run); $('scan-status').textContent = 'Đang quét ' + brand.name + ' · ' + completed + '/' + brands.length + ' hãng';
       try {
         const batches = await list(brand.id,"mimeType='" + FOLDER + "'",'id,name',run,'name desc');
-        // Preserve direct-image support for brands without batch folders.
-        const sources = batches.length ? batches : [{id:brand.id,name:brand.name}];
+        // Quét cả ảnh nằm trực tiếp trong thư mục hãng và ảnh trong các thư mục con (Áo, Quần, Váy...)
+        const sources = batches.length ? [{id:brand.id,name:brand.name}, ...batches] : [{id:brand.id,name:brand.name}];
         for (const batch of sources) {
           active(run); $('scan-status').textContent = 'Đang quét ' + brand.name + ' · ' + batch.name + ' · ' + completed + '/' + brands.length + ' hãng';
           try { await scanBatch(brand,batch,run); }
-          catch (error) { if (error.name === 'AbortError') throw error; scanErrors++; toast('Không đọc được đợt ' + batch.name + ': ' + error.message); }
+          catch (error) { if (error.name === 'AbortError') throw error; scanErrors++; toast('Không đọc được mục ' + batch.name + ': ' + error.message); }
         }
       } catch (error) { if (error.name === 'AbortError') throw error; scanErrors++; toast('Không đọc được hãng ' + brand.name + ': ' + error.message); }
       completed++;
@@ -735,8 +785,10 @@ function initIdentity() {
 function identityError() { $('login-button').textContent = 'Chưa tải được đăng nhập'; $('login-message').textContent = 'Không tải được Google. Kiểm tra kết nối rồi tải lại trang.'; }
 $('login-button').addEventListener('click',() => tokenClient?.requestAccessToken({prompt:'select_account'}));
 $('logout').addEventListener('click',() => { const token = accessToken; stopSession(); if (token && tokenClient) google.accounts.oauth2.revoke(token,() => {}); });
-function openLightbox(photo) {
-  lightboxItems = photos.filter(matches); lightboxIndex = lightboxItems.indexOf(photo); if (lightboxIndex < 0) return;
+function openLightbox(photo, customList = null) {
+  lightboxItems = customList || photos.filter(matches);
+  lightboxIndex = lightboxItems.indexOf(photo);
+  if (lightboxIndex < 0) { lightboxItems = [photo]; lightboxIndex = 0; }
   returnFocus = document.activeElement; $('lightbox').showModal(); scrollLock(); showOriginal();
 }
 function releaseOriginal() { imageGeneration++; originalController?.abort(); $('original').removeAttribute('src'); $('original').hidden = true; if (objectUrl) URL.revokeObjectURL(objectUrl); objectUrl = ''; }
@@ -762,7 +814,6 @@ async function showOriginal(direction = 0) {
     $('original').onerror = fallback; $('original').src = source;
   };
   let triedFallback = false;
-  // Download links may require Google cookies; authenticated API media is still the original image.
   async function fallback() {
     if (!valid() || triedFallback) { fail(); return; } triedFallback = true;
     try {
@@ -788,7 +839,9 @@ $('stage').addEventListener('touchcancel',() => { touch = null; },{passive:true}
 document.addEventListener('keydown',event => {
   if ($('lightbox').open) { if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); moveImage(event.key === 'ArrowLeft' ? -1 : 1); } }
 });
-let brandSearchTimer; $('brand-search').addEventListener('input',() => { clearTimeout(brandSearchTimer); brandSearchTimer = setTimeout(searchBrands,300); }); $('clear-filters').addEventListener('click',clearFilters); $('home').addEventListener('click',clearFilters); $('retry').addEventListener('click',scan);
+let brandSearchTimer; $('brand-search').addEventListener('input',() => { clearTimeout(brandSearchTimer); brandSearchTimer = setTimeout(searchBrands,300); }); $('clear-filters').addEventListener('click',clearFilters);
+$('home').addEventListener('click',() => { switchMainView('gallery'); clearFilters(); });
+$('retry').addEventListener('click',scan);
 function closeSettings() { $('settings').close(); scrollLock(); }
 $('settings-button').addEventListener('click',() => { $('root-input').value = root; $('settings').showModal(); scrollLock(); });
 $('close-settings').addEventListener('click',closeSettings); $('settings').addEventListener('cancel',event => { event.preventDefault(); closeSettings(); });
@@ -800,15 +853,23 @@ function saveRoot(value,reset=false) {
 }
 $('settings-form').addEventListener('submit',event => { event.preventDefault(); saveRoot($('root-input').value.trim()); });
 $('reset-root').addEventListener('click',() => saveRoot(DEFAULT_ROOT,true));
-// pos là góc trên-trái của logo, theo tỉ lệ kích thước ảnh gốc.
-// Bản chính: gallery là <main id=gallery>, có thêm section login + trạng thái đăng nhập.
-function showLogoTool(open) {
-  $('gallery').hidden = open || !accessToken;
-  $('logo-tool').hidden = !open;
-  $('login').hidden = open || !!accessToken;
-  $('nav-home').classList.toggle('active', !open); $('nav-logo').classList.toggle('active', open);
-  if (open) renderLogoPanels();
+
+// Quản lý chuyển đổi giữa 3 màn hình: Kho ảnh (gallery) | Chèn logo (logo) | Tìm bằng ảnh (search)
+function switchMainView(view) {
+  activeView = view;
+  const loggedIn = !!accessToken;
+  $('gallery').hidden = (view !== 'gallery') || !loggedIn;
+  $('logo-tool').hidden = (view !== 'logo');
+  $('search-tool').hidden = (view !== 'search');
+  $('login').hidden = (view === 'logo' || view === 'search') || loggedIn;
+  $('nav-home').classList.toggle('active', view === 'gallery');
+  $('nav-logo').classList.toggle('active', view === 'logo');
+  $('nav-search').classList.toggle('active', view === 'search');
+  if (view === 'logo') renderLogoPanels();
+  if (view === 'search') updateAISearchDropdowns();
 }
+
+// ===== CHÈN LOGO HÀNG LOẠT =====
 const logoImage = new Image();
 let logoGrayImage = null;
 let logoReady = false, logoFailed = false, logoItems = [], logoPage = 0, logoBusy = false, logoDrag = null;
@@ -917,7 +978,11 @@ document.addEventListener('paste', event => {
     .map(item => item.getAsFile()).filter(Boolean);
   if (!files.length) return;
   event.preventDefault();
-  addLogoFiles(files);
+  if (activeView === 'search') {
+    setAIQueryFile(files[0]);
+  } else {
+    addLogoFiles(files);
+  }
 });
 $('logo-paste').addEventListener('click', async () => {
   try {
@@ -960,8 +1025,6 @@ $('logo-panels').addEventListener('input', event => {
 });
 function logoPointer(event, canvas) {
   const rect = canvas.getBoundingClientRect();
-  // Canvas dùng object-fit:contain nên ảnh thật có thể letterbox trong khung CSS
-  // (vd 1 ảnh: panel rộng, cao bị cap 60vh) — phải map về vùng nội dung thật.
   if (!rect.width || !rect.height || !canvas.width || !canvas.height) return {x:0, y:0};
   const scale = Math.min(rect.width / canvas.width, rect.height / canvas.height);
   const contentW = canvas.width * scale, contentH = canvas.height * scale;
@@ -1016,17 +1079,271 @@ $('logo-download').addEventListener('click', async () => {
       link.href = url; link.download = stem + '-logo.' + ext; document.body.append(link); link.click(); link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 60000); downloaded++;
       toast('Đang tải ' + downloaded + '/' + logoItems.length + ' ảnh');
-      // Chrome chặn tải nhiều file tự động nếu bắn liên tiếp — giãn 1s/lần
       await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (error) { toast('Không xuất được ' + item.name + ': ' + error.message); }
     finally { output.width = output.height = 0; }
   }
   logoBusy = false; renderLogoPanels(); toast('Đã gửi tải ' + downloaded + '/' + logoItems.length + ' ảnh');
-  // Chrome có thể chặn tải nhiều file mà JS không phát hiện được — dặn trước khi thiếu file
   if (logoItems.length > 1) toast('Nếu thiếu file: vào chrome://settings/content/popups cho phép trang này tải nhiều file');
 });
 
 renderLogoPanels();
+
+// ===== TÍNH NĂNG MỚI: TÌM ẢNH THẬT BẰNG ẢNH WEB (CLIP AI TRONG TRÌNH DUYỆT + INDEXEDDB CACHE) =====
+let aiExtractor = null;
+let aiQueryUrl = '';
+let aiSearching = false;
+
+// Lưu trữ Vector vào IndexedDB để chỉ phải quét 1 lần duy nhất cho mỗi ảnh
+const DB_NAME = 'pa_gallery_ai_vectors_v1';
+const STORE_NAME = 'vectors';
+function openVectorDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = () => { req.result.createObjectStore(STORE_NAME); };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+async function getCachedVector(fileId) {
+  try {
+    const db = await openVectorDB();
+    return await new Promise(res => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const r = tx.objectStore(STORE_NAME).get(fileId);
+      r.onsuccess = () => res(r.result || null);
+      r.onerror = () => res(null);
+    });
+  } catch (_) { return null; }
+}
+async function setCachedVector(fileId, vec) {
+  try {
+    const db = await openVectorDB();
+    await new Promise(res => {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      tx.objectStore(STORE_NAME).put(vec, fileId);
+      tx.oncomplete = () => res();
+      tx.onerror = () => res();
+    });
+  } catch (_) {}
+}
+
+function updateAISearchDropdowns() {
+  const bSel = $('ai-brand-select');
+  const cSel = $('ai-cat-select');
+  if (!bSel || !cSel) return;
+  const curBrand = bSel.value;
+  const curCat = cSel.value || 'ALL';
+
+  bSel.innerHTML = '<option value="">-- Chọn hãng (' + brands.length + ' hãng) --</option>';
+  for (const b of brands) {
+    const cnt = counts.brand.get(b.id) || 0;
+    const opt = document.createElement('option');
+    opt.value = b.id;
+    opt.textContent = `${b.name} (${cnt} ảnh)`;
+    if (b.id === curBrand) opt.selected = true;
+    bSel.append(opt);
+  }
+
+  cSel.innerHTML = '<option value="ALL">-- Tất cả danh mục của hãng --</option>';
+  for (const cat of CATEGORIES) {
+    const opt = document.createElement('option');
+    opt.value = cat;
+    opt.textContent = cat;
+    if (cat === curCat) opt.selected = true;
+    cSel.append(opt);
+  }
+  updateAIScopeCount();
+}
+
+function getScopedPhotos() {
+  const bId = $('ai-brand-select').value;
+  const cat = $('ai-cat-select').value;
+  if (!bId) return [];
+  return photos.filter(p => p.brand === bId && (cat === 'ALL' || p.category === cat));
+}
+
+function updateAIScopeCount() {
+  const bId = $('ai-brand-select').value;
+  const list = getScopedPhotos();
+  $('ai-run-btn').disabled = aiSearching || !bId || !aiQueryUrl || list.length === 0;
+  if (!bId) {
+    $('ai-scope-info').textContent = !accessToken ? '⚠️ Vui lòng đăng nhập Google ở Trang chủ trước để tải danh sách hãng.' : 'Hãy chọn hãng để khoanh vùng tìm kiếm.';
+  } else {
+    $('ai-scope-info').textContent = `Phạm vi quét: ${list.length} ảnh trong mục đã chọn.`;
+  }
+}
+
+$('ai-brand-select').addEventListener('change', updateAIScopeCount);$('ai-cat-select').addEventListener('change', updateAIScopeCount);
+
+function setAIQueryFile(file) {
+  if (!file) return;
+  if (aiQueryUrl) URL.revokeObjectURL(aiQueryUrl);
+  aiQueryUrl = URL.createObjectURL(file);
+  $('ai-query-preview').src = aiQueryUrl;
+  $('ai-query-preview').hidden = false;
+  $('ai-drop-hint').hidden = true;
+  $('ai-clear-btn').hidden = false;
+  updateAIScopeCount();
+}
+
+$('ai-dropzone').addEventListener('click', () => $('ai-file-input').click());$('ai-file-input').addEventListener('change', e => {
+  if (e.target.files?.[0]) setAIQueryFile(e.target.files[0]);
+  e.target.value = '';
+});
+$('ai-dropzone').addEventListener('dragover', e => { e.preventDefault(); $('ai-dropzone').classList.add('dragover'); });$('ai-dropzone').addEventListener('dragleave', () => $('ai-dropzone').classList.remove('dragover'));$('ai-dropzone').addEventListener('drop', e => {
+  e.preventDefault(); $('ai-dropzone').classList.remove('dragover');
+  const file = e.dataTransfer?.files?.[0];
+  if (file && file.type.startsWith('image/')) setAIQueryFile(file);
+});
+$('ai-paste-btn').addEventListener('click', async () => {
+  try {
+    const items = await navigator.clipboard.read();
+    for (const item of items) {
+      const type = item.types.find(t => t.startsWith('image/'));
+      if (type) { setAIQueryFile(await item.getType(type)); return; }
+    }
+    toast('Không tìm thấy ảnh trong Clipboard.');
+  } catch (_) { toast('Hãy bấm tổ hợp phím Ctrl + V để dán ảnh!'); }
+});
+$('ai-clear-btn').addEventListener('click', () => {
+  if (aiQueryUrl) URL.revokeObjectURL(aiQueryUrl);
+  aiQueryUrl = '';
+  $('ai-query-preview').hidden = true;
+  $('ai-drop-hint').hidden = false;
+  $('ai-clear-btn').hidden = true;
+  updateAIScopeCount();
+});
+
+function cosineSimilarity(a, b) {
+  let dot = 0, na = 0, nb = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    na += a[i] * a[i];
+    nb += b[i] * b[i];
+  }
+  return dot / (Math.sqrt(na) * Math.sqrt(nb) + 1e-8);
+}
+
+async function fetchDriveImageBlobUrl(photo) {
+  // Ưu tiên tải thumbnail nhẹ qua Google Drive API bằng Bearer Token để tránh lỗi CORS và cực nhanh
+  const thumbSrc = thumbnail(photo.thumbnailLink);
+  if (thumbSrc) {
+    try {
+      const r = await fetch(thumbSrc, { credentials: 'omit' });
+      if (r.ok) {
+        const b = await r.blob();
+        return URL.createObjectURL(b);
+      }
+    } catch (_) {}
+  }
+  const r = await fetch(API + '/' + encodeURIComponent(photo.id) + '?alt=media&supportsAllDrives=true', {
+    headers: { Authorization: 'Bearer ' + accessToken }
+  });
+  if (!r.ok) throw new Error('Không tải được ảnh ' + photo.name);
+  const b = await r.blob();
+  return URL.createObjectURL(b);
+}
+
+$('ai-run-btn').addEventListener('click', async () => {
+  const candidates = getScopedPhotos();
+  if (!aiQueryUrl || !candidates.length || aiSearching) return;
+
+  aiSearching = true;
+  updateAIScopeCount();
+  $('ai-status-box').hidden = false;
+  $('ai-bar-fill').style.width = '5\%';$('ai-results-grid').replaceChildren();
+
+  try {
+    if (!aiExtractor) {
+      $('ai-status-text').textContent = 'Đang tải mô hình AI CLIP lần đầu (~25MB, chỉ tải 1 lần)...';
+      const { pipeline, env } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+      env.allowLocalModels = false;
+      aiExtractor = await pipeline('image-feature-extraction', 'Xenova/clip-vit-base-patch32', { quantized: true });
+    }
+
+    $('ai-status-text').textContent = 'Đang phân tích đặc trưng ảnh mẫu...';
+    $('ai-bar-fill').style.width = '12%';
+    const qOut = await aiExtractor(aiQueryUrl, { pooling: 'mean', normalize: true });
+    const queryVec = Array.from(qOut.data);
+
+    const scored = [];
+    let done = 0;
+
+    for (const photo of candidates) {
+      let vec = await getCachedVector(photo.id);
+      if (!vec) {
+        let tempUrl = '';
+        try {
+          tempUrl = await fetchDriveImageBlobUrl(photo);
+          const out = await aiExtractor(tempUrl, { pooling: 'mean', normalize: true });
+          vec = Array.from(out.data);
+          await setCachedVector(photo.id, vec);
+        } catch (_) {
+          vec = null;
+        } finally {
+          if (tempUrl) URL.revokeObjectURL(tempUrl);
+        }
+      }
+      done++;
+      const pct = Math.round((done / candidates.length) * 88) + 12;
+      $('ai-bar-fill').style.width = pct + '\%';$('ai-status-text').textContent = `Đang so khớp ảnh ${done}/${candidates.length} (Lần sau sẽ tức thì)...`;
+
+      if (vec) {
+        const sim = cosineSimilarity(queryVec, vec);
+        scored.push({ photo, sim });
+      }
+    }
+
+    scored.sort((a, b) => b.sim - a.sim);
+    const topResults = scored.slice(0, 20);
+    const topPhotosList = topResults.map(item => item.photo);
+
+    $('ai-result-label').textContent = `Tìm thấy Top ${topResults.length} ảnh thật giống nhất trong số ${candidates.length} ảnh:`;
+    const frag = document.createDocumentFragment();
+
+    for (const { photo, sim } of topResults) {
+      const card = document.createElement('button');
+      card.className = 'card';
+      const frame = document.createElement('span');
+      frame.className = 'photo';
+      const src = thumbnail(photo.thumbnailLink);
+      if (src) {
+        const img = document.createElement('img');
+        img.width = 400; img.height = 400; img.loading = 'lazy'; img.src = src; img.alt = photo.name;
+        frame.append(img);
+      } else {
+        frame.textContent = 'Ảnh';
+      }
+      const badge = document.createElement('span');
+      badge.className = 'ai-match-badge';
+      const matchPct = Math.min(99, Math.max(50, Math.round(sim * 100)));
+      badge.textContent = `Giống ${matchPct}% · ${photo.category}`;
+
+      const name = document.createElement('span');
+      name.className = 'filename';
+      name.textContent = photo.name;
+
+      card.append(frame, badge, name);
+      if (photo.price !== null) {
+        const pr = document.createElement('span');
+        pr.className = 'price';
+        pr.textContent = priceText(photo.price);
+        card.append(pr);
+      }
+      card.addEventListener('click', () => openLightbox(photo, topPhotosList));
+      frag.append(card);
+    }
+    $('ai-results-grid').append(frag);
+    toast('✨ Đã tìm xong ảnh tương đồng!');
+  } catch (err) {
+    toast('Lỗi khi tìm kiếm AI: ' + (err.message || err));
+  } finally {
+    aiSearching = false;
+    $('ai-status-box').hidden = true;
+    updateAIScopeCount();
+  }
+});
 
 // The only external executable resource is Google Identity Services.
 const identityScript = document.createElement('script'); identityScript.src = 'https://accounts.google.com/gsi/client'; identityScript.async = true; identityScript.onload = initIdentity; identityScript.onerror = identityError; document.head.append(identityScript);
