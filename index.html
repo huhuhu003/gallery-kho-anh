@@ -154,7 +154,7 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 @media(hover:hover){.card:hover{transform:translateY(-3px)}.card:hover::after{opacity:1}.card:hover img{transform:scale(1.05)}}.card:active{transform:scale(.98)}.nav-item:active,.text-button:active,#nav-close:active{transform:scale(.96)}
 @keyframes card-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @media(min-width:1024px){.card{padding:8px;background:var(--bg-surface);transition:transform .3s ease;contain-intrinsic-size:auto 250px}.card::after{box-shadow:0 14px 32px var(--desktop-shadow);transition:opacity .3s ease}.photo img{transition:transform .3s ease}}
-.card{transition:transform .3s ease,background-color .4s ease,color .4s ease,border-color .4s ease}
+.card{transition:transform .3s ease}
 
 .lightbox[open]{animation:backdrop-enter .3s ease-out}
 .lightbox[open]::backdrop{animation:backdrop-enter .3s ease-out}
@@ -177,7 +177,6 @@ button.primary:hover{border-color:var(--gold-hover);color:var(--text-white)}
 .nav-foot{margin-top:auto;padding:18px 20px;font-size:11px;letter-spacing:.1em;color:#96a4b8}
 @media(max-width:480px){#nav-sidebar{width:260px}}
 
-body,header,.announcement,.container,.login,.filters,.filter-body,.group,.toolbar,.card,.photo,.modal,button,input,select,.option,.option small,.filename,.price,.muted,.toast,.brand-icon rect{transition:background-color .4s ease,color .4s ease,border-color .4s ease,fill .4s ease}
 #theme-toggle{position:relative;width:62px;height:32px;flex:none;padding:0;border-radius:9999px;border:1px solid #c9a86a;background:linear-gradient(180deg,#f0e6cd,#e2d3ac);overflow:hidden;transition:background .4s ease,border-color .4s ease}
 #theme-toggle .sw-knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--gold-light),var(--gold-primary));box-shadow:0 2px 6px rgba(0,0,0,.28);display:grid;place-items:center;transition:transform .45s cubic-bezier(.34,1.4,.44,1),background .4s ease}
 #theme-toggle .theme-icon{position:absolute;width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s ease,transform .45s ease}
@@ -324,6 +323,44 @@ header .logo small{font-size:10px;letter-spacing:.16em}
 header .chamcong{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.25);color:#fdf6e3}
 @media(max-width:767px){#nav-fab{order:0}.logo{order:1}header .actions{order:2}.logo-mini{gap:7px}.logo-mini .flower-entrance{width:28px;height:28px}.logo-mini .name-line{font-size:20px}.logo-mini .gallery-line{font-size:8px;letter-spacing:.34em}.logo-mini .tagline{font-size:6.5px;letter-spacing:.24em;text-indent:.24em}.pa-name-glass{padding:2px 10px}header{flex-wrap:wrap;padding:8px 12px}.header-tools{order:3;width:100%;margin-left:0;justify-content:flex-end}#nav-fab{width:34px;height:34px}}
 @media (prefers-reduced-motion:reduce){.play .flower-entrance,.play .word,.play .name-line .ltr,.play .gallery-line span,.play .tagline{animation:none!important;opacity:1!important}.play .divider{width:180px;opacity:1}.flower-sway{animation:none!important}}
+/* ===== TELEGRAM CIRCULAR THEME REVEAL ===== */
+::view-transition-group(root),
+::view-transition-image-pair(root) {
+  animation: none !important;
+}
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+::view-transition-old(root) {
+  z-index: 1;
+  animation: none !important;
+  mix-blend-mode: normal !important;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+  animation: none !important;
+  mix-blend-mode: normal !important;
+  will-change: clip-path;
+}
+html.theme-changing,
+html.theme-changing::before,
+html.theme-changing::after,
+html.theme-changing *,
+html.theme-changing *::before,
+html.theme-changing *::after,
+html.theme-changing *::backdrop {
+  transition: none !important;
+  animation: none !important;
+  pointer-events: none !important;
+}
+/* Keep card containment, offscreen skipping, blur and shadows stable in both snapshots. */
+
+/* Stabilize logo text rasterization across theme snapshots. */
+.logo, .logo-mini {
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 </style>
 </head>
 <body>
@@ -473,14 +510,128 @@ function updateThemeToggle() {
   $('theme-toggle').setAttribute('aria-pressed',String(dark));
   $('theme-toggle').setAttribute('aria-label',label);
   $('theme-toggle').title = label;
+  $('nav-theme-label').textContent = document.documentElement.dataset.theme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối';
 }
 updateThemeToggle();
-$('theme-toggle').addEventListener('click',() => {
-  const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = theme;
-  try { localStorage.setItem('gallery_theme',theme); } catch (_) {}
-  updateThemeToggle();
-});
+// Preserve filled CSS animation frames while the DOM is frozen for the reveal.
+function freezeThemeLogo() {
+  const logo = document.getElementById('logo-mini');
+  if (!logo) return () => {};
+  const saved = logo.getAnimations({subtree: true})
+    .filter(animation => typeof CSSAnimation !== 'undefined' && animation instanceof CSSAnimation)
+    .map(animation => ({
+      target: animation.effect.target, name: animation.animationName,
+      time: animation.currentTime, rate: animation.playbackRate, state: animation.playState,
+      properties: [...new Set(animation.effect.getKeyframes().flatMap(frame => Object.keys(frame)))]
+        .filter(key => !['offset', 'computedOffset', 'easing', 'composite'].includes(key))
+    }));
+  const targets = new Map();
+  saved.forEach(item => {
+    if (!targets.has(item.target)) targets.set(item.target, new Set());
+    item.properties.forEach(property => targets.get(item.target).add(property));
+  });
+  // Batch reads before writes; no geometry reads during the reveal animation.
+  const styles = [...targets].map(([target, properties]) => {
+    const computed = getComputedStyle(target);
+    return {target, properties: [...properties].map(property => {
+      const css = property.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
+      return {css, value: computed.getPropertyValue(css), original: target.style.getPropertyValue(css), priority: target.style.getPropertyPriority(css)};
+    })};
+  });
+  styles.forEach(({target, properties}) => properties.forEach(({css, value}) => target.style.setProperty(css, value)));
+  return () => {
+    styles.forEach(({target, properties}) => properties.forEach(({css, original, priority}) => {
+      if (original) target.style.setProperty(css, original, priority);
+      else target.style.removeProperty(css);
+    }));
+    logo.getAnimations({subtree: true}).forEach(animation => {
+      const item = saved.find(item => item.target === animation.effect?.target && item.name === animation.animationName);
+      if (!item) return;
+      animation.playbackRate = item.rate;
+      animation.currentTime = item.time;
+      if (item.state === 'paused') animation.pause();
+    });
+  };
+}
+
+let themeBusy = false;
+async function revealTheme(event) {
+  if (themeBusy) return;
+  const root = document.documentElement;
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  let applied = false;
+
+  const apply = () => {
+    if (applied) return;
+    root.dataset.theme = next;
+    try { localStorage.setItem('gallery_theme', next); } catch (_) {}
+    updateThemeToggle();
+    const label = document.getElementById('nav-theme-label');
+    if (label) label.textContent = next === 'dark' ? 'Chế độ sáng' : 'Chế độ tối';
+    applied = true;
+  };
+
+  // Read geometry before changing styles; zero is a valid pointer coordinate.
+  const btn = document.getElementById('theme-toggle');
+  const rect = btn.getBoundingClientRect();
+  const pointerClick = event?.detail > 0 && Number.isFinite(event.clientX) && Number.isFinite(event.clientY);
+  const x = pointerClick ? event.clientX : rect.left + rect.width / 2;
+  const y = pointerClick ? event.clientY : rect.top + rect.height / 2;
+  const endRadius = Math.ceil(Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y)));
+
+  themeBusy = true;
+  // CSS animation:none does not stop animations created by Element.animate().
+  const restoreLogo = freezeThemeLogo();
+  const pausedAnimations = root.getAnimations({subtree: true}).filter(animation => animation.playState === 'running');
+  pausedAnimations.forEach(animation => animation.pause());
+  root.classList.add('theme-changing');
+  let vt;
+  let anim;
+
+  try {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !document.startViewTransition) {
+      apply();
+      return;
+    }
+
+    vt = document.startViewTransition(apply);
+    await vt.ready;
+
+    anim = root.animate(
+      {
+        clipPath: [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`
+        ]
+      },
+      {
+        duration: 400,
+        easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+        fill: 'forwards',
+        pseudoElement: '::view-transition-new(root)'
+      }
+    );
+    await anim.finished;
+    await vt.finished;
+  } catch (_) {
+    // A hidden tab or cancelled animation must still apply the selected theme.
+    if (vt) {
+      vt.skipTransition();
+      await vt.updateCallbackDone.catch(() => {});
+      await vt.finished.catch(() => {});
+    }
+    apply();
+  } finally {
+    anim?.cancel();
+    root.classList.remove('theme-changing');
+    restoreLogo();
+    pausedAnimations.forEach(animation => {
+      if (animation.playState === 'paused') animation.play();
+    });
+    themeBusy = false;
+  }
+}
+$('theme-toggle').addEventListener('click',revealTheme);
 
 function closeNav(){ $('nav-sidebar').classList.remove('open'); $('nav-sidebar').inert = true; $('nav-backdrop').classList.remove('show'); $('nav-fab').setAttribute('aria-expanded','false'); scrollLock(); }
 function openNav(){ $('nav-sidebar').inert = false; $('nav-sidebar').classList.add('open'); $('nav-backdrop').classList.add('show'); $('nav-fab').setAttribute('aria-expanded','true'); scrollLock(); $('nav-close').focus(); }
@@ -488,7 +639,7 @@ $('nav-fab').addEventListener('click',openNav);
 $('nav-close').addEventListener('click',() => {closeNav(); $('nav-fab').focus();});
 $('nav-backdrop').addEventListener('click',closeNav);
 $('nav-home').addEventListener('click',e => {e.preventDefault();switchMainView('gallery');clearFilters();closeNav();});
-$('nav-theme').addEventListener('click',() => {$('theme-toggle').click();});
+$('nav-theme').addEventListener('click',revealTheme);
 $('nav-getimg').addEventListener('click',() => {closeNav();$('getimg-guide').showModal();scrollLock();});
 $('nav-logo').addEventListener('click', () => { switchMainView('logo'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
 $('nav-search').addEventListener('click', () => { switchMainView('search'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
@@ -499,7 +650,6 @@ $('hdr-getimg').addEventListener('click', () => { $('getimg-guide').showModal();
 $('close-getimg').addEventListener('click',() => {$('getimg-guide').close();scrollLock();});
 $('getimg-guide').addEventListener('close',scrollLock);
 $('copy-bm').addEventListener('click',async () => {const code=$('bmlink').getAttribute('href');try{await navigator.clipboard.writeText(code);$('copy-msg').textContent='Đã copy! Tạo bookmark mới và dán mã vào ô địa chỉ (URL).';}catch(e){$('copy-msg').textContent='Không copy tự động được — chuột phải vào nút vàng, chọn Copy link address.';}});
-$('theme-toggle').addEventListener('click',() => {$('nav-theme-label').textContent = document.documentElement.dataset.theme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối';});
 document.addEventListener('keydown',e => {
  if (!$('nav-sidebar').classList.contains('open') || $('settings').open || $('lightbox').open) return;
  if(e.key === 'Escape'){closeNav();$('nav-fab').focus();}
