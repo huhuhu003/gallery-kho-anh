@@ -442,10 +442,34 @@ header .actions{margin-left:auto}
 .evaluation{border:1px solid var(--border-subtle);border-radius:12px;padding:14px;margin:24px 0;background:var(--bg-cream);font-size:13px}.evaluation summary{cursor:pointer;font-weight:600}.evaluation label{display:block;margin:12px 0 4px}.evaluation select{max-width:520px}.evaluation p{line-height:1.7}.evaluation .button-row{margin-top:12px}
 .ai-correct{outline:2px solid var(--status-success);outline-offset:2px}
 @media(min-width:1200px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}#ai-results-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:1100px){.header-tools{order:3;width:100%;margin:0;justify-content:center}.ai-panel{top:175px}}
+@media(max-width:1320px){.header-tools{order:3;width:100%;margin:0;justify-content:center}.ai-panel{top:175px}}
 @media(max-width:900px){.ai-search-box{grid-template-columns:1fr}.ai-panel{position:static}.login{margin:40px 16px;max-width:none}#search-tool,#logo-tool{padding:0 16px 32px}}
 @media(max-width:767px){header{gap:8px}.header-tools{justify-content:space-between;gap:2px}.header-tool{padding:8px;font-size:11px;gap:5px}.header-tool span{display:inline}.header-tool .ui-icon{width:16px;height:16px}.header-tool.secondary span{display:none}.intro{margin:22px 0 18px}.grid{gap:14px 10px}.logo-mini .tagline{font-size:7px}.logo-batch{align-items:stretch}.logo-batch label{flex:1}.logo-batch button{width:100%}.crop-fields{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){.card,.photo img{transition:none!important}}
+
+.gallery-pagination{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0 20px;padding:12px 0;border-block:1px solid var(--border-light)}
+.gallery-pagination .button-row{gap:8px}.gallery-pagination button{padding:8px 12px;letter-spacing:0;text-transform:none;min-height:40px}
+.gallery-pagination label{display:flex;align-items:center;gap:6px;font-size:12px}.gallery-pagination input{width:68px;min-height:40px;padding:8px;border:1px solid var(--border-subtle);border-radius:6px;background:var(--bg-surface);color:var(--text-main);font:inherit}
+.gallery-pagination button:disabled{cursor:default}#grid .card{animation:none}
+@media(max-width:400px){.gallery-pagination .button-row{gap:5px}.gallery-pagination button{padding:8px}.gallery-pagination input{width:54px}}
+/* Standalone crop workspace */
+#crop-tool{max-width:1400px;padding:0 32px 56px;margin:auto}
+.cut-drop{border:1px dashed var(--border-subtle);border-radius:16px;background:var(--bg-surface);padding:20px;transition:border-color .2s}
+.cut-drop.dragging{border-color:var(--gold-primary);background:var(--gold-subtle)}
+.cut-empty{text-align:center;padding:55px 16px;color:var(--text-muted)}
+.cut-empty strong{display:block;font-size:18px;color:var(--text-main);margin-bottom:8px}
+.cut-layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;margin-top:20px;align-items:start}
+.cut-stage{min-width:0;display:flex;justify-content:center;align-items:center;background:#1c2533;border-radius:12px;padding:16px;overflow:hidden}
+#cut-canvas{display:block;max-width:100%;max-height:65vh;width:auto;height:auto;touch-action:none;cursor:crosshair;user-select:none}
+.cut-options{min-width:0;border:1px solid var(--border-subtle);border-radius:12px;padding:16px;background:var(--bg-cream)}
+.cut-options>label{display:block;font-size:13px;margin-bottom:14px}
+.cut-options select{margin-top:6px}.cut-options .crop-fields{margin:12px 0 18px}
+.cut-options input[type=number]{width:100%;min-width:0;padding:9px;border:1px solid var(--border-subtle);border-radius:6px;background:var(--bg-surface);color:var(--text-main);font:inherit;margin-top:4px}
+.cut-result{display:block;font-weight:600;font-size:18px;margin:14px 0;color:var(--text-main)}
+.cut-options .button-row button{flex:1;letter-spacing:0;text-transform:none;white-space:nowrap;padding:10px 8px}.cut-options #cut-download{width:100%;margin-top:14px}
+.cut-hint{font-size:12px;line-height:1.7;color:var(--text-muted)}
+@media(max-width:900px){#crop-tool{padding:0 16px 32px}.cut-layout{grid-template-columns:1fr}.cut-drop{padding:12px}.cut-stage{padding:10px}.cut-options{padding:14px}}
+@media(max-width:767px){.header-tools{flex-wrap:wrap;justify-content:center}.header-tool{padding:7px 8px}}
 </style>
 </head>
 <body>
@@ -457,6 +481,7 @@ header .actions{margin-left:auto}
 <button class="nav-item" id="nav-search" type="button"><span class="nav-bar"></span>🔍 Tìm bằng ảnh (AI)</button>
 <a class="nav-item" href="https://huhuhu003.github.io/hop-thu-gui-nhanh/" target="_blank" rel="noopener"><span class="nav-bar"></span>Kho up ảnh</a>
 <button class="nav-item" id="nav-getimg" type="button"><span class="nav-bar"></span>📸 Lấy ảnh</button>
+<button class="nav-item" id="nav-crop" type="button"><span class="nav-bar"></span>Cắt ảnh</button>
 <button class="nav-item" id="nav-logo" type="button"><span class="nav-bar"></span>Chèn logo</button>
 <button class="nav-item" id="nav-theme" type="button"><span class="nav-bar"></span><span id="nav-theme-label">Chế độ tối</span></button>
 <div id="nav-controls"></div><aside class="filters" id="filters" aria-label="Bộ lọc sản phẩm"><div class="filter-body"><div class="filter-header"><strong>BỘ LỌC</strong></div><button class="text-button" id="clear-filters">Xóa tất cả bộ lọc</button>
@@ -483,7 +508,7 @@ header .actions{margin-left:auto}
 </div>
 
 <div class="announcement">Kho ảnh sản phẩm · Cảm hứng thời trang · Google Drive chỉ đọc</div>
-<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="caredey"><span>c</span><span>a</span><span>r</span><span>e</span><span>d</span><span>e</span><span>y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; caredey</span></span></span></button><nav class="header-tools" aria-label="Công cụ chính"><button id="hdr-gallery" type="button" class="header-tool" aria-current="page" aria-label="Kho ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Kho ảnh</span></button><button id="hdr-search" type="button" class="header-tool" aria-label="Tìm bằng ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M8 10.5h5m-2.5-2.5v5"/></svg><span>Tìm bằng ảnh</span></button><button id="hdr-logo" type="button" class="header-tool" aria-label="Chèn logo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h10l7 7-10 10-7-7Z"/><circle cx="9" cy="9" r="1.5"/></svg><span>Chèn logo</span></button><button id="hdr-getimg" type="button" class="header-tool secondary" aria-label="Lấy ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg><span>Lấy ảnh</span></button></nav><div class="chamcong" id="chamcong">
+<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="caredey"><span>c</span><span>a</span><span>r</span><span>e</span><span>d</span><span>e</span><span>y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; caredey</span></span></span></button><nav class="header-tools" aria-label="Công cụ chính"><button id="hdr-gallery" type="button" class="header-tool" aria-current="page" aria-label="Kho ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Kho ảnh</span></button><button id="hdr-search" type="button" class="header-tool" aria-label="Tìm bằng ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M8 10.5h5m-2.5-2.5v5"/></svg><span>Tìm bằng ảnh</span></button><button id="hdr-logo" type="button" class="header-tool" aria-label="Chèn logo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h10l7 7-10 10-7-7Z"/><circle cx="9" cy="9" r="1.5"/></svg><span>Chèn logo</span></button><button id="hdr-crop" type="button" class="header-tool" aria-label="Cắt ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h12M3 6h12a3 3 0 0 1 3 3v12M3 21 21 3"/></svg><span>Cắt ảnh</span></button><button id="hdr-getimg" type="button" class="header-tool secondary" aria-label="Lấy ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg><span>Lấy ảnh</span></button></nav><div class="chamcong" id="chamcong">
 <span id="cc-date"></span>
 <span id="cc-timer" hidden>00:00:00</span>
 <span id="cc-total"></span>
@@ -494,7 +519,13 @@ header .actions{margin-left:auto}
 <div class="intro"><h1>Tất cả sản phẩm</h1><div class="muted">Một kho ảnh, nhiều cách khám phá.</div></div>
 <div class="layout">
 
-<section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div class="toolbar-actions"><button id="gallery-filter" type="button" aria-controls="nav-sidebar" aria-expanded="false">Bộ lọc <span id="filter-count"></span></button><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="filter-chips" id="filter-chips" aria-label="Bộ lọc đang chọn"></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
+<section aria-label="Ảnh sản phẩm">
+<div class="toolbar"><span class="muted" id="result-count" role="status"></span><div class="toolbar-actions"><button id="gallery-filter" type="button" aria-controls="nav-sidebar" aria-expanded="false">Bộ lọc <span id="filter-count"></span></button><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button><button id="stop-scan" type="button" hidden>Dừng quét</button></div></div>
+<div class="filter-chips" id="filter-chips" aria-label="Bộ lọc đang chọn"></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div>
+<nav class="gallery-pagination" aria-label="Trang ảnh phía trên" hidden><span data-page-range class="muted" role="status"></span><div class="button-row"><button type="button" data-page-prev aria-label="Trang ảnh trước">← Trước</button><label>Trang <input type="number" min="1" step="1" data-page-input aria-label="Số trang ảnh phía trên"></label><span data-page-total class="muted"></span><button type="button" data-page-next aria-label="Trang ảnh tiếp">Sau →</button></div></nav>
+<div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p>
+<nav class="gallery-pagination" aria-label="Trang ảnh phía dưới" hidden><span data-page-range class="muted"></span><div class="button-row"><button type="button" data-page-prev aria-label="Trang ảnh trước">← Trước</button><label>Trang <input type="number" min="1" step="1" data-page-input aria-label="Số trang ảnh phía dưới"></label><span data-page-total class="muted"></span><button type="button" data-page-next aria-label="Trang ảnh tiếp">Sau →</button></div></nav>
+</section>
 </div></main>
 
 <!-- ===== SECTION: TÌM KIẾM BẰNG ẢNH MẪU (AI CLIP) ===== -->
@@ -572,6 +603,29 @@ header .actions{margin-left:auto}
   <div class="crop-fields"><label>Từ trái <output id="crop-x-value"></output><input id="crop-x" type="range" min="0" max="100" value="0"></label><label>Từ trên <output id="crop-y-value"></output><input id="crop-y" type="range" min="0" max="100" value="0"></label><label>Chiều rộng <output id="crop-w-value"></output><input id="crop-w" type="range" min="1" max="100" value="100"></label><label>Chiều cao <output id="crop-h-value"></output><input id="crop-h" type="range" min="1" max="100" value="100"></label></div>
   <div class="buttons"><button id="ai-crop-apply" class="primary" type="button">Dùng vùng đã chọn</button><button id="ai-crop-close" type="button">Hủy</button></div>
 </dialog>
+
+<section id="crop-tool" aria-labelledby="cut-title" hidden>
+  <div class="intro"><h1 id="cut-title">Cắt ảnh</h1><p class="muted">Kéo chọn vùng muốn giữ, di chuyển khung và kéo cạnh hoặc góc để chỉnh kích thước.</p></div>
+  <input id="cut-file" type="file" accept="image/*" hidden>
+  <div id="cut-drop" class="cut-drop">
+    <div class="button-row"><button id="cut-select" class="primary" type="button">Chọn ảnh</button><button id="cut-paste" type="button">Dán ảnh</button></div>
+    <p id="cut-status" class="muted" role="status">Chưa chọn ảnh.</p>
+    <div id="cut-empty" class="cut-empty"><strong>Kéo thả ảnh vào đây</strong>Hoặc chọn ảnh từ máy, dán bằng Ctrl+V / Cmd+V.<p class="cut-hint">Không cần đăng nhập. Ảnh được cắt ngay trên thiết bị của bạn.</p></div>
+    <div id="cut-workspace" hidden>
+      <div class="cut-layout">
+        <div><div class="cut-stage"><canvas id="cut-canvas" width="1" height="1" tabindex="0" aria-label="Ảnh cần cắt. Kéo để chọn vùng, kéo trong khung để di chuyển, kéo cạnh hoặc góc để đổi kích thước." aria-describedby="cut-help"></canvas></div><p id="cut-help" class="cut-hint">Kéo bên trong khung để di chuyển. Kéo các nút trắng để đổi cỡ. Bấm “Vẽ vùng mới” để chọn lại. Có thể dùng phím mũi tên để dịch 1 px, Shift + mũi tên để dịch 10 px.</p></div>
+        <div class="cut-options">
+          <label>Tỷ lệ khung cắt<select id="cut-ratio"><option value="0">Tự do</option><option value="1">Vuông · 1:1</option><option value="0.8">Dọc · 4:5</option><option value="0.75">Dọc · 3:4</option><option value="1.3333333333333333">Ngang · 4:3</option><option value="1.7777777777777777">Ngang · 16:9</option></select></label>
+          <div class="button-row"><button id="cut-new" type="button" aria-pressed="true">Vẽ vùng mới</button><button id="cut-reset" type="button">Đặt lại</button></div>
+          <div class="crop-fields"><label>Từ trái (px)<input id="cut-x" type="number" min="0" step="1"></label><label>Từ trên (px)<input id="cut-y" type="number" min="0" step="1"></label><label>Rộng (px)<input id="cut-w" type="number" min="1" step="1"></label><label>Cao (px)<input id="cut-h" type="number" min="1" step="1"></label></div>
+          <label>Định dạng tải về<select id="cut-format"><option value="image/png">PNG · Giữ nền trong suốt</option><option value="image/jpeg">JPG · Nền trắng</option></select></label>
+          <span class="cut-hint">Kích thước ảnh sau khi cắt</span><output id="cut-size" class="cut-result" aria-live="polite"></output>
+          <button id="cut-download" class="primary" type="button">Tải ảnh đã cắt</button><button id="cut-clear" class="text-button" type="button">Xóa ảnh</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="logo-tool" aria-labelledby="logo-title" hidden>
 <div class="intro"><h1 id="logo-title">Chèn logo hàng loạt</h1><p class="muted">Chọn ảnh, đặt logo và tải ảnh giữ nguyên kích thước gốc. Hoặc nhấn Ctrl+V / Cmd+V để dán ảnh.</p></div>
@@ -711,6 +765,8 @@ $('nav-home').addEventListener('click',e => {e.preventDefault();switchMainView('
 $('nav-theme').addEventListener('click',revealTheme);
 $('nav-getimg').addEventListener('click',() => {closeNav();$('getimg-guide').showModal();scrollLock();});
 $('nav-logo').addEventListener('click', () => { switchMainView('logo'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
+$('nav-crop').addEventListener('click', () => { switchMainView('crop'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
+$('hdr-crop').addEventListener('click', () => { switchMainView('crop'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('nav-search').addEventListener('click', () => { switchMainView('search'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
 $('hdr-gallery').addEventListener('click', () => { switchMainView('gallery'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('gallery-filter').addEventListener('click', () => { openNav(); $('brand-search').focus(); });
@@ -789,8 +845,11 @@ placeHeaderControls();mobileHeader.addEventListener('change',placeHeaderControls
 let accessToken = '', tokenClient, generation = 0, controller, tokenTimer, warnTimer, toastTimer;
 let root = DEFAULT_ROOT, photos = [], brands = [], scanning = false, scanErrors = 0, completed = 0;
 let seenPhotoIds = new Set(), scannedFolderIds = new Set();
+const GALLERY_PAGE_SIZE = 60;
+let galleryMatches = [], galleryPage = 0, galleryRenderedKey = '';
+const dirtyCounts = {brand:new Set(), category:new Set(), price:new Set()};
 let lightboxItems = [], lightboxIndex = 0, imageGeneration = 0, originalController, objectUrl = '', returnFocus;
-let activeView = 'gallery'; // 'gallery' | 'logo' | 'search'
+let activeView = 'gallery'; // 'gallery' | 'logo' | 'search' | 'crop'
 const selected = {brand:new Set(), category:new Set(), price:new Set()};
 const counts = {brand:new Map(), category:new Map(), price:new Map()};
 const options = {brand:new Map(), category:new Map(), price:new Map()};
@@ -943,9 +1002,11 @@ function stopSession(message) {
   generation++; controller?.abort(); clearTimeout(tokenTimer); clearTimeout(warnTimer); hideRenewToast(); accessToken = ''; authExpiresAt = 0; scanning = false;
   clearAuthSession();
   closeLightbox(); closeFilters(); photos = []; brands = []; seenPhotoIds.clear(); scannedFolderIds.clear();
-  $('grid').replaceChildren(); $('brand-options').replaceChildren();
+  resetGallery(); $('brand-options').replaceChildren();
+  $('stop-scan').hidden = true;
   $('gallery').hidden = true; $('login').hidden = false; $('logout').hidden = true;
-  $('logo-tool').hidden = true; $('search-tool').hidden = true;
+  $('logo-tool').hidden = true; $('search-tool').hidden = true; $('crop-tool').hidden = true; activeView = 'gallery';
+  $('nav-crop').classList.remove('active');
   $('nav-home').classList.add('active'); $('nav-logo').classList.remove('active'); $('nav-search').classList.remove('active');
   if (message) { $('login-message').textContent = message; toast(message); }
 }
@@ -996,7 +1057,7 @@ CATEGORIES.forEach(value => $('category-options').append(makeOption('category',v
 PRICES.forEach(value => $('price-options').append(makeOption('price',value,value)));
 function matches(photo) { return (!selected.brand.size || selected.brand.has(photo.brand)) && (!selected.category.size || selected.category.has(photo.category)) && (!selected.price.size || selected.price.has(photo.priceGroup)); }
 function syncHeaderView(view) {
-  for (const key of ['gallery','search','logo']) {
+  for (const key of ['gallery','search','logo','crop']) {
     const el = $('hdr-' + key);
     if (key === view) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current');
   }
@@ -1015,26 +1076,78 @@ function renderFilterChips() {
 }
 function updateResults() {
   renderFilterChips();
-  const shown = photos.reduce((total,photo) => total + (matches(photo) ? 1 : 0),0);
+  const shown = galleryMatches.length;
   $('result-count').textContent = shown.toLocaleString('vi-VN') + ' / ' + photos.length.toLocaleString('vi-VN') + ' ảnh · ' + brands.length + ' hãng';
   const filtersCount = Object.values(selected).reduce((sum,values) => sum + values.size,0);
   $('nav-fab').setAttribute('aria-label',filtersCount ? 'Mở menu, ' + filtersCount + ' bộ lọc đang chọn' : 'Mở menu điều hướng');
   $('empty').hidden = shown > 0;
   $('empty').textContent = scanning ? 'Đang quét kho ảnh. Các ảnh phù hợp sẽ xuất hiện tại đây…' : scanErrors ? 'Chưa có ảnh phù hợp trong dữ liệu đã đọc. Một phần kho chưa tải được; bạn có thể quét lại.' : photos.length ? 'Chưa có ảnh phù hợp. Thử bỏ bớt bộ lọc nhé.' : 'Kho này chưa có ảnh. Bạn có thể chọn thư mục khác trong Cài đặt.';
-  updateAISearchDropdowns();
+  renderGalleryPage();
+  if (activeView === 'search') updateAISearchDropdowns();
 }
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 function filterPhotos() {
-  let index = 0;
-  for (const photo of photos) {
-    photo.card.hidden = !matches(photo);
-    photo.card.getAnimations().forEach(animation => animation.cancel());
-    if (!photo.card.hidden && !reducedMotion.matches) {
-      photo.card.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}], {duration:240,delay:Math.min(index*25,300),fill:'backwards',easing:'ease-out'});
-      index++;
-    }
-  }
+  galleryMatches = photos.filter(matches);
+  galleryPage = 0;
   updateResults();
+}
+function resetGallery() {
+  galleryMatches = []; galleryPage = 0; galleryRenderedKey = '';
+  Object.values(dirtyCounts).forEach(set => set.clear());
+  $('grid').replaceChildren();
+  renderGalleryPage();
+}
+function createGalleryCard(photo) {
+  const card = document.createElement('button'); card.className = 'card'; card.type = 'button';
+  card.dataset.photoId = photo.id;
+  card.setAttribute('aria-label','Xem ảnh ' + photo.name); card.title = photo.brandName + ' · ' + photo.batchName;
+  const frame = document.createElement('span'); frame.className = 'photo';
+  const source = thumbnail(photo.thumbnailLink);
+  if (source) {
+    const img = document.createElement('img'); img.width = 400; img.height = 400; img.loading = 'lazy'; img.decoding = 'async'; img.alt = photo.name; img.src = source;
+    img.addEventListener('error',() => { img.remove(); frame.textContent = 'Không tải được ảnh thu nhỏ'; },{once:true}); frame.append(img);
+  } else frame.textContent = 'Chưa có ảnh thu nhỏ';
+  const name = document.createElement('span'); name.className = 'filename'; name.textContent = photo.name;
+  const hint = document.createElement('span'); hint.className = 'card-hint'; hint.textContent = 'Xem ảnh gốc ↗';
+  card.append(frame,name,hint);
+  if (photo.price !== null) { const price = document.createElement('span'); price.className = 'price'; price.textContent = priceText(photo.price); card.append(price); }
+  card.addEventListener('click',() => openLightbox(photo));
+  return card;
+}
+function renderGalleryPage() {
+  const total = galleryMatches.length, pages = Math.max(1, Math.ceil(total / GALLERY_PAGE_SIZE));
+  galleryPage = Math.min(galleryPage, pages - 1);
+  const start = galleryPage * GALLERY_PAGE_SIZE, page = galleryMatches.slice(start, start + GALLERY_PAGE_SIZE);
+  // Metadata for the whole library stays in memory; only this page owns DOM/image nodes.
+  const key = JSON.stringify([generation, galleryPage, page.map(photo => photo.id)]);
+  if (key !== galleryRenderedKey) {
+    const fragment = document.createDocumentFragment(); page.forEach(photo => fragment.append(createGalleryCard(photo)));
+    // Release old thumbnail requests/decoded surfaces before removing their nodes.
+    $('grid').querySelectorAll('img').forEach(img => img.removeAttribute('src'));
+    $('grid').replaceChildren(fragment); galleryRenderedKey = key;
+  }
+  for (const pager of document.querySelectorAll('.gallery-pagination')) {
+    pager.hidden = !total;
+    pager.querySelector('[data-page-prev]').disabled = galleryPage === 0;
+    pager.querySelector('[data-page-next]').disabled = galleryPage === pages - 1;
+    const input = pager.querySelector('[data-page-input]');
+    input.max = pages;
+    if (document.activeElement !== input) input.value = galleryPage + 1;
+    pager.querySelector('[data-page-total]').textContent = '/ ' + pages.toLocaleString('vi-VN');
+    pager.querySelector('[data-page-range]').textContent = `${(start+1).toLocaleString('vi-VN')}–${(start+page.length).toLocaleString('vi-VN')} / ${total.toLocaleString('vi-VN')} ảnh`;
+  }
+}
+function goGalleryPage(page) {
+  if (!Number.isFinite(page)) { renderGalleryPage(); return; }
+  galleryPage = Math.max(0, Math.min(Math.ceil(galleryMatches.length / GALLERY_PAGE_SIZE)-1, Math.floor(page)));
+  renderGalleryPage();
+  const top = $('gallery').getBoundingClientRect().top + window.scrollY - document.querySelector('header').offsetHeight - 12;
+  window.scrollTo({top:Math.max(0,top), behavior:'instant'});
+}
+for (const pager of document.querySelectorAll('.gallery-pagination')) {
+  pager.querySelector('[data-page-prev]').addEventListener('click',() => goGalleryPage(galleryPage-1));
+  pager.querySelector('[data-page-next]').addEventListener('click',() => goGalleryPage(galleryPage+1));
+  pager.querySelector('[data-page-input]').addEventListener('change',event => { goGalleryPage(event.target.valueAsNumber-1); event.target.value = galleryPage + 1; });
 }
 function clearFilters() { Object.values(selected).forEach(set => set.clear()); Object.values(options).forEach(map => map.forEach(option => { option.input.checked = false; })); $('brand-search').value = ''; searchBrands(); filterPhotos(); }
 function searchBrands() {
@@ -1045,32 +1158,28 @@ function searchBrands() {
 function updateCounts(photo) {
   for (const [group,value] of [['brand',photo.brand],['category',photo.category],['price',photo.priceGroup]]) {
     const number = (counts[group].get(value) || 0) + 1; counts[group].set(value,number);
-    const option = options[group].get(value); if (option) option.count.textContent = number.toLocaleString('vi-VN');
+    dirtyCounts[group].add(value);
+  }
+}
+function flushCounts() {
+  for (const [group,values] of Object.entries(dirtyCounts)) {
+    for (const value of values) { const option = options[group].get(value); if (option) option.count.textContent = counts[group].get(value).toLocaleString('vi-VN'); }
+    values.clear();
   }
 }
 async function appendPhotos(items,brand,batch,meta,run) {
-  for (let offset = 0; offset < items.length; offset += 60) {
-    active(run); const fragment = document.createDocumentFragment();
-    for (const file of items.slice(offset,offset + 60)) {
+  for (let offset = 0; offset < items.length; offset += 250) {
+    active(run);
+    for (const file of items.slice(offset,offset + 250)) {
       // Chống trùng lặp tuyệt đối theo ID ảnh trên Google Drive
       if (seenPhotoIds.has(file.id)) continue;
       seenPhotoIds.add(file.id);
 
       const photo = {...file,...meta,brand:brand.id,brandName:brand.name,batchName:batch.name};
-      const card = document.createElement('button'); card.className = 'card'; card.hidden = !matches(photo);
-      card.setAttribute('aria-label','Xem ảnh ' + file.name); card.title = brand.name + ' · ' + batch.name;
-      const frame = document.createElement('span'); frame.className = 'photo';
-      const source = thumbnail(file.thumbnailLink);
-      if (source) {
-        const img = document.createElement('img'); img.width = 400; img.height = 400; img.loading = 'lazy'; img.decoding = 'async'; img.alt = file.name; img.src = source;
-        img.addEventListener('error',() => { img.remove(); frame.textContent = 'Không tải được ảnh thu nhỏ'; },{once:true}); frame.append(img);
-      } else frame.textContent = 'Chưa có ảnh thu nhỏ';
-      const name = document.createElement('span'); name.className = 'filename'; name.textContent = file.name;
-      card.append(frame,name); const hint = document.createElement('span'); hint.className = 'card-hint'; hint.textContent = 'Xem ảnh gốc ↗'; card.append(hint);
-      if (photo.price !== null) { const price = document.createElement('span'); price.className = 'price'; price.textContent = priceText(photo.price); card.append(price); }
-      card.addEventListener('click',() => openLightbox(photo)); photo.card = card; photos.push(photo); updateCounts(photo); fragment.append(card);
+      photos.push(photo); updateCounts(photo);
+      if (matches(photo)) galleryMatches.push(photo);
     }
-    $('grid').append(fragment); updateResults();
+    flushCounts(); updateResults();
     await new Promise(resolve => setTimeout(resolve,0));
   }
 }
@@ -1114,11 +1223,11 @@ async function scan() {
   const run = ++generation; controller?.abort(); controller = new AbortController(); closeLightbox();
   photos = []; brands = []; scanErrors = 0; completed = 0; scanning = true;
   seenPhotoIds.clear(); scannedFolderIds.clear();
-  $('grid').replaceChildren(); $('brand-options').replaceChildren(); options.brand.clear();
+  resetGallery(); $('brand-options').replaceChildren(); options.brand.clear();
   Object.values(counts).forEach(map => map.clear()); clearFilters();
   Object.values(options).forEach(map => map.forEach(option => { option.count.textContent = '0'; }));
   switchMainView(activeView); $('login').hidden = true; $('logout').hidden = false;
-  $('scan-spinner').hidden = false; $('retry').hidden = true; $('scan-status').textContent = 'Đang đọc danh sách hãng…';
+  $('scan-spinner').hidden = false; $('retry').hidden = true; $('stop-scan').hidden = false; $('scan-status').textContent = 'Đang đọc danh sách hãng…';
   try {
     brands = await list(root,"mimeType='" + FOLDER + "'",'id,name',run);
     for (const brand of brands) $('brand-options').append(makeOption('brand',brand.id,brand.name));
@@ -1143,9 +1252,16 @@ async function scan() {
     }
   } catch (error) { if (error.name === 'AbortError') return; scanErrors++; toast(error.message); }
   if (run !== generation) return;
-  scanning = false; $('scan-spinner').hidden = true; $('retry').hidden = false;
+  scanning = false; $('scan-spinner').hidden = true; $('retry').hidden = false; $('stop-scan').hidden = true;
   $('scan-status').textContent = scanErrors ? 'Đã quét ' + completed + '/' + brands.length + ' hãng · ' + scanErrors + ' phần chưa tải được. Bạn có thể quét lại.' : 'Đã quét xong · ' + brands.length + ' hãng'; updateResults();
 }
+$('stop-scan').addEventListener('click',() => {
+  if (!scanning) return;
+  generation++; controller?.abort(); scanning = false;
+  $('scan-spinner').hidden = true; $('stop-scan').hidden = true; $('retry').hidden = false;
+  $('scan-status').textContent = 'Đã dừng quét · Có thể lọc và xem ' + photos.length.toLocaleString('vi-VN') + ' ảnh đã đọc. Quét lại để tải toàn bộ kho.';
+  flushCounts(); updateResults();
+});
 function initIdentity() {
   try {
     tokenClient = google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:SCOPE,include_granted_scopes:false,
@@ -1236,22 +1352,144 @@ function saveRoot(value,reset=false) {
 $('settings-form').addEventListener('submit',event => { event.preventDefault(); saveRoot($('root-input').value.trim()); });
 $('reset-root').addEventListener('click',() => saveRoot(DEFAULT_ROOT,true));
 
-// Quản lý chuyển đổi giữa 3 màn hình: Kho ảnh (gallery) | Chèn logo (logo) | Tìm bằng ảnh (search)
+// Shared navigation for the gallery and local image tools.
 function switchMainView(view) {
   activeView = view; syncHeaderView(view);
   const loggedIn = !!accessToken;
   $('gallery').hidden = (view !== 'gallery') || !loggedIn;
   $('logo-tool').hidden = (view !== 'logo');
   $('search-tool').hidden = (view !== 'search');
-  $('login').hidden = (view === 'logo' || view === 'search') || loggedIn;
+  $('crop-tool').hidden = (view !== 'crop');
+  $('login').hidden = (view !== 'gallery') || loggedIn;
   $('nav-home').classList.toggle('active', view === 'gallery');
   $('nav-logo').classList.toggle('active', view === 'logo');
   $('nav-search').classList.toggle('active', view === 'search');
+  $('nav-crop').classList.toggle('active', view === 'crop');
   if (view === 'logo') renderLogoPanels();
   if (view === 'search') updateAISearchDropdowns();
 }
 
 // ===== CHÈN LOGO HÀNG LOẠT =====
+// ===== STANDALONE IMAGE CROP =====
+const cutCanvas = $('cut-canvas'), cutContext = cutCanvas.getContext('2d');
+let cutImage=null, cutUrl='', cutName='anh', cutRect=null, cutDrag=null, cutLoadId=0, cutExporting=false, cutDrawMode=true;
+const cutClamp=(value,min,max)=>Math.max(min,Math.min(max,value));
+const cutRatio=()=>Number($('cut-ratio').value);
+function cutFit(x,y,w,h) {
+  const W=cutImage.naturalWidth,H=cutImage.naturalHeight,ratio=cutRatio();
+  w=cutClamp(w,1,W);h=cutClamp(h,1,H);
+  if(ratio){h=w/ratio;const scale=Math.min(1,W/w,H/h);w*=scale;h*=scale;}
+  w=Math.max(1,Math.round(w));h=Math.max(1,Math.round(h));
+  return {x:cutClamp(Math.round(x),0,W-w),y:cutClamp(Math.round(y),0,H-h),w,h};
+}
+function cutPaint() {
+  if(!cutImage||!cutRect)return;
+  const W=cutCanvas.width,H=cutCanvas.height,sx=W/cutImage.naturalWidth,sy=H/cutImage.naturalHeight;
+  const r=cutRect,x=r.x*sx,y=r.y*sy,w=r.w*sx,h=r.h*sy,ctx=cutContext;
+  ctx.clearRect(0,0,W,H);ctx.drawImage(cutImage,0,0,W,H);ctx.fillStyle='rgba(8,15,27,.6)';
+  ctx.fillRect(0,0,W,y);ctx.fillRect(0,y+h,W,H-y-h);ctx.fillRect(0,y,x,h);ctx.fillRect(x+w,y,W-x-w,h);
+  const scale=W/(cutCanvas.getBoundingClientRect().width||W);
+  ctx.strokeStyle='#fff';ctx.lineWidth=2*scale;ctx.strokeRect(x,y,w,h);
+  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.lineWidth=scale;ctx.strokeStyle='rgba(255,255,255,.5)';ctx.beginPath();
+  for(let i=1;i<3;i++){ctx.moveTo(x+w*i/3,y);ctx.lineTo(x+w*i/3,y+h);ctx.moveTo(x,y+h*i/3);ctx.lineTo(x+w,y+h*i/3);}
+  ctx.stroke();ctx.restore();const size=10*scale;
+  for(const [cx,cy] of [[x,y],[x+w/2,y],[x+w,y],[x+w,y+h/2],[x+w,y+h],[x+w/2,y+h],[x,y+h],[x,y+h/2]]){
+    ctx.fillStyle='#fff';ctx.fillRect(cx-size/2,cy-size/2,size,size);ctx.strokeStyle='#19213d';ctx.lineWidth=scale;ctx.strokeRect(cx-size/2,cy-size/2,size,size);
+  }
+  for(const key of ['x','y','w','h'])$('cut-'+key).value=r[key];
+  $('cut-x').max=cutImage.naturalWidth-r.w;$('cut-y').max=cutImage.naturalHeight-r.h;$('cut-w').max=cutImage.naturalWidth;$('cut-h').max=cutImage.naturalHeight;
+  $('cut-size').textContent=`${r.w} × ${r.h} px`;
+}
+function cutReset() {
+  if(!cutImage)return;
+  cutRect=cutFit(0,0,cutImage.naturalWidth,cutImage.naturalHeight);
+  cutRect.x=Math.round((cutImage.naturalWidth-cutRect.w)/2);cutRect.y=Math.round((cutImage.naturalHeight-cutRect.h)/2);
+  cutDrag=null;cutDrawMode=true;$('cut-new').setAttribute('aria-pressed','true');cutPaint();
+}
+async function loadCutFile(file) {
+  if(!file||cutExporting)return;
+  const run=++cutLoadId;
+  if(file.type&&!file.type.startsWith('image/')){toast('Hãy chọn một tệp ảnh.');return;}
+  const url=URL.createObjectURL(file),image=new Image();$('cut-status').textContent='Đang mở ảnh…';
+  try{
+    await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(new Error('Không đọc được ảnh. Hãy thử PNG, JPG hoặc WebP.'));image.src=url;});
+    if(run!==cutLoadId){URL.revokeObjectURL(url);return;}
+    if(cutUrl)URL.revokeObjectURL(cutUrl);
+    cutImage=image;cutUrl=url;cutName=(file.name||'anh').replace(/\.[^.]+$/,'');
+    const scale=Math.min(1,1400/image.naturalWidth,900/image.naturalHeight);
+    cutCanvas.width=Math.max(1,Math.round(image.naturalWidth*scale));cutCanvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+    $('cut-workspace').hidden=false;$('cut-empty').hidden=true;
+    $('cut-status').textContent=`${file.name||'Ảnh đã dán'} · ${image.naturalWidth} × ${image.naturalHeight} px`;cutReset();
+  }catch(error){URL.revokeObjectURL(url);if(run===cutLoadId){$('cut-status').textContent=error.message;toast(error.message);}}
+}
+function cutPoint(event){const box=cutCanvas.getBoundingClientRect();return {x:cutClamp((event.clientX-box.left)/box.width,0,1)*cutImage.naturalWidth,y:cutClamp((event.clientY-box.top)/box.height,0,1)*cutImage.naturalHeight};}
+function cutHit(event,p){
+  if(cutDrawMode)return 'draw';
+  const r=cutRect,box=cutCanvas.getBoundingClientRect(),t=event.pointerType==='touch'?22:10,dx=t*cutImage.naturalWidth/box.width,dy=t*cutImage.naturalHeight/box.height;
+  const inX=p.x>=r.x-dx&&p.x<=r.x+r.w+dx,inY=p.y>=r.y-dy&&p.y<=r.y+r.h+dy;
+  const edge=(inY&&Math.abs(p.x-r.x)<=dx?'w':inY&&Math.abs(p.x-r.x-r.w)<=dx?'e':'')+(inX&&Math.abs(p.y-r.y)<=dy?'n':inX&&Math.abs(p.y-r.y-r.h)<=dy?'s':'');
+  if(edge)return edge;
+  return p.x>=r.x&&p.x<=r.x+r.w&&p.y>=r.y&&p.y<=r.y+r.h?'move':'draw';
+}
+cutCanvas.addEventListener('pointerdown',event=>{
+  if(!cutImage||cutExporting||event.button!==0||!event.isPrimary)return;
+  event.preventDefault();const p=cutPoint(event);cutDrag={id:event.pointerId,point:p,rect:{...cutRect},mode:cutHit(event,p)};
+  cutDrawMode=false;$('cut-new').setAttribute('aria-pressed','false');cutCanvas.setPointerCapture(event.pointerId);cutCanvas.focus({preventScroll:true});
+});
+cutCanvas.addEventListener('pointermove',event=>{
+  if(!cutImage)return;
+  const p=cutPoint(event),d=cutDrag;
+  if(!d){const mode=cutHit(event,p);cutCanvas.style.cursor=mode==='move'?'move':mode==='draw'?'crosshair':['wn','es'].includes(mode)?'nwse-resize':['ws','en'].includes(mode)?'nesw-resize':/[we]/.test(mode)?'ew-resize':'ns-resize';return;}
+  if(d.id!==event.pointerId)return;
+  const r=d.rect,mode=d.mode;
+  if(mode==='move')cutRect=cutFit(r.x+p.x-d.point.x,r.y+p.y-d.point.y,r.w,r.h);
+  else{
+    let ax,ay,bx=p.x,by=p.y;
+    if(mode==='draw'){ax=d.point.x;ay=d.point.y;}else{ax=mode.includes('w')?r.x+r.w:r.x;ay=mode.includes('n')?r.y+r.h:r.y;if(!/[we]/.test(mode))bx=r.x+r.w;if(!/[ns]/.test(mode))by=r.y+r.h;}
+    let w=Math.max(1,Math.abs(bx-ax)),h=Math.max(1,Math.abs(by-ay));const signX=bx>=ax?1:-1,signY=by>=ay?1:-1,ratio=cutRatio();
+    if(ratio){if(mode==='n'||mode==='s')w=h*ratio;else h=w/ratio;const scale=Math.min(1,(signX>0?cutImage.naturalWidth-ax:ax)/w,(signY>0?cutImage.naturalHeight-ay:ay)/h);w*=scale;h*=scale;}
+    cutRect=cutFit(signX>0?ax:ax-w,signY>0?ay:ay-h,w,h);
+  }cutPaint();
+});
+for(const type of ['pointerup','pointercancel','lostpointercapture'])cutCanvas.addEventListener(type,event=>{if(cutDrag?.id!==event.pointerId)return;cutDrag=null;if(cutCanvas.hasPointerCapture(event.pointerId))cutCanvas.releasePointerCapture(event.pointerId);});
+cutCanvas.addEventListener('keydown',event=>{
+  if(!cutRect||cutExporting||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;
+  event.preventDefault();const step=event.shiftKey?10:1;
+  cutRect=cutFit(cutRect.x+(event.key==='ArrowRight'?step:event.key==='ArrowLeft'?-step:0),cutRect.y+(event.key==='ArrowDown'?step:event.key==='ArrowUp'?-step:0),cutRect.w,cutRect.h);cutPaint();
+});
+for(const key of ['x','y','w','h'])$('cut-'+key).addEventListener('change',()=>{
+  if(!cutRect||cutExporting)return;const value=$('cut-'+key).valueAsNumber;if(!Number.isFinite(value)){cutPaint();return;}
+  const r={...cutRect,[key]:value};if(key==='h'&&cutRatio())r.w=Math.max(1,value)*cutRatio();cutRect=cutFit(r.x,r.y,r.w,r.h);cutPaint();
+});
+$('cut-ratio').addEventListener('change',cutReset);$('cut-reset').addEventListener('click',cutReset);
+$('cut-new').addEventListener('click',()=>{cutDrawMode=true;$('cut-new').setAttribute('aria-pressed','true');cutCanvas.style.cursor='crosshair';cutCanvas.focus({preventScroll:true});});
+$('cut-select').addEventListener('click',()=>$('cut-file').click());
+$('cut-file').addEventListener('change',event=>{loadCutFile(event.target.files[0]);event.target.value='';});
+$('cut-paste').addEventListener('click',async()=>{
+  try{const items=await navigator.clipboard.read();for(const item of items){const type=item.types.find(type=>type.startsWith('image/'));if(type){await loadCutFile(await item.getType(type));return;}}toast('Clipboard chưa có ảnh. Hãy sao chép ảnh rồi dán lại.');}
+  catch(_){toast('Dùng Ctrl+V / Cmd+V để dán ảnh hoặc bấm Chọn ảnh.');}
+});
+for(const type of ['dragenter','dragover'])$('crop-tool').addEventListener(type,event=>{event.preventDefault();$('cut-drop').classList.add('dragging');});
+$('crop-tool').addEventListener('dragleave',event=>{if(!event.currentTarget.contains(event.relatedTarget))$('cut-drop').classList.remove('dragging');});
+$('crop-tool').addEventListener('drop',event=>{event.preventDefault();$('cut-drop').classList.remove('dragging');const file=[...event.dataTransfer.files].find(file=>file.type.startsWith('image/'));if(file)loadCutFile(file);else toast('Hãy kéo một tệp ảnh vào đây.');});
+$('cut-clear').addEventListener('click',()=>{
+  if(cutExporting)return;cutLoadId++;if(cutUrl)URL.revokeObjectURL(cutUrl);cutUrl='';cutImage=null;cutRect=null;cutDrag=null;cutCanvas.width=cutCanvas.height=1;
+  $('cut-workspace').hidden=true;$('cut-empty').hidden=false;$('cut-status').textContent='Chưa chọn ảnh.';
+});
+$('cut-download').addEventListener('click',async()=>{
+  if(!cutImage||!cutRect||cutExporting)return;
+  cutExporting=true;$('cut-download').disabled=true;
+  const output=document.createElement('canvas'),r={...cutRect},image=cutImage,name=cutName,mime=$('cut-format').value;
+  try{
+    output.width=r.w;output.height=r.h;const ctx=output.getContext('2d');if(mime==='image/jpeg'){ctx.fillStyle='#fff';ctx.fillRect(0,0,r.w,r.h);}
+    ctx.drawImage(image,r.x,r.y,r.w,r.h,0,0,r.w,r.h);const blob=await new Promise(resolve=>output.toBlob(resolve,mime,.95));
+    if(!blob)throw new Error('Không xuất được ảnh. Hãy thử vùng cắt nhỏ hơn.');
+    const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name+'-crop.'+(blob.type==='image/jpeg'?'jpg':'png');document.body.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),60000);toast(`Đã tạo ảnh cắt ${r.w} × ${r.h} px.`);
+  }catch(error){toast(error.message);}finally{output.width=output.height=0;cutExporting=false;$('cut-download').disabled=false;}
+});
+new ResizeObserver(()=>{if(cutImage&&!$('crop-tool').hidden)cutPaint();}).observe(cutCanvas);
+
 const logoImage = new Image();
 let logoGrayImage = null;
 let logoReady = false, logoFailed = false, logoItems = [], logoPage = 0, logoBusy = false, logoDrag = null;
@@ -1373,7 +1611,9 @@ document.addEventListener('paste', event => {
     .map(item => item.getAsFile()).filter(Boolean);
   if (!files.length) return;
   event.preventDefault();
-  if (activeView === 'search') {
+  if (activeView === 'crop') {
+    loadCutFile(files[0]);
+  } else if (activeView === 'search') {
     setAIQueryFile(files[0]);
   } else {
     addLogoFiles(files);
@@ -1720,26 +1960,22 @@ function updateAISearchDropdowns() {
   const bSel = $('ai-brand-select');
   const cSel = $('ai-cat-select');
   if (!bSel || !cSel) return;
-  const curBrand = bSel.value;
-  const curCat = cSel.value || 'ALL';
-
-  bSel.innerHTML = '<option value="">-- Chọn hãng (' + brands.length + ' hãng) --</option>';
+  // Keep existing option nodes/selection stable as scanning updates their counts.
+  const validBrands = new Set(brands.map(brand => brand.id));
+  for (const option of [...bSel.options]) if (option.value && !validBrands.has(option.value)) option.remove();
+  bSel.options[0].textContent = '-- Chọn hãng (' + brands.length + ' hãng) --';
+  const brandOptions = new Map([...bSel.options].map(option => [option.value,option]));
   for (const b of brands) {
     const cnt = counts.brand.get(b.id) || 0;
-    const opt = document.createElement('option');
-    opt.value = b.id;
-    opt.textContent = `${b.name} (${cnt} ảnh)`;
-    if (b.id === curBrand) opt.selected = true;
-    bSel.append(opt);
+    let opt = brandOptions.get(b.id);
+    if (!opt) { opt = document.createElement('option'); opt.value = b.id; bSel.append(opt); }
+    const label = `${b.name} (${cnt} ảnh)`;
+    if (opt.textContent !== label) opt.textContent = label;
   }
-
-  cSel.innerHTML = '<option value="ALL">-- Tất cả danh mục của hãng --</option>';
-  for (const cat of CATEGORIES) {
-    const opt = document.createElement('option');
-    opt.value = cat;
-    opt.textContent = cat;
-    if (cat === curCat) opt.selected = true;
-    cSel.append(opt);
+  if (cSel.options.length === 1) {
+    const fragment = document.createDocumentFragment();
+    for (const cat of CATEGORIES) { const opt = document.createElement('option'); opt.value = cat; opt.textContent = cat; fragment.append(opt); }
+    cSel.append(fragment);
   }
   updateAIScopeCount();
 }
