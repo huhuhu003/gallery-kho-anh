@@ -350,17 +350,95 @@ html.theme-changing *::before,
 html.theme-changing *::after,
 html.theme-changing *::backdrop {
   transition: none !important;
-  animation: none !important;
   pointer-events: none !important;
+}
+/* Pause at the current frame without cancelling or restarting logo animations. */
+html.theme-changing .flower-sway,
+html.theme-changing .logo-mini * {
+  animation-play-state: paused !important;
 }
 /* Keep card containment, offscreen skipping, blur and shadows stable in both snapshots. */
 
-/* Stabilize logo text rasterization across theme snapshots. */
+/* Anchor the logo on the left independently of header action widths. */
 .logo, .logo-mini {
+  min-width: max-content !important;
+  flex: none !important;
   transform: translateZ(0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.pa-name-glass {
+  transform: translateZ(0);
+  will-change: transform;
+}
+.name-line,
+.name-line .word,
+.name-line .ltr {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: geometricPrecision !important;
+  transform: translateZ(0);
+}
+
+/* Unified workspace: navy, champagne and rose. Logo/theme reveal rules stay above. */
+:root{--ui-radius:12px;--ui-control:9px;--ui-shadow:0 8px 28px rgba(26,43,74,.06)}
+body{font-size:14px;line-height:1.55}
+button,input,select{font-family:var(--font-sans)}
+button{min-height:42px;border-radius:var(--ui-control);letter-spacing:.02em;text-transform:none;font-size:13px}
+input[type=search],input[type=text],select{min-height:44px;border-radius:var(--ui-control);font-size:14px}
+button:disabled{cursor:not-allowed}
+header{flex-wrap:wrap;justify-content:flex-start;gap:14px;box-shadow:0 4px 20px rgba(25,33,61,.12)}
+header .actions{margin-left:auto}
+.header-tools{gap:4px;align-items:center;margin-left:12px;flex-wrap:wrap}
+.header-tool{box-shadow:none;background:transparent;border-color:transparent;color:#e9e6dc;letter-spacing:0;font:500 13px var(--font-sans);padding:10px 12px;min-height:42px}
+.header-tool.highlight{background:transparent;border-color:transparent}
+.header-tool{text-transform:none}
+.header-tool:hover{background:rgba(255,255,255,.09);color:white;border-color:transparent}
+.header-tool[aria-current=page]{background:#e9d9b3;color:#19213d;border-color:#e9d9b3}
+.header-tool.secondary{color:#d6c8a9}
+.ui-icon{width:19px;height:19px;display:inline-block;vertical-align:middle;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.announcement{font-size:10px;letter-spacing:.06em;padding:5px 12px}
+.intro{margin:28px 0 22px}.intro h1,.login h1{font:600 clamp(24px,3vw,32px)/1.25 var(--font-sans);letter-spacing:-.025em;text-transform:none;margin-bottom:8px}
+.intro .muted,.intro p{font-size:14px;margin-top:0}
+.container{padding-bottom:56px}.toolbar{margin-bottom:14px;padding-bottom:14px;flex-wrap:wrap;gap:12px}
+.toolbar-actions,.button-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.filter-chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px}.filter-chips:empty{display:none}
+.filter-chip{display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:5px 11px;background:var(--gold-subtle);border-color:var(--border-subtle);color:var(--gold-primary);border-radius:999px;font-size:12px}
+.grid{gap:20px 16px}.card{padding:8px;background:var(--bg-surface);border-radius:var(--ui-radius);text-align:left;letter-spacing:normal;box-shadow:none;overflow:hidden}
+.photo{border-radius:8px;background:var(--bg-photo)}.filename{font-size:12px;margin:10px 3px 0;color:var(--text-secondary)}.price{font-size:14px;margin:4px 3px 0}
+.card-hint{display:block;font-size:11px;color:var(--text-muted);margin:8px 3px 2px}.card:hover .card-hint{color:var(--gold-primary)}
+.card:hover img{transform:none}.card:active{transform:none}
+.modal{border-radius:16px;box-shadow:0 20px 80px rgba(0,0,0,.22)}.modal h2{font:600 23px var(--font-sans);letter-spacing:-.02em}
+.login{max-width:520px;padding:36px;border:1px solid var(--border-subtle);border-radius:20px;background:var(--bg-surface);box-shadow:var(--ui-shadow);margin:70px auto}
+.empty{border:1px dashed var(--border-subtle);border-radius:12px;padding:40px 20px;line-height:1.8}
+#search-tool,#logo-tool{max-width:1400px;padding:0 32px 56px;margin:auto}
+.ai-search-box{grid-template-columns:minmax(280px,340px) minmax(0,1fr);gap:24px}
+.ai-panel{position:sticky;top:130px;border-radius:16px;box-shadow:var(--ui-shadow)}
+.ai-step label{letter-spacing:0;text-transform:none;color:var(--text-main);font-size:13px}
+.ai-dropzone{border-width:1px;min-height:180px}.ai-dropzone strong{font-weight:600}
+.ai-step .button-row{flex-wrap:nowrap;margin-top:10px}.ai-step .button-row button{flex:1!important;padding:8px 6px;font-size:12px;white-space:nowrap}
+.ai-mode-note{font-size:12px;line-height:1.6;color:var(--text-muted);margin:8px 0 0}
+.ai-match-badge{font-size:11px;background:var(--gold-subtle);color:var(--gold-primary);padding:5px 8px;margin:8px 3px 0;border-radius:6px;font-weight:500;letter-spacing:0}
+[data-theme=dark] .ai-match-badge{color:var(--gold-primary)}
+.ai-progress-wrap{align-items:flex-start;border-radius:12px}.ai-bar-bg{height:5px}
+.search-message{padding:14px 16px;border:1px solid var(--border-subtle);border-radius:10px;font-size:13px;line-height:1.65;background:var(--bg-cream);margin-bottom:16px;white-space:pre-line}
+.search-message:empty{display:none}.ai-empty{padding:60px 24px;text-align:center;border:1px dashed var(--border-subtle);border-radius:16px;color:var(--text-muted)}
+.ai-empty strong{display:block;color:var(--text-main);font-size:18px;margin-bottom:8px}
+.logo-panel{border-radius:14px;background:var(--bg-surface);box-shadow:var(--ui-shadow)}
+.logo-panel-canvas{background-color:#a7adb3;background-image:linear-gradient(45deg,#c3c8cd 25%,transparent 25%),linear-gradient(-45deg,#c3c8cd 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#c3c8cd 75%),linear-gradient(-45deg,transparent 75%,#c3c8cd 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
+.logo-batch{display:flex;gap:12px;align-items:end;flex-wrap:wrap;background:var(--bg-cream);padding:16px;border:1px solid var(--border-subtle);border-radius:12px;margin:18px 0}
+.logo-batch label{font-size:12px;display:grid;gap:6px}.logo-batch select{width:auto;min-width:110px}.logo-batch input{max-width:130px}
+.logo-export{position:sticky;bottom:12px;z-index:3;background:var(--bg-surface);border:1px solid var(--border-subtle);box-shadow:var(--ui-shadow);padding:12px;border-radius:12px;justify-content:flex-end}
+#logo-download{padding:12px 22px}.model-notices{font-size:12px;line-height:1.7;color:var(--text-muted);margin:20px 0}.model-notices a{color:var(--gold-primary)}
+.crop-modal{max-width:760px}.crop-modal canvas{display:block;width:100%;height:auto;max-height:46vh;object-fit:contain;touch-action:none;background:#1c2533;cursor:crosshair;border-radius:8px}
+.crop-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.crop-fields label{font-size:12px;margin:0}.crop-fields input{width:100%;accent-color:var(--gold-primary)}
+.evaluation{border:1px solid var(--border-subtle);border-radius:12px;padding:14px;margin:24px 0;background:var(--bg-cream);font-size:13px}.evaluation summary{cursor:pointer;font-weight:600}.evaluation label{display:block;margin:12px 0 4px}.evaluation select{max-width:520px}.evaluation p{line-height:1.7}.evaluation .button-row{margin-top:12px}
+.ai-correct{outline:2px solid var(--status-success);outline-offset:2px}
+@media(min-width:1200px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}#ai-results-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1100px){.header-tools{order:3;width:100%;margin:0;justify-content:center}.ai-panel{top:175px}}
+@media(max-width:900px){.ai-search-box{grid-template-columns:1fr}.ai-panel{position:static}.login{margin:40px 16px;max-width:none}#search-tool,#logo-tool{padding:0 16px 32px}}
+@media(max-width:767px){header{gap:8px}.header-tools{justify-content:space-between;gap:2px}.header-tool{padding:8px;font-size:11px;gap:5px}.header-tool span{display:inline}.header-tool .ui-icon{width:16px;height:16px}.header-tool.secondary span{display:none}.intro{margin:22px 0 18px}.grid{gap:14px 10px}.logo-mini .tagline{font-size:7px}.logo-batch{align-items:stretch}.logo-batch label{flex:1}.logo-batch button{width:100%}.crop-fields{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.card,.photo img{transition:none!important}}
 </style>
 </head>
 <body>
@@ -398,7 +476,7 @@ html.theme-changing *::backdrop {
 </div>
 
 <div class="announcement">Kho ảnh sản phẩm · Cảm hứng thời trang · Google Drive chỉ đọc</div>
-<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="caredey"><span>c</span><span>a</span><span>r</span><span>e</span><span>d</span><span>e</span><span>y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; caredey</span></span></span></button><div class="header-tools" aria-label="Tool nhanh"><button id="hdr-search" type="button" class="header-tool highlight" title="Tìm ảnh thật bằng ảnh mẫu" aria-label="Tìm bằng ảnh">🔍<span>Tìm bằng ảnh</span></button><button id="hdr-logo" type="button" class="header-tool" title="Chèn logo" aria-label="Chèn logo">🏷️<span>Chèn logo</span></button><button id="hdr-getimg" type="button" class="header-tool" title="Lấy ảnh" aria-label="Lấy ảnh">📸<span>Lấy ảnh</span></button></div><div class="chamcong" id="chamcong">
+<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="caredey"><span>c</span><span>a</span><span>r</span><span>e</span><span>d</span><span>e</span><span>y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; caredey</span></span></span></button><nav class="header-tools" aria-label="Công cụ chính"><button id="hdr-gallery" type="button" class="header-tool" aria-current="page" aria-label="Kho ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Kho ảnh</span></button><button id="hdr-search" type="button" class="header-tool" aria-label="Tìm bằng ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M8 10.5h5m-2.5-2.5v5"/></svg><span>Tìm bằng ảnh</span></button><button id="hdr-logo" type="button" class="header-tool" aria-label="Chèn logo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h10l7 7-10 10-7-7Z"/><circle cx="9" cy="9" r="1.5"/></svg><span>Chèn logo</span></button><button id="hdr-getimg" type="button" class="header-tool secondary" aria-label="Lấy ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg><span>Lấy ảnh</span></button></nav><div class="chamcong" id="chamcong">
 <span id="cc-date"></span>
 <span id="cc-timer" hidden>00:00:00</span>
 <span id="cc-total"></span>
@@ -409,17 +487,21 @@ html.theme-changing *::backdrop {
 <div class="intro"><h1>Tất cả sản phẩm</h1><div class="muted">Một kho ảnh, nhiều cách khám phá.</div></div>
 <div class="layout">
 
-<section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div> <button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
+<section aria-label="Ảnh sản phẩm"><div class="toolbar"><span class="muted" id="result-count" role="status"></span><div class="toolbar-actions"><button id="gallery-filter" type="button" aria-controls="nav-sidebar" aria-expanded="false">Bộ lọc <span id="filter-count"></span></button><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button></div></div><div class="filter-chips" id="filter-chips" aria-label="Bộ lọc đang chọn"></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div><div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p></section>
 </div></main>
 
 <!-- ===== SECTION: TÌM KIẾM BẰNG ẢNH MẪU (AI CLIP) ===== -->
 <section id="search-tool" aria-labelledby="search-title" hidden>
   <div class="intro">
-    <h1 id="search-title">🔍 Tìm ảnh thật bằng ảnh mẫu (AI)</h1>
-    <p class="muted">Chọn đúng Hãng & Danh mục, sau đó dán (Ctrl+V) hoặc chọn ảnh web/lookbook để AI lọc ra những ảnh chụp thật giống nhất trong kho.</p>
+    <h1 id="search-title">Tìm đúng món bạn cần</h1>
+    <p class="muted">Chọn hãng, thêm ảnh mẫu và khoanh vùng món đồ để tìm ảnh tương đồng trong kho.</p>
   </div>
   <div class="ai-search-box">
     <div class="ai-panel">
+      <div class="ai-step"><label for="ai-mode">Cách tìm</label><select id="ai-mode">
+        <option value="clip">Nhanh, tiết kiệm · CLIP</option><option value="hybrid">Kỹ hơn · CLIP + DINOv2</option>
+        <option value="siglip">Thử mô hình khác · SigLIP 2</option><option value="duplicate">Tìm ảnh gần trùng · Không tải mô hình</option>
+      </select><p class="ai-mode-note" id="ai-mode-note"></p></div>
       <div class="ai-step">
         <label for="ai-brand-select">1. Chọn Hãng cần tìm</label>
         <select id="ai-brand-select"><option value="">-- Chọn hãng --</option></select>
@@ -439,12 +521,12 @@ html.theme-changing *::backdrop {
             <div class="muted" style="margin-top:4px">Hoặc bấm <b>Ctrl + V</b> để dán thẳng ảnh từ Zalo</div>
           </div>
         </div>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button id="ai-paste-btn" type="button" style="flex:1">📋 Dán ảnh</button>
-          <button id="ai-clear-btn" type="button" hidden>✕ Xóa</button>
+        <div class="button-row">
+          <button id="ai-paste-btn" type="button">Dán ảnh</button>
+          <button id="ai-crop-btn" type="button" hidden>Khoanh vùng</button><button id="ai-clear-btn" type="button" hidden>Xóa</button>
         </div>
       </div>
-      <button id="ai-run-btn" class="primary" type="button" style="width:100%;padding:14px;font-size:13px" disabled>✨ Bắt đầu tìm ảnh tương đồng</button>
+      <button id="ai-reset-crop" type="button" hidden style="width:100%;margin-bottom:10px">Dùng lại ảnh đầy đủ</button><button id="ai-run-btn" class="primary" type="button" style="width:100%;padding:14px;font-size:13px" disabled>Tìm ảnh tương đồng</button><button id="ai-stop-btn" type="button" hidden style="width:100%;margin-top:8px">Dừng tìm</button>
       <p id="ai-scope-info" class="muted" style="margin:12px 0 0;text-align:center"></p>
     </div>
 
@@ -452,27 +534,50 @@ html.theme-changing *::backdrop {
       <div id="ai-status-box" class="ai-progress-wrap" hidden>
         <span class="spinner" id="ai-spinner"></span>
         <div style="flex:1">
-          <div id="ai-status-text">Đang khởi tạo bộ não AI...</div>
-          <div class="ai-bar-bg"><div id="ai-bar-fill" class="ai-bar-fill"></div></div>
+          <div id="ai-status-text">Đang chuẩn bị tìm kiếm…</div>
+          <div class="ai-bar-bg" id="ai-progress" role="progressbar" aria-label="Tiến độ tìm ảnh" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="ai-bar-fill" class="ai-bar-fill"></div></div>
         </div>
       </div>
       <div class="toolbar" style="margin-bottom:16px">
         <span class="muted" id="ai-result-label">Kết quả ảnh thật tương đồng sẽ xuất hiện tại đây.</span>
       </div>
+      <p id="ai-result-message" class="search-message" role="status"></p>
+      <div id="ai-empty" class="ai-empty"><strong>Bắt đầu từ một ảnh mẫu</strong>Dán ảnh, chọn hãng rồi bấm “Tìm ảnh tương đồng”.</div>
       <div class="grid" id="ai-results-grid"></div>
+      <details class="evaluation"><summary>Đánh giá độ chính xác trên ảnh mẫu</summary>
+        <p>Sau mỗi lần tìm, chọn ảnh đúng đã biết để lưu thứ hạng. Cùng một bộ ảnh mẫu có thể được chạy lại với từng chế độ. Không lưu ảnh mẫu, chỉ lưu mã ảnh, thứ hạng và chế độ trên trình duyệt này.</p>
+        <label for="ai-case-name">Tên ca thử (dùng cùng tên khi so sánh các chế độ)</label><input id="ai-case-name" type="text" maxlength="100" placeholder="Ví dụ: áo hoa hồng, góc nghiêng">
+        <label for="ai-expected">Ảnh đúng trong phạm vi vừa tìm</label><select id="ai-expected"><option value="">Chưa có lần tìm nào</option></select>
+        <div class="button-row"><button id="ai-save-eval" type="button" disabled>Lưu đánh giá</button><button id="ai-export-eval" type="button">Xuất CSV</button><button id="ai-clear-eval" type="button">Xóa đánh giá</button></div>
+        <p id="ai-eval-summary" role="status">Chưa có đánh giá.</p>
+      </details>
     </div>
   </div>
+  <details class="model-notices"><summary>Mô hình miễn phí & cách xử lý ảnh</summary>
+    <p>Ảnh được phân tích trên thiết bị của bạn; không gửi ảnh đến dịch vụ suy luận AI. Lần đầu cần mạng để tải thư viện và trọng số, có thể hàng trăm MB tùy chế độ. Bộ nhớ đệm có thể bị trình duyệt xóa.</p>
+    <p><a href="https://github.com/openai/CLIP/blob/main/LICENSE" target="_blank" rel="noopener">CLIP · MIT</a> · <a href="https://huggingface.co/facebook/dinov2-small" target="_blank" rel="noopener">DINOv2 · Apache 2.0</a> · <a href="https://huggingface.co/google/siglip2-base-patch16-224" target="_blank" rel="noopener">SigLIP 2 · Apache 2.0</a> · <a href="https://github.com/huggingface/transformers.js/blob/main/LICENSE" target="_blank" rel="noopener">Transformers.js · Apache 2.0</a></p>
+    <p>Điểm tương đồng và thứ hạng không phải xác suất đúng. Chế độ hai mô hình chấm lại tối đa 80 ứng viên đầu của CLIP (24 trên máy ít RAM hoặc ít lõi xử lý); ảnh nằm ngoài nhóm này chưa được DINOv2 đánh giá. Chọn hãng và danh mục cụ thể để tìm nhanh hơn.</p>
+  </details>
 </section>
+<dialog id="ai-crop-dialog" class="modal crop-modal" aria-labelledby="ai-crop-title">
+  <h2 id="ai-crop-title">Khoanh vùng món đồ</h2><p class="muted">Kéo một khung trên ảnh hoặc dùng các thanh điều chỉnh bên dưới.</p>
+  <canvas id="ai-crop-canvas" width="640" height="480" aria-label="Ảnh mẫu với vùng được chọn"></canvas>
+  <div class="crop-fields"><label>Từ trái <output id="crop-x-value"></output><input id="crop-x" type="range" min="0" max="100" value="0"></label><label>Từ trên <output id="crop-y-value"></output><input id="crop-y" type="range" min="0" max="100" value="0"></label><label>Chiều rộng <output id="crop-w-value"></output><input id="crop-w" type="range" min="1" max="100" value="100"></label><label>Chiều cao <output id="crop-h-value"></output><input id="crop-h" type="range" min="1" max="100" value="100"></label></div>
+  <div class="buttons"><button id="ai-crop-apply" class="primary" type="button">Dùng vùng đã chọn</button><button id="ai-crop-close" type="button">Hủy</button></div>
+</dialog>
 
 <section id="logo-tool" aria-labelledby="logo-title" hidden>
 <div class="intro"><h1 id="logo-title">Chèn logo hàng loạt</h1><p class="muted">Chọn ảnh, đặt logo và tải ảnh giữ nguyên kích thước gốc. Hoặc nhấn Ctrl+V / Cmd+V để dán ảnh.</p></div>
 <input id="logo-files" type="file" accept="image/*" multiple hidden>
+<input id="logo-asset-file" type="file" accept="image/png,image/webp,image/svg+xml" hidden>
+<button id="logo-asset-select" type="button">Chọn ảnh logo</button>
 <button id="logo-select" class="primary" type="button">Chọn ảnh</button>
 <button id="logo-paste" type="button">Dán ảnh</button>
 <p id="logo-status" class="muted" role="status">Chưa chọn ảnh.</p>
+<div class="logo-batch"><label>Màu cho tất cả<select id="logo-batch-color"><option value="white">Trắng</option><option value="gray">Xám</option></select></label><label>Cỡ logo <output id="logo-batch-value">15%</output><input id="logo-batch-size" type="range" min="10" max="30" value="15"></label><button id="logo-apply-all" type="button" disabled>Áp dụng cho tất cả ảnh</button></div>
 <div id="logo-panels" class="logo-panels" aria-label="3 ảnh đang chỉnh"><div class="logo-panel" data-panel="0"><canvas class="logo-panel-canvas" width="640" height="480" aria-label="Ảnh 1"></canvas><p class="logo-panel-name"></p><p class="logo-panel-colors-label">Đổi màu chữ</p><div class="logo-panel-colors" role="group" aria-label="Màu logo ảnh 1"><button type="button" data-color="white">Trắng</button><button type="button" data-color="gray">Xám</button></div><label class="logo-drag-label"><input class="logo-panel-drag" type="checkbox"> Kéo thả tự do</label><div class="logo-controls logo-size-row"><label>Cỡ logo <output class="logo-panel-size-value">15%</output></label><input class="logo-panel-size" type="range" min="10" max="30" step="1" value="15" aria-label="Cỡ logo ảnh 1"></div></div><div class="logo-panel" data-panel="1"><canvas class="logo-panel-canvas" width="640" height="480" aria-label="Ảnh 2"></canvas><p class="logo-panel-name"></p><p class="logo-panel-colors-label">Đổi màu chữ</p><div class="logo-panel-colors" role="group" aria-label="Màu logo ảnh 2"><button type="button" data-color="white">Trắng</button><button type="button" data-color="gray">Xám</button></div><label class="logo-drag-label"><input class="logo-panel-drag" type="checkbox"> Kéo thả tự do</label><div class="logo-controls logo-size-row"><label>Cỡ logo <output class="logo-panel-size-value">15%</output></label><input class="logo-panel-size" type="range" min="10" max="30" step="1" value="15" aria-label="Cỡ logo ảnh 2"></div></div><div class="logo-panel" data-panel="2"><canvas class="logo-panel-canvas" width="640" height="480" aria-label="Ảnh 3"></canvas><p class="logo-panel-name"></p><p class="logo-panel-colors-label">Đổi màu chữ</p><div class="logo-panel-colors" role="group" aria-label="Màu logo ảnh 3"><button type="button" data-color="white">Trắng</button><button type="button" data-color="gray">Xám</button></div><label class="logo-drag-label"><input class="logo-panel-drag" type="checkbox"> Kéo thả tự do</label><div class="logo-controls logo-size-row"><label>Cỡ logo <output class="logo-panel-size-value">15%</output></label><input class="logo-panel-size" type="range" min="10" max="30" step="1" value="15" aria-label="Cỡ logo ảnh 3"></div></div></div>
 <div id="logo-pager" class="logo-controls logo-pager" hidden><button id="logo-prev-page" type="button">← Trang trước</button><span id="logo-page-info" class="muted" role="status">Trang 1/1</span><button id="logo-next-page" type="button">Trang tiếp →</button></div>
-<div class="logo-controls"><button id="logo-download" class="primary" type="button" disabled>Tải tất cả</button><button id="logo-clear" type="button" disabled>Xóa hết</button></div>
+<div class="logo-controls logo-export"><button id="logo-download" class="primary" type="button" disabled>Tải ảnh đã chèn logo</button><button id="logo-clear" type="button" disabled>Xóa hết</button></div>
 </section>
 <dialog class="modal" id="settings"><h2>Cài đặt kho ảnh</h2><form id="settings-form"><label for="root-input">ID thư mục gốc Google Drive</label><input id="root-input" type="text" required pattern="[A-Za-z0-9_-]+" autocomplete="off"><p class="muted">Lưu thư mục sẽ quét lại kho ảnh từ đầu.</p><div class="buttons"><button class="primary" type="submit">Lưu thư mục</button><button type="button" id="reset-root">Khôi phục mặc định</button><button type="button" id="close-settings">Đóng</button></div></form></dialog>
 <dialog class="modal" id="getimg-guide" aria-label="Hướng dẫn lấy ảnh"><h2>📸 Lấy ảnh từ Xiaohongshu / Instagram</h2>
@@ -633,8 +738,8 @@ async function revealTheme(event) {
 }
 $('theme-toggle').addEventListener('click',revealTheme);
 
-function closeNav(){ $('nav-sidebar').classList.remove('open'); $('nav-sidebar').inert = true; $('nav-backdrop').classList.remove('show'); $('nav-fab').setAttribute('aria-expanded','false'); scrollLock(); }
-function openNav(){ $('nav-sidebar').inert = false; $('nav-sidebar').classList.add('open'); $('nav-backdrop').classList.add('show'); $('nav-fab').setAttribute('aria-expanded','true'); scrollLock(); $('nav-close').focus(); }
+function closeNav(){ $('gallery-filter').setAttribute('aria-expanded','false'); $('nav-sidebar').classList.remove('open'); $('nav-sidebar').inert = true; $('nav-backdrop').classList.remove('show'); $('nav-fab').setAttribute('aria-expanded','false'); scrollLock(); }
+function openNav(){ $('gallery-filter').setAttribute('aria-expanded','true'); $('nav-sidebar').inert = false; $('nav-sidebar').classList.add('open'); $('nav-backdrop').classList.add('show'); $('nav-fab').setAttribute('aria-expanded','true'); scrollLock(); $('nav-close').focus(); }
 $('nav-fab').addEventListener('click',openNav);
 $('nav-close').addEventListener('click',() => {closeNav(); $('nav-fab').focus();});
 $('nav-backdrop').addEventListener('click',closeNav);
@@ -643,6 +748,8 @@ $('nav-theme').addEventListener('click',revealTheme);
 $('nav-getimg').addEventListener('click',() => {closeNav();$('getimg-guide').showModal();scrollLock();});
 $('nav-logo').addEventListener('click', () => { switchMainView('logo'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
 $('nav-search').addEventListener('click', () => { switchMainView('search'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
+$('hdr-gallery').addEventListener('click', () => { switchMainView('gallery'); window.scrollTo({top:0,behavior:'smooth'}); });
+$('gallery-filter').addEventListener('click', () => { openNav(); $('brand-search').focus(); });
 $('hdr-logo').addEventListener('click', () => { switchMainView('logo'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('hdr-search').addEventListener('click', () => { switchMainView('search'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('hdr-getimg').addEventListener('click', () => { $('getimg-guide').showModal(); scrollLock(); });
@@ -865,9 +972,10 @@ function toast(message) {
   // Không tự ẩn khi đang hiện nút gia hạn
   if (!keepBtn) { toastTimer = setTimeout(() => { el.hidden = true; },6500); }
 }
-function scrollLock() { document.body.style.overflow = $('lightbox').open || $('settings').open || $('getimg-guide').open || $('nav-sidebar').classList.contains('open') ? 'hidden' : ''; }
+function scrollLock() { document.body.style.overflow = $('ai-crop-dialog').open || $('lightbox').open || $('settings').open || $('getimg-guide').open || $('nav-sidebar').classList.contains('open') ? 'hidden' : ''; }
 function closeFilters() { closeNav(); }
 function stopSession(message) {
+  cancelAISearch(); clearAIResults('Đăng nhập Google Drive để tìm trong kho ảnh.'); syncHeaderView('gallery');
   generation++; controller?.abort(); clearTimeout(tokenTimer); clearTimeout(warnTimer); hideRenewToast(); accessToken = ''; authExpiresAt = 0; scanning = false;
   clearAuthSession();
   closeLightbox(); closeFilters(); photos = []; brands = []; seenPhotoIds.clear(); scannedFolderIds.clear();
@@ -923,7 +1031,26 @@ function makeOption(group,value,labelText) {
 CATEGORIES.forEach(value => $('category-options').append(makeOption('category',value,value)));
 PRICES.forEach(value => $('price-options').append(makeOption('price',value,value)));
 function matches(photo) { return (!selected.brand.size || selected.brand.has(photo.brand)) && (!selected.category.size || selected.category.has(photo.category)) && (!selected.price.size || selected.price.has(photo.priceGroup)); }
+function syncHeaderView(view) {
+  for (const key of ['gallery','search','logo']) {
+    const el = $('hdr-' + key);
+    if (key === view) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current');
+  }
+}
+function renderFilterChips() {
+  const fragment = document.createDocumentFragment(); let total = 0;
+  for (const [group,values] of Object.entries(selected)) for (const value of values) {
+    total++;
+    const chip = document.createElement('button'); chip.type = 'button'; chip.className = 'filter-chip';
+    const label = options[group].get(value)?.name.textContent || value;
+    chip.textContent = label + ' ×'; chip.setAttribute('aria-label','Bỏ bộ lọc ' + label);
+    chip.addEventListener('click', () => { selected[group].delete(value); const option = options[group].get(value); if (option) option.input.checked = false; filterPhotos(); });
+    fragment.append(chip);
+  }
+  $('filter-chips').replaceChildren(fragment); $('filter-count').textContent = total ? '(' + total + ')' : '';
+}
 function updateResults() {
+  renderFilterChips();
   const shown = photos.reduce((total,photo) => total + (matches(photo) ? 1 : 0),0);
   $('result-count').textContent = shown.toLocaleString('vi-VN') + ' / ' + photos.length.toLocaleString('vi-VN') + ' ảnh · ' + brands.length + ' hãng';
   const filtersCount = Object.values(selected).reduce((sum,values) => sum + values.size,0);
@@ -975,7 +1102,7 @@ async function appendPhotos(items,brand,batch,meta,run) {
         img.addEventListener('error',() => { img.remove(); frame.textContent = 'Không tải được ảnh thu nhỏ'; },{once:true}); frame.append(img);
       } else frame.textContent = 'Chưa có ảnh thu nhỏ';
       const name = document.createElement('span'); name.className = 'filename'; name.textContent = file.name;
-      card.append(frame,name);
+      card.append(frame,name); const hint = document.createElement('span'); hint.className = 'card-hint'; hint.textContent = 'Xem ảnh gốc ↗'; card.append(hint);
       if (photo.price !== null) { const price = document.createElement('span'); price.className = 'price'; price.textContent = priceText(photo.price); card.append(price); }
       card.addEventListener('click',() => openLightbox(photo)); photo.card = card; photos.push(photo); updateCounts(photo); fragment.append(card);
     }
@@ -989,7 +1116,7 @@ async function scanBatch(brand,batch,run,scanSubCategories=true) {
   scannedFolderIds.add(batch.id);
 
   const firstUrl = new URL(API);
-  firstUrl.search = new URLSearchParams({q:"'" + batch.id + "' in parents and mimeType contains 'image/' and trashed=false",fields:'nextPageToken,files(id,name,thumbnailLink,webContentLink)',pageSize:'1000',orderBy:'name',supportsAllDrives:'true',includeItemsFromAllDrives:'true'});
+  firstUrl.search = new URLSearchParams({q:"'" + batch.id + "' in parents and mimeType contains 'image/' and trashed=false",fields:'nextPageToken,files(id,name,modifiedTime,thumbnailLink,webContentLink)',pageSize:'1000',orderBy:'name',supportsAllDrives:'true',includeItemsFromAllDrives:'true'});
   const tasks = [
     list(batch.id,"name='GHI-CHU.md'",'id,name',run,'createdTime desc'),
     request(firstUrl,run)
@@ -1019,6 +1146,7 @@ async function scanBatch(brand,batch,run,scanSubCategories=true) {
   }
 }
 async function scan() {
+  cancelAISearch(); clearAIResults('Kho ảnh đang được quét lại. Chọn phạm vi rồi tìm lại.');
   const run = ++generation; controller?.abort(); controller = new AbortController(); closeLightbox();
   photos = []; brands = []; scanErrors = 0; completed = 0; scanning = true;
   seenPhotoIds.clear(); scannedFolderIds.clear();
@@ -1137,6 +1265,7 @@ $('close-settings').addEventListener('click',closeSettings); $('settings').addEv
 $('settings').addEventListener('click',event => { const rect = $('settings').getBoundingClientRect(); if (event.target === $('settings') && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) closeSettings(); });
 function saveRoot(value,reset=false) {
   if (!/^[\w-]+$/.test(value)) { toast('Vui lòng nhập ID thư mục hợp lệ.'); return; }
+  cancelAISearch();
   root = value; try { if (reset) localStorage.removeItem(STORAGE_KEY); else localStorage.setItem(STORAGE_KEY,root); } catch (_) { toast('Không lưu được cài đặt trên trình duyệt. Thư mục vẫn áp dụng cho phiên này.'); }
   closeSettings(); if (accessToken) scan();
 }
@@ -1145,7 +1274,7 @@ $('reset-root').addEventListener('click',() => saveRoot(DEFAULT_ROOT,true));
 
 // Quản lý chuyển đổi giữa 3 màn hình: Kho ảnh (gallery) | Chèn logo (logo) | Tìm bằng ảnh (search)
 function switchMainView(view) {
-  activeView = view;
+  activeView = view; syncHeaderView(view);
   const loggedIn = !!accessToken;
   $('gallery').hidden = (view !== 'gallery') || !loggedIn;
   $('logo-tool').hidden = (view !== 'logo');
@@ -1167,7 +1296,7 @@ function logoPageCount() { return Math.max(1, Math.ceil(logoItems.length / 3)); 
 function logoPanelItem(slot) { return logoItems[logoPage * 3 + slot]; }
 function logoSize(item) {
   const base = item.logoScale ?? .15;
-  const w = Math.min(base, 1.5 * logoImage.naturalWidth / item.img.naturalWidth);
+  const w = Math.min(base, 1.5 * logoImage.naturalWidth / item.img.naturalWidth, .94, .94 * item.img.naturalHeight / item.img.naturalWidth * logoImage.naturalWidth / logoImage.naturalHeight);
   return {x:w, y:w * item.img.naturalWidth / item.img.naturalHeight * logoImage.naturalHeight / logoImage.naturalWidth};
 }
 function logoSnap(item, position) {
@@ -1179,7 +1308,7 @@ function paintLogo(ctx, item, width, height) {
   ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
   ctx.globalAlpha = 1; ctx.drawImage(item.img, 0, 0, width, height);
   const size = logoSize(item);
-  const logo = (item.logoColor === 'gray' && logoGrayImage) ? logoGrayImage : logoImage;
+  const logo = (item.logoColor === 'gray' && logoGrayImage?.complete && logoGrayImage.naturalWidth) ? logoGrayImage : logoImage;
   ctx.drawImage(logo, item.pos.x * width, item.pos.y * height, size.x * width, size.y * height);
 }
 function renderLogoPanels() {
@@ -1189,12 +1318,15 @@ function renderLogoPanels() {
   const hasItems = logoItems.length > 0;
   $('logo-panels').hidden = !hasItems;
   $('logo-pager').hidden = !hasItems;
-  $('logo-status').textContent = logoFailed ? 'Không tải được logo-trong-suot.png. Hãy tải lại trang.' : !logoReady ? 'Đang tải logo…' : hasItems ? `Trang ${logoPage + 1}/${totalPages} · ${logoItems.length} ảnh` : 'Chưa chọn ảnh.';
+  $('logo-status').textContent = logoFailed ? 'Chưa có ảnh logo. Bấm “Chọn ảnh logo” để chọn tệp PNG, WebP hoặc SVG.' : !logoReady ? 'Đang tải logo…' : hasItems ? `Trang ${logoPage + 1}/${totalPages} · ${logoItems.length} ảnh` : 'Chưa chọn ảnh.';
   $('logo-page-info').textContent = `Trang ${logoPage + 1}/${totalPages}`;
   $('logo-prev-page').disabled = logoBusy || logoPage <= 0;
   $('logo-next-page').disabled = logoBusy || logoPage >= totalPages - 1;
   $('logo-download').disabled = logoBusy || !hasItems || !logoReady;
   $('logo-clear').disabled = logoBusy || !hasItems;
+  $('logo-apply-all').disabled = logoBusy || !hasItems || !logoReady;
+  $('logo-asset-select').disabled = logoBusy;
+  $('logo-batch-color').disabled = $('logo-batch-size').disabled = logoBusy;
   $('logo-select').disabled = logoBusy || !logoReady;
   $('logo-paste').disabled = logoBusy || !logoReady;
   logoPanelEls.forEach((panel, slot) => {
@@ -1225,7 +1357,8 @@ function renderLogoPanels() {
     paintLogo(canvas.getContext('2d'), item, canvas.width, canvas.height);
   });
 }
-logoImage.onload = () => { logoReady = true;
+logoImage.onload = () => { logoReady = true; logoFailed = false;
+  for (const item of logoItems) { const size=logoSize(item); item.pos={x:Math.max(0,Math.min(1-size.x,item.pos.x)),y:Math.max(0,Math.min(1-size.y,item.pos.y))}; }
   try {
     const off = document.createElement('canvas');
     off.width = logoImage.naturalWidth; off.height = logoImage.naturalHeight;
@@ -1233,11 +1366,20 @@ logoImage.onload = () => { logoReady = true;
     octx.drawImage(logoImage, 0, 0);
     octx.globalCompositeOperation = 'source-in';
     octx.fillStyle = '#888888'; octx.fillRect(0, 0, off.width, off.height);
-    logoGrayImage = new Image(); logoGrayImage.src = off.toDataURL();
+    logoGrayImage = new Image(); logoGrayImage.onload = renderLogoPanels; logoGrayImage.src = off.toDataURL();
   } catch (_) { logoGrayImage = null; }
   renderLogoPanels(); };
-logoImage.onerror = () => { logoFailed = true; renderLogoPanels(); toast('Không tải được logo-trong-suot.png'); };
+logoImage.onerror = () => { logoReady = false; logoFailed = true; renderLogoPanels(); };
 logoImage.src = 'logo-trong-suot.png';
+$('logo-asset-select').addEventListener('click', () => { if (!logoBusy) $('logo-asset-file').click(); });
+$('logo-asset-file').addEventListener('change', event => {
+  const file = event.target.files[0]; event.target.value = '';
+  if (!file || logoBusy) return;
+  const url = URL.createObjectURL(file); logoReady = false; logoFailed = false; logoGrayImage = null;
+  logoImage.addEventListener('load', () => URL.revokeObjectURL(url), {once:true});
+  logoImage.addEventListener('error', () => URL.revokeObjectURL(url), {once:true});
+  logoImage.src = url; renderLogoPanels();
+});
 $('logo-select').addEventListener('click', () => $('logo-files').click());
 $('logo-files').addEventListener('change', async event => {
   const adding = addLogoFiles(Array.from(event.target.files)); event.target.value = '';
@@ -1284,6 +1426,16 @@ $('logo-paste').addEventListener('click', async () => {
     }
     if (files.length) await addLogoFiles(files);
   } catch (_) { toast('Trình duyệt không cho đọc clipboard, hãy dùng Ctrl+V'); }
+});
+$('logo-batch-size').addEventListener('input', () => { $('logo-batch-value').textContent = $('logo-batch-size').value + '%'; });
+$('logo-apply-all').addEventListener('click', () => {
+  if (logoBusy || !logoReady) return;
+  for (const item of logoItems) {
+    item.logoColor = $('logo-batch-color').value; item.logoScale = Number($('logo-batch-size').value) / 100;
+    const size = logoSize(item);
+    item.pos = {x:Math.max(0,Math.min(1-size.x,item.pos.x)),y:Math.max(0,Math.min(1-size.y,item.pos.y))};
+  }
+  renderLogoPanels(); toast('Đã áp dụng màu và cỡ logo cho ' + logoItems.length + ' ảnh');
 });
 $('logo-panels').addEventListener('click', event => {
   const button = event.target.closest('button[data-color]');
@@ -1379,41 +1531,225 @@ $('logo-download').addEventListener('click', async () => {
 renderLogoPanels();
 
 // ===== TÌM ẢNH THẬT BẰNG ẢNH WEB (CLIP AI TRONG TRÌNH DUYỆT + INDEXEDDB CACHE) =====
-let aiExtractor = null;
-let aiQueryUrl = '';
-let aiSearching = false;
-
-const DB_NAME = 'pa_gallery_ai_vectors_v1';
-const STORE_NAME = 'vectors';
-function openVectorDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = () => { req.result.createObjectStore(STORE_NAME); };
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
+// Inference stays in a dedicated worker; no photo bytes or Drive tokens reach model hosts.
+const AI_MODELS = Object.freeze({
+  clip: {id:'Xenova/clip-vit-base-patch32', revision:'d15189d7028b43f1d3e65039190477f6af591c2a', dimension:512, name:'CLIP'},
+  dino: {id:'Xenova/dinov2-small', revision:'c2bb04a51fab207c420665f1946016107bffc701', dimension:384, name:'DINOv2'},
+  siglip: {id:'onnx-community/siglip2-base-patch16-224-ONNX', revision:'ba1f3b0843f24bc5417d38e19c37b287d719b2f4', dimension:768, name:'SigLIP 2'}
+});
+let aiQueryUrl = '', aiOriginalUrl = '', aiSearching = false, aiController = null, aiLastRun = null;
+let aiWorker = null, aiJobId = 0;
+let aiWorkerKind = null, aiReleaseTimer;
+function aiDeviceBudget() {
+  const lowMemory = (navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || navigator.connection?.saveData;
+  return {lowMemory:!!lowMemory,rerankLimit:lowMemory?24:80,maxSide:lowMemory?512:1024};
 }
-async function getCachedVector(fileId) {
+function releaseIdleAI() {
+  clearTimeout(aiReleaseTimer);
+  if (aiDeviceBudget().lowMemory) { if (!aiSearching) resetAIWorker(); }
+  else aiReleaseTimer = setTimeout(() => { if (!aiSearching) resetAIWorker(); },60000);
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden && !aiSearching) resetAIWorker(); });
+const aiJobs = new Map();
+const DB_NAME = 'pa_gallery_ai_features_v2';
+const STORE_NAME = 'features';
+let vectorDBPromise;
+function openVectorDB() {
+  if (!vectorDBPromise) vectorDBPromise = new Promise(resolve => {
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = () => req.result.createObjectStore(STORE_NAME);
+    req.onsuccess = () => { req.result.onversionchange = () => { req.result.close(); vectorDBPromise = null; }; resolve(req.result); };
+    req.onerror = req.onblocked = () => { vectorDBPromise = null; resolve(null); };
+  });
+  return vectorDBPromise;
+}
+function featureCacheKey(photo, kind) {
+  const model = AI_MODELS[kind];
+  return JSON.stringify([root, photo.id, photo.modifiedTime || photo.thumbnailLink || '', kind,
+    model ? model.id + '@' + model.revision + ':q8:rgb' + aiDeviceBudget().maxSide + ':processor-default:cls-or-projection-v1' : 'phash-dhash-v1']);
+}
+async function readFeature(key) {
   try {
-    const db = await openVectorDB();
-    return await new Promise(res => {
-      const tx = db.transaction(STORE_NAME, 'readonly');
-      const r = tx.objectStore(STORE_NAME).get(fileId);
-      r.onsuccess = () => res(r.result || null);
-      r.onerror = () => res(null);
+    const db = await openVectorDB(); if (!db) return null;
+    return await new Promise(resolve => {
+      const tx = db.transaction(STORE_NAME,'readonly'), req = tx.objectStore(STORE_NAME).get(key);
+      req.onsuccess = () => resolve(req.result || null); req.onerror = () => resolve(null);
     });
   } catch (_) { return null; }
 }
-async function setCachedVector(fileId, vec) {
+async function writeFeature(key, value) {
   try {
-    const db = await openVectorDB();
-    await new Promise(res => {
-      const tx = db.transaction(STORE_NAME, 'readwrite');
-      tx.objectStore(STORE_NAME).put(vec, fileId);
-      tx.oncomplete = () => res();
-      tx.onerror = () => res();
+    const db = await openVectorDB(); if (!db) return;
+    await new Promise(resolve => {
+      const tx = db.transaction(STORE_NAME,'readwrite'); tx.objectStore(STORE_NAME).put(value,key);
+      tx.oncomplete = tx.onerror = tx.onabort = () => resolve();
     });
-  } catch (_) {}
+  } catch (_) { /* Quota/private mode: searching still works without persistent cache. */ }
+}
+function validVector(vec, dimension) { return !!vec && vec.length === dimension && Array.from(vec).every(Number.isFinite) && vec.some(v => v !== 0); }
+function cosineSimilarity(a,b) {
+  if (!a || !b || a.length !== b.length) throw new Error('Vector khác mô hình hoặc khác kích thước');
+  let dot=0, na=0, nb=0;
+  for (let i=0;i<a.length;i++) { dot+=a[i]*b[i]; na+=a[i]*a[i]; nb+=b[i]*b[i]; }
+  if (!na || !nb) return 0;
+  return Math.max(-1, Math.min(1, dot / Math.sqrt(na*nb)));
+}
+function aiInferenceWorker() {
+  let runtime, loaded, model, processor;
+  self.onmessage = async ({data}) => {
+    const {job,kind,spec,pixels,width,height} = data;
+    try {
+      if (!runtime) {
+        runtime = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');
+        runtime.env.allowLocalModels = false;
+        runtime.env.backends.onnx.wasm.numThreads = 1;
+      }
+      if (loaded !== kind) {
+        if (model) { await model.dispose(); model = null; loaded = null; }
+        const options = {revision:spec.revision, dtype:'q8', device:'wasm', progress_callback:progress => {
+          if (progress.status === 'progress') self.postMessage({job,progress:Math.round(progress.progress || 0)});
+        }};
+        processor = await runtime.AutoProcessor.from_pretrained(spec.id,{revision:spec.revision});
+        const Model = kind === 'clip' ? runtime.CLIPVisionModelWithProjection : kind === 'siglip' ? runtime.SiglipVisionModel : runtime.Dinov2Model;
+        model = await Model.from_pretrained(spec.id,options); loaded = kind;
+      }
+      const image = new runtime.RawImage(new Uint8ClampedArray(pixels),width,height,3);
+      const {pixel_values} = await processor(image);
+      const output = await model({pixel_values});
+      let tensor = output.image_embeds || output.pooler_output;
+      let values;
+      if (kind === 'dino') {
+        tensor = output.last_hidden_state;
+        values = Float32Array.from(tensor.data.slice(0,spec.dimension)); // CLS token, not flattened patch tokens.
+      } else {
+        if (!tensor) throw new Error('Mô hình không trả về vector ảnh');
+        values = Float32Array.from(tensor.data);
+      }
+      if (values.length !== spec.dimension || !values.every(Number.isFinite)) throw new Error('Vector ảnh không hợp lệ');
+      const norm = Math.hypot(...values);
+      if (!norm) throw new Error('Vector ảnh rỗng');
+      for (let i=0;i<values.length;i++) values[i] /= norm;
+      self.postMessage({job,vector:values},[values.buffer]);
+    } catch (error) { self.postMessage({job,error:error.message || String(error)}); }
+  };
+}
+function resetAIWorker(reason = new DOMException('Đã dừng tìm','AbortError')) {
+  clearTimeout(aiReleaseTimer);
+  if (aiWorker) aiWorker.terminate(); aiWorker = null; aiWorkerKind = null;
+  for (const pending of aiJobs.values()) { clearTimeout(pending.timer); pending.reject(reason); }
+  aiJobs.clear();
+}
+function getAIWorker() {
+  if (aiWorker) return aiWorker;
+  const url = URL.createObjectURL(new Blob(['(' + aiInferenceWorker.toString() + ')()'],{type:'text/javascript'}));
+  try { aiWorker = new Worker(url,{type:'module'}); } finally { URL.revokeObjectURL(url); }
+  aiWorker.onmessage = ({data}) => {
+    const pending = aiJobs.get(data.job); if (!pending) return;
+    if ('progress' in data) { $('ai-status-text').textContent = 'Đang tải ' + pending.name + ' · ' + data.progress + '% của tệp mô hình'; return; }
+    clearTimeout(pending.timer); aiJobs.delete(data.job);
+    if (data.error) pending.reject(new Error(data.error)); else pending.resolve(data.vector);
+  };
+  aiWorker.onerror = event => { event.preventDefault(); resetAIWorker(new Error(event.message || 'Không khởi động được AI trên trình duyệt này')); };
+  return aiWorker;
+}
+async function imageCanvas(url,maxSide=1024) {
+  const image = new Image(); image.src = url; await image.decode();
+  const scale = Math.min(1,maxSide/Math.max(image.naturalWidth,image.naturalHeight));
+  const canvas = document.createElement('canvas'); canvas.width=Math.max(1,Math.round(image.naturalWidth*scale)); canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+  const ctx=canvas.getContext('2d',{willReadFrequently:true}); ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.drawImage(image,0,0,canvas.width,canvas.height);
+  return canvas;
+}
+async function extractVector(url,kind,signal) {
+  signal.throwIfAborted();
+  clearTimeout(aiReleaseTimer);
+  if (aiDeviceBudget().lowMemory && aiWorker && aiWorkerKind !== kind) resetAIWorker();
+  const canvas=await imageCanvas(url,aiDeviceBudget().maxSide), ctx=canvas.getContext('2d'), rgba=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  const rgb = new Uint8Array(canvas.width*canvas.height*3);
+  for(let i=0,j=0;i<rgba.length;i+=4) { rgb[j++]=rgba[i]; rgb[j++]=rgba[i+1]; rgb[j++]=rgba[i+2]; }
+  signal.throwIfAborted();
+  const worker=getAIWorker(), job=++aiJobId; aiWorkerKind=kind;
+  return new Promise((resolve,reject) => {
+    const timer=setTimeout(() => resetAIWorker(new Error('Tải hoặc chạy mô hình quá lâu. Kiểm tra mạng rồi thử lại.')),300000);
+    aiJobs.set(job,{resolve,reject,timer,name:AI_MODELS[kind].name});
+    worker.postMessage({job,kind,spec:AI_MODELS[kind],pixels:rgb.buffer,width:canvas.width,height:canvas.height},[rgb.buffer]);
+  });
+}
+function setAIProgress(text,percent) {
+  $('ai-status-text').textContent=text; $('ai-bar-fill').style.width=percent+'%'; $('ai-progress').setAttribute('aria-valuenow',String(percent));
+}
+function cancelAISearch() {
+  aiController?.abort(); resetAIWorker();
+}
+function clearAIQueryUrls() {
+  for (const url of new Set([aiQueryUrl,aiOriginalUrl])) if (url) URL.revokeObjectURL(url);
+  aiQueryUrl=aiOriginalUrl='';
+}
+function clearAIResults(message='') {
+  aiLastRun=null; $('ai-save-eval').disabled=true; $('ai-results-grid').replaceChildren(); $('ai-expected').replaceChildren();
+  $('ai-result-label').textContent='Kết quả ảnh tương đồng sẽ xuất hiện tại đây.';
+  $('ai-result-message').textContent=message; $('ai-empty').hidden=false;
+  $('ai-empty').innerHTML='<strong>Bắt đầu từ một ảnh mẫu</strong>Chọn hãng, thêm ảnh rồi bấm “Tìm ảnh tương đồng”.';
+}
+async function fetchDriveImageBlobUrl(photo,signal) {
+  const thumbSrc=thumbnail(photo.thumbnailLink);
+  if(thumbSrc) {
+    try {
+      const response=await fetch(thumbSrc,{credentials:'omit',signal});
+      if(response.ok) { const blob=await response.blob(); if(blob.type.startsWith('image/')) return URL.createObjectURL(blob); }
+    } catch(error) { if(error.name==='AbortError') throw error; }
+  }
+  const response=await fetch(API+'/'+encodeURIComponent(photo.id)+'?alt=media&supportsAllDrives=true', {headers:{Authorization:'Bearer '+accessToken},credentials:'omit',signal});
+  if(!response.ok) throw new Error('Không tải được ảnh '+photo.name+' ('+response.status+')');
+  return URL.createObjectURL(await response.blob());
+}
+async function photoVector(photo,kind,signal) {
+  const key=featureCacheKey(photo,kind), cached=await readFeature(key);
+  if(validVector(cached,AI_MODELS[kind].dimension)) return cached;
+  signal.throwIfAborted(); let url='';
+  try { url=await fetchDriveImageBlobUrl(photo,signal); const vector=await extractVector(url,kind,signal); await writeFeature(key,vector); return vector; }
+  finally { if(url) URL.revokeObjectURL(url); }
+}
+function hashFromGrayscale(gray,width,height) {
+  // pHash: 32x32 DCT, low-frequency 8x8 block excluding DC.
+  if(width!==32 || height!==32 || gray.length!==1024) throw new Error('Kích thước pHash không hợp lệ');
+  const coefficients=[];
+  for(let v=0;v<8;v++) for(let u=0;u<8;u++) {
+    if(!u&&!v) continue;
+    let sum=0;
+    for(let y=0;y<32;y++) for(let x=0;x<32;x++) sum+=gray[y*32+x]*Math.cos((2*x+1)*u*Math.PI/64)*Math.cos((2*y+1)*v*Math.PI/64);
+    coefficients.push(sum);
+  }
+  const sorted=[...coefficients].sort((a,b)=>a-b), median=sorted[31];
+  return coefficients.map(v=>v>median?1:0);
+}
+async function imageHashes(url) {
+  const source=await imageCanvas(url,512), canvas=document.createElement('canvas'); canvas.width=32; canvas.height=32;
+  const ctx=canvas.getContext('2d',{willReadFrequently:true}); ctx.drawImage(source,0,0,32,32);
+  const pixels=ctx.getImageData(0,0,32,32).data;
+  const gray=Array.from({length:1024},(_,i)=>.299*pixels[i*4]+.587*pixels[i*4+1]+.114*pixels[i*4+2]);
+  const phash=hashFromGrayscale(gray,32,32);
+  canvas.width=9; canvas.height=8; ctx.drawImage(source,0,0,9,8);
+  const small=ctx.getImageData(0,0,9,8).data, dhash=[];
+  const lum=i=>.299*small[i*4]+.587*small[i*4+1]+.114*small[i*4+2];
+  for(let y=0;y<8;y++) for(let x=0;x<8;x++) dhash.push(lum(y*9+x)>lum(y*9+x+1)?1:0);
+  return {phash,dhash};
+}
+function hashSimilarity(a,b) {
+  const distance=(x,y)=>x.reduce((sum,bit,i)=>sum+(bit!==y[i]?1:0),0)/x.length;
+  return 1-(distance(a.phash,b.phash)+distance(a.dhash,b.dhash))/2;
+}
+async function photoHashes(photo,signal) {
+  const key=featureCacheKey(photo,'hash'), cached=await readFeature(key);
+  if(cached?.phash?.length===63 && cached?.dhash?.length===64) return cached;
+  signal.throwIfAborted(); let url='';
+  try { url=await fetchDriveImageBlobUrl(photo,signal); const hashes=await imageHashes(url); await writeFeature(key,hashes); return hashes; }
+  finally { if(url) URL.revokeObjectURL(url); }
+}
+function fuseAIRanks(items) {
+  // Reciprocal rank fusion avoids mixing uncalibrated cosine scales.
+  const visual=[...items].sort((a,b)=>b.dino-a.dino);
+  const ranks=new Map(visual.map((item,i)=>[item.photo.id,i+1]));
+  return items.map((item,i)=>({...item,clipRank:i+1,dinoRank:ranks.get(item.photo.id),fusion:1/(60+i+1)+1/(60+ranks.get(item.photo.id))})).sort((a,b)=>b.fusion-a.fusion || b.sim-a.sim);
 }
 
 function updateAISearchDropdowns() {
@@ -1465,9 +1801,11 @@ function updateAIScopeCount() {
 $('ai-brand-select').addEventListener('change', updateAIScopeCount);$('ai-cat-select').addEventListener('change', updateAIScopeCount);
 
 function setAIQueryFile(file) {
-  if (!file) return;
-  if (aiQueryUrl) URL.revokeObjectURL(aiQueryUrl);
-  aiQueryUrl = URL.createObjectURL(file);
+  if (!file || aiSearching || cropLoading || cropApplying || $('ai-crop-dialog').open) return;
+  clearAIResults();
+  clearAIQueryUrls();
+  aiQueryUrl = URL.createObjectURL(file); aiOriginalUrl = aiQueryUrl;
+  $('ai-crop-btn').hidden = false; $('ai-reset-crop').hidden = true;
   $('ai-query-preview').src = aiQueryUrl;
   $('ai-query-preview').hidden = false;
   $('ai-drop-hint').hidden = true;
@@ -1494,146 +1832,226 @@ $('ai-paste-btn').addEventListener('click', async () => {
     toast('Không tìm thấy ảnh trong Clipboard.');
   } catch (_) { toast('Hãy bấm tổ hợp phím Ctrl + V để dán ảnh!'); }
 });
-$('ai-clear-btn').addEventListener('click', () => {
-  if (aiQueryUrl) URL.revokeObjectURL(aiQueryUrl);
-  aiQueryUrl = '';
-  $('ai-query-preview').hidden = true;
-  $('ai-drop-hint').hidden = false;
-  $('ai-clear-btn').hidden = true;
+let cropLoading=false, cropApplying=false, cropSource=null, cropRect={x:0,y:0,w:1,h:1}, cropPointer=null;
+function showAIModeNote() {
+  const notes={hybrid:'CLIP tìm ứng viên, DINOv2 chấm lại tối đa '+aiDeviceBudget().rerankLimit+' ảnh đầu. Lần đầu chậm hơn vì cần tải hai mô hình.',clip:'Mặc định cho máy cấu hình thấp: xử lý lần lượt từng ảnh, dùng lại đặc trưng đã lưu. Chọn hãng và danh mục cụ thể để giảm thời gian tìm.',siglip:'Chạy SigLIP 2 độc lập để so sánh với CLIP trên cùng ảnh mẫu. Cần tải mô hình riêng; nên dùng khi máy còn đủ bộ nhớ.',duplicate:'So khớp pHash + dHash cho ảnh cùng nguồn đã nén hoặc đổi kích thước. Không tải mô hình; không phù hợp để xác nhận cùng sản phẩm ở góc chụp khác.'};
+  $('ai-mode-note').textContent=notes[$('ai-mode').value];
+}
+$('ai-mode').addEventListener('change',()=>{showAIModeNote();clearAIResults();}); showAIModeNote();
+for (const id of ['ai-brand-select','ai-cat-select']) $(id).addEventListener('change',()=>{if(!aiSearching) clearAIResults();});
+$('ai-dropzone').addEventListener('keydown',event=>{ if(event.key==='Enter'||event.key===' ') {event.preventDefault(); if(!aiSearching) $('ai-file-input').click();} });
+$('ai-clear-btn').addEventListener('click',()=>{
+  if(aiSearching || cropLoading || cropApplying) return;
+  clearAIResults(); clearAIQueryUrls(); $('ai-query-preview').removeAttribute('src'); $('ai-query-preview').hidden=true;
+  $('ai-drop-hint').hidden=false;
+  for(const id of ['ai-clear-btn','ai-crop-btn','ai-reset-crop']) $(id).hidden=true;
   updateAIScopeCount();
 });
-
-function cosineSimilarity(a, b) {
-  let dot = 0, na = 0, nb = 0;
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i];
-    na += a[i] * a[i];
-    nb += b[i] * b[i];
-  }
-  return dot / (Math.sqrt(na) * Math.sqrt(nb) + 1e-8);
+$('ai-reset-crop').addEventListener('click',()=>{
+  if(aiSearching || cropLoading || cropApplying) return;
+  clearAIResults();
+  if(aiQueryUrl && aiQueryUrl!==aiOriginalUrl) URL.revokeObjectURL(aiQueryUrl);
+  aiQueryUrl=aiOriginalUrl; $('ai-query-preview').src=aiQueryUrl; $('ai-reset-crop').hidden=true;
+});
+function paintCrop() {
+  if(!cropSource) return;
+  const canvas=$('ai-crop-canvas'),ctx=canvas.getContext('2d'),r=cropRect;
+  ctx.drawImage(cropSource,0,0,canvas.width,canvas.height);
+  ctx.fillStyle='rgba(0,0,0,.55)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.save();ctx.beginPath();ctx.rect(r.x*canvas.width,r.y*canvas.height,r.w*canvas.width,r.h*canvas.height);ctx.clip();ctx.drawImage(cropSource,0,0,canvas.width,canvas.height);ctx.restore();
+  ctx.strokeStyle='#f6b8c6';ctx.lineWidth=3;ctx.strokeRect(r.x*canvas.width,r.y*canvas.height,r.w*canvas.width,r.h*canvas.height);
+  for(const key of ['x','y','w','h']) { $( 'crop-'+key).value=String(Math.round(r[key]*100)); $('crop-'+key+'-value').textContent=Math.round(r[key]*100)+'%'; }
 }
-
-async function fetchDriveImageBlobUrl(photo) {
-  const thumbSrc = thumbnail(photo.thumbnailLink);
-  if (thumbSrc) {
-    try {
-      const r = await fetch(thumbSrc, { credentials: 'omit' });
-      if (r.ok) {
-        const b = await r.blob();
-        return URL.createObjectURL(b);
-      }
-    } catch (_) {}
-  }
-  const r = await fetch(API + '/' + encodeURIComponent(photo.id) + '?alt=media&supportsAllDrives=true', {
-    headers: { Authorization: 'Bearer ' + accessToken }
-  });
-  if (!r.ok) throw new Error('Không tải được ảnh ' + photo.name);
-  const b = await r.blob();
-  return URL.createObjectURL(b);
-}
-
-$('ai-run-btn').addEventListener('click', async () => {
-  const candidates = getScopedPhotos();
-  if (!aiQueryUrl || !candidates.length || aiSearching) return;
-
-  aiSearching = true;
-  updateAIScopeCount();
-  $('ai-status-box').hidden = false;
-  $('ai-bar-fill').style.width = '5\%';$('ai-results-grid').replaceChildren();
-
+$('ai-crop-btn').addEventListener('click',async()=>{
+  if(!aiOriginalUrl || aiSearching || cropLoading) return;
+  cropLoading=true;
   try {
-    if (!aiExtractor) {
-      $('ai-status-text').textContent = 'Đang tải mô hình AI CLIP lần đầu (~25MB, chỉ tải 1 lần)...';
-      const { pipeline, env } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
-      env.allowLocalModels = false;
-      aiExtractor = await pipeline('image-feature-extraction', 'Xenova/clip-vit-base-patch32', { quantized: true });
-    }
-
-    $('ai-status-text').textContent = 'Đang phân tích đặc trưng ảnh mẫu...';
-    $('ai-bar-fill').style.width = '12%';
-    const qOut = await aiExtractor(aiQueryUrl, { pooling: 'mean', normalize: true });
-    const queryVec = Array.from(qOut.data);
-
-    const scored = [];
-    let done = 0;
-
-    for (const photo of candidates) {
-      let vec = await getCachedVector(photo.id);
-      if (!vec) {
-        let tempUrl = '';
-        try {
-          tempUrl = await fetchDriveImageBlobUrl(photo);
-          const out = await aiExtractor(tempUrl, { pooling: 'mean', normalize: true });
-          vec = Array.from(out.data);
-          await setCachedVector(photo.id, vec);
-        } catch (_) {
-          vec = null;
-        } finally {
-          if (tempUrl) URL.revokeObjectURL(tempUrl);
-        }
-      }
-      done++;
-      const pct = Math.round((done / candidates.length) * 88) + 12;
-      $('ai-bar-fill').style.width = pct + '\%';$('ai-status-text').textContent = `Đang so khớp ảnh ${done}/${candidates.length} (Lần sau sẽ tức thì)...`;
-
-      if (vec) {
-        const sim = cosineSimilarity(queryVec, vec);
-        scored.push({ photo, sim });
-      }
-    }
-
-    scored.sort((a, b) => b.sim - a.sim);
-    const topResults = scored.slice(0, 20);
-    const topPhotosList = topResults.map(item => item.photo);
-
-    $('ai-result-label').textContent = `Tìm thấy Top ${topResults.length} ảnh thật giống nhất trong số ${candidates.length} ảnh:`;
-    const frag = document.createDocumentFragment();
-
-    for (const { photo, sim } of topResults) {
-      const card = document.createElement('button');
-      card.className = 'card';
-      const frame = document.createElement('span');
-      frame.className = 'photo';
-      const src = thumbnail(photo.thumbnailLink);
-      if (src) {
-        const img = document.createElement('img');
-        img.width = 400; img.height = 400; img.loading = 'lazy'; img.src = src; img.alt = photo.name;
-        frame.append(img);
-      } else {
-        frame.textContent = 'Ảnh';
-      }
-      const badge = document.createElement('span');
-      badge.className = 'ai-match-badge';
-      const matchPct = Math.min(99, Math.max(50, Math.round(sim * 100)));
-      badge.textContent = `Giống ${matchPct}% · ${photo.category}`;
-
-      const name = document.createElement('span');
-      name.className = 'filename';
-      name.textContent = photo.name;
-
-      card.append(frame, badge, name);
-      if (photo.price !== null) {
-        const pr = document.createElement('span');
-        pr.className = 'price';
-        pr.textContent = priceText(photo.price);
-        card.append(pr);
-      }
-      card.addEventListener('click', () => openLightbox(photo, topPhotosList));
-      frag.append(card);
-    }
-    $('ai-results-grid').append(frag);
-    toast('✨ Đã tìm xong ảnh tương đồng!');
-  } catch (err) {
-    toast('Lỗi khi tìm kiếm AI: ' + (err.message || err));
-  } finally {
-    aiSearching = false;
-    $('ai-status-box').hidden = true;
-    updateAIScopeCount();
-  }
+    cropSource=await imageCanvas(aiOriginalUrl,1600); cropRect={x:0,y:0,w:1,h:1};
+    const canvas=$('ai-crop-canvas'),scale=Math.min(1,720/Math.max(cropSource.width,cropSource.height));
+    canvas.width=Math.round(cropSource.width*scale);canvas.height=Math.round(cropSource.height*scale);
+    $('ai-crop-dialog').showModal();scrollLock();paintCrop();
+  } catch(error) {toast('Không mở được ảnh: '+error.message);} finally {cropLoading=false;}
 });
+for(const key of ['x','y','w','h']) $('crop-'+key).addEventListener('input',()=>{
+  cropRect[key]=Number($('crop-'+key).value)/100;
+  cropRect.x=Math.min(.99,cropRect.x);cropRect.y=Math.min(.99,cropRect.y);
+  cropRect.w=Math.max(.01,Math.min(cropRect.w,1-cropRect.x));cropRect.h=Math.max(.01,Math.min(cropRect.h,1-cropRect.y));paintCrop();
+});
+function cropPoint(event) {
+  const canvas=$('ai-crop-canvas'),rect=canvas.getBoundingClientRect(),scale=Math.min(rect.width/canvas.width,rect.height/canvas.height);
+  const width=canvas.width*scale,height=canvas.height*scale;
+  return {x:Math.max(0,Math.min(1,(event.clientX-rect.left-(rect.width-width)/2)/width)),y:Math.max(0,Math.min(1,(event.clientY-rect.top-(rect.height-height)/2)/height))};
+}
+$('ai-crop-canvas').addEventListener('pointerdown',event=>{
+  if(event.button!==0 || !event.isPrimary || cropApplying) return;
+  const point=cropPoint(event);cropPointer={id:event.pointerId,...point};event.currentTarget.setPointerCapture(event.pointerId);
+});
+$('ai-crop-canvas').addEventListener('pointermove',event=>{
+  if(cropPointer?.id!==event.pointerId) return;
+  const point=cropPoint(event);
+  cropRect={x:Math.min(point.x,cropPointer.x),y:Math.min(point.y,cropPointer.y),w:Math.max(.01,Math.abs(point.x-cropPointer.x)),h:Math.max(.01,Math.abs(point.y-cropPointer.y))};
+  cropRect.w=Math.min(cropRect.w,1-cropRect.x);cropRect.h=Math.min(cropRect.h,1-cropRect.y);paintCrop();
+});
+for(const type of ['pointerup','pointercancel','lostpointercapture']) $('ai-crop-canvas').addEventListener(type,()=>{cropPointer=null;});
+$('ai-crop-apply').addEventListener('click',async()=>{
+  if(!cropSource || cropApplying) return;
+  cropApplying=true; $('ai-crop-apply').disabled=true;
+  try {
+    const canvas=document.createElement('canvas'),r=cropRect;
+    canvas.width=Math.max(1,Math.round(r.w*cropSource.width));canvas.height=Math.max(1,Math.round(r.h*cropSource.height));
+    canvas.getContext('2d').drawImage(cropSource,r.x*cropSource.width,r.y*cropSource.height,r.w*cropSource.width,r.h*cropSource.height,0,0,canvas.width,canvas.height);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    if(!blob) throw new Error('Không tạo được ảnh khoanh vùng');
+    if(aiQueryUrl!==aiOriginalUrl) URL.revokeObjectURL(aiQueryUrl);
+    clearAIResults(); aiQueryUrl=URL.createObjectURL(blob);$('ai-query-preview').src=aiQueryUrl;$('ai-reset-crop').hidden=false;
+    $('ai-crop-dialog').close();updateAIScopeCount();
+  } catch(error) {toast(error.message);} finally {cropApplying=false;$('ai-crop-apply').disabled=false;}
+});
+$('ai-crop-close').addEventListener('click',()=>{if(!cropApplying) $('ai-crop-dialog').close();});
+$('ai-crop-dialog').addEventListener('cancel',event=>{if(cropApplying) event.preventDefault();});
+$('ai-crop-dialog').addEventListener('close',()=>{cropPointer=null;scrollLock();});
+$('ai-stop-btn').addEventListener('click',cancelAISearch);
+function setAIBusy(busy) {
+  aiSearching=busy;
+  document.querySelectorAll('.ai-panel button,.ai-panel select,.ai-panel input').forEach(el=>{el.disabled=busy;});
+  $('ai-dropzone').setAttribute('aria-disabled',String(busy));$('ai-dropzone').tabIndex=busy?-1:0;
+  $('ai-stop-btn').disabled=false;$('ai-stop-btn').hidden=!busy;$('ai-status-box').hidden=!busy;
+  $('ai-save-eval').disabled=busy || !aiLastRun;
+  updateAIScopeCount();
+}
+async function rankWithModel(candidates,kind,query,signal) {
+  setAIProgress('Đang tải '+AI_MODELS[kind].name+' và phân tích ảnh mẫu…',3);
+  const queryVec=await extractVector(query,kind,signal), scored=[];let failed=0,done=0;
+  for(const photo of candidates) {
+    signal.throwIfAborted();
+    try { const vec=await photoVector(photo,kind,signal);scored.push({photo,sim:cosineSimilarity(queryVec,vec)}); }
+    catch(error) { if(error.name==='AbortError') throw error;failed++; }
+    setAIProgress('Đang so khớp '+AI_MODELS[kind].name+' · '+(++done)+'/'+candidates.length+' ảnh',10+Math.round(done/candidates.length*65));
+    if(done%8===0) await new Promise(resolve=>setTimeout(resolve,0));
+  }
+  scored.sort((a,b)=>b.sim-a.sim);return {scored,failed};
+}
+function renderAIResults(run) {
+  const top=run.ranked.slice(0,20),list=top.map(item=>item.photo),fragment=document.createDocumentFragment();
+  for(const [index,item] of top.entries()) {
+    const {photo,sim}=item,card=document.createElement('button');card.type='button';card.className='card';card.dataset.photoId=photo.id;
+    card.setAttribute('aria-label','Kết quả '+(index+1)+': '+photo.name);
+    const frame=document.createElement('span');frame.className='photo';const src=thumbnail(photo.thumbnailLink);
+    if(src) {const img=document.createElement('img');img.width=400;img.height=400;img.loading='lazy';img.decoding='async';img.src=src;img.alt=photo.name;img.onerror=()=>{img.remove();frame.textContent='Không tải được ảnh thu nhỏ';};frame.append(img);} else frame.textContent='Chưa có ảnh thu nhỏ';
+    const badge=document.createElement('span');badge.className='ai-match-badge';
+    badge.textContent=run.actual==='hybrid' && item.dino!==undefined ? '#'+(index+1)+' · CLIP '+sim.toFixed(3)+' · DINO '+item.dino.toFixed(3) : run.actual==='duplicate' ? '#'+(index+1)+' · Điểm gần trùng '+sim.toFixed(3) : '#'+(index+1)+' · '+(run.actual==='siglip'?'SigLIP 2':'CLIP')+' '+sim.toFixed(3);
+    const name=document.createElement('span');name.className='filename';name.textContent=photo.name;
+    const hint=document.createElement('span');hint.className='card-hint';hint.textContent=photo.category+' · Xem ảnh gốc ↗';card.append(frame,badge,name);
+    if(photo.price!==null){const price=document.createElement('span');price.className='price';price.textContent=priceText(photo.price);card.append(price);}
+    card.append(hint);card.addEventListener('click',()=>openLightbox(photo,list));fragment.append(card);
+  }
+  $('ai-results-grid').replaceChildren(fragment);$('ai-empty').hidden=top.length>0;
+  $('ai-empty').innerHTML=top.length?'':'<strong>Chưa có ảnh để xếp hạng</strong>Kiểm tra kết nối Google Drive hoặc thử lại với phạm vi khác.';
+  $('ai-result-label').textContent=top.length+' kết quả đầu · Đã chấm '+run.ranked.length+'/'+run.candidates.length+' ảnh';
+  $('ai-result-message').textContent=run.notes.join('\n')+'\nĐiểm tương đồng không phải xác suất đúng. Hãy đối chiếu chi tiết sản phẩm trước khi chọn.';
+  const optionsFragment=document.createDocumentFragment(),blank=document.createElement('option');blank.value='';blank.textContent='Chọn ảnh đúng đã biết…';optionsFragment.append(blank);
+  const ranks=new Map(run.ranked.map((item,i)=>[item.photo.id,i+1]));
+  for(const photo of run.candidates) {const option=document.createElement('option');option.value=photo.id;option.textContent=(ranks.has(photo.id)?'#'+ranks.get(photo.id):'Chưa chấm được')+' · '+photo.name;optionsFragment.append(option);}
+  $('ai-expected').replaceChildren(optionsFragment);
+}
+$('ai-run-btn').addEventListener('click',async()=>{
+  const candidates=getScopedPhotos(),requested=$('ai-mode').value,query=aiQueryUrl;
+  if(!query || !candidates.length || aiSearching || cropLoading || cropApplying) return;
+  const sourceGeneration=generation,sourceRoot=root,wasScanning=scanning;
+  aiController=new AbortController();const signal=aiController.signal;
+  aiLastRun=null;setAIBusy(true);$('ai-results-grid').replaceChildren();$('ai-result-message').textContent='';$('ai-empty').hidden=true;
+  $('ai-expected').replaceChildren();
+  try {
+    let ranked=[],actual=requested,failed=0;const notes=[];
+    if(requested==='duplicate') {
+      setAIProgress('Đang tạo dấu vân tay ảnh mẫu…',3);const queryHashes=await imageHashes(query);let done=0;
+      for(const photo of candidates) {
+        signal.throwIfAborted();
+        try {ranked.push({photo,sim:hashSimilarity(queryHashes,await photoHashes(photo,signal))});}
+        catch(error) {if(error.name==='AbortError') throw error;failed++;}
+        setAIProgress('Đang so khớp ảnh gần trùng · '+(++done)+'/'+candidates.length,Math.round(done/candidates.length*100));
+        if(done%4===0) await new Promise(resolve=>setTimeout(resolve,0));
+      }
+      ranked.sort((a,b)=>b.sim-a.sim);notes.push('Đã chạy pHash + dHash. Kết quả chỉ gợi ý ảnh gần trùng, không xác nhận cùng sản phẩm.');
+    } else {
+      const first=await rankWithModel(candidates,requested==='siglip'?'siglip':'clip',query,signal);ranked=first.scored;failed=first.failed;
+      if(requested==='hybrid' && ranked.length) {
+        const shortlist=ranked.slice(0,aiDeviceBudget().rerankLimit);let detailed=[];
+        try {
+          setAIProgress('Đang tải DINOv2 và phân tích ảnh mẫu…',76);const queryVec=await extractVector(query,'dino',signal);let done=0;
+          for(const item of shortlist) {
+            signal.throwIfAborted();
+            try {detailed.push({...item,dino:cosineSimilarity(queryVec,await photoVector(item.photo,'dino',signal))});}
+            catch(error) {if(error.name==='AbortError') throw error;}
+            setAIProgress('Đang kiểm tra chi tiết DINOv2 · '+(++done)+'/'+shortlist.length,76+Math.round(done/shortlist.length*24));
+          }
+          // Do not silently penalize images whose second-stage features failed.
+          if(detailed.length!==shortlist.length) throw new Error('Thiếu đặc trưng DINOv2 của '+(shortlist.length-detailed.length)+' ảnh');
+          ranked=[...fuseAIRanks(detailed),...ranked.slice(shortlist.length)];
+          notes.push('Đã chạy CLIP + DINOv2; kết hợp thứ hạng trên '+shortlist.length+' ứng viên đầu.');
+        } catch(error) {
+          if(error.name==='AbortError') throw error;
+          actual='clip';notes.push('DINOv2 chưa hoàn tất: '+error.message+'. Kết quả hiện chỉ dùng CLIP.');
+        }
+      } else notes.push('Đã chạy '+(requested==='siglip'?'SigLIP 2':'CLIP')+'.');
+    }
+    signal.throwIfAborted();
+    if(sourceGeneration!==generation || sourceRoot!==root) throw new DOMException('Kho ảnh đã thay đổi','AbortError');
+    if(failed) notes.push('Không chấm được '+failed+' ảnh do lỗi tải/xử lý. Không coi các ảnh này là không phù hợp.');
+    if(wasScanning) notes.push('Kho ảnh đang quét khi bắt đầu: lần tìm này chỉ dùng danh sách có tại thời điểm đó.');
+    aiLastRun={requested,actual,ranked,candidates,notes,root:sourceRoot,cropped:query!==aiOriginalUrl,rerankLimit:requested==='hybrid'?aiDeviceBudget().rerankLimit:null};
+    renderAIResults(aiLastRun);setAIProgress('Đã hoàn tất',100);toast('Đã tìm xong ảnh tương đồng');
+  } catch(error) {
+    const message=error.name==='AbortError'?'Đã dừng tìm ảnh.':'Không hoàn tất tìm kiếm: '+error.message;
+    $('ai-result-message').textContent=message;$('ai-result-label').textContent=message;$('ai-empty').hidden=false;
+    $('ai-empty').innerHTML='<strong>Chưa có kết quả mới</strong>Bạn có thể đổi chế độ hoặc thử lại.';toast(message);
+  } finally { aiController=null;setAIBusy(false);releaseIdleAI(); }
+});
+const AI_EVAL_KEY='pa_gallery_ai_evaluation_v1';
+function loadAIEvaluations() {try {const value=JSON.parse(localStorage.getItem(AI_EVAL_KEY)||'[]');return Array.isArray(value)?value:[];} catch(_){return [];} }
+function evaluationStats(records) {
+  const groups=new Map();
+  for(const record of records) {
+    const group=groups.get(record.actual)||{count:0,top1:0,top5:0};group.count++;
+    if(record.rank===1) group.top1++;if(record.rank>=1&&record.rank<=5) group.top5++;groups.set(record.actual,group);
+  }
+  return [...groups].map(([mode,g])=>({mode,...g,top1Rate:g.top1/g.count,top5Rate:g.top5/g.count}));
+}
+function renderAIEvaluations() {
+  const stats=evaluationStats(loadAIEvaluations());
+  $('ai-eval-summary').textContent=stats.length?stats.map(g=>g.mode+': '+g.count+' ca · đúng đầu '+Math.round(g.top1Rate*100)+'% · trong 5 ảnh đầu '+Math.round(g.top5Rate*100)+'%').join(' | '):'Chưa có đánh giá. Chỉ so sánh công bằng khi dùng cùng bộ ảnh mẫu và cùng phạm vi.';
+}
+function scopeFingerprint(ids) {
+  let a=2166136261,b=5381;
+  for(const id of [...ids].sort()) for(const character of id+'\0') {const code=character.charCodeAt(0);a=Math.imul(a^code,16777619);b=Math.imul(b,33)^code;}
+  return ids.length+':'+(a>>>0).toString(16)+':'+(b>>>0).toString(16);
+}
+$('ai-save-eval').addEventListener('click',()=>{
+  if(!aiLastRun || aiSearching) return;
+  const expected=$('ai-expected').value,caseName=$('ai-case-name').value.trim();
+  if(!expected || !caseName) {toast('Nhập tên ca thử và chọn ảnh đúng đã biết.');return;}
+  const index=aiLastRun.ranked.findIndex(item=>item.photo.id===expected);
+  const record={caseName,expected,rank:index<0?null:index+1,requested:aiLastRun.requested,actual:aiLastRun.actual,root:aiLastRun.root,cropped:aiLastRun.cropped,rerankLimit:aiLastRun.rerankLimit,scope:scopeFingerprint(aiLastRun.candidates.map(photo=>photo.id)),date:new Date().toISOString()};
+  let records=loadAIEvaluations().filter(item=>!(item.caseName===caseName&&item.actual===record.actual&&item.root===record.root&&item.cropped===record.cropped&&item.rerankLimit===record.rerankLimit&&item.scope===record.scope));
+  records.push(record);records=records.slice(-500);
+  try {localStorage.setItem(AI_EVAL_KEY,JSON.stringify(records));renderAIEvaluations();toast('Đã lưu đánh giá');} catch(_) {toast('Không lưu được đánh giá: bộ nhớ trình duyệt đã đầy hoặc bị chặn.');}
+});
+$('ai-expected').addEventListener('change',()=>{
+  document.querySelectorAll('#ai-results-grid .card').forEach(card=>card.classList.toggle('ai-correct',card.dataset.photoId===$('ai-expected').value));
+});
+function csvCell(value) { const text=String(value??'');return '"'+(/^[=+\-@\t\r]/.test(text)?"'":'')+text.replace(/"/g,'""')+'"'; }
+$('ai-export-eval').addEventListener('click',()=>{
+  const records=loadAIEvaluations();if(!records.length){toast('Chưa có đánh giá để xuất.');return;}
+  const keys=['caseName','expected','rank','requested','actual','root','cropped','rerankLimit','date','scope'];
+  const csv='\uFEFF'+[keys.map(csvCell).join(','),...records.map(item=>keys.map(key=>csvCell(key==='scope'?JSON.stringify(item[key]):item[key])).join(','))].join('\r\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download='danh-gia-tim-anh.csv';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+});
+$('ai-clear-eval').addEventListener('click',()=>{try {localStorage.removeItem(AI_EVAL_KEY);renderAIEvaluations();toast('Đã xóa đánh giá');} catch(_){toast('Không xóa được đánh giá');}});
+renderAIEvaluations();
+
 
 // Khôi phục phiên đăng nhập ngay lập tức khi vừa tải trang (trước cả khi script GSI tải xong)
-// The only external executable resource is Google Identity Services.
+// External resources: Google Identity, fonts, pinned Transformers.js/ONNX runtime and model weights.
 // Khôi phục phiên đăng nhập đã lưu ngay khi tải trang (không đợi Google GSI tải xong)
 try { tryRestoreSession(); } catch (_) {}
 const identityScript = document.createElement('script'); identityScript.src = 'https://accounts.google.com/gsi/client'; identityScript.async = true; identityScript.onload = initIdentity; identityScript.onerror = identityError; document.head.append(identityScript);
