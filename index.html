@@ -470,6 +470,89 @@ header .actions{margin-left:auto}
 .cut-hint{font-size:12px;line-height:1.7;color:var(--text-muted)}
 @media(max-width:900px){#crop-tool{padding:0 16px 32px}.cut-layout{grid-template-columns:1fr}.cut-drop{padding:12px}.cut-stage{padding:10px}.cut-options{padding:14px}}
 @media(max-width:767px){.header-tools{flex-wrap:wrap;justify-content:center}.header-tool{padding:7px 8px}}
+
+/* Radial header inspired by Lucian UX/UI #011, MIT (c) 2026 Seokwoooo.
+   https://lucianlabs.dev/uxui-prompt/#011 */
+header{flex-wrap:nowrap}
+.header-tools{position:relative;order:0;width:auto;margin:0 0 0 14px;flex:none}
+#tools-toggle{display:flex;align-items:center;gap:11px;min-height:54px;padding:5px 14px 5px 6px;border:1px solid rgba(233,217,179,.25);border-radius:999px;background:rgba(255,255,255,.05);color:#f6ecd8;text-align:left;box-shadow:inset 0 1px rgba(255,255,255,.06);transition:background .2s,border-color .2s}
+#tools-toggle:hover,#tools-toggle[aria-expanded=true]{background:rgba(233,217,179,.11);border-color:rgba(233,217,179,.55)}
+.tools-orb{display:grid;place-items:center;width:42px;height:42px;flex:none;border-radius:50%;background:linear-gradient(140deg,#f4dfc1,#e1bd8b);color:#433727;box-shadow:inset 0 1px 1px #fff8,0 4px 12px #0002}
+.tools-orb svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;transition:transform .45s cubic-bezier(.34,1.45,.64,1)}
+.is-open .tools-orb svg{transform:rotate(135deg)}
+.tools-caption{display:flex;flex-direction:column;gap:1px;min-width:94px;letter-spacing:0}
+.tools-caption>span{font-size:10px;color:#d6c8a9;letter-spacing:.1em}
+.tools-caption strong{font-size:13px;font-weight:600;line-height:1.5}
+.tools-chevron{width:16px;height:16px;transition:transform .25s}.is-open .tools-chevron{transform:rotate(180deg)}
+#tools-menu{--step:1px;position:fixed;top:110px;left:12px;width:400px;max-width:calc(100vw - 24px);height:292px;max-height:calc(100dvh - var(--menu-top,110px) - 12px);overflow:auto;border:1px solid var(--border-subtle);border-radius:26px;background:var(--bg-surface);color:var(--text-main);box-shadow:0 22px 65px rgba(15,25,45,.2),0 3px 12px rgba(15,25,45,.05);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px) scale(.96);transform-origin:var(--menu-origin,50%) 0;transition:opacity .18s,transform .3s cubic-bezier(.2,.8,.2,1),visibility .3s;isolation:isolate}
+.is-open #tools-menu{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+.tools-menu-heading{position:absolute;top:20px;left:0;width:100%;text-align:center;display:flex;flex-direction:column;gap:3px}
+.tools-menu-heading span{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted)}
+.tools-menu-heading strong{font-size:17px;font-weight:600;letter-spacing:-.03em}
+.tools-halo{position:absolute;inset:60px 20px 25px;z-index:-1;border-radius:50%;background:radial-gradient(ellipse,rgba(233,217,179,.23),rgba(246,184,198,.08) 55%,transparent 72%);transform:scale(.3);transition:transform .5s}
+.is-open .tools-halo{transform:scale(1)}
+#tools-menu .header-tool{position:absolute;top:67px;left:calc(50% - 40px);display:flex;flex-direction:column;gap:9px;width:80px;min-height:76px;padding:0;border:0;border-radius:14px;background:transparent;color:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:0;box-shadow:none;opacity:0;transform:translate(0,-20px) scale(.3);transition:transform .42s cubic-bezier(.34,1.3,.64,1),opacity .18s;transition-delay:calc((4 - var(--i)) * 15ms)}
+.is-open #tools-menu .header-tool{opacity:1;transform:translate(calc(var(--x) * var(--step)),calc(var(--y) * 1px)) scale(1);transition-delay:calc(var(--i) * 35ms)}
+#tools-menu .header-tool .ui-icon{display:block;box-sizing:content-box;width:21px;height:21px;padding:15px;border:1px solid color-mix(in srgb,var(--tool-color) 35%,transparent);border-radius:50%;background:color-mix(in srgb,var(--tool-color) 13%,var(--bg-surface));color:color-mix(in srgb,var(--tool-color) 80%,var(--text-main));box-shadow:inset 0 1px rgba(255,255,255,.3),0 5px 12px rgba(15,25,45,.04);transition:transform .25s,background .2s,box-shadow .2s}
+#tools-menu .header-tool span{display:block;white-space:nowrap}
+#tools-menu .header-tool:hover .ui-icon{transform:translateY(-3px);background:color-mix(in srgb,var(--tool-color) 24%,var(--bg-surface));box-shadow:0 8px 16px rgba(15,25,45,.1)}
+#tools-menu .header-tool[aria-current=page]{color:var(--gold-primary);font-weight:700}
+#tools-menu .header-tool[aria-current=page] .ui-icon{background:#e9d9b3;color:#433727;border-color:#d4bb87;box-shadow:0 0 0 4px var(--gold-subtle)}
+.tools-menu-note{position:absolute;bottom:12px;left:0;width:100%;margin:0;text-align:center;font-size:10px;color:var(--text-muted)}
+@media(min-width:768px) and (max-width:1100px){header{padding-inline:20px;gap:10px}.tools-caption{min-width:82px}.chamcong{font-size:11px;gap:7px;padding:5px 8px;margin-right:0}#cc-total{display:none}#cc-toggle{padding:7px 10px}header .actions{gap:6px}header .actions button{padding-inline:10px}}
+@media(max-width:767px){header{gap:8px}.header-tools{order:2;width:auto;margin-left:auto}header .actions{order:3;margin-left:0}#tools-toggle{min-height:42px;padding:0;border:0;background:transparent}.tools-orb{width:42px;height:42px}.tools-caption,.tools-chevron{display:none}#tools-menu{--step:.78px;width:312px;border-radius:22px}#tools-menu .header-tool .ui-icon{padding:12px}#tools-menu .header-tool{font-size:10px}.ai-panel{top:auto}}
+#tools-menu{height:320px}.tools-menu-note{top:294px;bottom:auto;padding-bottom:12px;font-size:11px}
+[data-theme="dark"] #tools-menu{--text-muted:#a8b2c2}
+@media(min-width:768px) and (max-width:1100px){.tools-caption,.tools-chevron{display:none}#tools-toggle{padding:5px}.header-tools{margin-left:0}}
+@media(max-width:767px){.logo-mini .divider{max-width:160px}}
+@media(max-width:380px){header{padding-inline:8px;gap:6px}.logo-mini{gap:4px}.logo-mini .name-line{font-size:17px}.logo-mini .flower-entrance{width:22px;height:22px}.logo-mini .divider{max-width:130px}.pa-name-glass{padding-inline:7px}.logo-mini .tagline{font-size:6px;letter-spacing:.15em}.tools-orb{width:38px;height:38px}}
+
+/* Lucian UX/UI #305 / #061 / #178 / #258 · MIT (c) 2026 Seokwoooo.
+   https://lucianlabs.dev/uxui-prompt/ — adapted for the product library. */
+#filter-drawer{position:fixed;inset:0 0 0 auto;margin:0;width:min(450px,100%);height:100dvh;max-width:100%;max-height:100dvh;padding:0;border:0;border-left:1px solid var(--border-subtle);background:var(--bg-surface);color:var(--text-main);box-shadow:-18px 0 70px #0a101a26;overflow:hidden}
+#filter-drawer[open]{display:flex;flex-direction:column;animation:drawer-in .32s cubic-bezier(.2,.8,.2,1)}
+#filter-drawer::backdrop{background:rgba(10,16,26,.42);backdrop-filter:blur(3px);animation:backdrop-enter .25s}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:26px 26px 20px;gap:12px;border-bottom:1px solid var(--border-light);flex:none}
+.drawer-eyebrow{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-primary)}
+.drawer-head h2{font-size:23px;letter-spacing:-.03em;margin:4px 0 0;font-weight:650}
+#drawer-close{width:42px;height:42px;padding:0;font-size:24px;border-radius:50%;background:var(--bg-cream);flex:none}
+.drawer-content{overflow:auto;overscroll-behavior:contain;flex:1;min-height:0;padding:0 26px}
+#filter-drawer .filters{padding:20px 0 4px;border:0}#filter-drawer .filter-body{display:flex;flex-direction:column;align-items:stretch;margin:0;padding:0;background:none}
+#filter-drawer .filter-header{display:none}#filter-drawer #clear-filters{align-self:flex-start;margin:0 0 16px;padding:4px 0;min-height:36px}
+#filter-drawer .filter-tabs{display:flex;position:sticky;top:0;z-index:1;background:var(--bg-surface);padding:8px 0 14px;gap:8px}
+#filter-drawer .filter-tabs label{flex:1;text-align:center;padding:11px 8px;border:1px solid var(--border-subtle);border-radius:999px;cursor:pointer;font-size:12px;transition:background .2s,color .2s}
+#filter-drawer .filter-body:has(#filter-brand:checked) label[for=filter-brand],#filter-drawer .filter-body:has(#filter-category:checked) label[for=filter-category],#filter-drawer .filter-body:has(#filter-price:checked) label[for=filter-price]{background:var(--gold-subtle);border-color:var(--gold-primary);color:var(--gold-primary);font-weight:650}
+#filter-drawer .group{display:none;padding:12px 0 20px;border:0}#filter-drawer .filter-body:has(#filter-brand:checked) .filter-brands,#filter-drawer .filter-body:has(#filter-category:checked) .filter-categories,#filter-drawer .filter-body:has(#filter-price:checked) .filter-prices{display:block}
+#filter-drawer .filter-body>.group{opacity:1;transform:none;transition:none}#filter-drawer .filter-tabs::after{display:none}
+#filter-drawer .brands{max-height:none;overflow:visible}#filter-drawer .options{gap:8px}#filter-drawer .option{min-height:48px;padding:11px 12px;border:1px solid var(--border-light);border-radius:12px;background:var(--bg-subtle)}
+.drawer-footer{padding:16px 26px max(20px,env(safe-area-inset-bottom));border-top:1px solid var(--border-light);background:var(--bg-surface);flex:none;display:flex;flex-direction:column;gap:10px}
+#drawer-summary{font-size:12px;color:var(--text-secondary)}#drawer-apply{width:100%;min-height:50px;border-radius:14px;display:flex;justify-content:center;align-items:center;gap:7px;font-size:14px;font-weight:650}
+#drawer-count{display:inline-block;font-variant-numeric:tabular-nums}#drawer-apply:disabled{opacity:.5;cursor:not-allowed}
+@keyframes drawer-in{from{transform:translateX(100%);opacity:.5}to{transform:none;opacity:1}}
+@keyframes sheet-in{from{transform:translateY(100%)}to{transform:none}}
+.gallery-card{position:relative;min-width:0}.gallery-card>.card{display:block;width:100%;height:100%;text-align:left;letter-spacing:normal;transition:border-color .2s,box-shadow .2s}
+.gallery-card.is-selected>.card{border-color:var(--gold-primary);box-shadow:0 0 0 2px var(--gold-badge)}
+.photo-pick{position:absolute;z-index:2;top:14px;right:14px;width:36px;height:36px;display:grid;place-items:center;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:50%;box-shadow:0 3px 12px #0a101a18;cursor:pointer}
+.photo-pick input{width:19px;height:19px;margin:0;accent-color:var(--gold-primary);cursor:pointer}.photo-pick:has(input:checked){background:var(--gold-subtle);border-color:var(--gold-primary)}
+.bulk-dock{position:fixed;bottom:max(20px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:25;width:max-content;max-width:calc(100% - 24px);padding:12px 14px;display:flex;align-items:center;gap:30px;border:1px solid var(--border-subtle);border-radius:22px;background:var(--bg-surface);box-shadow:0 12px 50px #0a101a33;animation:dock-in .32s cubic-bezier(.34,1.3,.64,1)}
+.bulk-summary{display:flex;align-items:center;gap:10px;min-width:0}.bulk-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--gold-subtle);color:var(--gold-primary);font-size:20px;flex:none}.bulk-summary strong,.bulk-summary small{display:block}.bulk-summary strong{font-size:14px;font-weight:650}.bulk-summary small{font-size:11px;color:var(--text-muted);margin-top:2px;max-width:330px}
+.bulk-actions{display:flex;gap:8px;flex:none}.bulk-actions button{min-height:42px;padding:10px 14px;border-radius:12px}body:has(#bulk-dock:not([hidden])) #gallery{padding-bottom:150px}body:has(#bulk-dock:not([hidden])) .toast{bottom:120px}
+@keyframes dock-in{from{opacity:0;translate:0 30px;scale:.95}to{opacity:1;translate:0 0;scale:1}}
+.photo.is-loading{position:relative;background:var(--bg-subtle-cream);background-size:contain;background-position:center;background-repeat:no-repeat;isolation:isolate}
+.photo.is-loading::before{content:"";position:absolute;inset:0;backdrop-filter:blur(9px);background:linear-gradient(100deg,transparent,rgba(233,217,179,.18),transparent);z-index:0}
+.photo.is-loading img{opacity:0;filter:blur(10px);transform:scale(1.035)}
+.photo img{position:relative;z-index:1;transition:opacity .35s ease,filter .45s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.photo-loader{position:absolute;bottom:0;left:0;right:0;height:3px;overflow:hidden;z-index:2;background:var(--border-light);pointer-events:none}
+.photo-loader::after{content:"";display:block;width:35%;height:100%;background:var(--gold-light);transform:translateX(-100%)}
+.photo.is-visible .photo-loader::after{animation:photo-loading 1.25s ease-in-out infinite}
+@keyframes photo-loading{to{transform:translateX(400%)}}
+.photo.is-ready+.filename{animation:photo-caption .3s ease-out both}@keyframes photo-caption{from{opacity:.5;translate:0 4px}to{opacity:1;translate:0 0}}
+.lightbox[open]{animation:none;background:rgba(8,14,24,.96);overflow:hidden}.lightbox::backdrop{background:rgba(8,14,24,.96)}
+#stage{overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}#original{flex:none;max-width:calc(100% - 80px);max-height:100%;width:auto;height:auto;will-change:transform;cursor:zoom-in;touch-action:none;user-select:none;-webkit-user-drag:none}
+#stage.is-zoomed #original{cursor:grab}#stage.is-dragging #original{cursor:grabbing}.lb-actions{display:flex;align-items:center;gap:10px}.lightbox #lb-zoom{font-size:20px}.lb-help{font-size:11px;color:#abb5c2;margin:0 0 7px}.lb-bottom{position:relative;z-index:2;flex:none}.lb-top{position:relative;z-index:2;flex:none}.lb-hero{position:fixed;z-index:1000;pointer-events:none;object-fit:contain;border-radius:8px;box-shadow:0 16px 60px #0003;will-change:transform;max-width:none!important;max-height:none!important}
+[data-theme=dark] .bulk-dock,[data-theme=dark] #filter-drawer{--text-muted:#a8b2c2}
+@media(max-width:767px){#filter-drawer{inset:auto 0 0;margin:0;width:100%;height:min(84dvh,780px);border:0;border-radius:26px 26px 0 0}#filter-drawer[open]{animation:sheet-in .32s cubic-bezier(.2,.8,.2,1)}.drawer-head{padding:24px 20px 16px;position:relative}.drawer-head::before{content:"";position:absolute;top:8px;left:calc(50% - 20px);width:40px;height:4px;border-radius:9px;background:var(--border-subtle)}.drawer-head h2{font-size:21px}.drawer-content{padding-inline:20px}.drawer-footer{padding-inline:20px}.bulk-dock{width:calc(100% - 24px);gap:10px;padding:12px;flex-wrap:wrap;bottom:max(12px,env(safe-area-inset-bottom));border-radius:18px}.bulk-summary{flex:1;min-width:150px}.bulk-summary small{font-size:10px}.bulk-mark{width:30px;height:30px}.bulk-actions{margin-left:auto}.bulk-actions button{padding:9px 11px;font-size:12px}.photo-pick{top:10px;right:10px;width:32px;height:32px}#original{max-width:100%}.lightbox{padding:12px}.lb-help{font-size:10px}.lb-bottom{padding-inline:5px}}
+@media(prefers-reduced-motion:reduce){#filter-drawer[open],.bulk-dock,.photo-loader::after,.photo.is-ready+.filename{animation:none!important}.photo img{transition:none!important}.photo.is-loading img{filter:none;transform:none}}
 </style>
 </head>
 <body>
@@ -508,7 +591,18 @@ header .actions{margin-left:auto}
 </div>
 
 <div class="announcement">Kho ảnh sản phẩm · Cảm hứng thời trang · Google Drive chỉ đọc</div>
-<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="caredey"><span>c</span><span>a</span><span>r</span><span>e</span><span>d</span><span>e</span><span>y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; caredey</span></span></span></button><nav class="header-tools" aria-label="Công cụ chính"><button id="hdr-gallery" type="button" class="header-tool" aria-current="page" aria-label="Kho ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Kho ảnh</span></button><button id="hdr-search" type="button" class="header-tool" aria-label="Tìm bằng ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M8 10.5h5m-2.5-2.5v5"/></svg><span>Tìm bằng ảnh</span></button><button id="hdr-logo" type="button" class="header-tool" aria-label="Chèn logo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h10l7 7-10 10-7-7Z"/><circle cx="9" cy="9" r="1.5"/></svg><span>Chèn logo</span></button><button id="hdr-crop" type="button" class="header-tool" aria-label="Cắt ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h12M3 6h12a3 3 0 0 1 3 3v12M3 21 21 3"/></svg><span>Cắt ảnh</span></button><button id="hdr-getimg" type="button" class="header-tool secondary" aria-label="Lấy ảnh"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg><span>Lấy ảnh</span></button></nav><div class="chamcong" id="chamcong">
+<header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="caredey"><span>c</span><span>a</span><span>r</span><span>e</span><span>d</span><span>e</span><span>y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; caredey</span></span></span></button><div class="header-tools" id="header-tools">
+<button id="tools-toggle" type="button" aria-expanded="false" aria-controls="tools-menu" aria-label="Mở công cụ · Kho ảnh">
+  <span class="tools-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+  <span class="tools-caption"><span>Công cụ</span><strong id="tools-current">Kho ảnh</strong></span>
+  <svg class="tools-chevron ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+</button>
+<nav id="tools-menu" aria-label="Công cụ chính" inert>
+  <div class="tools-menu-heading"><span>Không gian sáng tạo</span><strong>Bạn muốn làm gì?</strong></div>
+  <span class="tools-halo" aria-hidden="true"></span>
+<button id="hdr-gallery" type="button" class="header-tool" aria-current="page" aria-label="Kho ảnh" style="--i:0;--x:-136;--y:42;--tool-color:#b0945c"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Kho ảnh</span></button><button id="hdr-search" type="button" class="header-tool" aria-label="Tìm bằng ảnh" style="--i:1;--x:-76;--y:110;--tool-color:#7b8fc2"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M8 10.5h5m-2.5-2.5v5"/></svg><span>Tìm bằng ảnh</span></button><button id="hdr-logo" type="button" class="header-tool" aria-label="Chèn logo" style="--i:2;--x:0;--y:138;--tool-color:#cf91a5"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h10l7 7-10 10-7-7Z"/><circle cx="9" cy="9" r="1.5"/></svg><span>Chèn logo</span></button><button id="hdr-crop" type="button" class="header-tool" aria-label="Cắt ảnh" style="--i:3;--x:76;--y:110;--tool-color:#78a999"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v12a3 3 0 0 0 3 3h12M3 6h12a3 3 0 0 1 3 3v12M3 21 21 3"/></svg><span>Cắt ảnh</span></button><button id="hdr-getimg" type="button" class="header-tool secondary" aria-label="Lấy ảnh" style="--i:4;--x:136;--y:42;--tool-color:#c69a68"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg><span>Lấy ảnh</span></button>
+  <p class="tools-menu-note">Chọn một công cụ để bắt đầu</p>
+</nav></div><div class="chamcong" id="chamcong">
 <span id="cc-date"></span>
 <span id="cc-timer" hidden>00:00:00</span>
 <span id="cc-total"></span>
@@ -520,7 +614,7 @@ header .actions{margin-left:auto}
 <div class="layout">
 
 <section aria-label="Ảnh sản phẩm">
-<div class="toolbar"><span class="muted" id="result-count" role="status"></span><div class="toolbar-actions"><button id="gallery-filter" type="button" aria-controls="nav-sidebar" aria-expanded="false">Bộ lọc <span id="filter-count"></span></button><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button><button id="stop-scan" type="button" hidden>Dừng quét</button></div></div>
+<div class="toolbar"><span class="muted" id="result-count" role="status"></span><div class="toolbar-actions"><button id="gallery-filter" type="button" aria-controls="filter-drawer" aria-haspopup="dialog" aria-expanded="false">Bộ lọc <span id="filter-count"></span></button><button class="text-button" id="retry" hidden>Quét lại kho ảnh</button><button id="stop-scan" type="button" hidden>Dừng quét</button></div></div>
 <div class="filter-chips" id="filter-chips" aria-label="Bộ lọc đang chọn"></div><div class="progress" id="progress" role="status"><span class="spinner" id="scan-spinner"></span><span id="scan-status">Đang đọc danh sách hãng…</span></div>
 <nav class="gallery-pagination" aria-label="Trang ảnh phía trên" hidden><span data-page-range class="muted" role="status"></span><div class="button-row"><button type="button" data-page-prev aria-label="Trang ảnh trước">← Trước</button><label>Trang <input type="number" min="1" step="1" data-page-input aria-label="Số trang ảnh phía trên"></label><span data-page-total class="muted"></span><button type="button" data-page-next aria-label="Trang ảnh tiếp">Sau →</button></div></nav>
 <div class="grid" id="grid"></div><p class="empty" id="empty" hidden></p>
@@ -655,7 +749,17 @@ header .actions{margin-left:auto}
 </div>
 <div class="buttons"><button class="primary" type="button" id="copy-bm">Copy mã</button><button type="button" id="close-getimg">Đóng</button></div>
 <p class="muted" id="copy-msg" role="status" style="margin-top:10px"></p></dialog>
-<dialog class="lightbox" id="lightbox" aria-label="Xem ảnh gốc"><div class="lb-top"><span id="lb-count"></span><button id="lb-close" aria-label="Đóng ảnh">×</button></div><div class="stage" id="stage"><img id="original" alt="" hidden><div class="lb-status" id="lb-status" role="status"></div><button class="nav prev" id="lb-prev" aria-label="Ảnh trước">‹</button><button class="nav next" id="lb-next" aria-label="Ảnh sau">›</button></div><div class="lb-bottom"><div id="lb-name"></div><div class="price" id="lb-price"></div></div></dialog>
+<!-- Lucian UX/UI Prompt #305, #061, #178, #258 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/ -->
+<dialog id="filter-drawer" aria-labelledby="drawer-title">
+  <div class="drawer-head"><div><span class="drawer-eyebrow">Tìm đúng sản phẩm</span><h2 id="drawer-title">Bộ lọc kho ảnh</h2></div><button id="drawer-close" type="button" aria-label="Đóng bộ lọc">×</button></div>
+  <div id="drawer-content" class="drawer-content"></div>
+  <div class="drawer-footer"><span id="drawer-summary" role="status"></span><button id="drawer-apply" class="primary" type="button">Xem <span id="drawer-count">0</span> ảnh <span aria-hidden="true">↗</span></button></div>
+</dialog>
+<div id="bulk-dock" class="bulk-dock" role="region" aria-label="Thao tác ảnh đã chọn" hidden>
+  <div class="bulk-summary"><span class="bulk-mark" aria-hidden="true">✓</span><div><strong id="bulk-count" role="status">Đã chọn 0 ảnh</strong><small id="bulk-status">Tối đa 9 ảnh mỗi lượt chèn logo</small></div></div>
+  <div class="bulk-actions"><button id="bulk-clear" type="button">Bỏ chọn</button><button id="bulk-logo" type="button" class="primary">Chèn logo <span aria-hidden="true">↗</span></button></div>
+</div>
+<dialog class="lightbox" id="lightbox" aria-label="Xem ảnh gốc"><div class="lb-top"><span id="lb-count"></span><div class="lb-actions"><button id="lb-zoom" type="button" aria-label="Phóng to ảnh" aria-pressed="false" disabled>＋</button><button id="lb-close" aria-label="Đóng ảnh">×</button></div></div><div class="stage" id="stage"><img id="original" alt="" hidden><div class="lb-status" id="lb-status" role="status"></div><button class="nav prev" id="lb-prev" aria-label="Ảnh trước">‹</button><button class="nav next" id="lb-next" aria-label="Ảnh sau">›</button></div><div class="lb-bottom"><p class="lb-help">Bấm đúp để phóng to · Vuốt ngang đổi ảnh · Kéo xuống để đóng</p><div id="lb-name"></div><div class="price" id="lb-price"></div></div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 <script>
 'use strict';
@@ -756,8 +860,54 @@ async function revealTheme(event) {
 }
 $('theme-toggle').addEventListener('click',revealTheme);
 
+// Keep the fan within the viewport without changing the header's layout.
+const toolsRoot = $('header-tools'), toolsToggle = $('tools-toggle'), toolsMenu = $('tools-menu');
+const toolButtons = [...toolsMenu.querySelectorAll('.header-tool')];
+function positionToolsMenu() {
+  const anchor = toolsToggle.getBoundingClientRect();
+  const width = toolsMenu.offsetWidth;
+  const left = Math.max(12, Math.min(innerWidth - width - 12, anchor.left + anchor.width / 2 - width / 2));
+  const top = document.querySelector('header').getBoundingClientRect().bottom + 10;
+  toolsMenu.style.left = left + 'px'; toolsMenu.style.top = top + 'px';
+  toolsMenu.style.setProperty('--menu-top', top + 'px');
+  toolsMenu.style.setProperty('--menu-origin', (anchor.left + anchor.width / 2 - left) + 'px');
+}
+function setToolsOpen(open, restoreFocus = false) {
+  if (open) { closeNav(); positionToolsMenu(); }
+  toolsRoot.classList.toggle('is-open', open);
+  toolsToggle.setAttribute('aria-expanded', String(open));
+  toolsMenu.inert = !open;
+  toolsToggle.setAttribute('aria-label', (open ? 'Đóng công cụ · ' : 'Mở công cụ · ') + $('tools-current').textContent);
+  if (restoreFocus) toolsToggle.focus({preventScroll:true});
+}
+toolsToggle.addEventListener('click', () => setToolsOpen(toolsToggle.getAttribute('aria-expanded') !== 'true'));
+toolsToggle.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault(); setToolsOpen(true);
+    (e.key === 'ArrowUp' ? toolButtons.at(-1) : toolsMenu.querySelector('[aria-current]') || toolButtons[0]).focus();
+  }
+});
+toolsMenu.addEventListener('click', e => {
+  const button = e.target.closest('.header-tool');
+  if (button) setToolsOpen(false, button.id !== 'hdr-getimg');
+});
+toolsRoot.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && toolsRoot.classList.contains('is-open')) { e.preventDefault(); setToolsOpen(false, true); }
+  if (e.target === toolsToggle) return;
+  const index = toolButtons.indexOf(document.activeElement);
+  const direction = ['ArrowRight','ArrowDown'].includes(e.key) ? 1 : ['ArrowLeft','ArrowUp'].includes(e.key) ? -1 : 0;
+  if (index >= 0 && (direction || e.key === 'Home' || e.key === 'End')) {
+    e.preventDefault(); toolButtons[e.key === 'Home' ? 0 : e.key === 'End' ? toolButtons.length - 1 : (index + direction + toolButtons.length) % toolButtons.length].focus();
+  }
+});
+document.addEventListener('pointerdown', e => { if (!toolsRoot.contains(e.target)) setToolsOpen(false); });
+document.addEventListener('focusin', e => { if (!toolsRoot.contains(e.target)) setToolsOpen(false); });
+window.addEventListener('resize', () => { if (toolsRoot.classList.contains('is-open')) positionToolsMenu(); });
+window.addEventListener('scroll', () => { if (toolsRoot.classList.contains('is-open')) setToolsOpen(false, toolsMenu.contains(document.activeElement)); }, {passive:true});
+
+
 function closeNav(){ $('gallery-filter').setAttribute('aria-expanded','false'); $('nav-sidebar').classList.remove('open'); $('nav-sidebar').inert = true; $('nav-backdrop').classList.remove('show'); $('nav-fab').setAttribute('aria-expanded','false'); scrollLock(); }
-function openNav(){ $('gallery-filter').setAttribute('aria-expanded','true'); $('nav-sidebar').inert = false; $('nav-sidebar').classList.add('open'); $('nav-backdrop').classList.add('show'); $('nav-fab').setAttribute('aria-expanded','true'); scrollLock(); $('nav-close').focus(); }
+function openNav(){ setToolsOpen(false); $('gallery-filter').setAttribute('aria-expanded','true'); $('nav-sidebar').inert = false; $('nav-sidebar').classList.add('open'); $('nav-backdrop').classList.add('show'); $('nav-fab').setAttribute('aria-expanded','true'); scrollLock(); $('nav-close').focus(); }
 $('nav-fab').addEventListener('click',openNav);
 $('nav-close').addEventListener('click',() => {closeNav(); $('nav-fab').focus();});
 $('nav-backdrop').addEventListener('click',closeNav);
@@ -769,7 +919,7 @@ $('nav-crop').addEventListener('click', () => { switchMainView('crop'); closeNav
 $('hdr-crop').addEventListener('click', () => { switchMainView('crop'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('nav-search').addEventListener('click', () => { switchMainView('search'); closeNav(); window.scrollTo({top:0,behavior:'smooth'}); });
 $('hdr-gallery').addEventListener('click', () => { switchMainView('gallery'); window.scrollTo({top:0,behavior:'smooth'}); });
-$('gallery-filter').addEventListener('click', () => { openNav(); $('brand-search').focus(); });
+$('gallery-filter').addEventListener('click', openFilterDrawer);
 $('hdr-logo').addEventListener('click', () => { switchMainView('logo'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('hdr-search').addEventListener('click', () => { switchMainView('search'); window.scrollTo({top:0,behavior:'smooth'}); });
 $('hdr-getimg').addEventListener('click', () => { $('getimg-guide').showModal(); scrollLock(); });
@@ -847,6 +997,8 @@ let root = DEFAULT_ROOT, photos = [], brands = [], scanning = false, scanErrors 
 let seenPhotoIds = new Set(), scannedFolderIds = new Set();
 const GALLERY_PAGE_SIZE = 60;
 let galleryMatches = [], galleryPage = 0, galleryRenderedKey = '';
+const bulkSelected = new Map(); let bulkBusy = false, bulkController = null, bulkEpoch = 0;
+let draftFilters = null, drawerReturnFocus = null, drawerClosing = false;
 const dirtyCounts = {brand:new Set(), category:new Set(), price:new Set()};
 let lightboxItems = [], lightboxIndex = 0, imageGeneration = 0, originalController, objectUrl = '', returnFocus;
 let activeView = 'gallery'; // 'gallery' | 'logo' | 'search' | 'crop'
@@ -995,13 +1147,13 @@ function toast(message) {
   // Không tự ẩn khi đang hiện nút gia hạn
   if (!keepBtn) { toastTimer = setTimeout(() => { el.hidden = true; },6500); }
 }
-function scrollLock() { document.body.style.overflow = $('ai-crop-dialog').open || $('lightbox').open || $('settings').open || $('getimg-guide').open || $('nav-sidebar').classList.contains('open') ? 'hidden' : ''; }
-function closeFilters() { closeNav(); }
+function scrollLock() { document.body.style.overflow = $('filter-drawer').open || $('ai-crop-dialog').open || $('lightbox').open || $('settings').open || $('getimg-guide').open || $('nav-sidebar').classList.contains('open') ? 'hidden' : ''; }
+function closeFilters() { closeFilterDrawer(false); closeNav(); }
 function stopSession(message) {
   cancelAISearch(); clearAIResults('Đăng nhập Google Drive để tìm trong kho ảnh.'); syncHeaderView('gallery');
   generation++; controller?.abort(); clearTimeout(tokenTimer); clearTimeout(warnTimer); hideRenewToast(); accessToken = ''; authExpiresAt = 0; scanning = false;
   clearAuthSession();
-  closeLightbox(); closeFilters(); photos = []; brands = []; seenPhotoIds.clear(); scannedFolderIds.clear();
+  clearBulkSelection(); closeLightbox(true); closeFilters(); photos = []; brands = []; seenPhotoIds.clear(); scannedFolderIds.clear();
   resetGallery(); $('brand-options').replaceChildren();
   $('stop-scan').hidden = true;
   $('gallery').hidden = true; $('login').hidden = false; $('logout').hidden = true;
@@ -1033,13 +1185,13 @@ async function list(parent,condition,fields,run,orderBy='name',onPage) {
   } while (pageToken);
   return files;
 }
-function thumbnail(link) {
+function thumbnail(link, size = 400) {
   if (!link) return '';
   try {
     const url = new URL(link); if (url.protocol !== 'https:' || !/(^|\.)(googleusercontent\.com|google\.com)$/.test(url.hostname)) return '';
-    if (url.searchParams.has('sz')) url.searchParams.set('sz','w400');
-    else if (/=[sw]\d+[^/]*$/.test(url.pathname)) url.pathname = url.pathname.replace(/=[sw]\d+[^/]*$/,'=w400');
-    else url.searchParams.set('sz','w400');
+    if (url.searchParams.has('sz')) url.searchParams.set('sz','w' + size);
+    else if (/=[sw]\d+[^/]*$/.test(url.pathname)) url.pathname = url.pathname.replace(/=[sw]\d+[^/]*$/,'=w' + size);
+    else url.searchParams.set('sz','w' + size);
     return url.href;
   } catch (_) { return ''; }
 }
@@ -1048,15 +1200,19 @@ function makeOption(group,value,labelText) {
   const input = document.createElement('input'); input.type = 'checkbox'; input.value = value;
   const name = document.createElement('span'); name.textContent = labelText;
   const count = document.createElement('small'); count.textContent = '0'; count.setAttribute('aria-label','Số ảnh');
-  input.addEventListener('change',() => { if (input.checked) selected[group].add(value); else selected[group].delete(value); filterPhotos(); });
+  input.addEventListener('change',() => { const target = draftFilters || selected; if (input.checked) target[group].add(value); else target[group].delete(value); if (draftFilters) updateDrawerCount(); else filterPhotos(); });
   const box = document.createElement('span'); box.className = 'box'; box.setAttribute('aria-hidden','true');
   box.innerHTML = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="var(--bg-surface)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   label.append(input,box,name,count); options[group].set(value,{label,input,count,name}); return label;
 }
 CATEGORIES.forEach(value => $('category-options').append(makeOption('category',value,value)));
 PRICES.forEach(value => $('price-options').append(makeOption('price',value,value)));
-function matches(photo) { return (!selected.brand.size || selected.brand.has(photo.brand)) && (!selected.category.size || selected.category.has(photo.category)) && (!selected.price.size || selected.price.has(photo.priceGroup)); }
+function matchesFilters(photo, filters) { return (!filters.brand.size || filters.brand.has(photo.brand)) && (!filters.category.size || filters.category.has(photo.category)) && (!filters.price.size || filters.price.has(photo.priceGroup)); }
+function matches(photo) { return matchesFilters(photo, selected); }
 function syncHeaderView(view) {
+  const currentLabel = $('hdr-' + view)?.querySelector('span')?.textContent || 'Kho ảnh';
+  $('tools-current').textContent = currentLabel;
+  toolsToggle.setAttribute('aria-label', (toolsRoot.classList.contains('is-open') ? 'Đóng công cụ · ' : 'Mở công cụ · ') + currentLabel);
   for (const key of ['gallery','search','logo','crop']) {
     const el = $('hdr-' + key);
     if (key === view) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current');
@@ -1083,6 +1239,7 @@ function updateResults() {
   $('empty').hidden = shown > 0;
   $('empty').textContent = scanning ? 'Đang quét kho ảnh. Các ảnh phù hợp sẽ xuất hiện tại đây…' : scanErrors ? 'Chưa có ảnh phù hợp trong dữ liệu đã đọc. Một phần kho chưa tải được; bạn có thể quét lại.' : photos.length ? 'Chưa có ảnh phù hợp. Thử bỏ bớt bộ lọc nhé.' : 'Kho này chưa có ảnh. Bạn có thể chọn thư mục khác trong Cài đặt.';
   renderGalleryPage();
+  if (draftFilters) updateDrawerCount();
   if (activeView === 'search') updateAISearchDropdowns();
 }
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1092,27 +1249,198 @@ function filterPhotos() {
   updateResults();
 }
 function resetGallery() {
+  clearBulkSelection();
   galleryMatches = []; galleryPage = 0; galleryRenderedKey = '';
   Object.values(dirtyCounts).forEach(set => set.clear());
-  $('grid').replaceChildren();
+  disposeThumbnails($('grid')); $('grid').replaceChildren();
   renderGalleryPage();
 }
+// #305: one filter DOM, draft choices and a live count; apply commits once.
+$('drawer-content').append($('filters'));
+const navFiltersButton = document.createElement('button');
+navFiltersButton.type = 'button'; navFiltersButton.className = 'nav-item'; navFiltersButton.id = 'nav-filters';
+navFiltersButton.textContent = 'Bộ lọc kho ảnh';
+$('nav-controls').before(navFiltersButton);
+navFiltersButton.addEventListener('click', openFilterDrawer);
+for (const label of $('filters').querySelectorAll('.filter-tabs label')) {
+  label.tabIndex = 0; label.setAttribute('role','button');
+  label.addEventListener('keydown',e => { if (e.key==='Enter' || e.key===' ') { e.preventDefault(); label.click(); } });
+}
+$('filters').querySelectorAll('.filter-tab-state').forEach(input => { input.tabIndex=-1; });
+function syncFilterTabs() {
+  for (const label of $('filters').querySelectorAll('.filter-tabs label')) label.setAttribute('aria-pressed',String($(label.htmlFor).checked));
+}
+$('filters').querySelectorAll('.filter-tab-state').forEach(input => input.addEventListener('change',syncFilterTabs));
+syncFilterTabs();
+function syncFilterInputs(filters) {
+  for (const [group, map] of Object.entries(options)) map.forEach((option, value) => { option.input.checked = filters[group].has(value); });
+}
+function updateDrawerCount() {
+  if (!draftFilters) return;
+  const count = photos.reduce((n, photo) => n + Number(matchesFilters(photo, draftFilters)), 0);
+  const el = $('drawer-count'), label = count.toLocaleString('vi-VN');
+  if (el.textContent !== label) {
+    el.textContent = label;
+    if (!reducedMotion.matches) el.animate([{opacity:.3,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:180});
+  }
+  $('drawer-apply').disabled = count === 0 || drawerClosing;
+  const n = Object.values(draftFilters).reduce((total, set) => total + set.size, 0);
+  $('drawer-summary').textContent = (n ? n + ' điều kiện đang chọn' : 'Tất cả ảnh trong kho') + (scanning ? ' · Đang quét thêm ảnh…' : '');
+}
+function openFilterDrawer() {
+  if ($('filter-drawer').open) return;
+  drawerReturnFocus = document.activeElement;
+  closeNav(); setToolsOpen(false); drawerClosing = false;
+  draftFilters = Object.fromEntries(Object.entries(selected).map(([key, values]) => [key, new Set(values)]));
+  syncFilterInputs(draftFilters); $('filter-drawer').inert = false;
+  $('filter-drawer').showModal(); $('gallery-filter').setAttribute('aria-expanded','true');
+  updateDrawerCount(); scrollLock(); $('drawer-close').focus();
+}
+function closeFilterDrawer(apply = false, immediate = false) {
+  const drawer = $('filter-drawer');
+  if (!drawer.open || drawerClosing) return;
+  drawerClosing = true;
+  if (apply && draftFilters) {
+    for (const key of Object.keys(selected)) selected[key] = new Set(draftFilters[key]);
+    filterPhotos();
+  }
+  draftFilters = null; syncFilterInputs(selected);
+  drawer.inert = true; $('gallery-filter').setAttribute('aria-expanded','false');
+  const finish = () => {
+    drawer.close(); drawer.inert = false; drawerClosing = false; scrollLock();
+    const target = drawerReturnFocus; drawerReturnFocus = null;
+    if (target?.isConnected && target.getClientRects().length && !target.closest('[inert]')) target.focus({preventScroll:true});
+    else ($('gallery-filter').getClientRects().length ? $('gallery-filter') : $('nav-fab')).focus({preventScroll:true});
+  };
+  if (immediate || reducedMotion.matches) finish();
+  else {
+    const mobile = matchMedia('(max-width:767px)').matches;
+    const animation = drawer.animate([{transform:'none',opacity:1},{transform:mobile?'translateY(100%)':'translateX(100%)',opacity:.6}],{duration:210,easing:'ease-in',fill:'forwards'});
+    animation.finished.then(() => { finish(); animation.cancel(); },finish);
+  }
+}
+$('drawer-close').addEventListener('click', () => closeFilterDrawer());
+$('drawer-apply').addEventListener('click', () => closeFilterDrawer(true));
+$('filter-drawer').addEventListener('cancel', e => { e.preventDefault(); closeFilterDrawer(); });
+$('filter-drawer').addEventListener('click', e => {
+  const r = $('filter-drawer').getBoundingClientRect();
+  if (e.target === $('filter-drawer') && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) closeFilterDrawer();
+});
+
+// #258: real low-resolution previews, native lazy loading and an indeterminate bar.
+const thumbnailStates = new WeakMap();
+const thumbnailObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    const state = thumbnailStates.get(entry.target);
+    if (!state) continue;
+    entry.target.classList.toggle('is-visible',entry.isIntersecting);
+    if (entry.isIntersecting && !state.started) {
+      state.started = true;
+      const preview = new Image(); state.preview = preview;
+      preview.onload = () => { if (!state.done && entry.target.isConnected) entry.target.style.backgroundImage = 'url("' + preview.src.replace(/"/g,'%22') + '")'; };
+      preview.src = state.low;
+    }
+  }
+}, {rootMargin:'120px'});
+function createPhotoThumbnail(photo) {
+  const frame = document.createElement('span'); frame.className = 'photo';
+  const source = thumbnail(photo.thumbnailLink);
+  if (!source) { frame.textContent = 'Chưa có ảnh thu nhỏ'; return frame; }
+  const state = {done:false,started:false,preview:null,low:thumbnail(photo.thumbnailLink,32)};
+  thumbnailStates.set(frame,state);
+  frame.classList.add('is-loading'); frame.setAttribute('aria-busy','true');
+  const bar = document.createElement('span'); bar.className = 'photo-loader'; bar.setAttribute('aria-hidden','true');
+  const img = document.createElement('img'); img.width = 400; img.height = 400;
+  img.loading = 'lazy'; img.decoding = 'async'; img.alt = photo.name;
+  const finish = failed => {
+    if (state.done) return;
+    state.done = true; thumbnailObserver.unobserve(frame);
+    if (state.preview) { state.preview.onload = null; state.preview.removeAttribute('src'); state.preview = null; }
+    frame.style.backgroundImage = ''; frame.classList.remove('is-loading','is-visible'); frame.setAttribute('aria-busy','false'); bar.remove();
+    frame.classList.toggle('is-ready',!failed);
+    if (failed) { img.remove(); frame.textContent = 'Không tải được ảnh thu nhỏ'; }
+  };
+  img.onload = async () => { try { await img.decode(); } catch (_) {} if (img.naturalWidth) finish(false); };
+  img.onerror = () => finish(true);
+  frame.append(img,bar); img.src = source; thumbnailObserver.observe(frame); return frame;
+}
+function disposeThumbnails(container) {
+  for (const frame of container.querySelectorAll('.photo')) {
+    thumbnailObserver.unobserve(frame);
+    const state = thumbnailStates.get(frame);
+    if (state) { state.done = true; if (state.preview) { state.preview.onload = null; state.preview.removeAttribute('src'); } thumbnailStates.delete(frame); }
+    frame.style.backgroundImage = '';
+  }
+  container.querySelectorAll('img').forEach(img => { img.onload = img.onerror = null; img.removeAttribute('src'); });
+}
+
+// #178: selection survives paging/filtering; the dock operates on originals.
+function updateBulkDock(message = '') {
+  $('bulk-dock').hidden = !bulkSelected.size || activeView !== 'gallery';
+  $('bulk-count').textContent = 'Đã chọn ' + bulkSelected.size + ' ảnh';
+  $('bulk-status').textContent = message || 'Tối đa 9 ảnh mỗi lượt chèn logo';
+  $('bulk-logo').disabled = bulkBusy;
+  $('bulk-clear').textContent = bulkBusy ? 'Hủy' : 'Bỏ chọn';
+  for (const input of $('grid').querySelectorAll('[data-pick-id]')) {
+    input.disabled = bulkBusy; input.checked = bulkSelected.has(input.dataset.pickId);
+    input.closest('.gallery-card').classList.toggle('is-selected',input.checked);
+  }
+}
+function clearBulkSelection() {
+  bulkEpoch++; bulkController?.abort(); bulkController = null; bulkBusy = false;
+  bulkSelected.clear(); updateBulkDock();
+}
+$('bulk-clear').addEventListener('click', () => { clearBulkSelection(); $('gallery-filter').focus({preventScroll:true}); });
+$('bulk-logo').addEventListener('click', async () => {
+  if (bulkBusy || !bulkSelected.size || logoBusy) return;
+  if (bulkSelected.size > 9 - logoItems.length) { toast('Công cụ chèn logo còn chỗ cho ' + (9-logoItems.length) + ' ảnh. Hãy bớt ảnh đã chọn hoặc xóa ảnh cũ trong công cụ chèn logo.'); return; }
+  const items = [...bulkSelected.values()], epoch = ++bulkEpoch, run = generation;
+  bulkController = new AbortController(); const signal = bulkController.signal;
+  bulkBusy = true; renderLogoPanels(); let loaded = 0, failures = 0;
+  try {
+    for (const photo of items) {
+      signal.throwIfAborted(); if (epoch !== bulkEpoch) return;
+      updateBulkDock('Đang lấy ảnh gốc ' + (loaded + failures + 1) + '/' + items.length + '…');
+      try {
+        const blob = await request(API + '/' + encodeURIComponent(photo.id) + '?alt=media&supportsAllDrives=true',run,'blob',signal);
+        signal.throwIfAborted(); if (epoch !== bulkEpoch) return;
+        if (!blob.type.startsWith('image/')) throw new Error('Tệp không phải ảnh');
+        const before = logoItems.length;
+        await addLogoFiles([new File([blob],photo.name,{type:blob.type})],signal);
+        if (epoch !== bulkEpoch) return;
+        if (logoItems.length === before) throw new Error('Không đọc được ảnh');
+        bulkSelected.delete(photo.id); loaded++;
+      } catch (error) { if (error.name === 'AbortError') throw error; failures++; }
+    }
+    if (loaded && !failures) {
+      switchMainView('logo'); window.scrollTo({top:0,behavior:reducedMotion.matches?'instant':'smooth'});
+      toast(logoReady ? 'Đã đưa ' + loaded + ' ảnh gốc vào công cụ chèn logo.' : 'Đã đưa ' + loaded + ' ảnh gốc vào công cụ. Chọn ảnh logo để tiếp tục.');
+    } else if (failures) toast('Đã thêm ' + loaded + ' ảnh. Còn ' + failures + ' ảnh chưa tải được; giữ lựa chọn để thử lại.');
+  } catch (error) { if (error.name !== 'AbortError') toast(error.message); }
+  finally { if (epoch === bulkEpoch) { bulkBusy = false; bulkController = null; updateBulkDock(); renderLogoPanels(); } }
+});
+
 function createGalleryCard(photo) {
+  const tile = document.createElement('article'); tile.className = 'gallery-card'; tile.classList.toggle('is-selected', bulkSelected.has(photo.id));
   const card = document.createElement('button'); card.className = 'card'; card.type = 'button';
   card.dataset.photoId = photo.id;
   card.setAttribute('aria-label','Xem ảnh ' + photo.name); card.title = photo.brandName + ' · ' + photo.batchName;
-  const frame = document.createElement('span'); frame.className = 'photo';
-  const source = thumbnail(photo.thumbnailLink);
-  if (source) {
-    const img = document.createElement('img'); img.width = 400; img.height = 400; img.loading = 'lazy'; img.decoding = 'async'; img.alt = photo.name; img.src = source;
-    img.addEventListener('error',() => { img.remove(); frame.textContent = 'Không tải được ảnh thu nhỏ'; },{once:true}); frame.append(img);
-  } else frame.textContent = 'Chưa có ảnh thu nhỏ';
+  const frame = createPhotoThumbnail(photo);
   const name = document.createElement('span'); name.className = 'filename'; name.textContent = photo.name;
   const hint = document.createElement('span'); hint.className = 'card-hint'; hint.textContent = 'Xem ảnh gốc ↗';
   card.append(frame,name,hint);
   if (photo.price !== null) { const price = document.createElement('span'); price.className = 'price'; price.textContent = priceText(photo.price); card.append(price); }
   card.addEventListener('click',() => openLightbox(photo));
-  return card;
+  const pick = document.createElement('label'); pick.className = 'photo-pick'; pick.title = 'Chọn ảnh để chèn logo';
+  const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.checked = bulkSelected.has(photo.id); checkbox.dataset.pickId = photo.id;
+  checkbox.setAttribute('aria-label','Chọn ảnh ' + photo.name);
+  checkbox.addEventListener('change', () => {
+    if (bulkBusy) { checkbox.checked = bulkSelected.has(photo.id); return; }
+    if (checkbox.checked && bulkSelected.size >= 9) { checkbox.checked = false; toast('Chọn tối đa 9 ảnh mỗi lượt chèn logo.'); return; }
+    if (checkbox.checked) bulkSelected.set(photo.id, photo); else bulkSelected.delete(photo.id);
+    tile.classList.toggle('is-selected', checkbox.checked); updateBulkDock();
+  });
+  pick.append(checkbox); tile.append(card,pick); return tile;
 }
 function renderGalleryPage() {
   const total = galleryMatches.length, pages = Math.max(1, Math.ceil(total / GALLERY_PAGE_SIZE));
@@ -1123,7 +1451,7 @@ function renderGalleryPage() {
   if (key !== galleryRenderedKey) {
     const fragment = document.createDocumentFragment(); page.forEach(photo => fragment.append(createGalleryCard(photo)));
     // Release old thumbnail requests/decoded surfaces before removing their nodes.
-    $('grid').querySelectorAll('img').forEach(img => img.removeAttribute('src'));
+    disposeThumbnails($('grid'));
     $('grid').replaceChildren(fragment); galleryRenderedKey = key;
   }
   for (const pager of document.querySelectorAll('.gallery-pagination')) {
@@ -1149,7 +1477,7 @@ for (const pager of document.querySelectorAll('.gallery-pagination')) {
   pager.querySelector('[data-page-next]').addEventListener('click',() => goGalleryPage(galleryPage+1));
   pager.querySelector('[data-page-input]').addEventListener('change',event => { goGalleryPage(event.target.valueAsNumber-1); event.target.value = galleryPage + 1; });
 }
-function clearFilters() { Object.values(selected).forEach(set => set.clear()); Object.values(options).forEach(map => map.forEach(option => { option.input.checked = false; })); $('brand-search').value = ''; searchBrands(); filterPhotos(); }
+function clearFilters() { if (draftFilters) { Object.values(draftFilters).forEach(set => set.clear()); syncFilterInputs(draftFilters); $('brand-search').value = ''; searchBrands(); updateDrawerCount(); return; } Object.values(selected).forEach(set => set.clear()); Object.values(options).forEach(map => map.forEach(option => { option.input.checked = false; })); $('brand-search').value = ''; searchBrands(); filterPhotos(); }
 function searchBrands() {
   const query = normalize($('brand-search').value); let visible = 0;
   options.brand.forEach(option => { option.label.hidden = !normalize(option.name.textContent).includes(query); if (!option.label.hidden) visible++; });
@@ -1282,27 +1610,85 @@ function initIdentity() {
 function identityError() { $('login-button').textContent = 'Chưa tải được đăng nhập'; $('login-message').textContent = 'Không tải được Google. Kiểm tra kết nối rồi tải lại trang.'; }
 $('login-button').addEventListener('click',() => tokenClient?.requestAccessToken({prompt:'select_account'}));
 $('logout').addEventListener('click',() => { const token = accessToken; clearAuthSession(); stopSession(); if (token && tokenClient) google.accounts.oauth2.revoke(token,() => {}); });
+// #061: thumbnail-origin zoom, 2x pan and swipe-to-dismiss.
+let lbClosing = false, lbCloseAnimation = null, lbHero = null, lbZoom = 1, lbPan = {x:0,y:0}, lbGesture = null, lbLastTap = 0, lbLastTouch = 0;
+function resetLightboxTransform() {
+  lbZoom = 1; lbPan = {x:0,y:0}; lbGesture = null; lbLastTap = 0;
+  $('original').style.transform = ''; $('stage').style.transform = '';
+  $('stage').classList.remove('is-zoomed','is-dragging');
+  $('lb-zoom').setAttribute('aria-pressed','false'); $('lb-zoom').setAttribute('aria-label','Phóng to ảnh'); $('lb-zoom').textContent = '＋';
+  $('lb-zoom').disabled = true;
+}
+function photoThumbRect(photoId) {
+  const cards = [...document.querySelectorAll('#grid .card,#ai-results-grid .card')];
+  const img = cards.find(el => el.dataset.photoId === photoId && el.getClientRects().length)?.querySelector('.photo img');
+  if (!img?.naturalWidth) return null;
+  const box = img.getBoundingClientRect(), ratio = Math.min(box.width/img.naturalWidth,box.height/img.naturalHeight);
+  const width = img.naturalWidth*ratio, height = img.naturalHeight*ratio;
+  const rect = {left:box.left+(box.width-width)/2,top:box.top+(box.height-height)/2,width,height};
+  if (rect.top + rect.height < 0 || rect.top > innerHeight) return null;
+  return {img,rect};
+}
+function animateLightboxOpen(photo) {
+  lbHero?.remove(); lbHero = null;
+  if (reducedMotion.matches) return;
+  const thumb = photoThumbRect(photo.id); if (!thumb) return;
+  const img = thumb.img.cloneNode(); img.className = 'lb-hero'; img.removeAttribute('loading'); img.setAttribute('aria-hidden','true'); img.alt = '';
+  const stage = $('stage').getBoundingClientRect(), ratio = Math.min((stage.width-50)/thumb.img.naturalWidth,stage.height/thumb.img.naturalHeight);
+  const width = thumb.img.naturalWidth*ratio, height = thumb.img.naturalHeight*ratio;
+  const end = {left:stage.left+(stage.width-width)/2,top:stage.top+(stage.height-height)/2,width,height};
+  Object.assign(img.style,{left:end.left+'px',top:end.top+'px',width:width+'px',height:height+'px'});
+  $('lightbox').append(img); lbHero = img;
+  const dx = thumb.rect.left-end.left, dy = thumb.rect.top-end.top;
+  img.animate([{transform:'translate('+dx+'px,'+dy+'px) scale('+thumb.rect.width/width+','+thumb.rect.height/height+')',transformOrigin:'0 0',opacity:.7},{transform:'none',transformOrigin:'0 0',opacity:1}],{duration:330,easing:'cubic-bezier(.2,.8,.2,1)'}).finished.then(() => { img.remove(); if (lbHero===img) lbHero=null; },() => img.remove());
+}
 function openLightbox(photo, customList = null) {
+  if ($('lightbox').open) return;
+  lbClosing = false; lbCloseAnimation?.cancel(); lbCloseAnimation = null;
   lightboxItems = customList || photos.filter(matches);
   lightboxIndex = lightboxItems.indexOf(photo);
   if (lightboxIndex < 0) { lightboxItems = [photo]; lightboxIndex = 0; }
-  returnFocus = document.activeElement; $('lightbox').showModal(); scrollLock(); showOriginal();
+  returnFocus = document.activeElement; $('lightbox').showModal(); scrollLock();
+  showOriginal(); animateLightboxOpen(photo); $('lb-close').focus({preventScroll:true});
 }
-function releaseOriginal() { imageGeneration++; originalController?.abort(); $('original').removeAttribute('src'); $('original').hidden = true; if (objectUrl) URL.revokeObjectURL(objectUrl); objectUrl = ''; }
-function closeLightbox() { releaseOriginal(); if ($('lightbox').open) $('lightbox').close(); lightboxItems = []; scrollLock(); if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true}); returnFocus = null; }
+function releaseOriginal() {
+  imageGeneration++; originalController?.abort();
+  $('original').onload = $('original').onerror = null; $('original').removeAttribute('src'); $('original').hidden = true; $('lb-zoom').disabled = true;
+  if (objectUrl) URL.revokeObjectURL(objectUrl); objectUrl = '';
+}
+function closeLightbox(immediate = false) {
+  if (lbClosing && !immediate) return;
+  const viewer = $('lightbox'), image = $('original');
+  lbHero?.remove(); lbHero = null;
+  const finish = () => {
+    releaseOriginal(); if (viewer.open) viewer.close();
+    resetLightboxTransform(); lightboxItems = []; lbClosing = false; scrollLock();
+    if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true}); returnFocus = null;
+  };
+  if (!viewer.open) { finish(); return; }
+  if (immediate || reducedMotion.matches || image.hidden) { lbCloseAnimation?.cancel(); finish(); return; }
+  lbClosing = true; originalController?.abort();
+  const thumb = photoThumbRect(lightboxItems[lightboxIndex]?.id), rect = image.getBoundingClientRect();
+  const transform = thumb ? 'translate('+(thumb.rect.left-rect.left)+'px,'+(thumb.rect.top-rect.top)+'px) scale('+thumb.rect.width/rect.width+','+thumb.rect.height/rect.height+')' : 'translateY(35px) scale(.94)';
+  // Reset pan before reading the untransformed source; zoomed images simply fade out.
+  const frames = lbZoom > 1 ? [{opacity:1},{opacity:0}] : [{transform:'none',opacity:1,transformOrigin:'0 0'},{transform,opacity:thumb ? .5 : 0,transformOrigin:'0 0'}];
+  lbCloseAnimation = image.animate(frames,{duration:220,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards'});
+  lbCloseAnimation.finished.then(() => { const animation=lbCloseAnimation; lbCloseAnimation=null; finish(); animation?.cancel(); },() => {});
+}
+
 async function showOriginal(direction = 0) {
-  releaseOriginal(); const imageRun = imageGeneration, run = generation, photo = lightboxItems[lightboxIndex]; if (!photo) return;
+  resetLightboxTransform(); releaseOriginal(); const imageRun = imageGeneration, run = generation, photo = lightboxItems[lightboxIndex]; if (!photo) return;
   $('lb-count').textContent = (lightboxIndex + 1) + ' / ' + lightboxItems.length;
   $('lb-name').textContent = photo.name; $('lb-price').textContent = priceText(photo.price); $('lb-price').hidden = photo.price === null;
   $('original').alt = photo.name; $('lb-status').textContent = 'Đang tải ảnh gốc…'; $('lb-status').hidden = false;
   $('lb-prev').disabled = $('lb-next').disabled = lightboxItems.length < 2;
   originalController = new AbortController();
-  const valid = () => imageRun === imageGeneration && $('lightbox').open;
+  const valid = () => imageRun === imageGeneration && $('lightbox').open && !lbClosing;
   const reveal = () => {
     if (!valid()) return;
     $('lb-status').hidden = true; $('original').hidden = false;
-    if (direction && !reducedMotion.matches) $('original').animate([{opacity:0,transform:'translateX(' + (direction * 36) + 'px)'},{opacity:1,transform:'translateX(0)'}],{duration:240,easing:'ease-out'});
-    else if (!reducedMotion.matches) $('original').animate([{opacity:0,transform:'scale(.96)'},{opacity:1,transform:'scale(1.018)',offset:.65},{opacity:1,transform:'scale(1)'}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'});
+    $('lb-zoom').disabled = false;
+    if (!reducedMotion.matches) $('original').animate(direction ? [{opacity:0,transform:'translateX('+(direction*32)+'px)'},{opacity:1,transform:'none'}] : [{opacity:0},{opacity:1}],{duration:direction?220:160,easing:'ease-out'});
   };
   const fail = () => { if (valid()) { $('lb-status').textContent = 'Không tải được ảnh gốc. Kiểm tra quyền truy cập hoặc kết nối.'; $('original').hidden = true; } };
   const load = source => {
@@ -1325,17 +1711,65 @@ async function showOriginal(direction = 0) {
   try { const url = new URL(photo.webContentLink); if (url.protocol === 'https:' && /(^|\.)google\.com$/.test(url.hostname)) source = url.href; } catch (_) {}
   if (source) load(source); else await fallback();
 }
-function moveImage(direction) { if (lightboxItems.length > 1) { lightboxIndex = (lightboxIndex + direction + lightboxItems.length) % lightboxItems.length; showOriginal(direction); } }
-$('lb-close').addEventListener('click',closeLightbox); $('lb-prev').addEventListener('click',() => moveImage(-1)); $('lb-next').addEventListener('click',() => moveImage(1));
-$('stage').addEventListener('click',event => { if (event.target === $('stage')) closeLightbox(); });
+function moveImage(direction) { if (!lbClosing && lightboxItems.length > 1) { lbHero?.remove(); lbHero=null; lightboxIndex = (lightboxIndex + direction + lightboxItems.length) % lightboxItems.length; showOriginal(direction); } }
+$('lb-close').addEventListener('click',() => closeLightbox()); $('lb-prev').addEventListener('click',() => moveImage(-1)); $('lb-next').addEventListener('click',() => moveImage(1));
 $('lightbox').addEventListener('cancel',event => { event.preventDefault(); closeLightbox(); });
-let touch;
-$('stage').addEventListener('touchstart',event => { const point = event.changedTouches[0]; touch = {x:point.clientX,y:point.clientY}; },{passive:true});
-$('stage').addEventListener('touchend',event => { if (!touch) return; const point = event.changedTouches[0], dx = point.clientX - touch.x, dy = point.clientY - touch.y; if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) moveImage(dx < 0 ? 1 : -1); touch = null; },{passive:true});
-$('stage').addEventListener('touchcancel',() => { touch = null; },{passive:true});
-document.addEventListener('keydown',event => {
-  if ($('lightbox').open) { if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); moveImage(event.key === 'ArrowLeft' ? -1 : 1); } }
+function paintLightboxTransform() {
+  const stage = $('stage'), img = $('original');
+  const maxX = Math.max(0,(img.offsetWidth*lbZoom-stage.clientWidth)/2), maxY = Math.max(0,(img.offsetHeight*lbZoom-stage.clientHeight)/2);
+  lbPan.x = Math.max(-maxX,Math.min(maxX,lbPan.x)); lbPan.y = Math.max(-maxY,Math.min(maxY,lbPan.y));
+  img.style.transform = 'translate('+lbPan.x+'px,'+lbPan.y+'px) scale('+lbZoom+')';
+  stage.classList.toggle('is-zoomed',lbZoom>1);
+}
+function toggleLightboxZoom() {
+  if ($('original').hidden || lbClosing) return;
+  lbZoom = lbZoom === 1 ? 2 : 1; lbPan = {x:0,y:0}; paintLightboxTransform();
+  $('lb-zoom').setAttribute('aria-pressed',String(lbZoom>1)); $('lb-zoom').setAttribute('aria-label',lbZoom>1?'Thu nhỏ ảnh':'Phóng to ảnh'); $('lb-zoom').textContent=lbZoom>1?'−':'＋';
+}
+$('lb-zoom').addEventListener('click',toggleLightboxZoom);
+$('stage').addEventListener('dblclick',e => { if (e.target.closest('button')) return; e.preventDefault(); if (performance.now()-lbLastTouch>500) toggleLightboxZoom(); });
+$('original').addEventListener('dragstart',e => e.preventDefault());
+$('stage').addEventListener('pointerdown',e => {
+  if (e.target.closest('button') || lbClosing || e.button !== 0) return;
+  if (!e.isPrimary) { lbGesture = null; return; }
+  lbGesture = {id:e.pointerId,x:e.clientX,y:e.clientY,panX:lbPan.x,panY:lbPan.y,target:e.target,moved:false};
+  $('stage').setPointerCapture(e.pointerId);
 });
+$('stage').addEventListener('pointermove',e => {
+  if (!lbGesture || e.pointerId !== lbGesture.id) return;
+  const dx=e.clientX-lbGesture.x, dy=e.clientY-lbGesture.y;
+  if (Math.hypot(dx,dy)>8) lbGesture.moved=true;
+  if (lbZoom>1) { lbPan={x:lbGesture.panX+dx,y:lbGesture.panY+dy}; $('stage').classList.add('is-dragging'); paintLightboxTransform(); }
+  else if (dy>0 && Math.abs(dy)>Math.abs(dx)) $('stage').style.transform='translateY('+Math.min(dy,220)+'px) scale('+(1-Math.min(dy,220)/1800)+')';
+});
+function endLightboxGesture(e, cancelled=false) {
+  if (!lbGesture || e.pointerId!==lbGesture.id) return;
+  const gesture=lbGesture; lbGesture=null;
+  if ($('stage').hasPointerCapture(e.pointerId)) $('stage').releasePointerCapture(e.pointerId);
+  $('stage').classList.remove('is-dragging'); $('stage').style.transform='';
+  if (cancelled) return;
+  if (e.pointerType==='touch') lbLastTouch=performance.now();
+  const dx=e.clientX-gesture.x,dy=e.clientY-gesture.y;
+  if (lbZoom===1 && gesture.moved) {
+    lbLastTap=0;
+    if (dy>95 && Math.abs(dy)>Math.abs(dx)) closeLightbox();
+    else if (Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)) moveImage(dx<0?1:-1);
+  } else if (!gesture.moved) {
+    if (e.pointerType==='touch' && gesture.target===$('original')) {
+      const now=performance.now(); if (now-lbLastTap<320) { toggleLightboxZoom(); lbLastTap=0; } else lbLastTap=now;
+    } else if (gesture.target===$('stage')) closeLightbox();
+  }
+}
+$('stage').addEventListener('pointerup',e => endLightboxGesture(e));
+$('stage').addEventListener('pointercancel',e => endLightboxGesture(e,true));
+window.addEventListener('resize', () => { if ($('lightbox').open) { $('stage').style.transform=''; paintLightboxTransform(); } });
+document.addEventListener('keydown',event => {
+  if (!$('lightbox').open || lbClosing) return;
+  if (event.key==='ArrowLeft' || event.key==='ArrowRight') { event.preventDefault(); moveImage(event.key==='ArrowLeft'?-1:1); }
+  else if (event.key==='+' || event.key==='=') { event.preventDefault(); if(lbZoom===1) toggleLightboxZoom(); }
+  else if (event.key==='-' || event.key==='0') { event.preventDefault(); if(lbZoom>1) toggleLightboxZoom(); }
+});
+
 let brandSearchTimer; $('brand-search').addEventListener('input',() => { clearTimeout(brandSearchTimer); brandSearchTimer = setTimeout(searchBrands,300); }); $('clear-filters').addEventListener('click',clearFilters);
 $('home').addEventListener('click',() => { switchMainView('gallery'); clearFilters(); });
 $('retry').addEventListener('click',scan);
@@ -1354,7 +1788,7 @@ $('reset-root').addEventListener('click',() => saveRoot(DEFAULT_ROOT,true));
 
 // Shared navigation for the gallery and local image tools.
 function switchMainView(view) {
-  activeView = view; syncHeaderView(view);
+  activeView = view; syncHeaderView(view); updateBulkDock();
   const loggedIn = !!accessToken;
   $('gallery').hidden = (view !== 'gallery') || !loggedIn;
   $('logo-tool').hidden = (view !== 'logo');
@@ -1514,6 +1948,7 @@ function paintLogo(ctx, item, width, height) {
   ctx.drawImage(logo, item.pos.x * width, item.pos.y * height, size.x * width, size.y * height);
 }
 function renderLogoPanels() {
+  const controlsBusy = logoBusy || bulkBusy;
   const totalPages = logoPageCount();
   if (logoPage > totalPages - 1) logoPage = totalPages - 1;
   if (logoPage < 0) logoPage = 0;
@@ -1522,45 +1957,46 @@ function renderLogoPanels() {
   $('logo-pager').hidden = !hasItems;
   $('logo-status').textContent = logoFailed ? 'Chưa có ảnh logo. Bấm “Chọn ảnh logo” để chọn tệp PNG, WebP hoặc SVG.' : !logoReady ? 'Đang tải logo…' : hasItems ? `Trang ${logoPage + 1}/${totalPages} · ${logoItems.length} ảnh` : 'Chưa chọn ảnh.';
   $('logo-page-info').textContent = `Trang ${logoPage + 1}/${totalPages}`;
-  $('logo-prev-page').disabled = logoBusy || logoPage <= 0;
-  $('logo-next-page').disabled = logoBusy || logoPage >= totalPages - 1;
-  $('logo-download').disabled = logoBusy || !hasItems || !logoReady;
-  $('logo-clear').disabled = logoBusy || !hasItems;
-  $('logo-apply-all').disabled = logoBusy || !hasItems || !logoReady;
-  $('logo-asset-select').disabled = logoBusy;
-  $('logo-batch-color').disabled = $('logo-batch-size').disabled = logoBusy;
-  $('logo-select').disabled = logoBusy || !logoReady;
-  $('logo-paste').disabled = logoBusy || !logoReady;
+  $('logo-prev-page').disabled = controlsBusy || logoPage <= 0;
+  $('logo-next-page').disabled = controlsBusy || logoPage >= totalPages - 1;
+  $('logo-download').disabled = controlsBusy || !hasItems || !logoReady;
+  $('logo-clear').disabled = controlsBusy || !hasItems;
+  $('logo-apply-all').disabled = controlsBusy || !hasItems || !logoReady;
+  $('logo-asset-select').disabled = controlsBusy;
+  $('logo-batch-color').disabled = $('logo-batch-size').disabled = controlsBusy;
+  $('logo-select').disabled = controlsBusy || !logoReady;
+  $('logo-paste').disabled = controlsBusy || !logoReady;
   logoPanelEls.forEach((panel, slot) => {
     const item = logoItems[logoPage * 3 + slot];
     const canvas = panel.querySelector('canvas');
     const nameEl = panel.querySelector('.logo-panel-name');
     panel.hidden = !item;
     panel.querySelectorAll('.logo-panel-colors button').forEach(button => {
-      button.disabled = logoBusy || !item || !logoReady;
+      button.disabled = controlsBusy || !item || !logoReady;
       button.setAttribute('aria-pressed', String(!!item && (item.logoColor || 'white') === button.dataset.color));
     });
     const dragBox = panel.querySelector('.logo-panel-drag');
-    if (dragBox) dragBox.disabled = logoBusy || !item || !logoReady;
+    if (dragBox) dragBox.disabled = controlsBusy || !item || !logoReady;
     const sizeInput = panel.querySelector('.logo-panel-size');
     if (sizeInput) {
-      sizeInput.disabled = logoBusy || !item || !logoReady;
+      sizeInput.disabled = controlsBusy || !item || !logoReady;
       const pct = Math.round(((item && item.logoScale) ?? .15) * 100);
       if (String(pct) !== sizeInput.value) sizeInput.value = String(pct);
       const valueEl = panel.querySelector('.logo-panel-size-value');
       if (valueEl) valueEl.textContent = pct + '%';
     }
-    if (!item || !logoReady) { if (nameEl) nameEl.textContent = ''; return; }
+    if (!item) { if (nameEl) nameEl.textContent = ''; return; }
     if (nameEl) nameEl.textContent = item.name;
     const scale = Math.min(1, 1200/item.img.naturalWidth, 750/item.img.naturalHeight);
     const pw = Math.max(1, Math.round(item.img.naturalWidth*scale));
     const ph = Math.max(1, Math.round(item.img.naturalHeight*scale));
     if (canvas.width !== pw || canvas.height !== ph) { canvas.width = pw; canvas.height = ph; }
-    paintLogo(canvas.getContext('2d'), item, canvas.width, canvas.height);
+    if (logoReady) paintLogo(canvas.getContext('2d'), item, canvas.width, canvas.height);
+    else { const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(item.img,0,0,canvas.width,canvas.height); }
   });
 }
 logoImage.onload = () => { logoReady = true; logoFailed = false;
-  for (const item of logoItems) { const size=logoSize(item); item.pos={x:Math.max(0,Math.min(1-size.x,item.pos.x)),y:Math.max(0,Math.min(1-size.y,item.pos.y))}; }
+  for (const item of logoItems) { if (item.needsSnap) { item.pos = logoSnap(item, 'bottom-right'); item.needsSnap = false; } const size=logoSize(item); item.pos={x:Math.max(0,Math.min(1-size.x,item.pos.x)),y:Math.max(0,Math.min(1-size.y,item.pos.y))}; }
   try {
     const off = document.createElement('canvas');
     off.width = logoImage.naturalWidth; off.height = logoImage.naturalHeight;
@@ -1587,8 +2023,8 @@ $('logo-files').addEventListener('change', async event => {
   const adding = addLogoFiles(Array.from(event.target.files)); event.target.value = '';
   await adding;
 });
-async function addLogoFiles(files) {
-  if (logoBusy || !logoReady || !files.length) return;
+async function addLogoFiles(files, signal = null) {
+  if (logoBusy || (bulkBusy && !signal) || !files.length) return;
   if (logoItems.length >= 9) { toast('Đã đủ 9 ảnh — xóa ảnh cũ đi'); return; }
   logoBusy = true; renderLogoPanels(); let added = 0;
   for (const file of files) {
@@ -1597,7 +2033,8 @@ async function addLogoFiles(files) {
     const url = URL.createObjectURL(file), img = new Image();
     try {
       await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; img.src = url; });
-      const item = {file, img, pos:null, name:fileName, url, logoScale:.15, logoColor:'white'}; item.pos = logoSnap(item, 'bottom-right');
+      if (signal?.aborted) { URL.revokeObjectURL(url); break; }
+      const item = {file, img, pos:null, name:fileName, url, logoScale:.15, logoColor:'white'}; item.needsSnap = !logoReady; item.pos = logoReady ? logoSnap(item, 'bottom-right') : {x:.82,y:.82};
       logoItems.push(item); added++;
     } catch (_) { URL.revokeObjectURL(url); toast('Không đọc được ảnh: ' + fileName); }
   }
@@ -1889,7 +2326,7 @@ function clearAIQueryUrls() {
   aiQueryUrl=aiOriginalUrl='';
 }
 function clearAIResults(message='') {
-  aiLastRun=null; $('ai-save-eval').disabled=true; $('ai-results-grid').replaceChildren(); $('ai-expected').replaceChildren();
+  aiLastRun=null; $('ai-save-eval').disabled=true; disposeThumbnails($('ai-results-grid')); $('ai-results-grid').replaceChildren(); $('ai-expected').replaceChildren();
   $('ai-result-label').textContent='Kết quả ảnh tương đồng sẽ xuất hiện tại đây.';
   $('ai-result-message').textContent=message; $('ai-empty').hidden=false;
   $('ai-empty').innerHTML='<strong>Bắt đầu từ một ảnh mẫu</strong>Chọn hãng, thêm ảnh rồi bấm “Tìm ảnh tương đồng”.';
@@ -2136,8 +2573,7 @@ function renderAIResults(run) {
   for(const [index,item] of top.entries()) {
     const {photo,sim}=item,card=document.createElement('button');card.type='button';card.className='card';card.dataset.photoId=photo.id;
     card.setAttribute('aria-label','Kết quả '+(index+1)+': '+photo.name);
-    const frame=document.createElement('span');frame.className='photo';const src=thumbnail(photo.thumbnailLink);
-    if(src) {const img=document.createElement('img');img.width=400;img.height=400;img.loading='lazy';img.decoding='async';img.src=src;img.alt=photo.name;img.onerror=()=>{img.remove();frame.textContent='Không tải được ảnh thu nhỏ';};frame.append(img);} else frame.textContent='Chưa có ảnh thu nhỏ';
+    const frame=createPhotoThumbnail(photo);
     const badge=document.createElement('span');badge.className='ai-match-badge';
     badge.textContent=run.actual==='hybrid' && item.dino!==undefined ? '#'+(index+1)+' · CLIP '+sim.toFixed(3)+' · DINO '+item.dino.toFixed(3) : run.actual==='duplicate' ? '#'+(index+1)+' · Điểm gần trùng '+sim.toFixed(3) : '#'+(index+1)+' · '+(run.actual==='siglip'?'SigLIP 2':'CLIP')+' '+sim.toFixed(3);
     const name=document.createElement('span');name.className='filename';name.textContent=photo.name;
@@ -2145,7 +2581,7 @@ function renderAIResults(run) {
     if(photo.price!==null){const price=document.createElement('span');price.className='price';price.textContent=priceText(photo.price);card.append(price);}
     card.append(hint);card.addEventListener('click',()=>openLightbox(photo,list));fragment.append(card);
   }
-  $('ai-results-grid').replaceChildren(fragment);$('ai-empty').hidden=top.length>0;
+  disposeThumbnails($('ai-results-grid')); $('ai-results-grid').replaceChildren(fragment);$('ai-empty').hidden=top.length>0;
   $('ai-empty').innerHTML=top.length?'':'<strong>Chưa có ảnh để xếp hạng</strong>Kiểm tra kết nối Google Drive hoặc thử lại với phạm vi khác.';
   $('ai-result-label').textContent=top.length+' kết quả đầu · Đã chấm '+run.ranked.length+'/'+run.candidates.length+' ảnh';
   $('ai-result-message').textContent=run.notes.join('\n')+'\nĐiểm tương đồng không phải xác suất đúng. Hãy đối chiếu chi tiết sản phẩm trước khi chọn.';
@@ -2159,7 +2595,7 @@ $('ai-run-btn').addEventListener('click',async()=>{
   if(!query || !candidates.length || aiSearching || cropLoading || cropApplying) return;
   const sourceGeneration=generation,sourceRoot=root,wasScanning=scanning;
   aiController=new AbortController();const signal=aiController.signal;
-  aiLastRun=null;setAIBusy(true);$('ai-results-grid').replaceChildren();$('ai-result-message').textContent='';$('ai-empty').hidden=true;
+  aiLastRun=null;setAIBusy(true);disposeThumbnails($('ai-results-grid'));$('ai-results-grid').replaceChildren();$('ai-result-message').textContent='';$('ai-empty').hidden=true;
   $('ai-expected').replaceChildren();
   try {
     let ranked=[],actual=requested,failed=0;const notes=[];
