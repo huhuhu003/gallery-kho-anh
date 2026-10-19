@@ -479,7 +479,7 @@ header{flex-wrap:nowrap}
 #tools-toggle:hover,#tools-toggle[aria-expanded=true]{background:rgba(233,217,179,.11);border-color:rgba(233,217,179,.55)}
 .tools-orb{display:grid;place-items:center;width:42px;height:42px;flex:none;border-radius:50%;background:linear-gradient(140deg,#f4dfc1,#e1bd8b);color:#433727;box-shadow:inset 0 1px 1px #fff8,0 4px 12px #0002}
 .tools-orb svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;transition:transform .45s cubic-bezier(.34,1.45,.64,1)}
-.is-open .tools-orb svg{transform:rotate(135deg)}
+.is-open .tools-orb svg{transform:scale(.92)}
 .tools-caption{display:flex;flex-direction:column;gap:1px;min-width:94px;letter-spacing:0}
 .tools-caption>span{font-size:10px;color:#d6c8a9;letter-spacing:.1em}
 .tools-caption strong{font-size:13px;font-weight:600;line-height:1.5}
@@ -507,9 +507,29 @@ header{flex-wrap:nowrap}
 @media(max-width:767px){.logo-mini .divider{max-width:160px}}
 @media(max-width:380px){header{padding-inline:8px;gap:6px}.logo-mini{gap:4px}.logo-mini .name-line{font-size:17px}.logo-mini .flower-entrance{width:22px;height:22px}.logo-mini .divider{max-width:130px}.pa-name-glass{padding-inline:7px}.logo-mini .tagline{font-size:6px;letter-spacing:.15em}.tools-orb{width:38px;height:38px}}
 
+/* Compact header: brand/tools on the left, a single utility cluster on the right. */
+header{min-height:80px;gap:12px;padding:8px max(24px,calc((100vw - 1400px)/2 + 24px));box-shadow:0 3px 16px rgba(25,33,61,.1)}
+header .header-tools{margin:0 0 0 10px;width:auto;order:0;flex-wrap:nowrap}
+header .chamcong{margin:0 0 0 auto;min-height:44px;gap:10px;padding:4px 6px 4px 14px;flex-wrap:nowrap;border-color:rgba(233,217,179,.18);background:rgba(255,255,255,.045);font-size:11px}
+header #cc-toggle{min-height:34px;padding:6px 13px;font-size:11px}header #cc-date{letter-spacing:0}header #cc-total{font-size:10px}
+header .actions{margin-left:0;gap:8px}header .actions>button{min-height:44px}header #settings-button,header #logout{padding:10px 14px;border-radius:12px;font-size:12px;letter-spacing:0;background:rgba(255,255,255,.055);border-color:rgba(233,217,179,.2);color:#f3ecdd}
+header #settings-button:hover,header #logout:hover{background:rgba(233,217,179,.12);border-color:rgba(233,217,179,.4)}
+header #nav-fab{width:40px;height:44px;min-height:44px;border-radius:12px;border-color:rgba(233,217,179,.2);background:rgba(255,255,255,.055)}
+header #theme-toggle{width:44px;height:44px;min-height:44px;border-radius:12px;border-color:rgba(233,217,179,.2);background:rgba(233,217,179,.09)}
+header #theme-toggle .theme-icon{left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px}header #theme-toggle .theme-sun{stroke:#e9d9b3}header #theme-toggle .theme-moon{stroke:#e9d9b3}
+header #tools-toggle{min-height:44px;height:44px;gap:10px;padding:4px 12px 4px 4px;border-radius:14px;border-color:rgba(233,217,179,.25);background:rgba(255,255,255,.055)}
+header #tools-toggle:hover,header #tools-toggle[aria-expanded=true]{background:rgba(233,217,179,.12);border-color:rgba(233,217,179,.5)}
+header .tools-orb{width:34px;height:34px;border-radius:10px;box-shadow:inset 0 1px 0 #fff7;background:linear-gradient(145deg,#f0dfbf,#dbbe8c)}
+header .tools-orb svg{width:23px;height:23px;stroke-width:1.65;stroke-linejoin:round}
+header .tools-caption{display:flex;min-width:86px;gap:0}header .tools-caption>span{display:none}header .tools-caption strong{font-size:13px;font-weight:550;white-space:nowrap}header .tools-chevron{display:block;width:15px;height:15px;color:#d9cdb3}
+@media(min-width:768px){header .logo-mini{gap:8px}header .logo-mini .flower-entrance{width:32px;height:32px}header .logo-mini .name-line{font-size:28px}header .pa-name-glass{padding:2px 12px}header .logo-mini .gallery-line{font-size:9px;letter-spacing:.4em}header .logo-mini .divider{max-width:160px;margin-top:3px}header .logo-mini .tagline{font-size:6px;letter-spacing:.24em;margin-top:3px}}
+@media(min-width:768px) and (max-width:1199px){header{padding-inline:24px}header .header-tools{margin-left:auto}header .actions{margin-left:0}}
+@media(max-width:767px){header{min-height:72px;padding:8px 12px;gap:8px}header .header-tools{order:2;margin:0 0 0 auto}header .actions{order:3;margin-left:0}header #tools-toggle{width:40px;height:40px;min-height:40px;padding:0;justify-content:center;border-radius:12px}header .tools-orb{width:32px;height:32px;border-radius:9px}header .tools-caption,header .tools-chevron{display:none}header #theme-toggle,header #nav-fab{width:40px;height:40px;min-height:40px}header .actions>button{min-height:40px}}
+@media(max-width:380px){header{padding-inline:8px;gap:6px}}
+
 /* Lucian UX/UI #305 / #061 / #178 / #258 · MIT (c) 2026 Seokwoooo.
    https://lucianlabs.dev/uxui-prompt/ — adapted for the product library. */
-#filter-drawer{position:fixed;inset:0 0 0 auto;margin:0;width:min(450px,100%);height:100dvh;max-width:100%;max-height:100dvh;padding:0;border:0;border-left:1px solid var(--border-subtle);background:var(--bg-surface);color:var(--text-main);box-shadow:-18px 0 70px #0a101a26;overflow:hidden}
+#filter-drawer{position:fixed;inset:0 auto 0 0;margin:0;width:min(450px,100%);height:100dvh;max-width:100%;max-height:100dvh;padding:0;border:0;border-right:1px solid var(--border-subtle);background:var(--bg-surface);color:var(--text-main);box-shadow:18px 0 70px #0a101a26;overflow:hidden}
 #filter-drawer[open]{display:flex;flex-direction:column;animation:drawer-in .32s cubic-bezier(.2,.8,.2,1)}
 #filter-drawer::backdrop{background:rgba(10,16,26,.42);backdrop-filter:blur(3px);animation:backdrop-enter .25s}
 .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:26px 26px 20px;gap:12px;border-bottom:1px solid var(--border-light);flex:none}
@@ -528,8 +548,7 @@ header{flex-wrap:nowrap}
 .drawer-footer{padding:16px 26px max(20px,env(safe-area-inset-bottom));border-top:1px solid var(--border-light);background:var(--bg-surface);flex:none;display:flex;flex-direction:column;gap:10px}
 #drawer-summary{font-size:12px;color:var(--text-secondary)}#drawer-apply{width:100%;min-height:50px;border-radius:14px;display:flex;justify-content:center;align-items:center;gap:7px;font-size:14px;font-weight:650}
 #drawer-count{display:inline-block;font-variant-numeric:tabular-nums}#drawer-apply:disabled{opacity:.5;cursor:not-allowed}
-@keyframes drawer-in{from{transform:translateX(100%);opacity:.5}to{transform:none;opacity:1}}
-@keyframes sheet-in{from{transform:translateY(100%)}to{transform:none}}
+@keyframes drawer-in{from{transform:translateX(-100%);opacity:.5}to{transform:none;opacity:1}}
 .gallery-card{position:relative;min-width:0}.gallery-card>.card{display:block;width:100%;height:100%;text-align:left;letter-spacing:normal;transition:border-color .2s,box-shadow .2s}
 .gallery-card.is-selected>.card{border-color:var(--gold-primary);box-shadow:0 0 0 2px var(--gold-badge)}
 .photo-pick{position:absolute;z-index:2;top:14px;right:14px;width:36px;height:36px;display:grid;place-items:center;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:50%;box-shadow:0 3px 12px #0a101a18;cursor:pointer}
@@ -551,8 +570,18 @@ header{flex-wrap:nowrap}
 #stage{overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}#original{flex:none;max-width:calc(100% - 80px);max-height:100%;width:auto;height:auto;will-change:transform;cursor:zoom-in;touch-action:none;user-select:none;-webkit-user-drag:none}
 #stage.is-zoomed #original{cursor:grab}#stage.is-dragging #original{cursor:grabbing}.lb-actions{display:flex;align-items:center;gap:10px}.lightbox #lb-zoom{font-size:20px}.lb-help{font-size:11px;color:#abb5c2;margin:0 0 7px}.lb-bottom{position:relative;z-index:2;flex:none}.lb-top{position:relative;z-index:2;flex:none}.lb-hero{position:fixed;z-index:1000;pointer-events:none;object-fit:contain;border-radius:8px;box-shadow:0 16px 60px #0003;will-change:transform;max-width:none!important;max-height:none!important}
 [data-theme=dark] .bulk-dock,[data-theme=dark] #filter-drawer{--text-muted:#a8b2c2}
-@media(max-width:767px){#filter-drawer{inset:auto 0 0;margin:0;width:100%;height:min(84dvh,780px);border:0;border-radius:26px 26px 0 0}#filter-drawer[open]{animation:sheet-in .32s cubic-bezier(.2,.8,.2,1)}.drawer-head{padding:24px 20px 16px;position:relative}.drawer-head::before{content:"";position:absolute;top:8px;left:calc(50% - 20px);width:40px;height:4px;border-radius:9px;background:var(--border-subtle)}.drawer-head h2{font-size:21px}.drawer-content{padding-inline:20px}.drawer-footer{padding-inline:20px}.bulk-dock{width:calc(100% - 24px);gap:10px;padding:12px;flex-wrap:wrap;bottom:max(12px,env(safe-area-inset-bottom));border-radius:18px}.bulk-summary{flex:1;min-width:150px}.bulk-summary small{font-size:10px}.bulk-mark{width:30px;height:30px}.bulk-actions{margin-left:auto}.bulk-actions button{padding:9px 11px;font-size:12px}.photo-pick{top:10px;right:10px;width:32px;height:32px}#original{max-width:100%}.lightbox{padding:12px}.lb-help{font-size:10px}.lb-bottom{padding-inline:5px}}
+@media(max-width:767px){#filter-drawer{inset:0 auto 0 0;margin:0;width:min(400px,94vw);height:100dvh;border:0;border-radius:0 22px 22px 0}.drawer-head{padding:24px 20px 16px;position:relative}.drawer-head::before{display:none}.drawer-head h2{font-size:21px}.drawer-content{padding-inline:20px}.drawer-footer{padding-inline:20px}.bulk-dock{width:calc(100% - 24px);gap:10px;padding:12px;flex-wrap:wrap;bottom:max(12px,env(safe-area-inset-bottom));border-radius:18px}.bulk-summary{flex:1;min-width:150px}.bulk-summary small{font-size:10px}.bulk-mark{width:30px;height:30px}.bulk-actions{margin-left:auto}.bulk-actions button{padding:9px 11px;font-size:12px}.photo-pick{top:10px;right:10px;width:32px;height:32px}#original{max-width:100%}.lightbox{padding:12px}.lb-help{font-size:10px}.lb-bottom{padding-inline:5px}}
 @media(prefers-reduced-motion:reduce){#filter-drawer[open],.bulk-dock,.photo-loader::after,.photo.is-ready+.filename{animation:none!important}.photo img{transition:none!important}.photo.is-loading img{filter:none;transform:none}}
+
+.logo-panel-crop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px;border-top:1px solid var(--border-light)}
+.logo-panel-crop button{padding:9px 12px;min-height:42px;border-radius:10px}.logo-crop-info{font-size:11px;color:var(--text-secondary);width:100%;margin-top:2px}
+#logo-crop-dialog{width:min(1200px,calc(100% - 32px));max-width:100%;max-height:calc(100dvh - 32px);padding:0;border:1px solid var(--border-subtle);border-radius:20px;background:var(--bg-surface);color:var(--text-main);box-shadow:0 20px 80px #0a101a40;overflow:auto;overscroll-behavior:contain}
+#logo-crop-dialog::backdrop{background:rgba(8,15,27,.65);backdrop-filter:blur(4px)}
+.logo-crop-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 24px;border-bottom:1px solid var(--border-light)}.logo-crop-head h2{font-size:22px;letter-spacing:-.03em;margin:0}.logo-crop-head p{margin:6px 0 0;overflow-wrap:anywhere}
+#logo-crop-close{width:42px;height:42px;border-radius:50%;padding:0;font-size:24px;flex:none}#logo-crop-body{padding:20px 24px}#logo-crop-dialog .cut-layout{margin:0}#logo-crop-dialog #cut-canvas{max-height:60dvh}#logo-crop-dialog #cut-download,#logo-crop-dialog #cut-clear{display:none}
+#logo-crop-dialog label:has(#cut-format){display:none}[data-theme=dark] #logo-crop-dialog{--text-muted:#a8b2c2}
+.logo-crop-footer{position:sticky;bottom:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 24px max(16px,env(safe-area-inset-bottom));background:var(--bg-surface);border-top:1px solid var(--border-light)}#logo-crop-status{font-size:12px;color:var(--text-secondary)}
+@media(max-width:767px){#logo-crop-dialog{width:calc(100% - 16px);max-height:calc(100dvh - 16px);border-radius:16px}.logo-crop-head{padding:16px}.logo-crop-head h2{font-size:19px}#logo-crop-body{padding:16px}.logo-crop-footer{padding-inline:16px;flex-wrap:wrap}.logo-crop-footer .button-row{margin-left:auto}#logo-crop-dialog #cut-canvas{max-height:45dvh}}
 </style>
 </head>
 <body>
@@ -568,11 +597,11 @@ header{flex-wrap:nowrap}
 <button class="nav-item" id="nav-logo" type="button"><span class="nav-bar"></span>Chèn logo</button>
 <button class="nav-item" id="nav-theme" type="button"><span class="nav-bar"></span><span id="nav-theme-label">Chế độ tối</span></button>
 <div id="nav-controls"></div><aside class="filters" id="filters" aria-label="Bộ lọc sản phẩm"><div class="filter-body"><div class="filter-header"><strong>BỘ LỌC</strong></div><button class="text-button" id="clear-filters">Xóa tất cả bộ lọc</button>
-<input class="filter-tab-state" type="radio" name="filter-tab" id="filter-brand" aria-label="Hãng" aria-controls="filter-brands" checked><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-category" aria-label="Danh mục" aria-controls="filter-categories"><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-price" aria-label="Giá" aria-controls="filter-prices">
-<div class="filter-tabs" role="group" aria-label="Chọn nhóm bộ lọc"><label for="filter-brand">Hãng</label><label for="filter-category">Danh mục</label><label for="filter-price">Giá</label></div>
+<input class="filter-tab-state" type="radio" name="filter-tab" id="filter-brand" aria-label="Hãng" aria-controls="filter-brands" checked><input class="filter-tab-state" type="radio" name="filter-tab" id="filter-category" aria-label="Danh mục" aria-controls="filter-categories">
+<div class="filter-tabs" role="group" aria-label="Chọn nhóm bộ lọc"><label for="filter-brand">Hãng</label><label for="filter-category">Danh mục</label></div>
 <section class="group filter-brands" id="filter-brands"><h2>Hãng</h2><input type="search" id="brand-search" placeholder="Tìm tên hãng" aria-label="Tìm tên hãng"><div class="options brands" id="brand-options"></div><p class="muted" id="brand-empty" hidden>Không có hãng phù hợp.</p></section>
 <section class="group filter-categories" id="filter-categories"><h2>Danh mục</h2><div class="options" id="category-options"></div></section>
-<section class="group filter-prices" id="filter-prices"><h2>Khoảng giá</h2><div class="options" id="price-options"></div></section>
+
 </div></aside>
 <div class="nav-foot">© 2026 Kho ảnh</div>
 </nav>
@@ -592,8 +621,8 @@ header{flex-wrap:nowrap}
 
 <div class="announcement">Kho ảnh sản phẩm · Cảm hứng thời trang · Google Drive chỉ đọc</div>
 <header><button id="nav-fab" type="button" aria-label="Mở/đóng menu điều hướng" aria-expanded="false"><span></span><span></span><span></span></button><button class="logo" id="home" aria-label="Gallery kho ảnh — xóa bộ lọc"><span class="logo-mini" id="logo-mini"><span class="flower-entrance"><span class="flower-sway"><svg class="flower-svg" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 84 C 42 88, 30 80, 28 66 C 42 66, 54 72, 60 84 Z" fill="#7fb069"/><path d="M60 84 C 76 90, 90 84, 94 70 C 80 68, 66 74, 60 84 Z" fill="#95c07f"/><path d="M60 62 C 59 72, 59 78, 60 90" stroke="#6a9a58" stroke-width="3.5" stroke-linecap="round"/><g><ellipse cx="60" cy="28" rx="13" ry="20" fill="#f6b8c6"/><ellipse cx="84" cy="44" rx="13" ry="20" transform="rotate(62 84 44)" fill="#f2a3b7"/><ellipse cx="74" cy="66" rx="12" ry="18" transform="rotate(125 74 66)" fill="#f6b8c6"/><ellipse cx="46" cy="66" rx="12" ry="18" transform="rotate(-125 46 66)" fill="#f2a3b7"/><ellipse cx="36" cy="44" rx="13" ry="20" transform="rotate(-62 36 44)" fill="#f9cbd5"/></g><circle cx="60" cy="48" r="11" fill="#f6c453"/><circle cx="60" cy="48" r="6.5" fill="#e9a93a"/><circle cx="57" cy="46" r="1.2" fill="#7a6234"/><circle cx="63" cy="46" r="1.2" fill="#7a6234"/><circle cx="60" cy="51" r="1.2" fill="#7a6234"/></svg></span></span><span class="mini-text"><span class="pa-name-glass"><span class="name-line" role="text" aria-label="Phương Anh"><span class="word" aria-hidden="true"><span class="ltr" style="--i:0">P</span><span class="ltr" style="--i:1">h</span><span class="ltr" style="--i:2">ư</span><span class="ltr" style="--i:3">ơ</span><span class="ltr" style="--i:4">n</span><span class="ltr" style="--i:5">g</span></span><span class="word word-anh" aria-hidden="true"><span class="ltr" style="--i:6">A</span><span class="ltr" style="--i:7">n</span><span class="ltr" style="--i:8">h</span></span></span></span><span class="gallery-wrap"><span class="gallery-line" aria-label="caredey"><span>c</span><span>a</span><span>r</span><span>e</span><span>d</span><span>e</span><span>y</span></span></span><span class="divider"></span><span class="tagline">KIDS &nbsp;·&nbsp; FASHION &nbsp;·&nbsp; caredey</span></span></span></button><div class="header-tools" id="header-tools">
-<button id="tools-toggle" type="button" aria-expanded="false" aria-controls="tools-menu" aria-label="Mở công cụ · Kho ảnh">
-  <span class="tools-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+<button id="tools-toggle" type="button" aria-expanded="false" aria-controls="tools-menu" aria-label="Mở công cụ · Kho ảnh" title="Mở bộ công cụ ảnh">
+  <span class="tools-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="15" height="15" rx="3"/><path d="M3 7v12a2 2 0 0 0 2 2h12"/><circle cx="11" cy="8" r="1.25"/><path d="m8.5 15 3.5-4 2.5 2.5 2-2 2.5 3.5"/></svg></span>
   <span class="tools-caption"><span>Công cụ</span><strong id="tools-current">Kho ảnh</strong></span>
   <svg class="tools-chevron ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
 </button>
@@ -734,6 +763,11 @@ header{flex-wrap:nowrap}
 <div id="logo-pager" class="logo-controls logo-pager" hidden><button id="logo-prev-page" type="button">← Trang trước</button><span id="logo-page-info" class="muted" role="status">Trang 1/1</span><button id="logo-next-page" type="button">Trang tiếp →</button></div>
 <div class="logo-controls logo-export"><button id="logo-download" class="primary" type="button" disabled>Tải ảnh đã chèn logo</button><button id="logo-clear" type="button" disabled>Xóa hết</button></div>
 </section>
+<dialog id="logo-crop-dialog" aria-labelledby="logo-crop-title">
+  <div class="logo-crop-head"><div><h2 id="logo-crop-title">Cắt ảnh đã chèn logo</h2><p id="logo-crop-name" class="muted"></p></div><button id="logo-crop-close" type="button" aria-label="Đóng cắt ảnh">×</button></div>
+  <div id="logo-crop-body"></div>
+  <div class="logo-crop-footer"><span id="logo-crop-status" role="status">Đang chuẩn bị ảnh…</span><div class="button-row"><button id="logo-crop-cancel" type="button">Hủy</button><button id="logo-crop-apply" type="button" class="primary" disabled>Áp dụng cắt</button></div></div>
+</dialog>
 <dialog class="modal" id="settings"><h2>Cài đặt kho ảnh</h2><form id="settings-form"><label for="root-input">ID thư mục gốc Google Drive</label><input id="root-input" type="text" required pattern="[A-Za-z0-9_-]+" autocomplete="off"><p class="muted">Lưu thư mục sẽ quét lại kho ảnh từ đầu.</p><div class="buttons"><button class="primary" type="submit">Lưu thư mục</button><button type="button" id="reset-root">Khôi phục mặc định</button><button type="button" id="close-settings">Đóng</button></div></form></dialog>
 <dialog class="modal" id="getimg-guide" aria-label="Hướng dẫn lấy ảnh"><h2>📸 Lấy ảnh từ Xiaohongshu / Instagram</h2>
 <div class="getimg-steps">
@@ -932,7 +966,7 @@ document.addEventListener('keydown',e => {
  if(e.key === 'Escape'){closeNav();$('nav-fab').focus();}
  if(e.key === 'Tab'){const nodes=[...$('nav-sidebar').querySelectorAll('button,a,input')].filter(n=>n.getClientRects().length&&!n.hidden);const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
 });
-const mobileHeader = matchMedia('(max-width:767px)');
+const mobileHeader = matchMedia('(max-width:1199px)');
 function placeHeaderControls(){for(const id of ['chamcong','settings-button','logout']){const el=$(id);if(mobileHeader.matches)$('nav-controls').append(el);else if(id==='chamcong')document.querySelector('header').insertBefore(el,document.querySelector('.actions'));else document.querySelector('.actions').append(el);}}
 placeHeaderControls();mobileHeader.addEventListener('change',placeHeaderControls);
 (function(){const h=new Date().getHours();document.querySelector('#greeting-stage textPath').textContent='Chào '+(h>=5&&h<11?'buổi sáng':h<14&&h>=11?'buổi trưa':h<18&&h>=14?'buổi chiều':'buổi tối');$('stage-text').textContent='PhươngAnhcaredey';const st=$('greeting-stage');const glass=document.querySelector('.stage-glass');function glassCenter(){const sr=st.getBoundingClientRect(),gr=glass.getBoundingClientRect();return{cx:gr.left-sr.left+gr.width/2,cy:gr.top-sr.top+gr.height/2};}document.body.style.overflow='hidden';const R=Math.min(innerWidth,innerHeight);const palette=['#e5d3a9','#d4c092','#f5e6c8'];const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;function styleParticle(p){const color=palette[Math.floor(Math.random()*palette.length)];p.style.background=color;p.style.boxShadow='0 0 4px 1px '+color;p.style.animationDelay=(Math.random()*150).toFixed(1)+'ms';}function spawnParticles(n,cls,minD,maxD,dur,origin){if(reduceMotion)return;const c=document.createElement('div');c.className='g-particles';for(let i=0;i<n;i++){const p=document.createElement('div');p.className='g-particle '+cls;if(origin){p.style.left=origin.cx+'px';p.style.top=origin.cy+'px';}const a=Math.random()*Math.PI*2,d=minD+Math.random()*(maxD-minD),s=(2+Math.random()*2.5).toFixed(1);p.style.setProperty('--tx',(Math.cos(a)*d).toFixed(0)+'px');p.style.setProperty('--ty',(Math.sin(a)*d).toFixed(0)+'px');p.style.width=p.style.height=s+'px';styleParticle(p);c.appendChild(p);}st.appendChild(c);setTimeout(()=>c.remove(),dur*1000+450);}function spawnFloat(){if(reduceMotion)return;const c=document.createElement('div');c.className='g-particles';const dur=2.1;for(let i=0;i<10;i++){const p=document.createElement('div');p.className='g-particle float';p.style.left=(5+Math.random()*90)+'%';p.style.top=(15+Math.random()*70)+'%';p.style.width=p.style.height=(2+Math.random()*2).toFixed(1)+'px';styleParticle(p);c.appendChild(p);}st.appendChild(c);setTimeout(()=>c.remove(),dur*1000+450);}function dismiss(){if(st.classList.contains('hide'))return;st.classList.add('hide');spawnParticles(18,'shatter',R*0.1,R*0.4,.8);scrollLock();setTimeout(()=>{st.hidden=true;},800);}st.addEventListener('click',dismiss);document.addEventListener('keydown',e=>{if(e.key==='Escape')dismiss();});requestAnimationFrame(()=>requestAnimationFrame(()=>{const gc=glassCenter();spawnParticles(26,'burst',R*0.15,R*0.45,1,gc);setTimeout(()=>spawnFloat(),950);setTimeout(dismiss,3000);}));})();
@@ -1147,7 +1181,7 @@ function toast(message) {
   // Không tự ẩn khi đang hiện nút gia hạn
   if (!keepBtn) { toastTimer = setTimeout(() => { el.hidden = true; },6500); }
 }
-function scrollLock() { document.body.style.overflow = $('filter-drawer').open || $('ai-crop-dialog').open || $('lightbox').open || $('settings').open || $('getimg-guide').open || $('nav-sidebar').classList.contains('open') ? 'hidden' : ''; }
+function scrollLock() { document.body.style.overflow = $('logo-crop-dialog').open || $('filter-drawer').open || $('ai-crop-dialog').open || $('lightbox').open || $('settings').open || $('getimg-guide').open || $('nav-sidebar').classList.contains('open') ? 'hidden' : ''; }
 function closeFilters() { closeFilterDrawer(false); closeNav(); }
 function stopSession(message) {
   cancelAISearch(); clearAIResults('Đăng nhập Google Drive để tìm trong kho ảnh.'); syncHeaderView('gallery');
@@ -1206,8 +1240,8 @@ function makeOption(group,value,labelText) {
   label.append(input,box,name,count); options[group].set(value,{label,input,count,name}); return label;
 }
 CATEGORIES.forEach(value => $('category-options').append(makeOption('category',value,value)));
-PRICES.forEach(value => $('price-options').append(makeOption('price',value,value)));
-function matchesFilters(photo, filters) { return (!filters.brand.size || filters.brand.has(photo.brand)) && (!filters.category.size || filters.category.has(photo.category)) && (!filters.price.size || filters.price.has(photo.priceGroup)); }
+
+function matchesFilters(photo, filters) { return (!filters.brand.size || filters.brand.has(photo.brand)) && (!filters.category.size || filters.category.has(photo.category)); }
 function matches(photo) { return matchesFilters(photo, selected); }
 function syncHeaderView(view) {
   const currentLabel = $('hdr-' + view)?.querySelector('span')?.textContent || 'Kho ảnh';
@@ -1314,8 +1348,7 @@ function closeFilterDrawer(apply = false, immediate = false) {
   };
   if (immediate || reducedMotion.matches) finish();
   else {
-    const mobile = matchMedia('(max-width:767px)').matches;
-    const animation = drawer.animate([{transform:'none',opacity:1},{transform:mobile?'translateY(100%)':'translateX(100%)',opacity:.6}],{duration:210,easing:'ease-in',fill:'forwards'});
+    const animation = drawer.animate([{transform:'none',opacity:1},{transform:'translateX(-100%)',opacity:.6}],{duration:210,easing:'ease-in',fill:'forwards'});
     animation.finished.then(() => { finish(); animation.cancel(); },finish);
   }
 }
@@ -1922,12 +1955,23 @@ $('cut-download').addEventListener('click',async()=>{
     setTimeout(()=>URL.revokeObjectURL(url),60000);toast(`Đã tạo ảnh cắt ${r.w} × ${r.h} px.`);
   }catch(error){toast(error.message);}finally{output.width=output.height=0;cutExporting=false;$('cut-download').disabled=false;}
 });
-new ResizeObserver(()=>{if(cutImage&&!$('crop-tool').hidden)cutPaint();}).observe(cutCanvas);
+new ResizeObserver(()=>{if(cutImage&&(!$('crop-tool').hidden||$('logo-crop-dialog').open))cutPaint();}).observe(cutCanvas);
 
 const logoImage = new Image();
 let logoGrayImage = null;
 let logoReady = false, logoFailed = false, logoItems = [], logoPage = 0, logoBusy = false, logoDrag = null;
+let logoCropSession = null;
 const logoPanelEls = Array.from(document.querySelectorAll('.logo-panel'));
+for (const panel of logoPanelEls) {
+  const row=document.createElement('div');row.className='logo-panel-crop';
+  const open=document.createElement('button');open.type='button';open.className='logo-crop-open';open.textContent='Cắt ảnh';
+  open.setAttribute('aria-haspopup','dialog');open.setAttribute('aria-label','Cắt ảnh '+(Number(panel.dataset.panel)+1)+' sau khi chèn logo');
+  const reset=document.createElement('button');reset.type='button';reset.className='logo-crop-reset';reset.textContent='Bỏ cắt';reset.hidden=true;
+  const info=document.createElement('span');info.className='logo-crop-info';info.setAttribute('role','status');
+  open.addEventListener('click',()=>openLogoCrop(logoPanelItem(Number(panel.dataset.panel)),open));
+  reset.addEventListener('click',()=>{const item=logoPanelItem(Number(panel.dataset.panel));if(!item||logoBusy||bulkBusy)return;item.crop=null;renderLogoPanels();});
+  row.append(open,reset,info);panel.append(row);
+}
 function logoPageCount() { return Math.max(1, Math.ceil(logoItems.length / 3)); }
 function logoPanelItem(slot) { return logoItems[logoPage * 3 + slot]; }
 function logoSize(item) {
@@ -1940,12 +1984,18 @@ function logoSnap(item, position) {
   return {x:position.endsWith('left') ? .03 : position.endsWith('center') ? (1-size.x)/2 : right,
     y:position.startsWith('top') ? Math.min(.03, Math.max(0,1-size.y)) : bottom};
 }
-function paintLogo(ctx, item, width, height) {
-  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-  ctx.globalAlpha = 1; ctx.drawImage(item.img, 0, 0, width, height);
-  const size = logoSize(item);
-  const logo = (item.logoColor === 'gray' && logoGrayImage?.complete && logoGrayImage.naturalWidth) ? logoGrayImage : logoImage;
-  ctx.drawImage(logo, item.pos.x * width, item.pos.y * height, size.x * width, size.y * height);
+function logoOutputRect(item) {
+  return item.crop || {x:0,y:0,w:item.img.naturalWidth,h:item.img.naturalHeight};
+}
+function paintLogo(ctx, item, width, height, crop = item.crop) {
+  const W=item.img.naturalWidth,H=item.img.naturalHeight,r=crop || {x:0,y:0,w:W,h:H};
+  ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.globalAlpha=1;
+  ctx.clearRect(0,0,width,height);ctx.scale(width/r.w,height/r.h);ctx.translate(-r.x,-r.y);
+  ctx.drawImage(item.img,0,0,W,H);
+  const size=logoSize(item);
+  const logo=(item.logoColor==='gray' && logoGrayImage?.complete && logoGrayImage.naturalWidth) ? logoGrayImage : logoImage;
+  ctx.drawImage(logo,item.pos.x*W,item.pos.y*H,size.x*W,size.y*H);
+  ctx.restore();
 }
 function renderLogoPanels() {
   const controlsBusy = logoBusy || bulkBusy;
@@ -1969,6 +2019,9 @@ function renderLogoPanels() {
   logoPanelEls.forEach((panel, slot) => {
     const item = logoItems[logoPage * 3 + slot];
     const canvas = panel.querySelector('canvas');
+    panel.querySelector('.logo-crop-open').disabled = controlsBusy || !item || !logoReady;
+    const resetCrop = panel.querySelector('.logo-crop-reset'); resetCrop.hidden = !item?.crop; resetCrop.disabled = controlsBusy;
+    panel.querySelector('.logo-crop-info').textContent = item?.crop ? `Đã cắt · ${item.crop.w} × ${item.crop.h} px` : '';
     const nameEl = panel.querySelector('.logo-panel-name');
     panel.hidden = !item;
     panel.querySelectorAll('.logo-panel-colors button').forEach(button => {
@@ -1987,9 +2040,10 @@ function renderLogoPanels() {
     }
     if (!item) { if (nameEl) nameEl.textContent = ''; return; }
     if (nameEl) nameEl.textContent = item.name;
-    const scale = Math.min(1, 1200/item.img.naturalWidth, 750/item.img.naturalHeight);
-    const pw = Math.max(1, Math.round(item.img.naturalWidth*scale));
-    const ph = Math.max(1, Math.round(item.img.naturalHeight*scale));
+    const outputRect = logoOutputRect(item);
+    const scale = Math.min(1, 1200/outputRect.w, 750/outputRect.h);
+    const pw = Math.max(1, Math.round(outputRect.w*scale));
+    const ph = Math.max(1, Math.round(outputRect.h*scale));
     if (canvas.width !== pw || canvas.height !== ph) { canvas.width = pw; canvas.height = ph; }
     if (logoReady) paintLogo(canvas.getContext('2d'), item, canvas.width, canvas.height);
     else { const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(item.img,0,0,canvas.width,canvas.height); }
@@ -2047,6 +2101,7 @@ document.addEventListener('paste', event => {
     .filter(item => item.type.startsWith('image/'))
     .map(item => item.getAsFile()).filter(Boolean);
   if (!files.length) return;
+  if ($('logo-crop-dialog').open) { event.preventDefault(); return; }
   event.preventDefault();
   if (activeView === 'crop') {
     loadCutFile(files[0]);
@@ -2113,6 +2168,10 @@ function logoPointer(event, canvas) {
   const offsetX = (rect.width - contentW) / 2, offsetY = (rect.height - contentH) / 2;
   return {x:(event.clientX - rect.left - offsetX) / contentW, y:(event.clientY - rect.top - offsetY) / contentH};
 }
+function logoItemPointer(event,canvas,item) {
+  const point=logoPointer(event,canvas),r=logoOutputRect(item);
+  return {x:(r.x+point.x*r.w)/item.img.naturalWidth,y:(r.y+point.y*r.h)/item.img.naturalHeight};
+}
 logoPanelEls.forEach(panel => {
   const canvas = panel.querySelector('canvas');
   const slot = Number(panel.dataset.panel);
@@ -2120,14 +2179,14 @@ logoPanelEls.forEach(panel => {
     const item = logoPanelItem(slot);
     const dragBox = panel.querySelector('.logo-panel-drag');
     if (!dragBox?.checked || !item || !logoReady || logoBusy || event.button !== 0 || !event.isPrimary) return;
-    const point = logoPointer(event, canvas), size = logoSize(item);
+    const point = logoItemPointer(event, canvas, item), size = logoSize(item);
     if (point.x < item.pos.x || point.x > item.pos.x+size.x || point.y < item.pos.y || point.y > item.pos.y+size.y) return;
     event.preventDefault(); logoDrag = {id:event.pointerId, canvas, slot, x:point.x-item.pos.x, y:point.y-item.pos.y};
     canvas.setPointerCapture(event.pointerId);
   });
   canvas.addEventListener('pointermove', event => {
     if (!logoDrag || logoDrag.id !== event.pointerId || logoDrag.canvas !== canvas) return;
-    const item = logoPanelItem(logoDrag.slot), point = logoPointer(event, canvas), size = logoSize(item);
+    const item = logoPanelItem(logoDrag.slot), point = logoItemPointer(event, canvas, item), size = logoSize(item);
     item.pos = {x:Math.max(0,Math.min(1-size.x,point.x-logoDrag.x)), y:Math.max(0,Math.min(1-size.y,point.y-logoDrag.y))};
     renderLogoPanels();
   });
@@ -2148,7 +2207,7 @@ $('logo-download').addEventListener('click', async () => {
   if (logoBusy || !logoReady || !logoItems.length) return;
   logoBusy = true; logoDrag = null; renderLogoPanels(); let downloaded = 0;
   for (const item of logoItems) {
-    const output = document.createElement('canvas'); output.width = item.img.naturalWidth; output.height = item.img.naturalHeight;
+    const output = document.createElement('canvas'), rect=logoOutputRect(item); output.width = rect.w; output.height = rect.h;
     try {
       paintLogo(output.getContext('2d'), item, output.width, output.height);
       const match = item.name.match(/^(.*)\.([^.]+)$/), stem = match ? match[1] : item.name;
@@ -2168,6 +2227,53 @@ $('logo-download').addEventListener('click', async () => {
   logoBusy = false; renderLogoPanels(); toast('Đã gửi tải ' + downloaded + '/' + logoItems.length + ' ảnh');
   if (logoItems.length > 1) toast('Nếu thiếu file: vào chrome://settings/content/popups cho phép trang này tải nhiều file');
 });
+
+// Share the existing crop editor in a modal, preserving its standalone session.
+async function openLogoCrop(item,trigger) {
+  if(!item||!logoReady||logoBusy||bulkBusy||cutExporting||logoCropSession)return;
+  const workspace=$('cut-workspace'),anchor=document.createComment('standalone crop workspace');
+  workspace.before(anchor);
+  const saved={image:cutImage,url:cutUrl,name:cutName,rect:cutRect?{...cutRect}:null,drawMode:cutDrawMode,ratio:$('cut-ratio').value,width:cutCanvas.width,height:cutCanvas.height,status:$('cut-status').textContent,workspaceHidden:workspace.hidden,emptyHidden:$('cut-empty').hidden};
+  const session={item,trigger,anchor,saved,ready:false};logoCropSession=session;
+  cutLoadId++;cutImage=null;cutUrl='';cutRect=null;cutDrag=null;logoDrag=null;
+  logoBusy=true;renderLogoPanels();workspace.hidden=true;$('logo-crop-body').append(workspace);
+  $('logo-crop-name').textContent=item.name;$('logo-crop-status').textContent='Đang chuẩn bị ảnh đã ghép logo…';$('logo-crop-apply').disabled=true;
+  $('logo-crop-dialog').showModal();scrollLock();$('logo-crop-close').focus();
+  const canvas=document.createElement('canvas');
+  try {
+    canvas.width=item.img.naturalWidth;canvas.height=item.img.naturalHeight;
+    paintLogo(canvas.getContext('2d'),item,canvas.width,canvas.height,null);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    if(logoCropSession!==session)return;
+    if(!blob)throw new Error('Không chuẩn bị được ảnh. Hãy thử lại.');
+    $('cut-ratio').value='0';
+    await loadCutFile(new File([blob],item.name.replace(/\.[^.]+$/,'')+'-logo.png',{type:'image/png'}));
+    if(logoCropSession!==session)return;
+    if(!cutImage)throw new Error('Không mở được ảnh để cắt.');
+    if(item.crop){cutRect=cutFit(item.crop.x,item.crop.y,item.crop.w,item.crop.h);cutPaint();}
+    session.ready=true;$('logo-crop-apply').disabled=false;
+    $('logo-crop-status').textContent='Kéo khung hoặc chọn tỷ lệ rồi bấm Áp dụng cắt.';
+  }catch(error){if(logoCropSession===session)$('logo-crop-status').textContent=error.message;}
+  finally{canvas.width=canvas.height=0;}
+}
+function closeLogoCrop(apply=false) {
+  const session=logoCropSession;if(!session)return;
+  if(apply&&(!session.ready||!cutRect))return;
+  if(apply){const r={...cutRect};session.item.crop=r.x===0&&r.y===0&&r.w===session.item.img.naturalWidth&&r.h===session.item.img.naturalHeight?null:r;}
+  logoCropSession=null;cutLoadId++;if(cutUrl)URL.revokeObjectURL(cutUrl);
+  const saved=session.saved;
+  cutImage=saved.image;cutUrl=saved.url;cutName=saved.name;cutRect=saved.rect;cutDrawMode=saved.drawMode;cutDrag=null;
+  $('cut-ratio').value=saved.ratio;cutCanvas.width=saved.width;cutCanvas.height=saved.height;
+  session.anchor.replaceWith($('cut-workspace'));$('cut-workspace').hidden=saved.workspaceHidden;$('cut-empty').hidden=saved.emptyHidden;$('cut-status').textContent=saved.status;
+  $('cut-new').setAttribute('aria-pressed',String(cutDrawMode));if(cutImage)cutPaint();
+  $('logo-crop-dialog').close();logoBusy=false;renderLogoPanels();scrollLock();
+  if(session.trigger?.isConnected)session.trigger.focus({preventScroll:true});
+  if(apply)toast('Đã áp dụng vùng cắt. Bấm Tải ảnh đã chèn logo để lưu.');
+}
+$('logo-crop-close').addEventListener('click',()=>closeLogoCrop());
+$('logo-crop-cancel').addEventListener('click',()=>closeLogoCrop());
+$('logo-crop-apply').addEventListener('click',()=>closeLogoCrop(true));
+$('logo-crop-dialog').addEventListener('cancel',event=>{event.preventDefault();closeLogoCrop();});
 
 renderLogoPanels();
 
