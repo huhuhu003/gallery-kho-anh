@@ -14,6 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <script>
 try { if (localStorage.getItem('gallery_theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (_) {}
+function galleryDeviceBudget() {
+  const memory=Number(navigator.deviceMemory)||0,cores=Number(navigator.hardwareConcurrency)||0;
+  const lowMemory=(memory>0&&memory<=4)||(cores>0&&cores<=4)||!!navigator.connection?.saveData;
+  return {lowMemory,concurrency:lowMemory?2:4,side:lowMemory?320:400,preview:!lowMemory,margin:lowMemory?80:160};
+}
+const imageLoadBudget=galleryDeviceBudget();
+document.documentElement.dataset.performance=imageLoadBudget.lowMemory?'low':'standard';
 </script>
 <style>
 :root { --bg-body: #ffffff; --bg-surface: #ffffff; --bg-photo: #faf9f6; --bg-cream: #fbf9f5; --bg-subtle-cream: #f7f4ef; --bg-subtle: #fcfbf9; --lightbox-bg: rgba(10, 16, 26, 0.96); --text-main: #1a2b4a; --text-secondary: #4a5a73; --text-muted: #7e8b9e; --text-light: #abb5c2; --text-topbar: #334460; --text-note: #243550; --gold-primary: #b0945c; --gold-hover: #967d4a; --gold-light: #d4c092; --gold-subtle: #f7f3eb; --gold-badge: #eee5d3; --price-color: #b0945c; --price-lightbox: #e5d3a9; --border-light: #f0ede6; --border-subtle: #e5dfd5; --border-gold: #b0945c; --border-gold-light: #d4c092; --border-card-hover: #d4c092; --status-error: #a83232; --status-warning: #c28e2b; --status-success: #3b7352;--border-cream:var(--border-subtle);--font-serif:"Didot","Bodoni MT","Cinzel","Baskerville","Baskerville Old Face","Hoefler Text","Garamond","Times New Roman",serif;--font-sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--text-white:white;--bg-header:rgba(255,255,255,.98);--bg-backdrop:rgba(10,16,26,.45);--lb-border:rgba(255,255,255,.2);--lb-button:rgba(0,0,0,.45);--image-shadow:rgba(0,0,0,0.65);--lb-hover:rgba(255,255,255,0.25);--lb-border-hover:rgba(255,255,255,0.4);--card-shadow:rgba(146,116,62,.13);--toast-shadow:rgba(26,43,74,.28);--desktop-shadow:rgba(26,43,74,.14);--transparent:transparent;--toast-text:#ffffff}
@@ -572,6 +579,12 @@ header .tools-caption{display:flex;min-width:86px;gap:0}header .tools-caption>sp
 [data-theme=dark] .bulk-dock,[data-theme=dark] #filter-drawer{--text-muted:#a8b2c2}
 @media(max-width:767px){#filter-drawer{inset:0 auto 0 0;margin:0;width:min(400px,94vw);height:100dvh;border:0;border-radius:0 22px 22px 0}.drawer-head{padding:24px 20px 16px;position:relative}.drawer-head::before{display:none}.drawer-head h2{font-size:21px}.drawer-content{padding-inline:20px}.drawer-footer{padding-inline:20px}.bulk-dock{width:calc(100% - 24px);gap:10px;padding:12px;flex-wrap:wrap;bottom:max(12px,env(safe-area-inset-bottom));border-radius:18px}.bulk-summary{flex:1;min-width:150px}.bulk-summary small{font-size:10px}.bulk-mark{width:30px;height:30px}.bulk-actions{margin-left:auto}.bulk-actions button{padding:9px 11px;font-size:12px}.photo-pick{top:10px;right:10px;width:32px;height:32px}#original{max-width:100%}.lightbox{padding:12px}.lb-help{font-size:10px}.lb-bottom{padding-inline:5px}}
 @media(prefers-reduced-motion:reduce){#filter-drawer[open],.bulk-dock,.photo-loader::after,.photo.is-ready+.filename{animation:none!important}.photo img{transition:none!important}.photo.is-loading img{filter:none;transform:none}}
+/* Preserve layout and controls while avoiding per-photo blur surfaces on small-memory laptops. */
+html[data-performance=low] .photo.is-loading::before{backdrop-filter:none;background:linear-gradient(135deg,var(--bg-cream),var(--bg-subtle-cream))}
+html[data-performance=low] .photo img{filter:none!important;transform:none!important;transition:opacity .16s ease}
+html[data-performance=low] .photo-loader::after{animation:none!important;transform:none;width:100%;opacity:.45}
+html[data-performance=low] .card,html[data-performance=low] .photo.is-ready+.filename{animation:none!important}
+html[data-performance=low] .play .flower-sway{animation:none!important}
 
 .logo-panel-crop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px;border-top:1px solid var(--border-light)}
 .logo-panel-crop button{padding:9px 12px;min-height:42px;border-radius:10px}.logo-crop-info{font-size:11px;color:var(--text-secondary);width:100%;margin-top:2px}
@@ -769,16 +782,17 @@ header .tools-caption{display:flex;min-width:86px;gap:0}header .tools-caption>sp
   <div class="logo-crop-footer"><span id="logo-crop-status" role="status">Đang chuẩn bị ảnh…</span><div class="button-row"><button id="logo-crop-cancel" type="button">Hủy</button><button id="logo-crop-apply" type="button" class="primary" disabled>Áp dụng cắt</button></div></div>
 </dialog>
 <dialog class="modal" id="settings"><h2>Cài đặt kho ảnh</h2><form id="settings-form"><label for="root-input">ID thư mục gốc Google Drive</label><input id="root-input" type="text" required pattern="[A-Za-z0-9_-]+" autocomplete="off"><p class="muted">Lưu thư mục sẽ quét lại kho ảnh từ đầu.</p><div class="buttons"><button class="primary" type="submit">Lưu thư mục</button><button type="button" id="reset-root">Khôi phục mặc định</button><button type="button" id="close-settings">Đóng</button></div></form></dialog>
-<dialog class="modal" id="getimg-guide" aria-label="Hướng dẫn lấy ảnh"><h2>📸 Lấy ảnh từ Xiaohongshu / Instagram</h2>
+<dialog class="modal" id="getimg-guide" aria-label="Hướng dẫn lấy ảnh"><h2>📸 Lấy ảnh từ trang web</h2>
 <div class="getimg-steps">
 <p class="muted">Cài 1 lần, dùng mãi mãi. Không cần cài app hay extension.</p>
-<p style="text-align:center;margin:20px 0"><a id="bmlink" class="bmlink" href="javascript:(function(){'use strict';var id='boc-anh-overlay',old=document.getElementById(id);if(old)old.dispatchEvent(new Event('boc-anh-close'));if(old&amp;&amp;old.parentNode)old.remove();function best(img){var ss=img.getAttribute('srcset'),u='',n=-1,m;if(ss){var re=/(?:^|\s*,\s*)(\S+?)\s+(\d+(?:\.\d+)?)(w|x)(?=\s*(?:,|$))/g;while((m=re.exec(ss))){var s=Number(m[2]);if(s>n){n=s;u=m[1]}}if(!u)u=ss.split(',')[0].trim().split(/\s+/)[0]}if(!u)u=img.getAttribute('data-src')||img.getAttribute('data-original')||img.getAttribute('data-lazy-src')||img.getAttribute('src')||'';u=u.trim();if(!u||/^blob:/i.test(u)||(/^data:/i.test(u)&amp;&amp;u.length<500))return '';try{return new URL(u,location.href).href}catch(e){return ''}}var imgs=Array.from(document.querySelectorAll('img'));document.querySelectorAll('*').forEach(function(e){if(e.shadowRoot)imgs=imgs.concat(Array.from(e.shadowRoot.querySelectorAll('img')))});var seen=new Set(),urls=[];imgs.forEach(function(img){var u=best(img);if(!u||/profile|avatar|profile_pic|icon|emoji|logo|sprite|badge/i.test(u))return;var w=img.naturalWidth||Number(img.getAttribute('width'))||0,h=img.naturalHeight||Number(img.getAttribute('height'))||0;if((w>0&amp;&amp;w<300)||(h>0&amp;&amp;h<300))return;if(!seen.has(u)){seen.add(u);urls.push(u)}});if(!urls.length){alert('Không tìm thấy ảnh nào phù hợp trên trang này.');return}var o=document.createElement('div');o.id=id;o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-label','Bóc ảnh');o.style.cssText='position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.85);overflow-y:auto;color:#fff;font-family:Arial,sans-serif;';var bar=document.createElement('div');bar.style.cssText='position:sticky;top:0;z-index:2;background:#202020;padding:16px;';var title=document.createElement('h2');title.textContent='Bóc ảnh — tìm thấy '+urls.length+' ảnh';title.style.cssText='margin:0 0 14px;font-size:24px;color:#fff;';bar.appendChild(title);var actions=document.createElement('div');actions.style.cssText='display:flex;flex-wrap:wrap;gap:10px;';bar.appendChild(actions);function btn(t,c){var e=document.createElement('button');e.type='button';e.textContent=t;e.style.cssText='padding:12px 20px;font-size:16px;border:0;border-radius:8px;cursor:pointer;color:#fff;background:'+c+';';actions.appendChild(e);return e}var all=btn('Chọn tất cả','#365ca8'),none=btn('Bỏ chọn','#555'),dl=btn('Tải ảnh đã chọn (0)','#16803d'),close=btn('Đóng ✕','#b33232'),status=document.createElement('p');status.setAttribute('role','status');status.style.cssText='margin:12px 0 0;color:#fff;font-size:16px;';bar.appendChild(status);o.appendChild(bar);var grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:20px;';o.appendChild(grid);var boxes=[],busy=false,closed=false,focus=document.activeElement;function count(){if(!busy)dl.textContent='Tải ảnh đã chọn ('+boxes.filter(function(b){return b.checked}).length+')'}urls.forEach(function(u,i){var tile=document.createElement('label');tile.style.cssText='position:relative;display:block;cursor:pointer;background:#333;border-radius:8px;overflow:hidden;';var b=document.createElement('input');b.type='checkbox';b.setAttribute('aria-label','Chọn ảnh '+(i+1));b.style.cssText='position:absolute;top:8px;left:8px;width:28px;height:28px;z-index:1;cursor:pointer;accent-color:#16803d;';b.addEventListener('change',count);boxes.push(b);var img=document.createElement('img');img.src=u;img.alt='Ảnh '+(i+1);img.style.cssText='display:block;width:100%;height:180px;object-fit:contain;';tile.appendChild(b);tile.appendChild(img);grid.appendChild(tile)});all.onclick=function(){boxes.forEach(function(b){b.checked=true});count()};none.onclick=function(){boxes.forEach(function(b){b.checked=false});count()};function dismiss(){closed=true;document.removeEventListener('keydown',key,true);o.remove();if(focus&amp;&amp;focus.isConnected&amp;&amp;focus.focus)focus.focus()}function key(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();dismiss()}}close.onclick=dismiss;o.addEventListener('boc-anh-close',dismiss);document.addEventListener('keydown',key,true);dl.onclick=async function(){if(busy)return;var selected=urls.filter(function(u,i){return boxes[i].checked});if(!selected.length){status.textContent='Bạn hãy chọn ảnh muốn tải.';return}busy=true;dl.disabled=all.disabled=none.disabled=true;boxes.forEach(function(b){b.disabled=true});var saved=0,manual=0,blocked=0;status.textContent='Trình duyệt có thể yêu cầu cho phép tải nhiều ảnh hoặc mở tab mới.';for(var i=0;i<selected.length&amp;&amp;!closed;i++){dl.textContent='Đang tải '+(i+1)+'/'+selected.length+'...';var u=selected[i],ext=new URL(u).pathname.match(/\.(jpe?g|png|webp)$/i),name='anh-'+String(i+1).padStart(2,'0')+(ext?'.'+ext[1].toLowerCase():'.jpg');try{var res=await fetch(u);if(!res.ok)throw new Error('Không tải được ảnh');var blob=await res.blob();if(closed)break;var tmp=URL.createObjectURL(blob),a=document.createElement('a');a.href=tmp;a.download=name;o.appendChild(a);a.click();a.remove();setTimeout(function(t){URL.revokeObjectURL(t)},30000,tmp);saved++}catch(e){if(closed)break;var tab=window.open(u,'_blank');if(tab){tab.opener=null;manual++}else{manual++;blocked++}}if(i<selected.length-1&amp;&amp;!closed)await new Promise(function(resolve){setTimeout(resolve,400)})}if(closed)return;status.textContent='Đã tải '+saved+' ảnh, '+manual+' ảnh phải lưu tay (đã mở tab mới)';if(blocked)status.textContent+='. Có '+blocked+' tab bị chặn: hãy cho phép cửa sổ bật lên và thử lại.';busy=false;dl.disabled=all.disabled=none.disabled=false;boxes.forEach(function(b){b.disabled=false});count()};document.documentElement.appendChild(o);close.focus()})();" title="Kéo nút này lên thanh dấu trang">📸 Bóc ảnh</a></p>
+<p style="text-align:center;margin:20px 0"><a id="bmlink" class="bmlink" href="javascript:(function(){&#x27;use strict&#x27;;var id=&#x27;boc-anh-overlay&#x27;,old=document.getElementById(id);if(old)old.dispatchEvent(new Event(&#x27;boc-anh-close&#x27;));if(old&amp;&amp;old.parentNode)old.remove();function best(img){var sets=[img.getAttribute(&#x27;srcset&#x27;),img.getAttribute(&#x27;data-srcset&#x27;),img.getAttribute(&#x27;data-lazy-srcset&#x27;)],u=&#x27;&#x27;,n=-1,sw=0,m;sets.forEach(function(ss){if(!ss)return;var re=/(?:^|\s*,\s*)(\S+?)\s+(\d+(?:\.\d+)?)(w|x)(?=\s*(?:,|$))/g;while((m=re.exec(ss))){var s=Number(m[2]);if(s&gt;n){n=s;u=m[1];sw=m[3]===&#x27;w&#x27;?s:0}}if(!u)u=ss.split(&#x27;,&#x27;)[0].trim().split(/\s+/)[0]});if(!u)u=img.getAttribute(&#x27;data-src&#x27;)||img.getAttribute(&#x27;data-original&#x27;)||img.getAttribute(&#x27;data-lazy-src&#x27;)||img.currentSrc||img.getAttribute(&#x27;src&#x27;)||&#x27;&#x27;;u=u.trim();if(!u||/^blob:/i.test(u)||(/^data:/i.test(u)&amp;&amp;u.length&lt;500))return null;try{return {url:new URL(u,document.baseURI).href,width:sw}}catch(e){return null}}var imgs=Array.from(document.querySelectorAll(&#x27;img&#x27;));document.querySelectorAll(&#x27;*&#x27;).forEach(function(e){if(e.shadowRoot)imgs=imgs.concat(Array.from(e.shadowRoot.querySelectorAll(&#x27;img&#x27;)))});var seen=new Set(),urls=[];imgs.forEach(function(img){var candidate=best(img);if(!candidate)return;var u=candidate.url,path=new URL(u).pathname;try{path=decodeURIComponent(path)}catch(e){}if(/\/(?:profiles?|avatars?|profile_pics?|icons?|emojis?|logos?|sprites?|badges?|payments?)(?:\/|\.|$)/i.test(path)||/\/(?:assets|images|static)\/(?:[^/]+\/)*(?:profiles?|avatars?|profile_pics?|icons?|emojis?|logos?|sprites?|badges?|payments?)[-_.]/i.test(path))return;var dw=Number(img.getAttribute(&#x27;width&#x27;))||0,dh=Number(img.getAttribute(&#x27;height&#x27;))||0,loaded=u===(img.currentSrc||img.src),w=candidate.width||(loaded?img.naturalWidth:0)||dw,h=candidate.width?(dw&amp;&amp;dh?candidate.width*dh/dw:0):(loaded?img.naturalHeight:0)||dh;if((w&gt;0&amp;&amp;w&lt;300)||(h&gt;0&amp;&amp;h&lt;300))return;if(!seen.has(u)){seen.add(u);urls.push(u)}});if(!urls.length){alert(&#x27;Không tìm thấy ảnh nào phù hợp trên trang này.&#x27;);return}var o=document.createElement(&#x27;div&#x27;);o.id=id;o.setAttribute(&#x27;role&#x27;,&#x27;dialog&#x27;);o.setAttribute(&#x27;aria-modal&#x27;,&#x27;true&#x27;);o.setAttribute(&#x27;aria-label&#x27;,&#x27;Bóc ảnh&#x27;);o.style.cssText=&#x27;position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.85);overflow-y:auto;color:#fff;font-family:Arial,sans-serif;&#x27;;var bar=document.createElement(&#x27;div&#x27;);bar.style.cssText=&#x27;position:sticky;top:0;z-index:2;background:#202020;padding:16px;&#x27;;var title=document.createElement(&#x27;h2&#x27;);title.textContent=&#x27;Bóc ảnh — tìm thấy &#x27;+urls.length+&#x27; ảnh&#x27;;title.style.cssText=&#x27;margin:0 0 14px;font-size:24px;color:#fff;&#x27;;bar.appendChild(title);var actions=document.createElement(&#x27;div&#x27;);actions.style.cssText=&#x27;display:flex;flex-wrap:wrap;gap:10px;&#x27;;bar.appendChild(actions);function btn(t,c){var e=document.createElement(&#x27;button&#x27;);e.type=&#x27;button&#x27;;e.textContent=t;e.style.cssText=&#x27;padding:12px 20px;font-size:16px;border:0;border-radius:8px;cursor:pointer;color:#fff;background:&#x27;+c+&#x27;;&#x27;;actions.appendChild(e);return e}var all=btn(&#x27;Chọn tất cả&#x27;,&#x27;#365ca8&#x27;),none=btn(&#x27;Bỏ chọn&#x27;,&#x27;#555&#x27;),dl=btn(&#x27;Tải ảnh đã chọn (0)&#x27;,&#x27;#16803d&#x27;),close=btn(&#x27;Đóng ✕&#x27;,&#x27;#b33232&#x27;),status=document.createElement(&#x27;p&#x27;);status.setAttribute(&#x27;role&#x27;,&#x27;status&#x27;);status.style.cssText=&#x27;margin:12px 0 0;color:#fff;font-size:16px;&#x27;;bar.appendChild(status);o.appendChild(bar);var grid=document.createElement(&#x27;div&#x27;);grid.style.cssText=&#x27;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:20px;&#x27;;o.appendChild(grid);var boxes=[],busy=false,closed=false,focus=document.activeElement;function count(){if(!busy)dl.textContent=&#x27;Tải ảnh đã chọn (&#x27;+boxes.filter(function(b){return b.checked}).length+&#x27;)&#x27;}urls.forEach(function(u,i){var tile=document.createElement(&#x27;label&#x27;);tile.style.cssText=&#x27;position:relative;display:block;cursor:pointer;background:#333;border-radius:8px;overflow:hidden;&#x27;;var b=document.createElement(&#x27;input&#x27;);b.type=&#x27;checkbox&#x27;;b.setAttribute(&#x27;aria-label&#x27;,&#x27;Chọn ảnh &#x27;+(i+1));b.style.cssText=&#x27;position:absolute;top:8px;left:8px;width:28px;height:28px;z-index:1;cursor:pointer;accent-color:#16803d;&#x27;;b.addEventListener(&#x27;change&#x27;,count);boxes.push(b);var img=document.createElement(&#x27;img&#x27;);img.src=u;img.alt=&#x27;Ảnh &#x27;+(i+1);img.style.cssText=&#x27;display:block;width:100%;height:180px;object-fit:contain;&#x27;;tile.appendChild(b);tile.appendChild(img);grid.appendChild(tile)});all.onclick=function(){boxes.forEach(function(b){b.checked=true});count()};none.onclick=function(){boxes.forEach(function(b){b.checked=false});count()};function dismiss(){closed=true;document.removeEventListener(&#x27;keydown&#x27;,key,true);o.remove();if(focus&amp;&amp;focus.isConnected&amp;&amp;focus.focus)focus.focus()}function key(e){if(e.key===&#x27;Escape&#x27;){e.preventDefault();e.stopPropagation();dismiss()}}close.onclick=dismiss;o.addEventListener(&#x27;boc-anh-close&#x27;,dismiss);document.addEventListener(&#x27;keydown&#x27;,key,true);dl.onclick=async function(){if(busy)return;var selected=urls.filter(function(u,i){return boxes[i].checked});if(!selected.length){status.textContent=&#x27;Bạn hãy chọn ảnh muốn tải.&#x27;;return}busy=true;dl.disabled=all.disabled=none.disabled=true;boxes.forEach(function(b){b.disabled=true});var saved=0,manual=0,blocked=0;status.textContent=&#x27;Trình duyệt có thể yêu cầu cho phép tải nhiều ảnh hoặc mở tab mới.&#x27;;for(var i=0;i&lt;selected.length&amp;&amp;!closed;i++){dl.textContent=&#x27;Đang tải &#x27;+(i+1)+&#x27;/&#x27;+selected.length+&#x27;...&#x27;;var u=selected[i],ext=new URL(u).pathname.match(/\.(jpe?g|png|webp)$/i),name=&#x27;anh-&#x27;+String(i+1).padStart(2,&#x27;0&#x27;)+(ext?&#x27;.&#x27;+ext[1].toLowerCase():&#x27;.jpg&#x27;);try{var res=await fetch(u);if(!res.ok)throw new Error(&#x27;Không tải được ảnh&#x27;);var blob=await res.blob();if(closed)break;var tmp=URL.createObjectURL(blob),a=document.createElement(&#x27;a&#x27;);a.href=tmp;a.download=name;o.appendChild(a);a.click();a.remove();setTimeout(function(t){URL.revokeObjectURL(t)},30000,tmp);saved++}catch(e){if(closed)break;var tab=window.open(u,&#x27;_blank&#x27;);if(tab){tab.opener=null;manual++}else{manual++;blocked++}}if(i&lt;selected.length-1&amp;&amp;!closed)await new Promise(function(resolve){setTimeout(resolve,400)})}if(closed)return;status.textContent=&#x27;Đã tải &#x27;+saved+&#x27; ảnh, &#x27;+manual+&#x27; ảnh phải lưu tay (đã mở tab mới)&#x27;;if(blocked)status.textContent+=&#x27;. Có &#x27;+blocked+&#x27; tab bị chặn: hãy cho phép cửa sổ bật lên và thử lại.&#x27;;busy=false;dl.disabled=all.disabled=none.disabled=false;boxes.forEach(function(b){b.disabled=false});count()};document.documentElement.appendChild(o);close.focus()})();" title="Kéo nút này lên thanh dấu trang">📸 Bóc ảnh</a></p>
 <p class="muted" style="text-align:center">↑ Kéo nút vàng lên thanh dấu trang của trình duyệt ↑</p>
 <ol>
 <li><strong>Bước 1 — Cài nút:</strong> nhấn giữ nút <strong>📸 Bóc ảnh</strong> màu vàng ở trên, kéo thả lên thanh dấu trang (bookmark bar) của Chrome/Cốc Cốc.</li>
-<li><strong>Bước 2 — Mở trang ảnh:</strong> vào Xiaohongshu hoặc Instagram, mở bài viết có ảnh sản phẩm cần lấy.</li>
+<li><strong>Bước 2 — Mở trang ảnh:</strong> vào trang sản phẩm hoặc bài viết có ảnh cần lấy (Childrensalon, Xiaohongshu, Instagram…).</li>
 <li><strong>Bước 3 — Bóc ảnh:</strong> bấm vào bookmark <strong>📸 Bóc ảnh</strong> trên thanh dấu trang → tick chọn ảnh → bấm <strong>Tải ảnh đã chọn</strong>.</li>
 </ol>
+<p class="muted">Nếu đã cài nút Bóc ảnh trước đây, hãy xóa bookmark cũ và kéo lại nút ở trên để cập nhật.</p>
 <p class="muted">Mẹo: nếu không kéo được, bấm nút "Copy mã" bên dưới rồi tạo bookmark mới và dán mã vào ô địa chỉ (URL).</p>
 </div>
 <div class="buttons"><button class="primary" type="button" id="copy-bm">Copy mã</button><button type="button" id="close-getimg">Đóng</button></div>
@@ -937,7 +951,14 @@ toolsRoot.addEventListener('keydown', e => {
 document.addEventListener('pointerdown', e => { if (!toolsRoot.contains(e.target)) setToolsOpen(false); });
 document.addEventListener('focusin', e => { if (!toolsRoot.contains(e.target)) setToolsOpen(false); });
 window.addEventListener('resize', () => { if (toolsRoot.classList.contains('is-open')) positionToolsMenu(); });
-window.addEventListener('scroll', () => { if (toolsRoot.classList.contains('is-open')) setToolsOpen(false, toolsMenu.contains(document.activeElement)); }, {passive:true});
+let toolsPositionFrame = 0;
+window.addEventListener('scroll', () => {
+  if (!toolsRoot.classList.contains('is-open') || toolsPositionFrame) return;
+  toolsPositionFrame = requestAnimationFrame(() => {
+    toolsPositionFrame = 0;
+    if (toolsRoot.classList.contains('is-open')) positionToolsMenu();
+  });
+}, {passive:true});
 
 
 function closeNav(){ $('gallery-filter').setAttribute('aria-expanded','false'); $('nav-sidebar').classList.remove('open'); $('nav-sidebar').inert = true; $('nav-backdrop').classList.remove('show'); $('nav-fab').setAttribute('aria-expanded','false'); scrollLock(); }
@@ -1360,48 +1381,77 @@ $('filter-drawer').addEventListener('click', e => {
   if (e.target === $('filter-drawer') && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) closeFilterDrawer();
 });
 
-// #258: real low-resolution previews, native lazy loading and an indeterminate bar.
+// #258: viewport loading with bounded network/decode work; lighter on 4 GB devices.
 const thumbnailStates = new WeakMap();
+const thumbnailQueue = new Set();
+let thumbnailActiveJobs = 0;
+function pumpThumbnailQueue() {
+  if(document.hidden || $('lightbox').open)return;
+  for(const state of thumbnailQueue) {
+    if(thumbnailActiveJobs>=imageLoadBudget.concurrency)break;
+    thumbnailQueue.delete(state);
+    if(state.done || state.active || !state.visible || !state.frame.isConnected || state.frame.closest('[hidden]'))continue;
+    state.start();
+  }
+}
 const thumbnailObserver = new IntersectionObserver(entries => {
   for (const entry of entries) {
     const state = thumbnailStates.get(entry.target);
-    if (!state) continue;
+    if (!state || state.done) continue;
+    state.visible=entry.isIntersecting;
     entry.target.classList.toggle('is-visible',entry.isIntersecting);
-    if (entry.isIntersecting && !state.started) {
-      state.started = true;
-      const preview = new Image(); state.preview = preview;
-      preview.onload = () => { if (!state.done && entry.target.isConnected) entry.target.style.backgroundImage = 'url("' + preview.src.replace(/"/g,'%22') + '")'; };
-      preview.src = state.low;
-    }
+    if(entry.isIntersecting&&!state.active)thumbnailQueue.add(state);
+    else if(!entry.isIntersecting)thumbnailQueue.delete(state);
   }
-}, {rootMargin:'120px'});
+  pumpThumbnailQueue();
+}, {rootMargin:imageLoadBudget.margin+'px'});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)pumpThumbnailQueue();});
+document.addEventListener('close',pumpThumbnailQueue,true);
 function createPhotoThumbnail(photo) {
   const frame = document.createElement('span'); frame.className = 'photo';
-  const source = thumbnail(photo.thumbnailLink);
+  const source = thumbnail(photo.thumbnailLink,imageLoadBudget.side);
   if (!source) { frame.textContent = 'Chưa có ảnh thu nhỏ'; return frame; }
-  const state = {done:false,started:false,preview:null,low:thumbnail(photo.thumbnailLink,32)};
+  const state = {frame,done:false,active:false,visible:false,preview:null,previewTimer:0,deadline:0,start:null,finish:null};
   thumbnailStates.set(frame,state);
   frame.classList.add('is-loading'); frame.setAttribute('aria-busy','true');
   const bar = document.createElement('span'); bar.className = 'photo-loader'; bar.setAttribute('aria-hidden','true');
-  const img = document.createElement('img'); img.width = 400; img.height = 400;
+  const img = document.createElement('img'); img.width = imageLoadBudget.side; img.height = imageLoadBudget.side;
   img.loading = 'lazy'; img.decoding = 'async'; img.alt = photo.name;
-  const finish = failed => {
+  const finish = (failed,disposed=false) => {
     if (state.done) return;
-    state.done = true; thumbnailObserver.unobserve(frame);
-    if (state.preview) { state.preview.onload = null; state.preview.removeAttribute('src'); state.preview = null; }
+    state.done = true; thumbnailObserver.unobserve(frame); thumbnailQueue.delete(state);
+    clearTimeout(state.previewTimer);clearTimeout(state.deadline);
+    img.onload=img.onerror=null;
+    if (state.preview) { state.preview.onload = state.preview.onerror = null; state.preview.removeAttribute('src'); state.preview = null; }
+    if(failed||disposed)img.removeAttribute('src');
     frame.style.backgroundImage = ''; frame.classList.remove('is-loading','is-visible'); frame.setAttribute('aria-busy','false'); bar.remove();
-    frame.classList.toggle('is-ready',!failed);
-    if (failed) { img.remove(); frame.textContent = 'Không tải được ảnh thu nhỏ'; }
+    frame.classList.toggle('is-ready',!failed&&!disposed);
+    if (failed&&!disposed) { img.remove(); frame.textContent = 'Không tải được ảnh thu nhỏ'; }
+    if(state.active){state.active=false;thumbnailActiveJobs--;queueMicrotask(pumpThumbnailQueue);}
   };
-  img.onload = async () => { try { await img.decode(); } catch (_) {} if (img.naturalWidth) finish(false); };
-  img.onerror = () => finish(true);
-  frame.append(img,bar); img.src = source; thumbnailObserver.observe(frame); return frame;
+  state.finish=finish;
+  state.start=()=>{
+    state.active=true;thumbnailActiveJobs++;
+    // The observer decides when to load; eager avoids an occupied slot waiting on a second lazy-load threshold.
+    img.loading='eager';img.fetchPriority='auto';
+    img.onload=async()=>{try{await img.decode();}catch(_){}if(!state.done)finish(!img.naturalWidth);};
+    img.onerror=()=>finish(true);
+    state.deadline=setTimeout(()=>finish(true),45000);
+    if(imageLoadBudget.preview)state.previewTimer=setTimeout(()=>{
+      if(state.done||!state.visible)return;
+      const preview=new Image();state.preview=preview;preview.decoding='async';preview.fetchPriority='low';
+      preview.onload=()=>{if(!state.done&&frame.isConnected)frame.style.backgroundImage='url("'+preview.src.replace(/"/g,'%22')+'")';};
+      preview.src=thumbnail(photo.thumbnailLink,32);
+    },80);
+    img.src=source;
+  };
+  frame.append(img,bar); thumbnailObserver.observe(frame); return frame;
 }
 function disposeThumbnails(container) {
   for (const frame of container.querySelectorAll('.photo')) {
     thumbnailObserver.unobserve(frame);
     const state = thumbnailStates.get(frame);
-    if (state) { state.done = true; if (state.preview) { state.preview.onload = null; state.preview.removeAttribute('src'); } thumbnailStates.delete(frame); }
+    if (state) { state.finish(false,true);thumbnailStates.delete(frame); }
     frame.style.backgroundImage = '';
   }
   container.querySelectorAll('img').forEach(img => { img.onload = img.onerror = null; img.removeAttribute('src'); });
